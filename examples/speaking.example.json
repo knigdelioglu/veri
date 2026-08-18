@@ -5,6 +5,7 @@
   "language": "tr",
   "grade": 11,
   "task": {
+    "task_id": "example-novel-character-q01",
     "prompt": "Seçtiğiniz bir roman kahramanını tanıtın ve eserdeki rolünü açıklayın.",
     "context": null,
     "max_score": 10
@@ -98,6 +99,11 @@
     "subject_group_id": null,
     "exam_family": "example-speaking-01",
     "question_family": "novel-character-presentation",
-    "provenance": "synthetic"
+    "provenance": "synthetic",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
   }
 }
