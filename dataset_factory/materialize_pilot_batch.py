@@ -8,15 +8,12 @@ from pathlib import Path
 
 from .core import dump_json, load_json, repo_root
 
-
 ALLOWED_QUALITIES = {
-    "full_correct",
-    "high_partial",
-    "mid_partial",
-    "low_partial",
-    "incorrect",
-    "blank_irrelevant",
-    "borderline",
+    "full_correct", "high_partial", "mid_partial", "low_partial",
+    "incorrect", "blank_irrelevant", "borderline",
+}
+ALLOWED_RESPONSE_SOURCES = {
+    "manual", "teacher_corrected", "verified_ocr", "verified_stt", "raw_ocr", "raw_stt",
 }
 
 
@@ -29,24 +26,20 @@ def _overrides_by_id(payload: dict) -> dict[str, dict]:
 
 
 def _effective_text(response: dict, override: dict | None) -> str:
-    text = str(response.get("text") or "")
-    if override and "text_override" in override:
-        text = str(override["text_override"])
-    return text.strip()
+    value = override.get("text_override") if override and "text_override" in override else response.get("text", "")
+    return str(value or "").strip()
 
 
 def _effective_quality(response: dict, override: dict | None) -> str:
-    quality = str(response.get("response_quality") or "mid_partial")
     if override and override.get("effective_response_quality"):
-        quality = str(override["effective_response_quality"])
-    return quality
+        return str(override["effective_response_quality"])
+    return str(response.get("response_quality") or "mid_partial")
 
 
 def _effective_hard_cases(response: dict, override: dict | None) -> list[str]:
-    hard_cases = list(response.get("hard_case_types") or [])
     if override and "hard_case_types_override" in override:
-        hard_cases = list(override.get("hard_case_types_override") or [])
-    return hard_cases
+        return list(override.get("hard_case_types_override") or [])
+    return list(response.get("hard_case_types") or [])
 
 
 def _effective_review(response: dict, override: dict | None) -> tuple[bool, str | None]:
@@ -55,9 +48,30 @@ def _effective_review(response: dict, override: dict | None) -> tuple[bool, str 
     if override and "needs_review" in override:
         needs_review = bool(override["needs_review"])
         review_reason = override.get("review_reason")
-    if not needs_review:
-        review_reason = None
-    return needs_review, review_reason
+    return needs_review, review_reason if needs_review else None
+
+
+def _effective_source(response: dict, override: dict | None) -> str:
+    source = str(
+        override.get("source_override")
+        if override and "source_override" in override
+        else response.get("source", "manual")
+    )
+    if source not in ALLOWED_RESPONSE_SOURCES:
+        raise ValueError(f"Desteklenmeyen student_response.source={source}")
+    return source
+
+
+def _effective_observations(response: dict, override: dict | None) -> list[dict]:
+    if override and "observations_override" in override:
+        return copy.deepcopy(override.get("observations_override") or [])
+    return copy.deepcopy(response.get("observations") or [])
+
+
+def _effective_uncertainties(response: dict, override: dict | None) -> list[dict]:
+    if override and "input_uncertainties_override" in override:
+        return copy.deepcopy(override.get("input_uncertainties_override") or [])
+    return copy.deepcopy(response.get("input_uncertainties") or [])
 
 
 def _score_map(criteria: list[dict], response: dict, override: dict | None) -> dict[str, float]:
@@ -125,7 +139,7 @@ def _justification(criterion: dict, score: float) -> str:
 
 def _overall_feedback(total: float, maximum: float, needs_review: bool) -> str:
     if needs_review:
-        return "Mevcut kanıt güvenilir bir final puanı için yeterli değildir; ek doğrulama gerekir."
+        return "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
     ratio = total / maximum if maximum else 0.0
     if ratio >= 0.999:
         return "Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."
@@ -180,9 +194,14 @@ def build_batch_records(root: Path, *, batch: str) -> list[dict]:
                 quality = _effective_quality(response, override)
                 hard_cases = _effective_hard_cases(response, override)
                 needs_review, review_reason = _effective_review(response, override)
+                source = _effective_source(response, override)
+                observations = _effective_observations(response, override)
+                uncertainties = _effective_uncertainties(response, override)
                 scores = _score_map(criteria, response, override)
                 if quality not in ALLOWED_QUALITIES:
                     raise ValueError(f"{candidate_id}: desteklenmeyen response_quality={quality}")
+                if source in {"raw_ocr", "raw_stt"} and not uncertainties:
+                    raise ValueError(f"{candidate_id}: raw OCR/STT kaydı input_uncertainties içermelidir")
 
                 criterion_results: list[dict] = []
                 for criterion in criteria:
@@ -192,65 +211,64 @@ def build_batch_records(root: Path, *, batch: str) -> list[dict]:
                     score = float(scores[cid])
                     if score < 0 or score > float(criterion["max_score"]):
                         raise ValueError(f"{candidate_id}: {cid} puanı aralık dışında: {score}")
-                    criterion_results.append(
-                        {
-                            "criterion_id": cid,
-                            "score": score,
-                            "evidence": _evidence_for(text, cid, score),
-                            "justification": _justification(criterion, score),
-                        }
-                    )
+                    criterion_results.append({
+                        "criterion_id": cid,
+                        "score": score,
+                        "evidence": _evidence_for(text, cid, score),
+                        "justification": _justification(criterion, score),
+                    })
 
                 serial = start + offset
                 offset += 1
                 total_score = sum(float(item["score"]) for item in criterion_results)
-                record_id = _record_id(grade, modality, serial)
-                records.append(
-                    {
-                        "id": record_id,
-                        "schema_version": "1.0",
-                        "modality": modality,
-                        "language": "tr",
-                        "grade": grade,
-                        "task": {
-                            "task_id": task["task_id"],
-                            "prompt": task["prompt"],
-                            "context": task.get("context"),
-                            "max_score": max_score,
-                        },
-                        "rubric": copy.deepcopy(rubric),
-                        "student_response": {
-                            "text": text,
-                            "source": "manual",
-                            "observations": [],
-                        },
-                        "gold_evaluation": {
-                            "criterion_results": criterion_results,
-                            "total_score": total_score,
-                            "max_score": max_score,
-                            "needs_review": needs_review,
-                            "review_reason": review_reason,
-                            "overall_feedback": _overall_feedback(total_score, max_score, needs_review),
-                        },
-                        "metadata": {
-                            "status": "ai_verified",
-                            "split": None,
-                            "created_at": family.get("created_at", "2026-08-18"),
-                            "tags": sorted(set((family.get("tags") or []) + ["synthetic", batch])),
-                            "pii_reviewed": True,
-                            "subject_group_id": None,
-                            "exam_family": family.get("exam_family"),
-                            "question_family": family.get("question_family"),
-                            "provenance": "synthetic",
-                            "verification_source": "ai",
-                            "response_quality": quality,
-                            "hard_case_types": hard_cases,
-                            "adversarial": bool(response.get("adversarial", False)),
-                            "review_count": 2 if candidate_id in second_pass_ids else 1,
-                            "adjudicated": False,
-                        },
-                    }
-                )
+                student_response = {
+                    "text": text,
+                    "source": source,
+                    "observations": observations,
+                }
+                if uncertainties:
+                    student_response["input_uncertainties"] = uncertainties
+
+                records.append({
+                    "id": _record_id(grade, modality, serial),
+                    "schema_version": "1.0",
+                    "modality": modality,
+                    "language": "tr",
+                    "grade": grade,
+                    "task": {
+                        "task_id": task["task_id"],
+                        "prompt": task["prompt"],
+                        "context": task.get("context"),
+                        "max_score": max_score,
+                    },
+                    "rubric": copy.deepcopy(rubric),
+                    "student_response": student_response,
+                    "gold_evaluation": {
+                        "criterion_results": criterion_results,
+                        "total_score": total_score,
+                        "max_score": max_score,
+                        "needs_review": needs_review,
+                        "review_reason": review_reason,
+                        "overall_feedback": _overall_feedback(total_score, max_score, needs_review),
+                    },
+                    "metadata": {
+                        "status": "ai_verified",
+                        "split": None,
+                        "created_at": family.get("created_at", "2026-08-18"),
+                        "tags": sorted(set((family.get("tags") or []) + ["synthetic", batch])),
+                        "pii_reviewed": True,
+                        "subject_group_id": None,
+                        "exam_family": family.get("exam_family"),
+                        "question_family": family.get("question_family"),
+                        "provenance": "synthetic",
+                        "verification_source": "ai",
+                        "response_quality": quality,
+                        "hard_case_types": hard_cases,
+                        "adversarial": bool(response.get("adversarial", False)),
+                        "review_count": 2 if candidate_id in second_pass_ids else 1,
+                        "adjudicated": False,
+                    },
+                })
 
         expected_family_count = int(manifest.get("coverage", {}).get("answers_per_question_family", offset))
         if offset != expected_family_count:
@@ -318,25 +336,23 @@ def materialize_batch(root: Path, *, batch: str, overwrite: bool = False) -> lis
     needs_review_count = sum(item["gold_evaluation"]["needs_review"] for item in records)
     dual_review_count = sum(item["metadata"]["review_count"] >= 2 for item in records)
 
-    manifest.update(
-        {
-            "status": "materialized_ai_verified",
-            "canonical_records": len(records),
-            "ai_verified_records": len(records),
-            "ai_verified_records_pending_materialization": 0,
-            "canonical_materialized_at": "2026-08-18",
-            "canonical_distribution": {
-                "modality": dict(sorted(modality.items())),
-                "grade": dict(sorted(grade.items())),
-                "response_quality": dict(sorted(quality.items())),
-                "hard_case_records": hard_case_count,
-                "adversarial_records": adversarial_count,
-                "needs_review_records": needs_review_count,
-                "second_pass_ai_review_records": dual_review_count,
-            },
-            "next_action": "Run veri check and cumulative pilot quota review before producing the next wave.",
-        }
-    )
+    manifest.update({
+        "status": "materialized_ai_verified",
+        "canonical_records": len(records),
+        "ai_verified_records": len(records),
+        "ai_verified_records_pending_materialization": 0,
+        "canonical_materialized_at": "2026-08-18",
+        "canonical_distribution": {
+            "modality": dict(sorted(modality.items())),
+            "grade": dict(sorted(grade.items())),
+            "response_quality": dict(sorted(quality.items())),
+            "hard_case_records": hard_case_count,
+            "adversarial_records": adversarial_count,
+            "needs_review_records": needs_review_count,
+            "second_pass_ai_review_records": dual_review_count,
+        },
+        "next_action": "Run veri check and cumulative pilot quota review before producing the next wave.",
+    })
     dump_json(manifest_path, manifest)
     return written
 
