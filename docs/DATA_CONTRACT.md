@@ -6,24 +6,29 @@ Bu sözleşme, Türk Dili ve Edebiyatı yazılı, konuşma ve dinleme sınavlar�
 
 ## 2. Kayıt birimi
 
-Bir kayıt **tek bir öğrencinin tek bir soru/görev için rubrikle değerlendirilmiş cevabını** temsil eder.
+Bir kayıt **tek bir öğrencinin tek bir exact soru/görev için rubrikle değerlendirilmiş cevabını** temsil eder.
 
-Bir kayıt şu dört çekirdek bileşenden oluşur:
+Çekirdek bileşenler:
 
 1. `task`: soru/görev ve gerekli bağlam,
 2. `rubric`: puanlama ölçütleri,
 3. `student_response`: öğrencinin canonical cevabı,
-4. `gold_evaluation`: öğretmen tarafından doğrulanmış hedef değerlendirme.
+4. `gold_evaluation`: öğretmen tarafından doğrulanmış hedef değerlendirme,
+5. `metadata`: leakage, veri üretimi ve kalite kontrol metadata'sı.
 
-## 3. Zorunlu alanlar
+## 3. Kimlik ve temel alanlar
 
 ### `id`
 
-Depo içinde benzersiz kayıt kimliği. Örnek: `tde12-written-000001`.
+Depo içinde benzersiz canonical kayıt kimliği. Örnek:
+
+```text
+tde12-written-000001
+```
 
 ### `schema_version`
 
-İlk sürüm `1.0`'dır. Alanların anlamı geriye dönük uyumsuz değişirse sürüm artırılır.
+Canonical sözleşme sürümü. İlk sürüm `1.0`'dır.
 
 ### `modality`
 
@@ -39,42 +44,56 @@ Depo içinde benzersiz kayıt kimliği. Örnek: `tde12-written-000001`.
 
 9–12 arasında sınıf düzeyi.
 
-## 4. Task
+## 4. `task`
 
-`task.prompt` öğrencinin gördüğü soru veya görevdir.
+### `task_id`
 
-`task.context`, değerlendirme için gerekli ek metin/veridir. Örneğin verilen şiir parçası, dinleme metninin değerlendirme için gerekli özeti veya görev yönergesi. Gerekmiyorsa `null` olabilir.
+Birebir aynı soru/görevin veri seti içindeki kararlı kimliğidir. Aynı soruya verilen farklı öğrenci cevapları aynı `task_id` değerini kullanır.
 
-`task.max_score`, bu kayıt için toplam azami puandır.
+`task_id` veri kürasyonu içindir; modele verilen SFT promptuna dahil edilmez.
 
-## 5. Rubrik
+### `prompt`
 
-Her ölçütün kararlı bir `criterion_id` değeri bulunur. Ölçüt metni değişse bile eski veriler sessizce yeni anlamla yorumlanmamalıdır.
+Öğrencinin gördüğü soru veya görevdir.
 
-Her ölçüt şunları içerir:
+### `context`
 
-- `name`
-- `description`
-- `max_score`
-- `scoring_anchors`: puan seviyelerini açıklayan çıpalar
-- `evidence_sources`: bu ölçütün hangi kanıta dayanabileceği
+Değerlendirme için gerekli ek metin/veridir. Örneğin şiir parçası veya dinleme sorusunun doğru değerlendirilebilmesi için gerekli kaynak bağlamı. Gerekmiyorsa `null` olabilir.
+
+### `max_score`
+
+Görevin toplam azami puanı.
+
+## 5. `rubric`
+
+Her ölçütün kararlı bir `criterion_id` değeri bulunur.
+
+Her criterion:
+
+- `name`,
+- `description`,
+- `max_score`,
+- `scoring_anchors`,
+- `evidence_sources`
+
+alanlarını taşır.
 
 Desteklenen kanıt kaynakları:
 
-- `response_text`: öğrencinin yazılı cevabı veya doğrulanmış transkripti
-- `task_context`: soruda/görevde verilen bağlam
-- `audio_delivery`: gerçek ses kaydında gözlenebilen özellik
-- `teacher_observation`: öğretmenin yapılandırılmış gözlemi
+- `response_text`
+- `task_context`
+- `audio_delivery`
+- `teacher_observation`
 
-Bir model, mevcut girdide bulunmayan bir kanıt kaynağını varmış gibi kullanmamalıdır.
+Bir model, mevcut girdide bulunmayan kanıtı varmış gibi kullanmamalıdır.
 
-## 6. Student response
+Konuşma sınavında transkript yalnız **ne söylendiğini** temsil eder. Telaffuz, vurgu-tonlama ve gerçek zamanlı akıcılık gibi özellikler yalnız uygun ses/gözlem kanıtı varsa puanlanır.
+
+## 6. `student_response`
 
 ### `text`
 
-Modelin değerlendireceği canonical öğrenci cevabıdır.
-
-Yazılı sınavda OCR kullanıldıysa OCR çıktısı öğretmen tarafından kontrol edilip düzeltilmelidir. Konuşma sınavında STT kullanıldıysa transkript mümkün olduğunca doğrulanmalıdır.
+Modelin değerlendireceği canonical öğrenci cevabı veya doğrulanmış konuşma transkriptidir.
 
 ### `source`
 
@@ -83,55 +102,63 @@ Yazılı sınavda OCR kullanıldıysa OCR çıktısı öğretmen tarafından kon
 - `verified_ocr`
 - `verified_stt`
 
+OCR/STT'nin eklediği hata düzeltilir; öğrencinin kendi dil/anlatım hatası canonical cevapta korunur.
+
 ### `observations`
 
-Metinden çıkarılamayan fakat rubrik için gerekli bilgiler için isteğe bağlı yapılandırılmış gözlemler.
-
-Örnek:
+Transkriptten/metinden güvenilir biçimde çıkarılamayan fakat rubrik için gerekli öğretmen gözlemleridir.
 
 ```json
 {
   "label": "akıcılık",
-  "value": "Konuşma genel olarak akıcı; iki kısa duraksama var.",
+  "value": "Genel olarak akıcı; iletişimi bozmayan iki kısa duraksama var.",
   "source": "teacher"
 }
 ```
 
-Bu alan özellikle konuşma sınavlarında önemlidir. Transkriptten telaffuz, vurgu-tonlama veya gerçek akıcılık doğrudan çıkarılmamalıdır.
+## 7. `gold_evaluation`
 
-## 7. Gold evaluation
+Modelin öğrenmesi hedeflenen öğretmen onaylı değerlendirmedir.
 
-`gold_evaluation` modelin öğrenmesi hedeflenen öğretmen onaylı değerlendirmedir.
+Her `criterion_result`:
 
-Her `criterion_result` şunları içerir:
+- `criterion_id`,
+- `score`,
+- `evidence`,
+- `justification`
 
-- `criterion_id`
-- `score`
-- `evidence`: öğrenci cevabı/gözleminden kısa kanıtlar
-- `justification`: rubriğe bağlı kısa açıklama
+alanlarını taşır.
 
 Ayrıca:
 
-- `total_score`
-- `max_score`
-- `needs_review`
-- `review_reason`
+- `total_score`,
+- `max_score`,
+- `needs_review`,
+- `review_reason`,
 - `overall_feedback`
 
 bulunur.
 
-`justification` uzun düşünce zinciri değildir. Yalnızca puanın dışarıdan denetlenebilmesini sağlayan kısa gerekçedir.
+`justification`, uzun düşünce zinciri değildir. Yalnız puanın denetlenebilmesini sağlayan kısa gerekçedir.
 
-## 8. Metadata
+### `needs_review` semantiği
 
-### `status`
+`needs_review=true` her zaman “kayıt bitmemiş” demek değildir.
 
-- `draft`: kayıt tamamlanmamış
-- `annotated`: ilk öğretmen değerlendirmesi yapılmış
-- `teacher_verified`: eğitim için onaylanmış
-- `quarantined`: şüpheli/uyumsuz kayıt; export edilmez
+İki ayrı lifecycle durumu vardır:
 
-Yalnızca `teacher_verified` kayıtlar eğitim export'una girebilir.
+**Çözülmemiş annotation:** gold karar güvenilir değilse kayıt `draft`, `annotated` veya `quarantined` kalır ve export edilmez.
+
+**Gold escalation:** doğru model davranışı insan incelemesine yönlendirmekse kayıt `teacher_verified + needs_review=true` olabilir. Bu tür kayıtlar en az iki bağımsız inceleme görür ve curated SFT exportuna girer.
+
+## 8. `metadata.status`
+
+- `draft`: kayıt tamamlanmamış,
+- `annotated`: ilk değerlendirme yapılmış fakat final kalite kapısından geçmemiş,
+- `teacher_verified`: canonical gold karar eğitim/evaluation için onaylı,
+- `quarantined`: şüpheli veya kullanıma uygun olmayan kayıt.
+
+## 9. Split ve leakage alanları
 
 ### `split`
 
@@ -141,17 +168,73 @@ Yalnızca `teacher_verified` kayıtlar eğitim export'una girebilir.
 - `benchmark`
 - `null`
 
-### Sızıntı kontrol alanları
+### `subject_group_id`
 
-- `subject_group_id`: öğrenciyi tanımlamayan rastgele grup kimliği; gerçek numaradan türetilmiş kolay çözülebilir hash kullanılmamalıdır.
-- `exam_family`: aynı sınav/form ailesini gruplar.
-- `question_family`: aynı veya yakın soru varyantlarını gruplar.
+Öğrenciyi tanımlamayan rastgele/grup kimliği. Gerçek okul numarası veya kolay geri çözülebilir öğrenci kimliği kullanılmaz.
 
-### Gizlilik
+### `exam_family`
 
-`pii_reviewed: true` olmadan kayıt export edilmemelidir.
+Aynı sınav/form ailesini gruplar.
 
-## 9. Canonical ve türetilmiş veri
+### `question_family`
+
+Birebir aynı olmayan ancak aynı veya çok yakın beceriyi/soru yapısını temsil eden varyantları gruplar.
+
+### `task.task_id`
+
+Birebir aynı soruyu ayırt eder. `task_id`, cevap sayısı kotası için kullanılır; split leakage kuralında esas geniş aile koruması `question_family`, `exam_family` ve `subject_group_id` üzerinden yapılır.
+
+## 10. Veri üretim metadata'sı
+
+Bu alanlar **model girdisi değildir**; veri setinin dengesi ve doğrulanabilirliği içindir.
+
+### `response_quality`
+
+- `full_correct`
+- `high_partial`
+- `mid_partial`
+- `low_partial`
+- `incorrect`
+- `blank_irrelevant`
+- `borderline`
+
+`teacher_verified` kayıtlar için üretim kalite kapısı bu alanı zorunlu tutar.
+
+### `hard_case_types`
+
+Bir örneğin deliberate hard case olup olmadığını ve hangi karar sınırını sınadığını belirtir. Birden çok değer taşıyabilir.
+
+### `adversarial`
+
+Örnek prompt injection veya başka deliberate manipülasyon içeriyorsa `true` olur.
+
+### `review_count`
+
+Canonical gold karar üzerinde kaç bağımsız insan değerlendirmesi bulunduğunu belirtir.
+
+- normal teacher-verified: en az 1,
+- validation/test/benchmark: en az 2,
+- `borderline`: en az 2,
+- gold `needs_review=true`: en az 2.
+
+### `adjudicated`
+
+Bağımsız değerlendirmeler arasında anlamlı uyuşmazlık oluşmuş ve nihai gold karar ortak incelemeyle çözülmüşse `true` yapılır. Çift değerlendirme tek başına adjudication değildir.
+
+## 11. `provenance`
+
+- `synthetic`
+- `real_anonymized`
+
+Sentetik örnekler gerçek öğrenci verisi gibi etiketlenmemelidir. Model tarafından üretilen örnek, öğretmen doğrulaması olmadan gold kabul edilmez.
+
+## 12. Gizlilik
+
+`pii_reviewed=true` olmadan kayıt teacher-verified export sürecine girmemelidir.
+
+Canonical veri öğrenci adı, okul numarası, T.C. kimlik numarası, telefon/e-posta, açık okul/şube bilgisi veya kişiyi yeniden tanımlamayı kolaylaştıracak serbest metadata içermemelidir.
+
+## 13. Canonical ve türetilmiş veri
 
 Canonical kayıt:
 
@@ -159,22 +242,33 @@ Canonical kayıt:
 dataset/records/<modality>/<id>.json
 ```
 
-Split manifestleri canonical kaydı kopyalamak zorunda değildir; tercihen kayıt ID'lerini listeler.
+Canonical kayıt tek gerçek kaynaktır. `exports/` altındaki SFT/preference dosyaları yeniden üretilebilir türevlerdir.
 
-SFT/preference dosyaları `exports/` altında üretilir ve yeniden üretilebilir kabul edilir.
+## 14. SFT girdisi
 
-## 10. Eğitim girdisi üretme ilkesi
-
-Bir SFT örneği üretilirken modele şu içerikler verilir:
+Curated SFT exportunda modele:
 
 ```text
-Görev + gerekli bağlam + rubrik + öğrenci cevabı + mevcut yapılandırılmış gözlemler
+task (task_id hariç)
+rubric
+student_response
 ```
 
-Hedef çıktı ise yalnızca değerlendirme sözleşmesidir:
+verilir.
 
-```text
-ölçüt puanları + kısa kanıt + kısa gerekçe + toplam + needs_review
-```
+Assistant hedefi yalnız `gold_evaluation` yapısıdır.
 
-Öğrenci kimliği, kaynak dosya adı, okul bilgisi veya annotation sırasında kullanılan dahili notlar modele verilmez.
+Şunlar model promptuna verilmez:
+
+- `task_id`,
+- `subject_group_id`,
+- `exam_family`,
+- `question_family`,
+- `response_quality`,
+- `hard_case_types`,
+- `adversarial`,
+- `review_count`,
+- `adjudicated`,
+- diğer annotation metadata'sı.
+
+Bu ayrım, modelin veri kürasyonu etiketlerinden kestirme öğrenmesini engeller.
