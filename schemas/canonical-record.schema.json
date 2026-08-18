@@ -6,10 +6,7 @@
   "additionalProperties": false,
   "required": ["id", "schema_version", "modality", "language", "grade", "task", "rubric", "student_response", "gold_evaluation", "metadata"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^tde(09|10|11|12)-(written|speaking|listening)-[0-9]{6}$"
-    },
+    "id": {"type": "string", "pattern": "^tde(09|10|11|12)-(written|speaking|listening)-[0-9]{6}$"},
     "schema_version": {"const": "1.0"},
     "modality": {"enum": ["written", "speaking", "listening"]},
     "language": {"const": "tr"},
@@ -19,6 +16,7 @@
       "additionalProperties": false,
       "required": ["prompt", "context", "max_score"],
       "properties": {
+        "task_id": {"type": ["string", "null"], "minLength": 1},
         "prompt": {"type": "string", "minLength": 1},
         "context": {"type": ["string", "null"]},
         "max_score": {"type": "number", "exclusiveMinimum": 0}
@@ -62,10 +60,7 @@
             "properties": {
               "criterion_id": {"type": "string", "minLength": 1},
               "score": {"type": "number", "minimum": 0},
-              "evidence": {
-                "type": "array",
-                "items": {"type": "string", "minLength": 1}
-              },
+              "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}},
               "justification": {"type": "string", "minLength": 1}
             }
           }
@@ -90,7 +85,16 @@
         "subject_group_id": {"type": ["string", "null"]},
         "exam_family": {"type": ["string", "null"]},
         "question_family": {"type": ["string", "null"]},
-        "provenance": {"enum": ["synthetic", "real_anonymized"]}
+        "provenance": {"enum": ["synthetic", "real_anonymized"]},
+        "response_quality": {"enum": ["full_correct", "high_partial", "mid_partial", "low_partial", "incorrect", "blank_irrelevant", "borderline", null]},
+        "hard_case_types": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["correct_result_wrong_reason", "wrong_result_valid_method", "mixed_criterion_performance", "long_irrelevant", "short_correct", "keyword_decoy", "rubric_extra_info", "paraphrase_equivalent", "contradictory_answer", "prompt_injection", "ocr_ambiguity", "stt_ambiguity", "missing_evidence", "rubric_ambiguity"]}
+        },
+        "adversarial": {"type": "boolean"},
+        "review_count": {"type": "integer", "minimum": 0},
+        "adjudicated": {"type": "boolean"}
       }
     }
   }
