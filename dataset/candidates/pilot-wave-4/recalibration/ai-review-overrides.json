@@ -1,0 +1,19 @@
+{
+  "schema_version": "ai-review-overrides-1.0",
+  "batch_id": "pilot-wave-4-modality-hard-cases",
+  "overrides": [],
+  "second_pass_ids": [
+    "w4a1-04","w4a1-06","w4a1-10","w4a2-08","w4a2-09","w4a2-10",
+    "w4b1-04","w4b1-06","w4b1-10","w4b2-08","w4b2-09","w4b2-10",
+    "w4c1-04","w4c1-06","w4c1-10","w4c2-08","w4c2-09","w4c2-10",
+    "w4d1-04","w4d1-06","w4d1-10","w4d2-08","w4d2-09","w4d2-10",
+    "w4e1-04","w4e1-06","w4e1-10","w4e2-08","w4e2-09","w4e2-10"
+  ],
+  "review_summary": {
+    "records_reviewed": 30,
+    "score_changes": 0,
+    "text_changes": 0,
+    "metadata_changes": 0,
+    "note": "Second pass confirmed rubric-first scores and genuine uncertainty boundaries; no quota-driven gold changes were required."
+  }
+}
