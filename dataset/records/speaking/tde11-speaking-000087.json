@@ -1,0 +1,196 @@
+{
+  "id": "tde11-speaking-000087",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "pilot-w4-g11-speaking-c",
+    "prompt": "Verilen karakter özetine göre karakterin değişip değişmediğini savununuz; en az iki olaydan yararlanınız.",
+    "context": "Karakter yıllar sonra kasabasına döner. Başta yalnız evi satıp gitmek ister. Babasından kalan dükkânı kapatmak yerine onarmaya başlar ve sonunda geçmişiyle bağını tümüyle koparmamaya karar verir.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w4-g11-speaking-interpretation-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Verilen edebî duruma ilişkin savunulabilir yorum geliştirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel unsur yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Yorumunu olay/karakter ilişkileriyle gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe/çözüm yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Görev bağlamından uygun kanıt kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Bir sınırlı/uygun kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Düşünce örgüsü",
+        "description": "Konuşma metni açık ve tutarlı ilerler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Bence karakter değişiyor. İlk bölümde kasabayı yük gibi görüyor, sonda ise kalıcı olmak zorunda olmadığını ama bağlarını koruyabileceğini söylüyor. Dükkânı onarması bu değişimin somut kanıtı.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 3.0,
+        "evidence": [
+          "Bence karakter değişiyor."
+        ],
+        "justification": "Yorum için yanıt 3 puan düzeyindeki çıpayla uyumludur: Doğru, açık ve tam."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 3.0,
+        "evidence": [
+          "Dükkânı onarması bu değişimin somut kanıtı."
+        ],
+        "justification": "Gerekçelendirme için yanıt 3 puan düzeyindeki çıpayla uyumludur: Açık, tutarlı ve yeterli."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "Bence karakter değişiyor.",
+          "İlk bölümde kasabayı yük gibi görüyor, sonda ise kalıcı olmak zorunda olmadığını ama bağlarını koruyabileceğini söylüyor."
+        ],
+        "justification": "Kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Kanıt doğrudan ve yeterli."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 2.0,
+        "evidence": [
+          "Bence karakter değişiyor.",
+          "İlk bölümde kasabayı yük gibi görüyor, sonda ise kalıcı olmak zorunda olmadığını ama bağlarını koruyabileceğini söylüyor."
+        ],
+        "justification": "Düşünce örgüsü için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 10.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "interpretation",
+      "pilot",
+      "pilot-wave-4",
+      "speaking",
+      "stt",
+      "synthetic",
+      "transcript-only",
+      "wave-4"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w4-g11-speaking-modality-b",
+    "question_family": "pilot-w4-g11-speaking-interpretation",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

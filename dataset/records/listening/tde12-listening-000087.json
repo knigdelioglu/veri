@@ -1,0 +1,196 @@
+{
+  "id": "tde12-listening-000087",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "pilot-w4-g12-listening-a",
+    "prompt": "Konuşmacının eski pazara dönmesindeki temel amacı ve geçmişe karşı tutumunu açıklayınız; en az bir ayrıntı kullanınız.",
+    "context": "Konuşmacı çocukluğundaki pazara döndüğünü, baharat kokusunun dedesiyle yaptığı yürüyüşleri hatırlattığını anlatır. 'Buraya alışveriş için gelmedim; dedemle kurduğum bağı yeniden duymak istedim. Ama her şey eskiden daha güzel değildi.' der.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w4-g12-listening-attitude-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comprehension",
+        "name": "Ana anlam",
+        "description": "Konuşmacının ana tutum/amacını doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel unsur yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "inference",
+        "name": "Çıkarım",
+        "description": "Tutumu ayrıntılarla ilişkilendirerek çıkarım yapar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe/çözüm yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Duyulan içerikten uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Bir sınırlı/uygun kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Temel tutum özlemle karışık bir gerçekçilik. Baharat kokusunun dedesini hatırlatması duygusal bağı kuruyor; geçmişin kusursuz olmadığını söylemesi nostaljiyi sınırlıyor.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comprehension",
+        "score": 3.0,
+        "evidence": [
+          "Temel tutum özlemle karışık bir gerçekçilik."
+        ],
+        "justification": "Ana anlam için yanıt 3 puan düzeyindeki çıpayla uyumludur: Doğru, açık ve tam."
+      },
+      {
+        "criterion_id": "inference",
+        "score": 3.0,
+        "evidence": [
+          "Baharat kokusunun dedesini hatırlatması duygusal bağı kuruyor; geçmişin kusursuz olmadığını söylemesi nostaljiyi sınırlıyor."
+        ],
+        "justification": "Çıkarım için yanıt 3 puan düzeyindeki çıpayla uyumludur: Açık, tutarlı ve yeterli."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "Temel tutum özlemle karışık bir gerçekçilik.",
+          "Baharat kokusunun dedesini hatırlatması duygusal bağı kuruyor; geçmişin kusursuz olmadığını söylemesi nostaljiyi sınırlıyor."
+        ],
+        "justification": "Kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Kanıt doğrudan ve yeterli."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Temel tutum özlemle karışık bir gerçekçilik.",
+          "Baharat kokusunun dedesini hatırlatması duygusal bağı kuruyor; geçmişin kusursuz olmadığını söylemesi nostaljiyi sınırlıyor."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 10.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "attitude",
+      "listening",
+      "modality-specific",
+      "pilot",
+      "pilot-wave-4",
+      "stt",
+      "synthetic",
+      "wave-4"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w4-g12-listening-modality",
+    "question_family": "pilot-w4-g12-listening-attitude",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

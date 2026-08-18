@@ -1,0 +1,196 @@
+{
+  "id": "tde12-listening-000090",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "pilot-w4-g12-listening-a",
+    "prompt": "Konuşmacının eski pazara dönmesindeki temel amacı ve geçmişe karşı tutumunu açıklayınız; en az bir ayrıntı kullanınız.",
+    "context": "Konuşmacı çocukluğundaki pazara döndüğünü, baharat kokusunun dedesiyle yaptığı yürüyüşleri hatırlattığını anlatır. 'Buraya alışveriş için gelmedim; dedemle kurduğum bağı yeniden duymak istedim. Ama her şey eskiden daha güzel değildi.' der.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w4-g12-listening-attitude-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comprehension",
+        "name": "Ana anlam",
+        "description": "Konuşmacının ana tutum/amacını doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel unsur yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "inference",
+        "name": "Çıkarım",
+        "description": "Tutumu ayrıntılarla ilişkilendirerek çıkarım yapar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe/çözüm yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Duyulan içerikten uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Bir sınırlı/uygun kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Konuşmacı çocukluğunu hatırlıyor ve pazarı özlüyor. Dedesiyle bağlantısı var.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comprehension",
+        "score": 2.0,
+        "evidence": [
+          "Konuşmacı çocukluğunu hatırlıyor ve pazarı özlüyor."
+        ],
+        "justification": "Ana anlam için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+      },
+      {
+        "criterion_id": "inference",
+        "score": 2.0,
+        "evidence": [
+          "Dedesiyle bağlantısı var."
+        ],
+        "justification": "Çıkarım için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Konuşmacı çocukluğunu hatırlıyor ve pazarı özlüyor.",
+          "Dedesiyle bağlantısı var."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Bir sınırlı/uygun kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Konuşmacı çocukluğunu hatırlıyor ve pazarı özlüyor.",
+          "Dedesiyle bağlantısı var."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 6.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "attitude",
+      "listening",
+      "modality-specific",
+      "pilot",
+      "pilot-wave-4",
+      "stt",
+      "synthetic",
+      "wave-4"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w4-g12-listening-modality",
+    "question_family": "pilot-w4-g12-listening-attitude",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
