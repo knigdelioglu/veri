@@ -6,6 +6,8 @@ import unittest
 from pathlib import Path
 
 from dataset_factory.production import (
+    assign_splits_curated,
+    check_leakage_curated,
     export_sft_curated,
     next_batch_plan,
     production_findings,
@@ -195,6 +197,33 @@ class ProductionStrategyTest(unittest.TestCase):
         self.assertEqual(report["coverage"]["exact_tasks"]["unique"], 1)
         self.assertEqual(report["coverage"]["exact_tasks"]["in_range"], 1)
         self.assertEqual(report["coverage"]["question_families"]["unique"], 1)
+
+    def test_same_exact_task_cannot_exist_in_two_splits(self):
+        first = record("tde11-written-000001", split="train")
+        first["metadata"]["exam_family"] = "exam-a"
+        first["metadata"]["question_family"] = "family-a"
+        second = record("tde11-written-000002", split="test")
+        second["metadata"]["exam_family"] = "exam-b"
+        second["metadata"]["question_family"] = "family-b"
+        second["metadata"]["review_count"] = 2
+        self.write(first)
+        self.write(second)
+        findings = check_leakage_curated(self.root)
+        self.assertTrue(any(item.code == "split_leakage" and "task_id='task-1'" in item.message for item in findings))
+
+    def test_split_keeps_same_exact_task_together_even_if_families_differ(self):
+        first = record("tde11-written-000001", split=None)
+        first["metadata"]["exam_family"] = "exam-a"
+        first["metadata"]["question_family"] = "family-a"
+        second = record("tde11-written-000002", split=None)
+        second["metadata"]["exam_family"] = "exam-b"
+        second["metadata"]["question_family"] = "family-b"
+        self.write(first)
+        self.write(second)
+        assignments = assign_splits_curated(self.root, seed="exact-task-test")
+        locations = {rid: split for split, ids in assignments.items() for rid in ids}
+        self.assertEqual(locations[first["id"]], locations[second["id"]])
+        self.assertEqual(check_leakage_curated(self.root), [])
 
 
 if __name__ == "__main__":
