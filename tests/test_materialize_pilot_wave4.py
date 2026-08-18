@@ -35,6 +35,12 @@ class Wave4MaterializationTest(unittest.TestCase):
             self.assertTrue(record["student_response"].get("input_uncertainties"))
             self.assertGreaterEqual(record["metadata"]["review_count"], 2)
 
+    def test_uncertainty_diagnostics_are_not_student_prose(self):
+        forbidden = ("OCR'da", "STT'de", "transkriptte", "el yazısındaki", "ses kaydında")
+        for record in self.records:
+            text = record["student_response"]["text"]
+            self.assertFalse(any(token in text for token in forbidden), text)
+
     def test_speaking_is_transcript_only(self):
         speaking = [r for r in self.records if r["modality"] == "speaking"]
         self.assertEqual(len(speaking), 40)
