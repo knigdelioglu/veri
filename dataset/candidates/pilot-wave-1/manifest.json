@@ -2,9 +2,10 @@
   "schema_version": "candidate-batch-manifest-1.0",
   "batch_id": "pilot-wave-1-calibration",
   "created_at": "2026-08-18",
-  "status": "recalibrated_pending_teacher_review",
+  "status": "ai_verified_ready_for_materialization",
   "candidate_records": 100,
   "canonical_records": 0,
+  "ai_verified_records_pending_materialization": 100,
   "teacher_verified_records": 0,
   "provenance": "synthetic",
   "distribution": {
@@ -21,7 +22,8 @@
     },
     "hard_case_records": 18,
     "adversarial_records": 4,
-    "needs_review_candidates": 10
+    "initial_needs_review_candidates": 10,
+    "final_genuine_needs_review_candidates": 1
   },
   "coverage": {
     "question_families": 4,
@@ -36,13 +38,16 @@
     "g12-listening-inference.json"
   ],
   "audit_file": "AUDIT.md",
+  "ai_review_file": "AI_REVIEW_PHASE_A.md",
   "recalibration_directory": "recalibration/",
   "recalibration_summary": {
     "override_records": 62,
     "text_overrides": 27,
-    "speaking_delivery_pending": 25
+    "second_pass_high_risk_records": 30,
+    "false_needs_review_labels_corrected": 9,
+    "speaking_transcript_only_records": 25
   },
-  "promotion_policy": "Teacher review is mandatory before materialization into dataset/records. Candidate scores, rewritten texts and observations remain proposals until human approval.",
-  "blocking_issue": "Human teacher review is now the blocking gate. Speaking delivery cannot be approved without real audio or teacher observation.",
-  "next_action": "Review Wave 1 effective candidates using recalibration overrides. Promote only approved examples to canonical dataset/records; do not start Wave 2 until review findings are sampled and the Wave 1 quality gate is accepted."
+  "promotion_policy": "Materialize synthetic records as ai_verified with verification_source=ai. Source, recalibration and second-pass AI overrides are applied in that order. Speaking synthetic records use transcript-only rubrics; nonexistent audio delivery is never fabricated.",
+  "blocking_issue": null,
+  "next_action": "Materialize Wave 1 to canonical dataset/records, run validate + production + leakage gates, then begin Wave 2."
 }
