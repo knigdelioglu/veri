@@ -29,7 +29,7 @@
       "required": ["text", "source", "observations"],
       "properties": {
         "text": {"type": "string"},
-        "source": {"enum": ["manual", "teacher_corrected", "verified_ocr", "verified_stt"]},
+        "source": {"enum": ["manual", "teacher_corrected", "verified_ocr", "verified_stt", "raw_ocr", "raw_stt"]},
         "observations": {
           "type": "array",
           "items": {
@@ -40,6 +40,20 @@
               "label": {"type": "string", "minLength": 1},
               "value": {"type": "string", "minLength": 1},
               "source": {"const": "teacher"}
+            }
+          }
+        },
+        "input_uncertainties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["type", "span", "candidates", "note"],
+            "properties": {
+              "type": {"enum": ["ocr", "stt", "missing_segment", "speaker_attribution"]},
+              "span": {"type": ["string", "null"]},
+              "candidates": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+              "note": {"type": "string", "minLength": 1}
             }
           }
         }
