@@ -1,0 +1,17 @@
+{
+  "schema_version":"candidate-recalibration-family-1.0",
+  "batch_id":"pilot-wave-1-calibration",
+  "family":"g12-listening-inference",
+  "status":"recalibrated_pending_teacher_review",
+  "policy":"Overrides take precedence over the generated candidate; unchanged fields remain from the source candidate file.",
+  "overrides":[
+    {"candidate_id":"d1-04","effective_response_quality":"high_partial","text_override":"Dedesiyle geçirdiği günleri özlediği için pazara dönüyor. Baharat kokusu ona dedesini hatırlatıyor; bu ayrıntının pazarın diğer değişiklikleriyle ilişkisini açıklamıyorum.","scores":{"comprehension":6,"supporting_inference":2}},
+    {"candidate_id":"d1-05","effective_response_quality":"high_partial","scores":{"comprehension":3,"supporting_inference":4}},
+    {"candidate_id":"d1-06","effective_response_quality":"mid_partial","text_override":"Pazara eski günlerini hatırlamak için gidiyor. Baharat kokusu geçmişi çağrıştırıyor.","scores":{"comprehension":3,"supporting_inference":2}},
+    {"candidate_id":"d2-03","effective_response_quality":"high_partial","text_override":"Şair gece daha rahat düşündüğü için yazıyor. Gündüz iş ve insanların beklentisi var; gece kendi düşüncelerine dönüyor. “Yavaşlama izni” fikrini tam açıklamıyorum.","scores":{"comprehension":6,"supporting_inference":2}},
+    {"candidate_id":"d2-04","effective_response_quality":"high_partial","text_override":"Temel neden yavaşlayabilmek ve gün içinde fark etmediği duyguları düşünmek. “Yavaşlama izni” ifadesi bunu gösteriyor ama bunun gündüz beklentileriyle bağını açmıyorum.","scores":{"comprehension":6,"supporting_inference":2}},
+    {"candidate_id":"d2-05","effective_response_quality":"high_partial","text_override":"Gündüz dışarıdan gelen beklentiler yüzünden kendi düşüncesini duyamıyor. Gece bunlardan uzaklaştığı için yazıyor.","scores":{"comprehension":6,"supporting_inference":2}},
+    {"candidate_id":"d2-07","effective_response_quality":"mid_partial","text_override":"Şair geceleri daha rahat hissedip kendini dinliyor. Gündüz aceleyle geçtiği duygulara gece geri döndüğünü söylüyor.","scores":{"comprehension":3,"supporting_inference":2}},
+    {"candidate_id":"d2-08","effective_response_quality":"low_partial","text_override":"Gece kendine biraz daha zaman kaldığı için yazıyor.","scores":{"comprehension":3,"supporting_inference":0}}
+  ]
+}
