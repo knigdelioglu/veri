@@ -2,7 +2,7 @@
   "schema_version": "candidate-batch-manifest-1.0",
   "batch_id": "pilot-wave-1-calibration",
   "created_at": "2026-08-18",
-  "status": "generated_pending_teacher_review",
+  "status": "paused_score_recalibration_required",
   "candidate_records": 100,
   "canonical_records": 0,
   "teacher_verified_records": 0,
@@ -35,6 +35,8 @@
     "g11-speaking-character.json",
     "g12-listening-inference.json"
   ],
+  "audit_file": "AUDIT.md",
   "promotion_policy": "Teacher review is mandatory before materialization into dataset/records. Candidate scores and observations are not gold labels.",
-  "next_action": "Review a stratified sample from all four families before generating pilot wave 2."
+  "blocking_issue": "Proposed criterion scores must be recalibrated strictly against rubric anchors; response-quality quotas must not drive gold scores.",
+  "next_action": "Recalibrate Wave 1 proposed scores, then re-measure response_quality distribution before any Wave 2 generation."
 }
