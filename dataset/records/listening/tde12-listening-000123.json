@@ -1,0 +1,190 @@
+{
+  "id": "tde12-listening-000123",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "pilot-w5-g12-listening-b",
+    "prompt": "İki konuşmacının şehirde sessiz alanlar oluşturma konusundaki görüşlerini karşılaştırınız; uzlaştıkları ve ayrıştıkları noktayı belirtiniz.",
+    "context": "Birinci konuşmacı, kent merkezinde tamamen sessiz bölgeler oluşturmanın gürültü stresini azaltacağını savunur. İkinci konuşmacı bunun gerçekçi olmadığını, bunun yerine belirli saatlerde düşük ses uygulamasının daha sürdürülebilir olduğunu söyler. İkisi de aşırı gürültünün yaşam kalitesini düşürdüğü konusunda uzlaşır.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w5-g12-listening-attribution-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comprehension",
+        "name": "Ana anlam",
+        "description": "Konuşmanın temel görüşünü doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ana anlam yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "attribution",
+        "name": "Konuşmacı atfı",
+        "description": "Görüş ve gerekçeleri doğru konuşmacıya bağlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Atıf yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Kısmi atıf."
+          },
+          {
+            "score": 2,
+            "description": "Büyük ölçüde doğru."
+          },
+          {
+            "score": 3,
+            "description": "Görüş ve gerekçeler doğru biçimde ayrılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Duyulan içerikten uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı dayanak."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli dayanak."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "İki konuşmacı da kent merkezinde daha fazla gürültü olmasını istiyor.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comprehension",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Ana anlam için yanıt 0 puan düzeyindeki çıpayla uyumludur: Ana anlam yok veya yanlış."
+      },
+      {
+        "criterion_id": "attribution",
+        "score": 1.0,
+        "evidence": [
+          "İki konuşmacı da kent merkezinde daha fazla gürültü olmasını istiyor."
+        ],
+        "justification": "Konuşmacı atfı için yanıt 1 puan düzeyindeki çıpayla uyumludur: Kısmi atıf."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Kanıt için yanıt 0 puan düzeyindeki çıpayla uyumludur: Uygun kanıt yok."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "İki konuşmacı da kent merkezinde daha fazla gürültü olmasını istiyor."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 2.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtta sınırlı doğru unsurlar var; rubriğin temel beklentileri büyük ölçüde karşılanmıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "listening",
+      "pilot",
+      "pilot-wave-5",
+      "quota-closure",
+      "speaker-attribution",
+      "stt",
+      "synthetic",
+      "wave-5"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w5-g12-listening-quota-closure",
+    "question_family": "pilot-w5-g12-listening-speaker-attribution",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "incorrect",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

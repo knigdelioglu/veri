@@ -1,0 +1,190 @@
+{
+  "id": "tde09-written-000123",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "pilot-w5-g09-written-b",
+    "prompt": "İki parçadaki umut duygusunun nasıl farklı kurulduğunu karşılaştırınız; her parçadan bir ayrıntı kullanınız.",
+    "context": "A: 'Sabahın ilk ışığı duvara vurdu; pencerenin önündeki saksıda yeni bir yaprak belirdi.' B: 'Yağmur dinmedi ama çocuk şemsiyesini kapatıp koşmaya devam etti.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w5-g09-synthesis-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Temel yorum",
+        "description": "İki metnin ortak/ayrışan yönünü doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve iki metni birlikte kapsıyor."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Her iki metinden uygun kanıt kullanır.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek metinden sınırlı kanıt."
+          },
+          {
+            "score": 2,
+            "description": "İki metne değinen uygun kanıt."
+          },
+          {
+            "score": 3,
+            "description": "İki metinden doğrudan ve yeterli kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "relationship",
+        "name": "İlişki kurma",
+        "description": "Kanıtları yorumla açık biçimde ilişkilendirir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İlişki kurulmamış."
+          },
+          {
+            "score": 1,
+            "description": "İlişki sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "İlişki açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "A umutsuz, B de umutsuz çünkü birinde duvar diğerinde yağmur var.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Temel yorum için yanıt 0 puan düzeyindeki çıpayla uyumludur: Yorum yok veya yanlış."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "A umutsuz, B de umutsuz çünkü birinde duvar diğerinde yağmur var."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Tek metinden sınırlı kanıt."
+      },
+      {
+        "criterion_id": "relationship",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "İlişki kurma için yanıt 0 puan düzeyindeki çıpayla uyumludur: İlişki kurulmamış."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "A umutsuz, B de umutsuz çünkü birinde duvar diğerinde yağmur var."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 2.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtta sınırlı doğru unsurlar var; rubriğin temel beklentileri büyük ölçüde karşılanmıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "ocr",
+      "pilot",
+      "pilot-wave-5",
+      "quota-closure",
+      "synthesis",
+      "synthetic",
+      "wave-5",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w5-g09-written-quota-closure",
+    "question_family": "pilot-w5-g09-written-synthesis",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "incorrect",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
