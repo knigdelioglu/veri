@@ -1,0 +1,21 @@
+{
+  "schema_version": "candidate-recalibration-family-1.0",
+  "batch_id": "pilot-wave-1-calibration",
+  "family": "g09-poetry-theme",
+  "status": "recalibrated_pending_teacher_review",
+  "policy": "Overrides take precedence over the generated candidate; unchanged fields remain from the source candidate file.",
+  "overrides": [
+    {"candidate_id":"a1-04","effective_response_quality":"high_partial","scores":{"dominant_feeling":4,"textual_evidence":3,"explanation":2}},
+    {"candidate_id":"a1-05","effective_response_quality":"high_partial","scores":{"dominant_feeling":4,"textual_evidence":3,"explanation":2}},
+    {"candidate_id":"a1-09","effective_response_quality":"low_partial","text_override":"Şiirde üzüntü var. Boş sokak bunu gösterir.","scores":{"dominant_feeling":2,"textual_evidence":1,"explanation":1}},
+    {"candidate_id":"a1-10","effective_response_quality":"low_partial","scores":{"dominant_feeling":2,"textual_evidence":1,"explanation":1}},
+    {"candidate_id":"a1-11","effective_response_quality":"incorrect","scores":{"dominant_feeling":0,"textual_evidence":1,"explanation":1}},
+    {"candidate_id":"a2-03","effective_response_quality":"high_partial","scores":{"dominant_feeling":4,"textual_evidence":3,"explanation":2}},
+    {"candidate_id":"a2-04","effective_response_quality":"high_partial","text_override":"Bence ana duygu pişmanlıkla karışık özlem. “Annemin terlikleri yok” sözü kaybı gösteriyor. Geç kaldığını da hissediyor ama bunu hangi ifadeden çıkardığımı tam açıklayamıyorum.","scores":{"dominant_feeling":4,"textual_evidence":2,"explanation":2}},
+    {"candidate_id":"a2-05","effective_response_quality":"high_partial","text_override":"Şiirde hüzün ve özlem öne çıkıyor. Islak sandalye ile annenin terliklerinin olmayışı evin ıssızlığını hissettiriyor; erik ağacının çiçek açmasının bu duyguya nasıl bağlandığını tam kuramıyorum.","scores":{"dominant_feeling":4,"textual_evidence":3,"explanation":2}},
+    {"candidate_id":"a2-08","effective_response_quality":"low_partial","scores":{"dominant_feeling":2,"textual_evidence":1,"explanation":1}},
+    {"candidate_id":"a2-09","effective_response_quality":"low_partial","scores":{"dominant_feeling":2,"textual_evidence":1,"explanation":1}},
+    {"candidate_id":"a2-10","effective_response_quality":"incorrect","scores":{"dominant_feeling":0,"textual_evidence":1,"explanation":1}},
+    {"candidate_id":"a2-12","effective_response_quality":"borderline","scores":{"dominant_feeling":2,"textual_evidence":3,"explanation":3},"gold_review_target_candidate":true}
+  ]
+}
