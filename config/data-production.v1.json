@@ -50,7 +50,7 @@
     "preferred_criterion_count_range": [2, 5]
   },
   "review_policy": {
-    "teacher_verified_min_reviews": 1,
+    "verified_min_reviews": 1,
     "evaluation_split_min_reviews": 2,
     "borderline_min_reviews": 2,
     "needs_review_min_reviews": 2
