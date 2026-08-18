@@ -1,0 +1,174 @@
+{
+  "id": "tde12-listening-000055",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "pilot-w3-g12-listening-attitude-a",
+    "prompt": "Konuşmacının şehir kütüphanesinin taşınmasına ilişkin tutumunu ve bu tutumun konuşma içinde değişip değişmediğini açıklayınız.",
+    "context": "Sunucu: Yeni kütüphane binası şehir merkezinden iki kilometre uzağa taşındı. Dinleyici: İlk duyduğumda çok kızdım; yıllardır yürüyerek gidiyordum. Sonra yeni binayı gördüm. Çalışma salonları daha sessiz, çocuk bölümü iki kat büyük. Yine de merkezde küçük bir ödünç alma noktası bırakılsaydı çok iyi olurdu. Şimdi taşınmanın tamamen yanlış olduğunu söylemiyorum, ama ulaşım sorunu çözülmeli.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w3-g12-listening-attitude-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comprehension",
+        "name": "Temel anlam",
+        "description": "Konuşmanın temel düşüncesini doğru kavrar.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel anlam yanlış."
+          },
+          {
+            "score": 2,
+            "description": "Ana yön kısmen doğru ancak önemli eksik/yanlış var."
+          },
+          {
+            "score": 4,
+            "description": "Temel anlam doğru ve açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "attitude",
+        "name": "Konuşmacı tutumu",
+        "description": "Konuşmacının tutumunu ve değişimini doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Tutum yanlış veya belirtilmemiş."
+          },
+          {
+            "score": 1,
+            "description": "Tutum genel biçimde sezilmiş."
+          },
+          {
+            "score": 2,
+            "description": "Tutum doğru fakat değişim sınırlı açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "Tutum ve değişim açık, doğru ve bağlamla uyumlu."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "İşitsel metinden kanıt",
+        "description": "Yorumunu konuşmadaki uygun ayrıntılarla destekler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek veya dolaylı kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Uygun kanıt var ancak sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "En az iki uygun ayrıntı yorumla doğrudan ilişkilendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Önce karşı, sonra yeni binanın iyi yanlarını kabul ediyor. Yine de merkezde…",
+    "source": "raw_stt",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "missing_segment",
+        "span": null,
+        "candidates": [],
+        "note": "Öğrenci cevabının ulaşım koşulunu açıkladığı son bölüm transkriptte eksik."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comprehension",
+        "score": 4.0,
+        "evidence": [
+          "Önce karşı, sonra yeni binanın iyi yanlarını kabul ediyor."
+        ],
+        "justification": "Temel anlam için yanıt 4 puan düzeyindeki çıpayla uyumludur: Temel anlam doğru ve açık."
+      },
+      {
+        "criterion_id": "attitude",
+        "score": 2.0,
+        "evidence": [
+          "Önce karşı, sonra yeni binanın iyi yanlarını kabul ediyor."
+        ],
+        "justification": "Konuşmacı tutumu için yanıt 2 puan düzeyindeki çıpayla uyumludur: Tutum doğru fakat değişim sınırlı açıklanmış."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Önce karşı, sonra yeni binanın iyi yanlarını kabul ediyor.",
+          "Yine de merkezde…"
+        ],
+        "justification": "İşitsel metinden kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Tek veya dolaylı kanıt var."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "Öğrenci cevabının koşullu tutumu açıkladığı bölüm kayıp; attitude/evidence puanı ses doğrulanmadan kesinleştirilemez.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "listening",
+      "pilot",
+      "pilot-wave-3",
+      "speaker-attitude",
+      "stt-ambiguity",
+      "synthetic",
+      "wave-3"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w3-g12-listening-hard-cases-a",
+    "question_family": "pilot-w3-g12-listening-attitude-negation",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "borderline",
+    "hard_case_types": [
+      "missing_evidence",
+      "stt_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

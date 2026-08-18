@@ -1,0 +1,195 @@
+{
+  "id": "tde10-written-000076",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "pilot-w3-g10-irony-a",
+    "prompt": "Öğretmenin son cümlesindeki örtük anlamı belirleyiniz ve bağlamdan kanıtla açıklayınız.",
+    "context": "Sınıf proje sunumuna hazırlanıyordu. Ece üç gündür grubun ortak dosyasına hiçbir şey eklememişti. Sunum sabahı arkadaşlarına, 'Ben de moral desteği verdim, o da önemli,' dedi. Öğretmen dosyadaki katkıları gördükten sonra gülümseyerek, 'Evet Ece, görünmeyen emeğin gerçekten göz kamaştırıyor,' dedi.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w3-g10-irony-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Örtük anlamı belirleme",
+        "description": "Sözün görünen anlamı ile amaçlanan anlam arasındaki farkı doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Örtük anlam yanlış veya ilgisiz."
+          },
+          {
+            "score": 1,
+            "description": "Bir karşıtlık sezilmiş ancak yorum belirsiz."
+          },
+          {
+            "score": 2,
+            "description": "Örtük anlam büyük ölçüde doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Örtük anlam doğru ve açık yorumlanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Yorumunu bağlamdaki olay ve sözlerle ilişkilendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel bir gerekçe var."
+          },
+          {
+            "score": 2,
+            "description": "Uygun gerekçe var ancak ilişki sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "Yorum bağlamla açık ve tutarlı gerekçelendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt kullanımı",
+        "description": "Metinden uygun ayrıntı veya sözü kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek veya dolaylı kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve uygun kanıt var."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "İfade açıklığı",
+        "description": "Yanıt anlaşılır ve kendi içinde tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı belirsizlik veya kopukluk var."
+          },
+          {
+            "score": 2,
+            "description": "Yanıt açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Bence öğretmen hem şaka yapıyor hem de Ece'nin moral desteğini küçümsüyor. Katkı yapmadığı için sözün tam bir övgü olmadığı belli.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 2.0,
+        "evidence": [
+          "Bence öğretmen hem şaka yapıyor hem de Ece'nin moral desteğini küçümsüyor."
+        ],
+        "justification": "Örtük anlamı belirleme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Örtük anlam büyük ölçüde doğru fakat eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "Katkı yapmadığı için sözün tam bir övgü olmadığı belli."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun gerekçe var ancak ilişki sınırlı."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Bence öğretmen hem şaka yapıyor hem de Ece'nin moral desteğini küçümsüyor.",
+          "Katkı yapmadığı için sözün tam bir övgü olmadığı belli."
+        ],
+        "justification": "Kanıt kullanımı için yanıt 1 puan düzeyindeki çıpayla uyumludur: Tek veya dolaylı kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Bence öğretmen hem şaka yapıyor hem de Ece'nin moral desteğini küçümsüyor.",
+          "Katkı yapmadığı için sözün tam bir övgü olmadığı belli."
+        ],
+        "justification": "İfade açıklığı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Yanıt açık ve tutarlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "context-gap",
+      "ironi",
+      "ortuk-anlam",
+      "pilot",
+      "pilot-wave-3",
+      "synthetic",
+      "wave-3"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w3-g10-written-hard-cases",
+    "question_family": "pilot-w3-g10-irony-context-gap",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
