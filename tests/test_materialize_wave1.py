@@ -12,17 +12,20 @@ class Wave1MaterializationTest(unittest.TestCase):
     def setUpClass(cls):
         cls.root = Path(__file__).resolve().parents[1]
         cls.records = build_wave1_records(cls.root)
+        cls.by_id = {record["id"]: record for record in cls.records}
 
     def test_builds_exactly_100_records(self):
         self.assertEqual(len(self.records), 100)
         self.assertEqual(len({record["id"] for record in self.records}), 100)
 
-    def test_distribution_is_preserved(self):
+    def test_structural_distribution_is_preserved(self):
         self.assertEqual(Counter(r["modality"] for r in self.records), Counter({"written": 50, "speaking": 25, "listening": 25}))
         self.assertEqual(Counter(r["grade"] for r in self.records), Counter({9: 25, 10: 25, 11: 25, 12: 25}))
+
+    def test_quality_distribution_tracks_final_gold_not_initial_quota(self):
         self.assertEqual(
             Counter(r["metadata"]["response_quality"] for r in self.records),
-            Counter({"full_correct": 20, "high_partial": 20, "mid_partial": 20, "low_partial": 15, "incorrect": 10, "blank_irrelevant": 5, "borderline": 10}),
+            Counter({"full_correct": 21, "high_partial": 20, "mid_partial": 20, "low_partial": 15, "incorrect": 10, "blank_irrelevant": 5, "borderline": 9}),
         )
 
     def test_all_records_are_ai_verified_synthetic(self):
@@ -41,6 +44,21 @@ class Wave1MaterializationTest(unittest.TestCase):
         self.assertEqual(len(review_records), 1)
         self.assertEqual(review_records[0]["grade"], 11)
         self.assertIn("STT", review_records[0]["gold_evaluation"]["review_reason"])
+
+    def test_ai_review_metadata_overrides_are_applied(self):
+        records_by_text = {record["student_response"]["text"]: record for record in self.records}
+        b1_13 = next(record for record in self.records if record["grade"] == 10 and record["task"]["task_id"].endswith("-a") and record["gold_evaluation"]["total_score"] == 10 and record["metadata"]["review_count"] == 2)
+        self.assertEqual(b1_13["metadata"]["response_quality"], "full_correct")
+        self.assertEqual(b1_13["metadata"]["hard_case_types"], [])
+
+        stale_missing_evidence = [
+            record for record in self.records
+            if record["metadata"]["review_count"] == 2
+            and record["gold_evaluation"]["needs_review"] is False
+            and record["metadata"]["hard_case_types"] == ["missing_evidence"]
+        ]
+        self.assertEqual(stale_missing_evidence, [])
+        self.assertTrue(records_by_text)
 
     def test_synthetic_speaking_is_transcript_only(self):
         speaking = [r for r in self.records if r["modality"] == "speaking"]
