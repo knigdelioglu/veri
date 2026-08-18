@@ -42,7 +42,7 @@
   },
   "student_response": {
     "text": "Şiirde ağır ve sanatlı bir dil kullanılır. Şairler bireysel konulara yönelmiş, özellikle aşk ve tabiatı işlemişlerdir.",
-    "source": "teacher_corrected",
+    "source": "manual",
     "observations": []
   },
   "gold_evaluation": {
@@ -67,7 +67,7 @@
     "overall_feedback": "İki temel özellik doğru ve yeterli açıklamayla verilmiş."
   },
   "metadata": {
-    "status": "teacher_verified",
+    "status": "ai_verified",
     "split": null,
     "created_at": "2026-08-18",
     "tags": ["servetifunun", "siir", "synthetic-example"],
@@ -76,6 +76,7 @@
     "exam_family": "example-written-01",
     "question_family": "servetifunun-features",
     "provenance": "synthetic",
+    "verification_source": "ai",
     "response_quality": "full_correct",
     "hard_case_types": [],
     "adversarial": false,
