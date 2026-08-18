@@ -8,10 +8,10 @@
     "task_id": "example-novel-character-q01",
     "prompt": "Seçtiğiniz bir roman kahramanını tanıtın ve eserdeki rolünü açıklayın.",
     "context": null,
-    "max_score": 10
+    "max_score": 8
   },
   "rubric": {
-    "rubric_id": "example-speaking-01",
+    "rubric_id": "example-speaking-01-transcript-only",
     "version": "1.0",
     "criteria": [
       {
@@ -37,31 +37,13 @@
           {"score": 3, "description": "Düşünceler açık ve bağlantılı ilerliyor."}
         ],
         "evidence_sources": ["response_text"]
-      },
-      {
-        "criterion_id": "fluency",
-        "name": "Akıcılık",
-        "description": "Konuşmayı uygun akıcılıkla sürdürür.",
-        "max_score": 2,
-        "scoring_anchors": [
-          {"score": 0, "description": "Sık ve iletişimi bozan duraksamalar var."},
-          {"score": 1, "description": "Bazı duraksamalar var fakat iletişim sürüyor."},
-          {"score": 2, "description": "Konuşma genel olarak akıcı."}
-        ],
-        "evidence_sources": ["audio_delivery", "teacher_observation"]
       }
     ]
   },
   "student_response": {
     "text": "İnce Memed romanındaki Memed, haksızlığa karşı çıkan bir köylüdür. Abdi Ağa'nın baskısına karşı direnmesi onu yalnız kendi hayatı için değil köylüler için de önemli hâle getirir. Bu yüzden romanda adaletsizliğe karşı direnişi temsil ettiğini düşünüyorum.",
-    "source": "verified_stt",
-    "observations": [
-      {
-        "label": "akıcılık",
-        "value": "Konuşma genel olarak akıcı; iletişimi bozmayan iki kısa duraksama gözlendi.",
-        "source": "teacher"
-      }
-    ]
+    "source": "manual",
+    "observations": []
   },
   "gold_evaluation": {
     "criterion_results": [
@@ -75,31 +57,26 @@
         "criterion_id": "organization",
         "score": 3,
         "evidence": ["tanıtım → çatışma → eserdeki rol"],
-        "justification": "Konuşmanın düşünce akışı açık ve bağlantılı."
-      },
-      {
-        "criterion_id": "fluency",
-        "score": 2,
-        "evidence": ["iletişimi bozmayan iki kısa duraksama"],
-        "justification": "Öğretmen gözlemi konuşmanın genel olarak akıcı olduğunu doğruluyor."
+        "justification": "Konuşma transkripti düşüncelerin açık ve bağlantılı ilerlediğini gösteriyor."
       }
     ],
-    "total_score": 10,
-    "max_score": 10,
+    "total_score": 8,
+    "max_score": 8,
     "needs_review": false,
     "review_reason": null,
-    "overall_feedback": "İçerik, düzen ve akıcılık ölçütleri başarıyla karşılanmış."
+    "overall_feedback": "Transkript üzerinden içerik ve düzen ölçütleri başarıyla karşılanmış."
   },
   "metadata": {
-    "status": "teacher_verified",
+    "status": "ai_verified",
     "split": null,
     "created_at": "2026-08-18",
-    "tags": ["roman", "konusma", "synthetic-example"],
+    "tags": ["roman", "konusma", "synthetic-example", "transcript-only"],
     "pii_reviewed": true,
     "subject_group_id": null,
     "exam_family": "example-speaking-01",
     "question_family": "novel-character-presentation",
     "provenance": "synthetic",
+    "verification_source": "ai",
     "response_quality": "full_correct",
     "hard_case_types": [],
     "adversarial": false,
