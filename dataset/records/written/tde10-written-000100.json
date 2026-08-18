@@ -1,0 +1,210 @@
+{
+  "id": "tde10-written-000100",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "pilot-w4-g10-written-a",
+    "prompt": "Parçanın anlatıcı/bakış açısını belirleyiniz ve bunun okurun bilgi düzeyine etkisini açıklayınız.",
+    "context": "Zarfı masanın üstünde görünce benim için bırakıldığını sandım. Adımı aradım, bulamadım. Sonra kardeşim içeri girdi ve okul gezisi izin kâğıtlarını aradığını söyledi.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w4-g10-narrative-attribution-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "viewpoint",
+        "name": "Bakış açısı",
+        "description": "Anlatıcı/bakış açısını doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel unsur yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "effect",
+        "name": "Etkisi",
+        "description": "Bakış açısının bilgi ve gerilim üzerindeki etkisini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe/çözüm yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metinden uygun kanıt kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Bir sınırlı/uygun kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Birinci kişi anlatıcı var. 'Ben gelmeyeceğim' sözü anlatıcının bilgisinin sınırlı olduğunu gösteriyor.",
+    "source": "raw_ocr",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "speaker_attribution",
+        "span": "ben gelmeyeceğim",
+        "candidates": [
+          "anlatıcının sözü",
+          "kardeşin sözü"
+        ],
+        "note": "OCR alıntı işaretlerini ve konuşmacı işaretini kaybetmiş."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "viewpoint",
+        "score": 2.0,
+        "evidence": [
+          "Birinci kişi anlatıcı var."
+        ],
+        "justification": "Bakış açısı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+      },
+      {
+        "criterion_id": "effect",
+        "score": 2.0,
+        "evidence": [
+          "'Ben gelmeyeceğim' sözü anlatıcının bilgisinin sınırlı olduğunu gösteriyor."
+        ],
+        "justification": "Etkisi için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Birinci kişi anlatıcı var.",
+          "'Ben gelmeyeceğim' sözü anlatıcının bilgisinin sınırlı olduğunu gösteriyor."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Bir sınırlı/uygun kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Birinci kişi anlatıcı var.",
+          "'Ben gelmeyeceğim' sözü anlatıcının bilgisinin sınırlı olduğunu gösteriyor."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "Alıntı işaretleri kaybolduğu için sözün hangi kişiye ait olduğu belirsiz; viewpoint/evidence puanı özgün görüntü olmadan kesinleştirilemez.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "ocr",
+      "pilot",
+      "pilot-wave-4",
+      "speaker-attribution",
+      "synthetic",
+      "viewpoint",
+      "wave-4",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w4-g10-written-modality",
+    "question_family": "pilot-w4-g10-written-attribution",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "borderline",
+    "hard_case_types": [
+      "ocr_ambiguity",
+      "missing_evidence"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
