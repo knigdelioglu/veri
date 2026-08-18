@@ -8,15 +8,19 @@
     {"candidate_id":"w4b1-06","text_override":"Bakış açısı birinci kişidir. Zarf bana aitti sanmıştım; bu yüzden okur da benim yanılgımla sınırlı kalıyor."},
     {"candidate_id":"w4b1-10","text_override":"Birinci kişi anlatıcı var. 'Ben gelmeyeceğim' sözü anlatıcının bilgisinin sınırlı olduğunu gösteriyor."},
     {"candidate_id":"w4b2-08","text_override":"Üçüncü kişi sınırlı anlatıcı var. Kardeşi otobüsü kaçırdı; gecikmenin nedeni okura sonradan açıklanıyor."},
+    {"candidate_id":"w4b2-10","text_override":"Üçüncü kişi sınırlı anlatıcı var. Meral'in kaygısını biliyoruz; annenin ve kardeşin bilgisi konusunda açıklamam karışık kaldı."},
     {"candidate_id":"w4c1-06","text_override":"Yalnız dönem ölçüt olmamalı. Dil ve kurgu da önemlidir."},
     {"candidate_id":"w4c1-10","text_override":"Dönem bağlamı önemlidir fakat tek ölçüt değildir. Nesnellik..."},
     {"candidate_id":"w4c2-08","text_override":"Uyarlama değişebilir ama ana çatışmayı korumalı."},
+    {"candidate_id":"w4c2-10","text_override":"Uyarlama değişebilir ama kaynak eserle bağını korumalıdır. Sadakatin önemli olduğunu söyleyen karşı görüşü anıyorum, fakat ona tam bir cevap vermiyorum."},
     {"candidate_id":"w4d1-06","text_override":"Karakter değişiyor; sonunda kasabada kalmayı seçiyor ve geçmişiyle bağını koruyor."},
     {"candidate_id":"w4d1-10","text_override":"Yorumum karakterin geçmişiyle uzlaştığı yönünde."},
     {"candidate_id":"w4d2-08","text_override":"Mektubu ameliyat öncesi olduğu için göndermiyor; arkadaşını korumak istiyor."},
+    {"candidate_id":"w4d2-10","text_override":"Karar bence koruma isteğiyle ilgili olabilir. Mektubu göndermemesi arkadaşını üzmek istemediğini gösteriyor ama yüzleşmekten çekindiği için de ertelemiş olabilir."},
     {"candidate_id":"w4e1-06","text_override":"Konuşmacı geçmişi özlüyor ama 'her şey daha güzel değildi' diyor; yani geçmişi idealize etmiyor."},
     {"candidate_id":"w4e1-10","text_override":"Konuşmacı dedesini anmak için dönüyor. Alışveriş için gelmedim..."},
-    {"candidate_id":"w4e2-08","text_override":"Geceyi yalnız sessizlik değil, yavaşlayıp duygularına dönmek için seçiyor."}
+    {"candidate_id":"w4e2-08","text_override":"Geceyi yalnız sessizlik değil, yavaşlayıp duygularına dönmek için seçiyor."},
+    {"candidate_id":"w4e2-10","text_override":"Konuşmacı geceyi seçiyor çünkü yavaşlayabiliyor ve duygularına dönebiliyor. Sessizliğin tek neden olup olmadığını ise tam ayıramıyorum."}
   ],
   "second_pass_ids": [
     "w4a1-04","w4a1-06","w4a1-10","w4a2-08","w4a2-09","w4a2-10",
@@ -28,8 +32,8 @@
   "review_summary": {
     "records_reviewed": 30,
     "score_changes": 0,
-    "text_changes": 15,
+    "text_changes": 19,
     "metadata_changes": 0,
-    "note": "Second pass removed OCR/STT diagnostic prose from student text in all 15 genuine escalation records while preserving uncertainty only in input_uncertainties. Rubric-first scores were not quota-adjusted."
+    "note": "Second pass removed OCR/STT diagnostic prose from genuine escalation records and from four non-escalation borderline answers that still contained pipeline/meta language. Rubric-first scores were not quota-adjusted."
   }
 }
