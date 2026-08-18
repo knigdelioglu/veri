@@ -1,0 +1,61 @@
+{
+  "id": "tde10-listening-000001",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "prompt": "Dinlediğiniz metinde anlatıcının yolculuğa çıkmasının temel nedenini açıklayınız.",
+    "context": "Değerlendirme anahtarına göre anlatıcı, uzun süredir görmediği ailesini ziyaret etmek üzere yolculuğa çıkmaktadır.",
+    "max_score": 5
+  },
+  "rubric": {
+    "rubric_id": "example-listening-01",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comprehension",
+        "name": "Dinlediğini anlama",
+        "description": "Yolculuğun temel nedenini doğru belirler ve açıklar.",
+        "max_score": 5,
+        "scoring_anchors": [
+          {"score": 0, "description": "Neden yanlış veya cevap yok."},
+          {"score": 3, "description": "Aile ziyareti fikri var fakat açıklama eksik."},
+          {"score": 5, "description": "Uzun süredir görmediği ailesini ziyaret etme nedeni açıkça belirtilmiş."}
+        ],
+        "evidence_sources": ["response_text", "task_context"]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Ailesini uzun zamandır görmediği için onları ziyaret etmeye gidiyor.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comprehension",
+        "score": 5,
+        "evidence": ["Ailesini uzun zamandır görmediği için"],
+        "justification": "Cevap yolculuğun temel nedenini değerlendirme bağlamıyla uyumlu biçimde açıklıyor."
+      }
+    ],
+    "total_score": 5,
+    "max_score": 5,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Temel neden doğru anlaşılmış ve açıkça ifade edilmiş."
+  },
+  "metadata": {
+    "status": "teacher_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": ["dinleme", "anlama", "synthetic-example"],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "example-listening-01",
+    "question_family": "main-reason-comprehension",
+    "provenance": "synthetic"
+  }
+}

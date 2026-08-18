@@ -1,0 +1,79 @@
+{
+  "id": "tde12-written-000001",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "prompt": "Servetifünun şiirinin iki belirgin özelliğini açıklayınız.",
+    "context": null,
+    "max_score": 10
+  },
+  "rubric": {
+    "rubric_id": "example-servetifunun-01",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "content",
+        "name": "Edebî özellik bilgisi",
+        "description": "Servetifünun şiirine ait iki geçerli özelliği belirtir.",
+        "max_score": 6,
+        "scoring_anchors": [
+          {"score": 0, "description": "Geçerli özellik yok."},
+          {"score": 3, "description": "Bir geçerli özellik var."},
+          {"score": 6, "description": "İki geçerli özellik var."}
+        ],
+        "evidence_sources": ["response_text"]
+      },
+      {
+        "criterion_id": "explanation",
+        "name": "Açıklama",
+        "description": "Belirttiği özellikleri anlaşılır biçimde açıklar.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {"score": 0, "description": "Açıklama yok veya ilgisiz."},
+          {"score": 2, "description": "Kısmi açıklama var."},
+          {"score": 4, "description": "İki özellik de yeterli biçimde açıklanmış."}
+        ],
+        "evidence_sources": ["response_text"]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Şiirde ağır ve sanatlı bir dil kullanılır. Şairler bireysel konulara yönelmiş, özellikle aşk ve tabiatı işlemişlerdir.",
+    "source": "teacher_corrected",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "content",
+        "score": 6,
+        "evidence": ["ağır ve sanatlı bir dil", "bireysel konulara yönelmiş"],
+        "justification": "Cevap iki geçerli Servetifünun şiiri özelliği içeriyor."
+      },
+      {
+        "criterion_id": "explanation",
+        "score": 4,
+        "evidence": ["özellikle aşk ve tabiatı işlemişlerdir"],
+        "justification": "Özellikler kısa fakat anlaşılır biçimde açıklanmış."
+      }
+    ],
+    "total_score": 10,
+    "max_score": 10,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "İki temel özellik doğru ve yeterli açıklamayla verilmiş."
+  },
+  "metadata": {
+    "status": "teacher_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": ["servetifunun", "siir", "synthetic-example"],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "example-written-01",
+    "question_family": "servetifunun-features",
+    "provenance": "synthetic"
+  }
+}

@@ -1,0 +1,40 @@
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
+
+# Python / tooling
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+
+# Local-only raw student material. Never commit identifiable source material.
+local_raw/
+private_raw/
+
+# Raw media / scans are excluded by default.
+*.wav
+*.mp3
+*.m4a
+*.aac
+*.flac
+*.mp4
+*.mov
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.heic
+*.tiff
+
+# Generated training exports are reproducible from canonical records.
+exports/**/*.jsonl
+exports/**/*.parquet
+
+# Temporary files
+*.tmp
+*.bak
+.cache/

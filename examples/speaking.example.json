@@ -1,0 +1,103 @@
+{
+  "id": "tde11-speaking-000001",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "prompt": "Seçtiğiniz bir roman kahramanını tanıtın ve eserdeki rolünü açıklayın.",
+    "context": null,
+    "max_score": 10
+  },
+  "rubric": {
+    "rubric_id": "example-speaking-01",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "content",
+        "name": "İçerik",
+        "description": "Kahramanı ve eserdeki rolünü doğru biçimde açıklar.",
+        "max_score": 5,
+        "scoring_anchors": [
+          {"score": 0, "description": "İçerik yok veya tamamen yanlış."},
+          {"score": 3, "description": "Kahraman doğru tanıtılmış fakat rol açıklaması sınırlı."},
+          {"score": 5, "description": "Kahraman ve rolü yeterli doğrulukta açıklanmış."}
+        ],
+        "evidence_sources": ["response_text"]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Konuşma düzeni",
+        "description": "Düşünceleri anlaşılır ve bağlantılı bir sırayla sunar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {"score": 0, "description": "Anlamlı bir düzen yok."},
+          {"score": 2, "description": "Genel düzen anlaşılır; sınırlı kopukluk var."},
+          {"score": 3, "description": "Düşünceler açık ve bağlantılı ilerliyor."}
+        ],
+        "evidence_sources": ["response_text"]
+      },
+      {
+        "criterion_id": "fluency",
+        "name": "Akıcılık",
+        "description": "Konuşmayı uygun akıcılıkla sürdürür.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {"score": 0, "description": "Sık ve iletişimi bozan duraksamalar var."},
+          {"score": 1, "description": "Bazı duraksamalar var fakat iletişim sürüyor."},
+          {"score": 2, "description": "Konuşma genel olarak akıcı."}
+        ],
+        "evidence_sources": ["audio_delivery", "teacher_observation"]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "İnce Memed romanındaki Memed, haksızlığa karşı çıkan bir köylüdür. Abdi Ağa'nın baskısına karşı direnmesi onu yalnız kendi hayatı için değil köylüler için de önemli hâle getirir. Bu yüzden romanda adaletsizliğe karşı direnişi temsil ettiğini düşünüyorum.",
+    "source": "verified_stt",
+    "observations": [
+      {
+        "label": "akıcılık",
+        "value": "Konuşma genel olarak akıcı; iletişimi bozmayan iki kısa duraksama gözlendi.",
+        "source": "teacher"
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "content",
+        "score": 5,
+        "evidence": ["haksızlığa karşı çıkan bir köylüdür", "adaletsizliğe karşı direnişi temsil ettiğini"],
+        "justification": "Kahraman ve eserdeki temel rolü doğru biçimde açıklanmış."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 3,
+        "evidence": ["tanıtım → çatışma → eserdeki rol"],
+        "justification": "Konuşmanın düşünce akışı açık ve bağlantılı."
+      },
+      {
+        "criterion_id": "fluency",
+        "score": 2,
+        "evidence": ["iletişimi bozmayan iki kısa duraksama"],
+        "justification": "Öğretmen gözlemi konuşmanın genel olarak akıcı olduğunu doğruluyor."
+      }
+    ],
+    "total_score": 10,
+    "max_score": 10,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "İçerik, düzen ve akıcılık ölçütleri başarıyla karşılanmış."
+  },
+  "metadata": {
+    "status": "teacher_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": ["roman", "konusma", "synthetic-example"],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "example-speaking-01",
+    "question_family": "novel-character-presentation",
+    "provenance": "synthetic"
+  }
+}
