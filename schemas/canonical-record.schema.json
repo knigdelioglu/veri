@@ -96,7 +96,17 @@
         "adversarial": {"type": "boolean"},
         "review_count": {"type": "integer", "minimum": 0},
         "adjudicated": {"type": "boolean"}
-      }
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "ai_verified"}}, "required": ["status"]},
+          "then": {"required": ["verification_source"], "properties": {"verification_source": {"const": "ai"}, "pii_reviewed": {"const": true}}}
+        },
+        {
+          "if": {"properties": {"status": {"const": "teacher_verified"}}, "required": ["status"]},
+          "then": {"required": ["verification_source"], "properties": {"verification_source": {"const": "teacher"}, "pii_reviewed": {"const": true}}}
+        }
+      ]
     }
   }
 }
