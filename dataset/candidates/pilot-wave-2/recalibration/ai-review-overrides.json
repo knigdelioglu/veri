@@ -1,0 +1,42 @@
+{
+  "schema_version": "candidate-ai-review-overrides-1.0",
+  "batch_id": "pilot-wave-2-partial-boundaries",
+  "review_pass": 2,
+  "status": "ai_reviewed",
+  "policy": "Final gold follows rubric evidence, never quota labels. Overrides take precedence over source candidates.",
+  "summary": {
+    "candidate_records": 100,
+    "second_pass_records": 25,
+    "text_rewrites": 3,
+    "hard_case_records_after_review": 20,
+    "adversarial_records": 4,
+    "genuine_needs_review_records": 0
+  },
+  "second_pass_ids": [
+    "w2a1-09", "w2a1-10", "w2a2-09", "w2a2-10", "w2a3-09", "w2a3-10",
+    "w2a4-09", "w2a4-10", "w2a5-09", "w2a5-10", "w2b5-10",
+    "w2a1-08", "w2b2-09", "w2b3-09", "w2b4-09",
+    "w2a1-05", "w2b1-05", "w2b2-05", "w2a2-08", "w2a3-06",
+    "w2b3-06", "w2a4-05", "w2b4-06", "w2a5-05", "w2b5-05"
+  ],
+  "overrides": [
+    {"candidate_id":"w2a1-05","text_override":"Bacalarla ilgili bir kişileştirme var. Fabrikanın sessiz kaldığını anlatıyor.","final_scores":{"device_identification":3,"textual_evidence":1,"function":1,"clarity":2},"effective_response_quality":"mid_partial","hard_case_types_override":[],"note":"Original answer supplied direct evidence strongly enough to behave like high_partial. Response was narrowed; gold score follows the rewritten text."},
+    {"candidate_id":"w2b1-05","text_override":"Kaldırımlarla ilgili kişileştirme var. İnsanların acele ettiğini gösteriyor.","final_scores":{"device_identification":3,"textual_evidence":1,"function":1,"clarity":2},"effective_response_quality":"mid_partial","note":"Response narrowed so the intended partial boundary comes from missing evidence/function detail rather than an artificially low score."},
+    {"candidate_id":"w2b2-05","text_override":"A'da kişi yeni evini benimsiyor; “burası benim” diyor. B'de ise eski evine artık ait olmadığını düşünüyorum ama bunu hangi ayrıntının gösterdiğini açıklamıyorum.","final_scores":{"comparison_claim":2,"evidence_a":2,"evidence_b":0,"relationship":1,"clarity":2},"effective_response_quality":"mid_partial","note":"Original B evidence was sufficient for a higher profile; revised response makes the evidence gap explicit."},
+
+    {"candidate_id":"w2a1-02","hard_case_types_override":[]},
+    {"candidate_id":"w2a1-07","hard_case_types_override":[]},
+    {"candidate_id":"w2b1-06","hard_case_types_override":[]},
+    {"candidate_id":"w2b1-09","hard_case_types_override":[]},
+
+    {"candidate_id":"w2a2-05","hard_case_types_override":[]},
+    {"candidate_id":"w2a2-07","hard_case_types_override":[]},
+    {"candidate_id":"w2a2-10","hard_case_types_override":[]},
+    {"candidate_id":"w2b2-02","hard_case_types_override":[]},
+    {"candidate_id":"w2b2-06","hard_case_types_override":[]},
+    {"candidate_id":"w2b2-08","hard_case_types_override":[]},
+
+    {"candidate_id":"w2a4-02","hard_case_types_override":[]},
+    {"candidate_id":"w2a4-05","hard_case_types_override":[]}
+  ]
+}
