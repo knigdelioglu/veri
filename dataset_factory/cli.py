@@ -7,8 +7,6 @@ from pathlib import Path
 
 from .core import (
     SUPPORTED_MODALITIES,
-    assign_splits,
-    check_leakage,
     create_draft_record,
     dataset_stats,
     dump_json,
@@ -19,6 +17,8 @@ from .core import (
 from .production import (
     HARD_CASE_TYPES,
     QUALITY_LEVELS,
+    assign_splits_curated,
+    check_leakage_curated,
     export_sft_curated,
     next_batch_plan,
     production_findings,
@@ -163,7 +163,7 @@ def cmd_validate(args: argparse.Namespace, root: Path) -> int:
 
 
 def cmd_leakage(args: argparse.Namespace, root: Path) -> int:
-    findings = check_leakage(root)
+    findings = check_leakage_curated(root)
     _print_findings(findings)
     return 1 if _error_count(findings) else 0
 
@@ -171,7 +171,7 @@ def cmd_leakage(args: argparse.Namespace, root: Path) -> int:
 def cmd_check(args: argparse.Namespace, root: Path) -> int:
     findings = validate_dataset(root, include_examples=args.include_examples)
     findings.extend(production_findings(root))
-    findings.extend(check_leakage(root))
+    findings.extend(check_leakage_curated(root))
     _print_findings(findings)
     errors = _error_count(findings)
     warnings = sum(item.level == "warning" for item in findings)
@@ -186,10 +186,10 @@ def cmd_split(args: argparse.Namespace, root: Path) -> int:
         _print_findings(errors)
         print("Split iptal edildi: önce üretim profili hatalarını düzeltin.", file=sys.stderr)
         return 1
-    assignments = assign_splits(root, train_ratio=args.train, validation_ratio=args.validation, seed=args.seed)
+    assignments = assign_splits_curated(root, train_ratio=args.train, validation_ratio=args.validation, seed=args.seed)
     for split, ids in assignments.items():
         print(f"{split:10} {len(ids):5} kayıt")
-    findings = check_leakage(root)
+    findings = check_leakage_curated(root)
     if findings:
         _print_findings(findings)
         return 1
@@ -205,7 +205,7 @@ def cmd_export_sft(args: argparse.Namespace, root: Path) -> int:
         _print_findings(errors)
         print("Export iptal edildi: önce veri/üretim profili hatalarını düzeltin.", file=sys.stderr)
         return 1
-    leakage = check_leakage(root)
+    leakage = check_leakage_curated(root)
     if leakage:
         _print_findings(leakage)
         print("Export iptal edildi: split leakage bulundu.", file=sys.stderr)
