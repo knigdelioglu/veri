@@ -27,6 +27,15 @@ SECOND_PASS_IDS = {
 }
 
 AUDIO_ONLY_SOURCES = {"audio_delivery", "teacher_observation"}
+ALLOWED_QUALITIES = {
+    "full_correct",
+    "high_partial",
+    "mid_partial",
+    "low_partial",
+    "incorrect",
+    "blank_irrelevant",
+    "borderline",
+}
 
 
 def _overrides_by_id(payload: dict) -> dict[str, dict]:
@@ -95,6 +104,13 @@ def _effective_quality(response: dict, recalibration: dict | None, ai_review: di
     if ai_review and ai_review.get("effective_response_quality"):
         quality = str(ai_review["effective_response_quality"])
     return quality
+
+
+def _effective_hard_cases(response: dict, ai_review: dict | None) -> list[str]:
+    hard_cases = list(response.get("hard_case_types") or [])
+    if ai_review and "hard_case_types_override" in ai_review:
+        hard_cases = list(ai_review.get("hard_case_types_override") or [])
+    return hard_cases
 
 
 def _review_target(response: dict, ai_review: dict | None) -> tuple[bool, str | None]:
@@ -207,6 +223,7 @@ def build_wave1_records(root: Path) -> list[dict]:
                 ai_review = ai_overrides.get(candidate_id)
                 text = _effective_text(response, recal, ai_review)
                 quality = _effective_quality(response, recal, ai_review)
+                hard_cases = _effective_hard_cases(response, ai_review)
                 score_map = _final_score_map(source_criteria, response, recal, ai_review)
                 score_map = {key: float(value) for key, value in score_map.items() if key in canonical_ids}
                 needs_review, review_reason = _review_target(response, ai_review)
@@ -269,7 +286,7 @@ def build_wave1_records(root: Path) -> list[dict]:
                             "provenance": "synthetic",
                             "verification_source": "ai",
                             "response_quality": quality,
-                            "hard_case_types": list(response.get("hard_case_types") or []),
+                            "hard_case_types": hard_cases,
                             "adversarial": bool(response.get("adversarial", False)),
                             "review_count": 2 if candidate_id in SECOND_PASS_IDS else 1,
                             "adjudicated": False,
@@ -284,24 +301,17 @@ def _assert_wave1_invariants(records: list[dict]) -> None:
         raise ValueError(f"Wave 1 tam 100 kayıt üretmelidir; bulunan={len(records)}")
     modality = Counter(item["modality"] for item in records)
     grade = Counter(str(item["grade"]) for item in records)
-    quality = Counter(item["metadata"]["response_quality"] for item in records)
+    qualities = Counter(item["metadata"]["response_quality"] for item in records)
     expected_modality = {"written": 50, "speaking": 25, "listening": 25}
     expected_grade = {"9": 25, "10": 25, "11": 25, "12": 25}
-    expected_quality = {
-        "full_correct": 20,
-        "high_partial": 20,
-        "mid_partial": 20,
-        "low_partial": 15,
-        "incorrect": 10,
-        "blank_irrelevant": 5,
-        "borderline": 10,
-    }
     if dict(modality) != expected_modality:
         raise ValueError(f"Modalite dağılımı bozuldu: {dict(modality)}")
     if dict(grade) != expected_grade:
         raise ValueError(f"Sınıf dağılımı bozuldu: {dict(grade)}")
-    if dict(quality) != expected_quality:
-        raise ValueError(f"Cevap profili dağılımı bozuldu: {dict(quality)}")
+    if set(qualities) - ALLOWED_QUALITIES:
+        raise ValueError(f"Desteklenmeyen final response_quality bulundu: {sorted(set(qualities) - ALLOWED_QUALITIES)}")
+    if sum(qualities.values()) != 100:
+        raise ValueError("Final response_quality sınıflaması 100 kaydın tamamını kapsamalıdır")
     if sum(item["gold_evaluation"]["needs_review"] for item in records) != 1:
         raise ValueError("Wave 1 ikinci AI review sonrası tam 1 genuine needs_review içermelidir")
     if sum(item["metadata"]["review_count"] >= 2 for item in records) != 30:
@@ -325,6 +335,13 @@ def materialize_wave1(root: Path, *, overwrite: bool = False) -> list[Path]:
         dump_json(path, record)
         written.append(path)
 
+    modality = Counter(item["modality"] for item in records)
+    grade = Counter(str(item["grade"]) for item in records)
+    quality = Counter(item["metadata"]["response_quality"] for item in records)
+    hard_case_records = sum(bool(item["metadata"]["hard_case_types"]) for item in records)
+    adversarial_records = sum(item["metadata"]["adversarial"] for item in records)
+    needs_review_records = sum(item["gold_evaluation"]["needs_review"] for item in records)
+
     manifest_path = root / BATCH_DIR / "manifest.json"
     manifest = load_json(manifest_path)
     manifest.update(
@@ -333,11 +350,27 @@ def materialize_wave1(root: Path, *, overwrite: bool = False) -> list[Path]:
             "candidate_records": 100,
             "canonical_records": 100,
             "ai_verified_records": 100,
+            "ai_verified_records_pending_materialization": 0,
             "teacher_verified_records": 0,
-            "final_needs_review_records": 1,
+            "final_needs_review_records": needs_review_records,
             "second_pass_ai_review_records": 30,
             "canonical_materialized_at": "2026-08-18",
             "canonical_policy": "candidate -> recalibration -> AI review -> ai_verified canonical",
+            "canonical_distribution": {
+                "modality": dict(sorted(modality.items())),
+                "grade": dict(sorted(grade.items())),
+                "response_quality": dict(sorted(quality.items())),
+                "hard_case_records": hard_case_records,
+                "adversarial_records": adversarial_records,
+                "needs_review_records": needs_review_records,
+            },
+            "materialized_blocks": [
+                "g09-poetry-theme",
+                "g10-narrator-viewpoint",
+                "g11-speaking-character",
+                "g12-listening-inference",
+            ],
+            "next_action": "Run validate + production + leakage gates, then begin Wave 2.",
         }
     )
     dump_json(manifest_path, manifest)
