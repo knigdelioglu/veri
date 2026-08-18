@@ -1,0 +1,52 @@
+{
+  "review_version":"wave3-ai-review-1.0",
+  "reviewed_at":"2026-08-18",
+  "policy":"Rubric-first scoring. Input-capture uncertainty is represented separately from student text. Borderline alone does not trigger escalation.",
+  "second_pass_ids":[
+    "w3a1-06","w3a1-10","w3a2-10","w3b1-10","w3c1-06","w3c1-10","w3c2-10","w3d1-06","w3d1-10","w3d2-10","w3e1-10","w3e2-10",
+    "w3a2-09","w3b2-09","w3c2-09","w3d2-09",
+    "w3a1-08","w3b1-08","w3c2-06","w3e1-08",
+    "w3a1-04","w3a2-06","w3b1-06","w3b2-06","w3c1-04","w3d1-04","w3d2-06","w3e1-04","w3e2-06","w3b2-10"
+  ],
+  "overrides":[
+    {"candidate_id":"w3a1-06","text_override":"Şair geceyi insan gibi bekledi diye yazmış. Bu yüzden kişileştirme var ve yalnızlığı artırıyor.","source_override":"raw_ocr","input_uncertainties_override":[{"type":"ocr","span":"bekledi","candidates":["bekledi","belledi"],"note":"El yazısındaki fiil iki farklı biçimde okunabiliyor; söz sanatını dayandırdığı kelime güvenilir değil."}],"hard_case_types_override":["ocr_ambiguity","missing_evidence"],"needs_review":true,"review_reason":"OCR belirsizliği öğrencinin söz sanatını dayandırdığı fiili değiştiriyor; özgün görüntü doğrulanmadan device/evidence puanı kesinleştirilemez."},
+    {"candidate_id":"w3a1-10","text_override":"Sanat kişileştirme. Rüzgâr boş odaların adını çağırdı; bu da yalnızlığı güçlendiriyor.","source_override":"raw_ocr","input_uncertainties_override":[{"type":"ocr","span":"çağırdı","candidates":["çağırdı","çağırmadı"],"note":"Olumsuzluk eki güvenilir okunamıyor ve kanıtın anlamını tersine çevirebilir."}],"hard_case_types_override":["ocr_ambiguity"],"needs_review":true,"review_reason":"OCR belirsizliği kanıtın olumlu/olumsuz anlamını tersine çevirebilir; özgün görüntü olmadan function/evidence puanı kesin değildir."},
+    {"candidate_id":"w3a2-10","text_override":"Saatin “ağır bir kuş gibi” oluşu benzetme. Bu söz beklerken zamanın yavaş geçtiğini gösteriyor.","source_override":"raw_ocr","input_uncertainties_override":[{"type":"ocr","span":"yavaş","candidates":["yavaş","hızlı"],"note":"İşlev açıklamasındaki karşıt anlamlı sözcük güvenilir okunamıyor."}],"hard_case_types_override":["ocr_ambiguity"],"needs_review":true,"review_reason":"OCR alternatifi işlev yorumunu tersine çevirdiği için function puanı özgün cevap doğrulanmadan kesinleştirilemez."},
+    {"candidate_id":"w3b1-10","text_override":"Öğretmen Ece'yi eleştiriyor. Ece katkı yapmadı; “görünmeyen emeğin göz kamaştırıyor” sözü gerçek övgü değil.","source_override":"raw_ocr","input_uncertainties_override":[{"type":"ocr","span":"yapmadı","candidates":["yapmadı","yaptı"],"note":"Olumsuzluk eki öğrencinin temel gerekçesini tersine çevirebilir."}],"hard_case_types_override":["ocr_ambiguity"],"needs_review":true,"review_reason":"OCR belirsizliği ironiyi gerekçelendiren temel olguyu değiştiriyor; interpretation/reasoning puanı özgün cevap doğrulanmadan kesin değildir."},
+    {"candidate_id":"w3b2-10","text_override":"Cümle büyük olasılıkla ironik. Mesaj ve oyun kısmı bunu düşündürüyor; ancak kardeşin sözünün şaka mı sert eleştiri mi olduğunu kesin ayıramıyorum.","hard_case_types_override":[],"needs_review":false,"review_reason":null,"note":"Bu tereddüt rubriğin kısmi yorum çıpasıyla doğrudan puanlanabilir; kaynak belirsizliği yok."},
+    {"candidate_id":"w3c1-06","text_override":"Tek yoruma katılmıyorum. Metinden kanıt varsa farklı yorumların savunulabileceğini düşünüyorum.","source_override":"raw_stt","input_uncertainties_override":[{"type":"stt","span":"katılmıyorum","candidates":["katılıyorum","katılmıyorum"],"note":"Negasyon STT tarafından iki zıt biçimde çözülmüş."}],"hard_case_types_override":["stt_ambiguity"],"needs_review":true,"review_reason":"STT belirsizliği konuşmacının temel görüşünü tersine çevirebilir; ses doğrulanmadan claim puanı kesinleştirilemez."},
+    {"candidate_id":"w3c1-10","text_override":"Farklı yorumlar olabilir. Kanıt varsa kabul edilir; tek yorumun daha kolay puanlanması bunu değiştirmez.","source_override":"raw_stt","input_uncertainties_override":[{"type":"stt","span":"kabul edilir","candidates":["kabul edilir","kabul edilmez"],"note":"Negasyon gerekçenin normatif yönünü tersine çevirebilir."}],"hard_case_types_override":["stt_ambiguity"],"needs_review":true,"review_reason":"STT alternatifi gerekçenin yönünü tersine çevirdiği için reasoning/counterargument puanı ses doğrulanmadan kesinleştirilemez."},
+    {"candidate_id":"w3c2-10","text_override":"Özet tam metnin yerini tutamaz. Olayları hatırlatır ama dil ve anlatım kaybolur. Karşı görüş olarak…","source_override":"raw_stt","input_uncertainties_override":[{"type":"missing_segment","span":null,"candidates":[],"note":"Konuşmanın karşı görüşü ele aldığı son bölümü STT çıktısında eksik."}],"hard_case_types_override":["stt_ambiguity","missing_evidence"],"needs_review":true,"review_reason":"Karşı görüşe ilişkin ses bölümü transkriptte eksik; counterargument puanı doğrulanmış ses olmadan kesinleştirilemez."},
+    {"candidate_id":"w3d1-06","text_override":"Önce kızıyor, sonra yeni binayı görünce fikri değişiyor. Taşınmanın tamamen yanlış olduğunu söylemiyorum.","source_override":"raw_stt","input_uncertainties_override":[{"type":"stt","span":"söylemiyorum","candidates":["söylüyorum","söylemiyorum"],"note":"Olumsuzluk STT tarafından güvenilir çözülemiyor ve son tutumu tersine çevirebilir."}],"hard_case_types_override":["stt_ambiguity"],"needs_review":true,"review_reason":"Son tutumu belirleyen negasyon güvenilir değil; comprehension/attitude puanı ses doğrulanmadan kesinleştirilemez."},
+    {"candidate_id":"w3d1-10","text_override":"Önce karşı, sonra yeni binanın iyi yanlarını kabul ediyor. Yine de merkezde…","source_override":"raw_stt","input_uncertainties_override":[{"type":"missing_segment","span":null,"candidates":[],"note":"Öğrenci cevabının ulaşım koşulunu açıkladığı son bölüm transkriptte eksik."}],"hard_case_types_override":["missing_evidence","stt_ambiguity"],"needs_review":true,"review_reason":"Öğrenci cevabının koşullu tutumu açıkladığı bölüm kayıp; attitude/evidence puanı ses doğrulanmadan kesinleştirilemez."},
+    {"candidate_id":"w3d2-10","text_override":"Deneyimden sonra fikri değişiyor. Herkesin sürekli evden çalışması gerektiğini savunmuyorum; bazı işlerde haftada birkaç gün olabilir.","source_override":"raw_stt","input_uncertainties_override":[{"type":"stt","span":"savunmuyorum","candidates":["savunuyorum","savunmuyorum"],"note":"Olumsuzluk eki konuşmacının koşullu mu mutlak mı öneri sunduğunu değiştiriyor."}],"hard_case_types_override":["stt_ambiguity"],"needs_review":true,"review_reason":"STT belirsizliği son görüşün kapsamını tersine çevirebilir; attitude puanı ses doğrulanmadan kesinleştirilemez."},
+    {"candidate_id":"w3e1-10","text_override":"Aylin ve Bora kontrollü kullanımda yaklaşıyor. Aylin eğitim amacıyla kullanıma karşı değil.","source_override":"raw_ocr","input_uncertainties_override":[{"type":"speaker_attribution","span":"Aylin","candidates":["Aylin","Bora"],"note":"El yazısındaki konuşmacı adı güvenilir okunamıyor; uzlaşma cümlesinin kime atfedildiği belirsiz."}],"hard_case_types_override":["ocr_ambiguity","missing_evidence"],"needs_review":true,"review_reason":"Konuşmacı atfı güvenilir olmadığı için görüşlerin gerçekten yakınlaşıp yakınlaşmadığı kesin değil; positions/relationship puanı özgün cevap doğrulanmadan kesinleştirilemez."},
+    {"candidate_id":"w3e2-10","text_override":"Selin ve Kerem tamamen karşıt değildir. İkisi de özgün metni koruyup erişimi kolaylaştıran desteklere açık.","source_override":"raw_ocr","input_uncertainties_override":[{"type":"ocr","span":"değildir","candidates":["değildir","-dir"],"note":"Negasyon güvenilir okunamıyor; görüşlerin karşıt mı yakın mı olduğu değişebilir."}],"hard_case_types_override":["ocr_ambiguity"],"needs_review":true,"review_reason":"OCR belirsizliği görüşler arası ilişkiyi tersine çevirebilir; relationship/inference puanı özgün cevap doğrulanmadan kesinleştirilemez."},
+
+    {"candidate_id":"w3a1-08","hard_case_types_override":["keyword_decoy"]},
+    {"candidate_id":"w3b1-08","hard_case_types_override":["keyword_decoy"]},
+    {"candidate_id":"w3c2-06","hard_case_types_override":["contradictory_answer"]},
+    {"candidate_id":"w3e1-08","hard_case_types_override":["contradictory_answer"]},
+
+    {"candidate_id":"w3a2-09","hard_case_types_override":["prompt_injection"]},
+    {"candidate_id":"w3b2-09","hard_case_types_override":["prompt_injection"]},
+    {"candidate_id":"w3c2-09","hard_case_types_override":["prompt_injection"]},
+    {"candidate_id":"w3d2-09","hard_case_types_override":["prompt_injection"]},
+
+    {"candidate_id":"w3a1-02","hard_case_types_override":[]},
+    {"candidate_id":"w3a2-02","hard_case_types_override":[]},
+    {"candidate_id":"w3a2-06","hard_case_types_override":[]},
+    {"candidate_id":"w3b1-02","hard_case_types_override":[]},
+    {"candidate_id":"w3b1-06","hard_case_types_override":[]},
+    {"candidate_id":"w3b2-02","hard_case_types_override":[]},
+    {"candidate_id":"w3c1-02","hard_case_types_override":[]},
+    {"candidate_id":"w3c1-08","hard_case_types_override":[]},
+    {"candidate_id":"w3c2-02","hard_case_types_override":[]},
+    {"candidate_id":"w3d1-02","hard_case_types_override":[]},
+    {"candidate_id":"w3d1-08","hard_case_types_override":[]},
+    {"candidate_id":"w3d2-02","hard_case_types_override":[]},
+    {"candidate_id":"w3e1-02","hard_case_types_override":[]},
+    {"candidate_id":"w3e2-02","hard_case_types_override":[]},
+    {"candidate_id":"w3e2-09","hard_case_types_override":[]}
+  ]
+}
