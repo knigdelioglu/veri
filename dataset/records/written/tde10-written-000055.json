@@ -1,0 +1,163 @@
+{
+  "id": "tde10-written-000055",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "pilot-w2-g10-period-application-a",
+    "prompt": "Ders notundaki bilgilerden yararlanarak şiir parçasının Tanzimat'ın birinci dönemindeki toplumcu şiir anlayışıyla uyuşan iki yönünü belirleyiniz ve metinden kanıtla açıklayınız.",
+    "context": "Ders notu: Tanzimat'ın birinci dönemindeki toplumcu şiirde vatan, hürriyet, adalet ve hak gibi toplumsal kavramlar öne çıkabilir; şair geniş bir topluluğa seslenebilir ve şiiri toplumsal fayda için kullanmayı amaçlayabilir. Şiir: Ey yurdumun gençleri, susmasın artık sözünüz / Adalet gölgede kalırsa eksilir gündüzümüz / Birlikte koruyalım bize emanet bu toprağı / Hür yaşasın her insan, açık olsun yarına yolu.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w2-g10-period-application-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "feature_identification",
+        "name": "Özelliği belirleme",
+        "description": "Verilen ders notundaki dönem/topluluk özelliklerinden parçayla gerçekten ilişkili olanları doğru belirler.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Geçerli özellik belirlenmemiş veya temel sınıflama yanlış."
+          },
+          {
+            "score": 2,
+            "description": "Bir geçerli özellik doğru belirlenmiş ya da iki özellikten biri belirgin biçimde sorunlu."
+          },
+          {
+            "score": 4,
+            "description": "En az iki geçerli özellik doğru biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "name": "Metne uygulama",
+        "description": "Belirlediği özellikleri parçadaki uygun söz, durum veya anlatım tercihiyle eşleştirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Parçadan uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kanıt çok genel veya yalnız bir özellik için sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun kanıtlar var fakat eşleştirme kısmen açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "Özellikler parçadaki doğrudan kanıtlarla doğru biçimde eşleştirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "application_explanation",
+        "name": "Uygulama gerekçesi",
+        "description": "Metinsel kanıtların verilen dönem/topluluk özellikleriyle neden uyuştuğunu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Gerekçe genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Gerekçe doğru fakat kısmen geliştirilmiş."
+          },
+          {
+            "score": 3,
+            "description": "Kanıt-özellik ilişkisi açık ve tutarlı biçimde gerekçelendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Şiirde vatan konusu vardır ve gençlere hitap eder. “Bu toprağı” sözü vatanı gösterir. Gençlere seslenmesi de toplumsal olabilir ama neden dönem özelliği olduğunu tam açıklayamıyorum.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "feature_identification",
+        "score": 4.0,
+        "evidence": [
+          "Şiirde vatan konusu vardır ve gençlere hitap eder."
+        ],
+        "justification": "Özelliği belirleme için yanıt 4 puan düzeyindeki çıpayla uyumludur: En az iki geçerli özellik doğru biçimde belirlenmiş."
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "score": 2.0,
+        "evidence": [
+          "Şiirde vatan konusu vardır ve gençlere hitap eder.",
+          "“Bu toprağı” sözü vatanı gösterir."
+        ],
+        "justification": "Metne uygulama için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun kanıtlar var fakat eşleştirme kısmen açıklanmış."
+      },
+      {
+        "criterion_id": "application_explanation",
+        "score": 1.0,
+        "evidence": [
+          "Gençlere seslenmesi de toplumsal olabilir ama neden dönem özelliği olduğunu tam açıklayamıyorum."
+        ],
+        "justification": "Uygulama gerekçesi için yanıt 1 puan düzeyindeki çıpayla uyumludur: Gerekçe genel ve sınırlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "edebi-donem",
+      "kanit",
+      "pilot",
+      "pilot-wave-2",
+      "synthetic",
+      "uygulama",
+      "wave-2"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w2-g10-written-partial-boundaries",
+    "question_family": "pilot-w2-g10-period-application",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

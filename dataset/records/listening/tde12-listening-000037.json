@@ -1,0 +1,163 @@
+{
+  "id": "tde12-listening-000037",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "pilot-w2-g12-listening-speaker-purpose-b",
+    "prompt": "Konuşmacının okuma günlüğü tutmayı anlatırken temel amacını belirleyiniz ve bunu gösteren bir ayrıntıyla açıklayınız.",
+    "context": "Bir podcast konuğu şöyle der: 'Okuma günlüğüne kitabın özetini yazmıyorum; zaten aylar sonra olayların çoğunu unutabilirim. Ben ilk okuduğumda hangi karaktere kızdığımı, hangi cümlenin beni durdurduğunu not ediyorum. Geçen yıl çok sevdiğim bir kahramanı bu yıl bencil bulduğumu fark ettim. Günlük, kitapları hatırlamamdan çok, okurken benim nasıl değiştiğimi görmemi sağlıyor.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w2-g12-listening-purpose-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "purpose",
+        "name": "Konuşmacının amacını belirleme",
+        "description": "Konuşmacının temel iletişim amacını dinleme bağlamıyla uyumlu biçimde belirler.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel amaç yanlış veya cevap yok."
+          },
+          {
+            "score": 2,
+            "description": "Konuşmanın konusunu yakalıyor fakat iletişim amacını eksik/genel belirliyor."
+          },
+          {
+            "score": 4,
+            "description": "Temel iletişim amacı açık ve doğru biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "supporting_detail",
+        "name": "Destekleyici ayrıntı",
+        "description": "Amacı gösteren uygun bir ayrıntıyı konuşmadan seçer.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun ayrıntı yok."
+          },
+          {
+            "score": 1,
+            "description": "Ayrıntı konuşmada var fakat amaçla ilişkisi zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Uygun ayrıntı seçilmiş fakat bağlantı kısmen kurulmuş."
+          },
+          {
+            "score": 3,
+            "description": "Amacı doğrudan destekleyen uygun ayrıntı seçilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "inference",
+        "name": "Amaç-ayrıntı çıkarımı",
+        "description": "Seçtiği ayrıntının konuşmacının amacını nasıl gösterdiğini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Çıkarım yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı çıkarım var."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat kısmen geliştirilmiş çıkarım var."
+          },
+          {
+            "score": 3,
+            "description": "Ayrıntı ile iletişim amacı arasında açık ve doğru çıkarım kurulmuş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Okuma günlüğünün kişinin düşüncelerindeki değişimi göstermesini anlatıyor. Geçen yıl sevdiği kahramanı bu yıl bencil bulması bunun kanıtı. Neden özet yazmadığını bu amaçla ayrıntılı bağlamıyorum.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "purpose",
+        "score": 4.0,
+        "evidence": [
+          "Okuma günlüğünün kişinin düşüncelerindeki değişimi göstermesini anlatıyor."
+        ],
+        "justification": "Konuşmacının amacını belirleme için yanıt 4 puan düzeyindeki çıpayla uyumludur: Temel iletişim amacı açık ve doğru biçimde belirlenmiş."
+      },
+      {
+        "criterion_id": "supporting_detail",
+        "score": 3.0,
+        "evidence": [
+          "Okuma günlüğünün kişinin düşüncelerindeki değişimi göstermesini anlatıyor.",
+          "Geçen yıl sevdiği kahramanı bu yıl bencil bulması bunun kanıtı."
+        ],
+        "justification": "Destekleyici ayrıntı için yanıt 3 puan düzeyindeki çıpayla uyumludur: Amacı doğrudan destekleyen uygun ayrıntı seçilmiş."
+      },
+      {
+        "criterion_id": "inference",
+        "score": 2.0,
+        "evidence": [
+          "Neden özet yazmadığını bu amaçla ayrıntılı bağlamıyorum."
+        ],
+        "justification": "Amaç-ayrıntı çıkarımı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru fakat kısmen geliştirilmiş çıkarım var."
+      }
+    ],
+    "total_score": 9.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "cikarim",
+      "dinleme",
+      "konusmaci-amaci",
+      "pilot",
+      "pilot-wave-2",
+      "synthetic",
+      "wave-2"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w2-g12-listening-partial-boundaries",
+    "question_family": "pilot-w2-g12-listening-speaker-purpose",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "high_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
