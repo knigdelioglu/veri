@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from .core import Finding, load_json, load_records
+from .core import Finding, dump_json, load_json, load_records
 
 QUALITY_LEVELS = (
     "full_correct",
@@ -32,6 +33,8 @@ HARD_CASE_TYPES = (
     "missing_evidence",
     "rubric_ambiguity",
 )
+
+SUPPORTED_SPLITS = ("train", "validation", "test")
 
 SYSTEM_PROMPT = (
     "Sen Türk Dili ve Edebiyatı dersinde rubriğe bağlı değerlendirme yapan bir puanlama modelisin. "
@@ -120,6 +123,154 @@ def production_findings(root: Path) -> list[Finding]:
         if {"missing_evidence", "rubric_ambiguity"}.intersection(hard_cases) and gold.get("needs_review") is not True:
             findings.append(Finding("warning", "ambiguity_without_review_target", "missing_evidence/rubric_ambiguity örneğinde needs_review=false; gold kararını yeniden kontrol edin.", rel))
 
+    return findings
+
+
+def _group_values(record: dict) -> list[tuple[str, str]]:
+    values: list[tuple[str, str]] = []
+    task = record.get("task") if isinstance(record.get("task"), dict) else {}
+    metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
+    task_id = task.get("task_id")
+    if task_id:
+        values.append(("task_id", str(task_id)))
+    for field in ("subject_group_id", "exam_family", "question_family"):
+        value = metadata.get(field)
+        if value:
+            values.append((field, str(value)))
+    return values
+
+
+def _connected_components(records: list[dict]) -> list[list[dict]]:
+    parent = list(range(len(records)))
+
+    def find(index: int) -> int:
+        while parent[index] != index:
+            parent[index] = parent[parent[index]]
+            index = parent[index]
+        return index
+
+    def union(left: int, right: int) -> None:
+        left_root, right_root = find(left), find(right)
+        if left_root != right_root:
+            parent[right_root] = left_root
+
+    seen: dict[tuple[str, str], int] = {}
+    for index, record in enumerate(records):
+        for key in _group_values(record):
+            if key in seen:
+                union(index, seen[key])
+            else:
+                seen[key] = index
+
+    groups: dict[int, list[dict]] = defaultdict(list)
+    for index, record in enumerate(records):
+        groups[find(index)].append(record)
+    return list(groups.values())
+
+
+def _stable_unit(value: str, seed: str) -> float:
+    digest = hashlib.sha256(f"{seed}:{value}".encode("utf-8")).digest()
+    return int.from_bytes(digest[:8], "big") / float(2**64)
+
+
+def assign_splits_curated(
+    root: Path,
+    *,
+    train_ratio: float = 0.8,
+    validation_ratio: float = 0.1,
+    seed: str = "tde-v1",
+) -> dict[str, list[str]]:
+    if not (0 < train_ratio < 1):
+        raise ValueError("train_ratio 0 ile 1 arasında olmalıdır.")
+    if not (0 <= validation_ratio < 1):
+        raise ValueError("validation_ratio 0 ile 1 arasında olmalıdır.")
+    if train_ratio + validation_ratio >= 1:
+        raise ValueError("train_ratio + validation_ratio 1'den küçük olmalıdır.")
+
+    loaded = load_records(root)
+    eligible: list[tuple[Path, dict]] = []
+    for path, record in loaded:
+        metadata = record.get("metadata", {})
+        if metadata.get("status") != "teacher_verified" or metadata.get("pii_reviewed") is not True:
+            continue
+        if metadata.get("split") == "benchmark":
+            continue
+        eligible.append((path, record))
+
+    benchmark_keys: set[tuple[str, str]] = set()
+    for _, record in loaded:
+        if record.get("metadata", {}).get("split") == "benchmark":
+            benchmark_keys.update(_group_values(record))
+
+    for _, record in eligible:
+        collisions = [f"{field}={value}" for field, value in _group_values(record) if (field, value) in benchmark_keys]
+        if collisions:
+            raise ValueError(f"{record['id']} benchmark ailesiyle çakışıyor: {', '.join(collisions)}. Kayıt split edilmedi.")
+
+    records = [record for _, record in eligible]
+    components = _connected_components(records)
+    assignments: dict[str, list[str]] = {name: [] for name in SUPPORTED_SPLITS}
+    split_by_id: dict[str, str] = {}
+    validation_cut = train_ratio + validation_ratio
+
+    for component in components:
+        existing = {
+            str(record.get("metadata", {}).get("split"))
+            for record in component
+            if record.get("metadata", {}).get("split") in SUPPORTED_SPLITS
+        }
+        if len(existing) > 1:
+            ids = ", ".join(sorted(record["id"] for record in component))
+            raise ValueError(f"Bağlı kayıt grubunda mevcut split çakışması var ({ids}): {', '.join(sorted(existing))}")
+
+        if existing:
+            split = next(iter(existing))
+        else:
+            signature = "|".join(sorted(record["id"] for record in component))
+            value = _stable_unit(signature, seed)
+            split = "train" if value < train_ratio else "validation" if value < validation_cut else "test"
+
+        for record in component:
+            split_by_id[record["id"]] = split
+            assignments[split].append(record["id"])
+
+    for path, record in eligible:
+        record["metadata"]["split"] = split_by_id[record["id"]]
+        dump_json(path, record)
+
+    for split, ids in assignments.items():
+        ids.sort()
+        dump_json(
+            root / "dataset" / "splits" / split / "manifest.json",
+            {
+                "schema_version": "1.0",
+                "split": split,
+                "seed": seed,
+                "grouping_rule": "connected components over task_id OR subject_group_id OR exam_family OR question_family",
+                "record_ids": ids,
+            },
+        )
+    return assignments
+
+
+def check_leakage_curated(root: Path) -> list[Finding]:
+    by_key: dict[str, dict[str, set[str]]] = {
+        field: defaultdict(set)
+        for field in ("task_id", "subject_group_id", "exam_family", "question_family")
+    }
+
+    for _, record in load_records(root):
+        split = record.get("metadata", {}).get("split")
+        if split not in (*SUPPORTED_SPLITS, "benchmark"):
+            continue
+        for field, value in _group_values(record):
+            by_key[field][value].add(str(split))
+
+    findings: list[Finding] = []
+    for field, values in by_key.items():
+        for value, splits in sorted(values.items()):
+            if len(splits) > 1:
+                findings.append(Finding("error", "split_leakage", f"{field}='{value}' birden fazla split içinde: {', '.join(sorted(splits))}"))
     return findings
 
 
@@ -247,7 +398,7 @@ def next_batch_plan(root: Path, *, phase: str | None = None, count: int = 100) -
 
 
 def export_sft_curated(root: Path, *, split: str) -> tuple[Path, int]:
-    if split not in {"train", "validation", "test"}:
+    if split not in SUPPORTED_SPLITS:
         raise ValueError("split train, validation veya test olmalıdır.")
 
     rows: list[dict] = []
