@@ -5,6 +5,7 @@
   "language": "tr",
   "grade": 12,
   "task": {
+    "task_id": "example-servetifunun-features-q01",
     "prompt": "Servetifünun şiirinin iki belirgin özelliğini açıklayınız.",
     "context": null,
     "max_score": 10
@@ -74,6 +75,11 @@
     "subject_group_id": null,
     "exam_family": "example-written-01",
     "question_family": "servetifunun-features",
-    "provenance": "synthetic"
+    "provenance": "synthetic",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
   }
 }
