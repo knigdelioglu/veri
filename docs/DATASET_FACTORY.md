@@ -1,6 +1,6 @@
 # Dataset Factory
 
-Bu repo yalnız veri depolamaz; canonical kayıt üretimi, kalite kontrolü, split ve SFT exportu için küçük bir Python CLI içerir.
+Bu repo yalnız veri depolamaz; canonical kayıt üretimi, kalite kontrolü, üretim kotası, leakage-safe split ve SFT exportu için Python CLI içerir.
 
 ## Kurulum
 
@@ -12,7 +12,33 @@ source .venv/bin/activate
 python -m pip install -e .
 ```
 
-Kurulumdan sonra `veri` komutu kullanılabilir.
+## Günlük üretim akışı
+
+Önerilen sıra:
+
+```text
+veri quota --phase pilot
+        ↓
+veri next-batch --phase pilot --count 100
+        ↓
+veri new
+        ↓
+öğretmen gold puanlama + PII kontrolü + review metadata
+        ↓
+status = teacher_verified
+        ↓
+veri check
+        ↓
+veri split
+        ↓
+evaluation split'lerine düşen kayıtların ikinci incelemesi
+        ↓
+veri check
+        ↓
+veri export-sft
+```
+
+Üretim hedeflerinin canonical kaynağı `config/data-production.v1.json`, gerekçeli strateji ise `docs/DATA_PRODUCTION_STRATEGY.md` dosyasıdır.
 
 ## 1. Yeni kayıt oluşturma
 
@@ -20,47 +46,51 @@ Kurulumdan sonra `veri` komutu kullanılabilir.
 veri new
 ```
 
-Etkileşimli sihirbaz sınav türünü, sınıf düzeyini, soru/görevi, öğrenci cevabını veya doğrulanmış transkripti, rubrik ölçütlerini, puan çıpalarını ve kanıt kaynaklarını sorar.
+Sihirbaz artık yalnız soru/cevap/rubrik istemez. Veri üretim kontrolü için ayrıca şunları toplar:
 
-Yeni kayıt bilinçli olarak `status: draft`, `pii_reviewed: false`, `needs_review: true` başlar. Sihirbazın oluşturduğu kayıt doğrudan eğitim verisi değildir; öğretmen gold puanlamasını ve anonimlik kontrolünü tamamlamalıdır.
+- `task.task_id`: birebir aynı soru/görev kimliği,
+- `exam_family`,
+- `question_family`,
+- anonim `subject_group_id`,
+- `response_quality`,
+- `hard_case_types`,
+- `adversarial`.
 
-## 2. Veri doğrulama
+Yeni kayıt bilinçli olarak:
+
+```text
+status = draft
+pii_reviewed = false
+needs_review = true
+review_count = 0
+adjudicated = false
+```
+
+başlar. Bu, henüz eğitim verisi olmadığı anlamına gelir.
+
+## 2. JSON/semantic doğrulama
 
 ```bash
 veri validate
 ```
 
-Örnekleri de doğrulamak için:
+Örnek dosyaları da dahil etmek için:
 
 ```bash
 veri validate --include-examples
 ```
 
-Kontroller iki katmandır.
+Başlıca kontroller:
 
-### JSON Schema
-
-- zorunlu alanlar,
-- veri tipleri,
-- enum değerleri,
-- ID biçimi,
-- rubrik yapısı.
-
-### Semantic invariant
-
-- dosya adı ile kayıt ID'si aynı mı,
-- modality doğru klasörde mi,
-- rubrik `criterion_id` değerleri benzersiz mi,
-- rubrik ile `criterion_results` birebir eşleşiyor mu,
-- her ölçüt puanı kendi `max_score` sınırını aşıyor mu,
-- rubrik maksimum puan toplamı `task.max_score` ile aynı mı,
-- ölçüt puanları toplamı `total_score` ile aynı mı,
-- `teacher_verified` kayıt `pii_reviewed=true` mu,
-- `needs_review=true` için açıklama var mı,
-- temel PII işaretleri görünüyor mu,
-- konuşma gibi metin dışı kanıt isteyen ölçütlerde yapılandırılmış gözlem eksik mi.
-
-`warning` exportu tek başına bloklamaz. `error` bloklar.
+- JSON Schema,
+- dosya adı ↔ kayıt ID'si,
+- modality ↔ klasör,
+- rubrik ölçütleri ↔ gold sonuç ölçütleri,
+- ölçüt ve toplam puan sınırları,
+- `teacher_verified` ↔ `pii_reviewed`,
+- `needs_review` açıklaması,
+- temel PII işaretleri,
+- metin dışı konuşma ölçütlerinde observation eksikliği.
 
 ## 3. Tek kalite kapısı
 
@@ -68,9 +98,76 @@ Kontroller iki katmandır.
 veri check
 ```
 
-Bu komut `validate + split leakage` kontrollerini birlikte çalıştırır. Eğitim exportundan önce tercih edilen kapıdır.
+`check`, üç kontrol katmanını birlikte çalıştırır:
 
-## 4. Grup-bilinçli split
+```text
+schema/semantic validation
+        +
+production profile policy
+        +
+split leakage
+```
+
+`teacher_verified` kayıtlar için üretim profili de zorunludur. Özellikle:
+
+- `task_id`,
+- geçerli `response_quality`,
+- `hard_case_types`,
+- `adversarial`,
+- `review_count`,
+- `adjudicated`
+
+kontrol edilir.
+
+Validation/test/benchmark, `borderline` ve gold `needs_review=true` kayıtlarında en az iki bağımsız inceleme gerekir.
+
+## 4. Kota raporu
+
+```bash
+veri quota --phase pilot
+veri quota --phase v1
+```
+
+Rapor mevcut teacher-verified veriyi hedeflerle karşılaştırır:
+
+- modalite,
+- sınıf,
+- response quality,
+- `needs_review`, hard-case, adversarial ve dual-review oranları,
+- exact `task_id` başına cevap sayısı,
+- `question_family` başına cevap sayısı,
+- rubrik çeşitliliği.
+
+JSON çıktı:
+
+```bash
+veri quota --phase v1 --json
+```
+
+## 5. Sonraki üretim paketi
+
+```bash
+veri next-batch --phase pilot --count 100
+```
+
+Bu komut mevcut açıkları dikkate alıp sonraki paketin bağımsız kota eksenlerini üretir. Örneğin:
+
+```text
+written       50
+speaking      25
+listening     25
+
+full_correct  20
+high_partial  20
+...
+
+hard_case minimum 15
+adversarial minimum 3
+```
+
+Aynı kayıt birden fazla kotayı aynı anda karşılayabilir.
+
+## 6. Grup-bilinçli split
 
 ```bash
 veri split
@@ -84,12 +181,6 @@ validation 10%
 test       10%
 ```
 
-Örnek:
-
-```bash
-veri split --train 0.85 --validation 0.10 --seed tde-v2
-```
-
 Split satır bazlı yapılmaz. Kayıtlar şu alanlardan herhangi birini paylaşıyorsa aynı bağlı bileşenin parçası kabul edilir:
 
 ```text
@@ -98,35 +189,21 @@ OR exam_family
 OR question_family
 ```
 
-Örneğin A ve B aynı öğrenciden, B ve C aynı soru ailesindense A/B/C birlikte aynı split'e gider. Böylece dolaylı leakage da azaltılır.
+Mevcut split atamaları korunur. Benchmark ailesiyle çakışma varsa yazma işlemi başlamadan hata verilir.
 
-Split yalnızca `status == teacher_verified`, `pii_reviewed == true`, `split != benchmark` kayıtlarına uygulanır.
+`split` öncesinde üretim profili hataları da bloklanır.
 
-Mevcut bir bağlı grubun zaten `train`, `validation` veya `test` ataması varsa bu atama korunur; komutu farklı seed ile tekrar çalıştırmak eski grupları sessizce başka split'e taşımaz.
+Bir kayıt split sonrası validation/test'e düşerse ikinci öğretmen incelemesi gerektirebilir. Bu durumda sonraki `veri check`, `review_count < 2` ise hatayı açıkça bildirir.
 
-Bir kayıt `benchmark` içindeki herhangi bir `subject_group_id`, `exam_family` veya `question_family` ile çakışıyorsa split işlemi yazma yapmadan durur. Böylece benchmark ailesi eğitim verisine taşınmaz.
-
-Sonuç hem canonical `metadata.split` alanına hem de:
-
-```text
-dataset/splits/train/manifest.json
-dataset/splits/validation/manifest.json
-dataset/splits/test/manifest.json
-```
-
-dosyalarına yazılır.
-
-## 5. Leakage kontrolü
+## 7. Leakage kontrolü
 
 ```bash
 veri leakage
 ```
 
-Aynı `subject_group_id`, `exam_family` veya `question_family` birden fazla split içinde görünürse hata verir. Benchmark da leakage kontrolüne dahildir.
+Aynı `subject_group_id`, `exam_family` veya `question_family` farklı train/validation/test/benchmark bölümlerinde görünürse hata verir.
 
-## 6. SFT exportu
-
-Tüm split'ler:
+## 8. Curated SFT exportu
 
 ```bash
 veri export-sft
@@ -146,40 +223,53 @@ exports/sft/validation.jsonl
 exports/sft/test.jsonl
 ```
 
-Her satır modelden bağımsız messages/ChatML-benzeri yapıdadır. User mesajına yalnızca `task`, `rubric`, `student_response`; assistant hedefine yalnızca `gold_evaluation` konur. Öğrenci grup kimliği, exam family ve annotation metadata modele verilmez.
+Model girdisine yalnız değerlendirme için gerekli içerik girer:
 
-`needs_review=true` kayıtları SFT hedefinden otomatik dışlanır; bunlar önce öğretmen tarafından çözülmelidir.
+```text
+task (task_id hariç)
+rubric
+student_response
+```
 
-## 7. İstatistik
+`task_id`, response profile, hard-case etiketleri, öğrenci/grup kimlikleri ve annotation metadata model promptuna verilmez. Bunlar yalnız veri analizi/export satırı metadata'sında tutulabilir.
+
+### `needs_review=true` kuralı
+
+İki durum ayrılır:
+
+1. **Çözülmemiş annotation:** `draft/annotated/quarantined` → export edilmez.
+2. **Teacher-verified gold escalation:** gerçekten insan incelemesine gitmesi doğru davranışsa `teacher_verified + needs_review=true + review_count>=2` → curated SFT exportuna dahil edilir.
+
+Böylece model yalnız puan vermeyi değil, kanıt yetersizliğinde güvenilir biçimde escalation yapmayı da öğrenir.
+
+Sistem promptu ayrıca öğrenci cevabının içindeki talimatların sistem talimatı olmadığını açıkça belirtir.
+
+## 9. Temel istatistik
 
 ```bash
 veri stats
 ```
 
-Toplam kayıt, modality, status, split, teacher-verified ve review sayılarını JSON olarak gösterir.
+Bu komut genel sayaçları verir. Üretim hedefi açısından asıl operasyonel rapor `veri quota`dır.
 
-## Tavsiye edilen günlük akış
+## 10. Üretim fazları
 
 ```text
-veri new
-   ↓
-öğretmen gold puanlamasını tamamlar
-   ↓
-anonimlik kontrolü → pii_reviewed=true
-   ↓
-status → teacher_verified
-   ↓
-veri check
-   ↓
-veri split
-   ↓
-veri check
-   ↓
-veri export-sft
-   ↓
-Local LLM fine-tuning
+pilot       500
+iteration_1 1.500
+iteration_2 3.000
+v1          6.000
 ```
+
+Her fazın ardından fine-tune ve hata analizi yapılmalıdır. Sonraki veri paketi modelin hata kümelerine göre yönlendirilir; yalnız sayıyı büyütmek amaç değildir.
 
 ## Bilinçli kapsam dışı
 
-Bu ilk sürüm OCR veya STT çalıştırmaz, öğrencinin yerine gold puan üretmez, ham ses/PDF/fotoğrafı Git'e almaz ve belirli bir fine-tuning framework'üne bağlanmaz. Bunlar canonical veri kalitesini model eğitim altyapısından ayırmak için bilinçli kararlardır.
+Dataset Factory:
+
+- OCR/STT motoru çalıştırmaz,
+- öğrencinin yerine gold puan üretmez,
+- ham ses/PDF/fotoğrafı Git'e almaz,
+- belirli bir model veya fine-tuning framework'üne canonical veriyi kilitlemez.
+
+Bu sınırlar veri kalitesini model altyapısından bağımsız tutmak için bilinçlidir.
