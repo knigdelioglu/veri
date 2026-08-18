@@ -1,6 +1,6 @@
 # veri — Türk Dili ve Edebiyatı Rubrik Notlandırma Veri Seti
 
-Bu depo, **yerel bir dil modelini (Local LLM) Türk Dili ve Edebiyatı derslerinde rubriğe dayalı notlandırma yapacak şekilde eğitmek ve değerlendirmek** için veri üretme, öğretmen tarafından doğrulama, kalite kontrolü, kota yönetimi ve eğitim formatlarına dönüştürme amacıyla kurulmuştur.
+Bu depo, **yerel bir dil modelini (Local LLM) Türk Dili ve Edebiyatı derslerinde rubriğe dayalı notlandırma yapacak şekilde eğitmek ve değerlendirmek** için veri üretme, doğrulama, kalite kontrolü, kota yönetimi ve eğitim formatlarına dönüştürme amacıyla kurulmuştur.
 
 Hedef model; soru/görev + rubrik + öğrenci cevabını birlikte okuyarak:
 
@@ -18,7 +18,27 @@ Desteklenen sınav türleri:
 - **Konuşma sınavı** (`speaking`)
 - **Dinleme sınavı** (`listening`)
 
-> Bu depo rubrik tabanlı değerlendirme modelini eğitir. OCR veya STT sisteminin kendi hatalarını öğretmek ana hedef değildir. Canonical öğrenci metni/transkripti mümkün olduğunca öğretmen tarafından doğrulanmış olmalıdır.
+> Bu depo rubrik tabanlı değerlendirme modelini eğitir. OCR veya STT sisteminin kendi hatalarını öğretmek ana hedef değildir. Sentetik veride olmayan ses/teslim özellikleri uydurulmaz; speaking örnekleri gerçek audio yoksa transcript-only rubric kullanır.
+
+## Doğrulama kaynakları
+
+Canonical veri doğrulama kaynağını açıkça taşır:
+
+```text
+ai_verified       → AI tarafından üretilmiş/yeniden denetlenmiş veri
+teacher_verified  → gerçekten insan öğretmen tarafından doğrulanmış veri
+```
+
+Sentetik pilot üretimde varsayılan:
+
+```json
+{
+  "status": "ai_verified",
+  "verification_source": "ai"
+}
+```
+
+olacaktır. `teacher_verified` etiketi AI verisine verilmez.
 
 ## Ana tasarım
 
@@ -29,7 +49,9 @@ rubrik
     +
 öğrenci cevabı
     +
-öğretmen gold değerlendirmesi
+gold değerlendirme
+    +
+verification provenance
     +
 üretim profili / review metadata
     ↓
@@ -46,7 +68,7 @@ curated SFT / benchmark
 
 ## V1 veri üretim hedefi
 
-V1 için hedef **6.000 teacher-verified canonical örnek**tir. Veri tek seferde üretilmez:
+V1 için hedef **6.000 verified canonical örnek**tir. Veri tek seferde üretilmez:
 
 ```text
 500    → pilot fine-tune + error mining
@@ -79,10 +101,12 @@ Buna ek olarak:
 
 - **%15–20 hard case**,
 - **%3–5 adversarial**,
-- **%8–12 teacher-verified gold `needs_review`**,
-- teacher-verified verinin en az **%20'sinde çift insan değerlendirmesi**
+- hedef olarak **%8–12 gerçek gold `needs_review`**,
+- verified verinin en az **%20'sinde ikinci doğrulama geçişi**
 
-hedeflenir.
+izlenir.
+
+`needs_review` oranı kota uğruna yapay olarak doldurulmaz. Rubrik mevcut anchor ile güvenilir puan verebiliyorsa borderline cevap puanlanır; escalation yalnız kanıt gerçekten yetersiz/güvenilmez olduğunda kullanılır.
 
 Ayrıntılar: [`docs/DATA_PRODUCTION_STRATEGY.md`](docs/DATA_PRODUCTION_STRATEGY.md).
 
@@ -98,7 +122,7 @@ source .venv/bin/activate
 python -m pip install -e .
 ```
 
-Pilot üretime başlarken:
+Pilot üretimde:
 
 ```bash
 veri quota --phase pilot
@@ -148,7 +172,7 @@ production profile policy
 split leakage
 ```
 
-`teacher_verified` kayıtta üretim metadata'sı ve insan review politikası da kontrol edilir.
+Verified kayıtların `verification_source`, üretim metadata'sı ve review-count politikası kontrol edilir.
 
 ### `veri quota`
 
@@ -160,7 +184,7 @@ veri quota --phase v1
 veri quota --phase v1 --json
 ```
 
-Modalite, sınıf, cevap profili, hard-case/adversarial/needs-review oranları, review kotası, exact soru kapsaması, question-family kapsaması ve rubrik çeşitliliğini raporlar.
+Modalite, sınıf, cevap profili, hard-case/adversarial/needs-review oranları, doğrulama kotası, exact soru kapsaması, question-family kapsaması, rubrik çeşitliliği ve doğrulama kaynağını raporlar.
 
 ### `veri next-batch`
 
@@ -174,7 +198,7 @@ veri next-batch --phase pilot --count 100
 
 ### `veri split`
 
-Teacher-verified kayıtları varsayılan `80/10/10` train/validation/test oranıyla ayırır. Satır bazlı rastgele split yapmaz.
+Verified kayıtları varsayılan `80/10/10` train/validation/test oranıyla ayırır. Satır bazlı rastgele split yapmaz.
 
 Aşağıdaki alanlardan **herhangi birini** paylaşan kayıtlar aynı bağlı bileşende tutulur:
 
@@ -205,11 +229,9 @@ rubric
 student_response
 ```
 
-Üretim etiketleri ve öğrenci/grup metadata'sı modele verilmez.
+Üretim etiketleri ve öğrenci/grup metadata'sı modele verilmez. Export metadata'sında `verification_source` korunur; böylece AI-verified ve ilerideki human-verified veri analizde ayrılabilir.
 
 ## `needs_review` için kritik ayrım
-
-İki durum birbirine karıştırılmaz.
 
 **Çözülmemiş annotation:**
 
@@ -222,14 +244,14 @@ draft / annotated / quarantined
 **Gold escalation davranışı:**
 
 ```text
-status = teacher_verified
+status = ai_verified | teacher_verified
 needs_review = true
 review_count >= 2
 ```
 
-→ gerçekten modelin “insan incelemesine gönder” demesi doğru olduğundan curated SFT exportuna girer.
+→ kanıtın gerçekten güvenilir puan üretmeye yetmediği bir örnekse curated SFT exportuna girer.
 
-Bu sayede model yalnız not vermeyi değil, kanıt yetersiz olduğunda **aşırı özgüven göstermemeyi** de öğrenir.
+**Borderline tek başına escalation değildir.** Rubrik komşu bir anchor ile puanlamayı çözüyorsa model puan vermelidir.
 
 ## Aynı sorudan kaç cevap?
 
@@ -274,11 +296,13 @@ Bunlar modelin yalnız anahtar kelime veya cevap uzunluğuna göre puan vermesin
 │   ├── ANNOTATION_GUIDE.md
 │   ├── DATA_QUALITY.md
 │   ├── DATASET_FACTORY.md
-│   └── DATA_PRODUCTION_STRATEGY.md
+│   ├── DATA_PRODUCTION_STRATEGY.md
+│   └── PILOT_500_PRODUCTION_PLAN.md
 ├── schemas/
 │   ├── canonical-record.schema.json
 │   └── rubric.schema.json
 ├── dataset/
+│   ├── candidates/
 │   ├── records/
 │   │   ├── written/
 │   │   ├── speaking/
@@ -293,6 +317,8 @@ Bunlar modelin yalnız anahtar kelime veya cevap uzunluğuna göre puan vermesin
 
 ## Canonical metadata özeti
 
+Sentetik verified örnek:
+
 ```json
 {
   "task": {
@@ -302,10 +328,11 @@ Bunlar modelin yalnız anahtar kelime veya cevap uzunluğuna göre puan vermesin
     "max_score": 10
   },
   "metadata": {
-    "status": "teacher_verified",
+    "status": "ai_verified",
+    "verification_source": "ai",
     "split": null,
     "pii_reviewed": true,
-    "subject_group_id": "anon-group-...",
+    "subject_group_id": null,
     "exam_family": "exam-family-...",
     "question_family": "main-idea-poetry",
     "response_quality": "mid_partial",
@@ -313,7 +340,7 @@ Bunlar modelin yalnız anahtar kelime veya cevap uzunluğuna göre puan vermesin
     "adversarial": false,
     "review_count": 1,
     "adjudicated": false,
-    "provenance": "real_anonymized"
+    "provenance": "synthetic"
   }
 }
 ```
@@ -322,7 +349,10 @@ Tam sözleşme: [`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md).
 
 ## Konuşma sınavlarında kanıt kuralı
 
-Transkript yalnız **ne söylendiğini** temsil eder. Telaffuz, vurgu-tonlama, gerçek akıcılık/duraksama, ses kullanımı veya beden dili yalnız transkriptten puanlanmaz. Bu ölçütler varsa uygun `evidence_sources` ve öğretmen observation bilgisi gerekir.
+Transkript yalnız **ne söylendiğini** temsil eder. Telaffuz, vurgu-tonlama, gerçek akıcılık/duraksama, ses kullanımı veya beden dili yalnız transkriptten puanlanmaz.
+
+- Sentetik speaking veride gerçek audio yoksa bu kriterler rubric'ten çıkarılır ve kayıt `transcript-only` olarak işaretlenir.
+- Gerçek audio verisinde bu ölçütler kullanılacaksa uygun `evidence_sources` ve gerçek gözlem/audio kanıtı gerekir.
 
 ## Gizlilik
 
@@ -339,7 +369,7 @@ Başarı yalnız toplam puan eşleşmesi değildir. Benchmarklarda mümkün oldu
 - borderline karar performansı,
 - `needs_review` precision/recall,
 - hard-case ve adversarial alt-küme performansı,
-- insan ↔ insan ve model ↔ insan uyumu
+- AI-verified ↔ ileride varsa human-verified slice farkları
 
 izlenmelidir.
 
