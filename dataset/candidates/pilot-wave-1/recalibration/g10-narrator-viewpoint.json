@@ -1,0 +1,26 @@
+{
+  "schema_version":"candidate-recalibration-family-1.0",
+  "batch_id":"pilot-wave-1-calibration",
+  "family":"g10-narrator-viewpoint",
+  "status":"recalibrated_pending_teacher_review",
+  "policy":"Overrides take precedence over the generated candidate; unchanged fields remain from the source candidate file.",
+  "overrides":[
+    {"candidate_id":"b1-04","effective_response_quality":"high_partial","text_override":"Anlatıcı olaya katılan birinci kişidir. Zarfı kendisiyle ilgili sanması okurun da bir süre yanılmasına yol açıyor. Gerçeğin ertesi gün öğrenilmesi beklentiyi bozuyor.","scores":{"viewpoint":3,"evidence":1,"effect":3,"clarity":2}},
+    {"candidate_id":"b1-05","effective_response_quality":"high_partial","text_override":"Kahraman anlatıcı var. “İçeri girmedim” ifadesi anlatıcının olayın içinde olduğunu gösteriyor. Zarfın ne olduğunu başta bilmediği için okur da sonradan öğreniyor.","scores":{"viewpoint":3,"evidence":1,"effect":2,"clarity":2}},
+    {"candidate_id":"b1-06","effective_response_quality":"mid_partial","scores":{"viewpoint":3,"evidence":1,"effect":1,"clarity":2}},
+    {"candidate_id":"b1-07","effective_response_quality":"mid_partial","text_override":"Anlatıcı kahramanın kendisidir çünkü “gördüm” diyor. Olayı onun gözünden izliyoruz. Bunun okura etkisini tam açıklayamıyorum.","scores":{"viewpoint":3,"evidence":2,"effect":0,"clarity":2}},
+    {"candidate_id":"b1-08","effective_response_quality":"mid_partial","text_override":"Bakış açısı birinci kişidir. Zarf konusunda yanıldığını görüyoruz. Bu durum okurun bilgi alanını da sınırlar.","scores":{"viewpoint":3,"evidence":1,"effect":1,"clarity":2}},
+    {"candidate_id":"b1-09","effective_response_quality":"low_partial","text_override":"Anlatıcı olayın içindedir. “Gördüm” kelimesi geçiyor.","scores":{"viewpoint":1,"evidence":1,"effect":0,"clarity":2}},
+    {"candidate_id":"b1-10","effective_response_quality":"low_partial","scores":{"viewpoint":1,"evidence":1,"effect":0,"clarity":2}},
+    {"candidate_id":"b1-11","effective_response_quality":"incorrect","scores":{"viewpoint":0,"evidence":1,"effect":0,"clarity":2}},
+    {"candidate_id":"b1-12","effective_response_quality":"blank_irrelevant","scores":{"viewpoint":0,"evidence":0,"effect":0,"clarity":2}},
+    {"candidate_id":"b2-03","effective_response_quality":"high_partial","text_override":"Hâkim bakış açısı vardır. Meral kardeşini beklerken okur kardeşin otobüsü kaçırdığını öğreniyor. Bu yüzden okur karakterden daha fazla bilgi sahibi.","scores":{"viewpoint":3,"evidence":2,"effect":2,"clarity":2}},
+    {"candidate_id":"b2-04","effective_response_quality":"high_partial","scores":{"viewpoint":3,"evidence":2,"effect":2,"clarity":2}},
+    {"candidate_id":"b2-05","effective_response_quality":"high_partial","scores":{"viewpoint":3,"evidence":2,"effect":2,"clarity":2}},
+    {"candidate_id":"b2-06","effective_response_quality":"mid_partial","scores":{"viewpoint":1,"evidence":2,"effect":1,"clarity":2}},
+    {"candidate_id":"b2-07","effective_response_quality":"mid_partial","text_override":"Anlatıcı Meral'in ne düşündüğünü biliyor, bu yüzden gözlemci değildir. Bence ilahi anlatıcıdır. Kardeşin istasyonda olduğunu da öğreniyoruz.","scores":{"viewpoint":3,"evidence":1,"effect":0,"clarity":2}},
+    {"candidate_id":"b2-08","effective_response_quality":"low_partial","scores":{"viewpoint":1,"evidence":1,"effect":0,"clarity":2}},
+    {"candidate_id":"b2-09","effective_response_quality":"low_partial","scores":{"viewpoint":1,"evidence":1,"effect":0,"clarity":2}},
+    {"candidate_id":"b2-11","effective_response_quality":"incorrect","scores":{"viewpoint":0,"evidence":0,"effect":0,"clarity":2}}
+  ]
+}
