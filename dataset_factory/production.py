@@ -35,6 +35,7 @@ HARD_CASE_TYPES = (
 )
 
 SUPPORTED_SPLITS = ("train", "validation", "test")
+VERIFIED_STATUSES = {"ai_verified", "teacher_verified"}
 
 SYSTEM_PROMPT = (
     "Sen Türk Dili ve Edebiyatı dersinde rubriğe bağlı değerlendirme yapan bir puanlama modelisin. "
@@ -52,7 +53,7 @@ def _verified_records(root: Path) -> list[tuple[Path, dict]]:
     rows: list[tuple[Path, dict]] = []
     for path, record in load_records(root):
         metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
-        if metadata.get("status") == "teacher_verified" and metadata.get("pii_reviewed") is True:
+        if metadata.get("status") in VERIFIED_STATUSES and metadata.get("pii_reviewed") is True:
             rows.append((path, record))
     return rows
 
@@ -60,21 +61,35 @@ def _verified_records(root: Path) -> list[tuple[Path, dict]]:
 def production_findings(root: Path) -> list[Finding]:
     strategy = load_production_strategy(root)
     review_policy = strategy["review_policy"]
+    verified_min_reviews = review_policy.get("verified_min_reviews", review_policy.get("teacher_verified_min_reviews", 1))
     allowed_hard = set(HARD_CASE_TYPES)
     findings: list[Finding] = []
 
     for path, record in load_records(root):
         metadata = record.get("metadata") if isinstance(record.get("metadata"), dict) else {}
-        if metadata.get("status") != "teacher_verified":
+        status = metadata.get("status")
+        if status not in VERIFIED_STATUSES:
             continue
 
         rel = str(path.relative_to(root))
         task = record.get("task") if isinstance(record.get("task"), dict) else {}
         gold = record.get("gold_evaluation") if isinstance(record.get("gold_evaluation"), dict) else {}
 
+        verification_source = metadata.get("verification_source")
+        expected_source = "ai" if status == "ai_verified" else "teacher"
+        if verification_source != expected_source:
+            findings.append(
+                Finding(
+                    "error",
+                    "verification_source_mismatch",
+                    f"{status} kayıt verification_source='{expected_source}' taşımalıdır.",
+                    rel,
+                )
+            )
+
         task_id = task.get("task_id")
         if not isinstance(task_id, str) or not task_id.strip():
-            findings.append(Finding("error", "production_task_id_required", "teacher_verified kayıt task.task_id taşımalıdır.", rel))
+            findings.append(Finding("error", "production_task_id_required", "Verified kayıt task.task_id taşımalıdır.", rel))
 
         quality = metadata.get("response_quality")
         if quality not in QUALITY_LEVELS:
@@ -98,21 +113,21 @@ def production_findings(root: Path) -> list[Finding]:
         if not isinstance(review_count, int) or isinstance(review_count, bool):
             findings.append(Finding("error", "review_count_required", "review_count tam sayı olmalıdır.", rel))
             review_count = 0
-        elif review_count < review_policy["teacher_verified_min_reviews"]:
-            findings.append(Finding("error", "insufficient_review_count", f"teacher_verified kayıt en az {review_policy['teacher_verified_min_reviews']} bağımsız inceleme görmelidir.", rel))
+        elif review_count < verified_min_reviews:
+            findings.append(Finding("error", "insufficient_review_count", f"Verified kayıt en az {verified_min_reviews} doğrulama geçişi görmelidir.", rel))
 
         if not isinstance(metadata.get("adjudicated"), bool):
             findings.append(Finding("error", "adjudicated_required", "adjudicated boolean olmalıdır.", rel))
 
         split = metadata.get("split")
         if split in {"validation", "test", "benchmark"} and review_count < review_policy["evaluation_split_min_reviews"]:
-            findings.append(Finding("error", "evaluation_split_requires_dual_review", f"{split} kaydı en az {review_policy['evaluation_split_min_reviews']} bağımsız inceleme görmelidir.", rel))
+            findings.append(Finding("error", "evaluation_split_requires_dual_review", f"{split} kaydı en az {review_policy['evaluation_split_min_reviews']} doğrulama geçişi görmelidir.", rel))
 
         if quality == "borderline" and review_count < review_policy["borderline_min_reviews"]:
-            findings.append(Finding("error", "borderline_requires_dual_review", f"borderline kayıt en az {review_policy['borderline_min_reviews']} bağımsız inceleme görmelidir.", rel))
+            findings.append(Finding("error", "borderline_requires_dual_review", f"borderline kayıt en az {review_policy['borderline_min_reviews']} doğrulama geçişi görmelidir.", rel))
 
         if gold.get("needs_review") is True and review_count < review_policy["needs_review_min_reviews"]:
-            findings.append(Finding("error", "needs_review_requires_dual_review", f"needs_review=true gold örneği en az {review_policy['needs_review_min_reviews']} bağımsız inceleme görmelidir.", rel))
+            findings.append(Finding("error", "needs_review_requires_dual_review", f"needs_review=true gold örneği en az {review_policy['needs_review_min_reviews']} doğrulama geçişi görmelidir.", rel))
 
         if adversarial and not hard_cases:
             findings.append(Finding("warning", "adversarial_without_hard_case", "adversarial=true fakat hard_case_types boş; saldırı türünü etiketlemek analiz kalitesini artırır.", rel))
@@ -191,7 +206,7 @@ def assign_splits_curated(
     eligible: list[tuple[Path, dict]] = []
     for path, record in loaded:
         metadata = record.get("metadata", {})
-        if metadata.get("status") != "teacher_verified" or metadata.get("pii_reviewed") is not True:
+        if metadata.get("status") not in VERIFIED_STATUSES or metadata.get("pii_reviewed") is not True:
             continue
         if metadata.get("split") == "benchmark":
             continue
@@ -319,10 +334,12 @@ def production_report(root: Path, *, phase: str | None = None) -> dict:
     family_counts: Counter[str] = Counter()
     rubric_counts: Counter[str] = Counter()
     criterion_counts: Counter[str] = Counter()
+    verification_sources: Counter[str] = Counter()
     for record in records:
         task = record.get("task", {})
         metadata = record.get("metadata", {})
         rubric = record.get("rubric", {})
+        verification_sources[str(metadata.get("verification_source") or "<missing>")] += 1
         if task.get("task_id"):
             task_counts[str(task["task_id"])] += 1
         if metadata.get("question_family"):
@@ -353,6 +370,7 @@ def production_report(root: Path, *, phase: str | None = None) -> dict:
         "target_records": target_total,
         "verified_records": total,
         "remaining_to_phase_target": max(0, target_total - total),
+        "by_verification_source": dict(sorted(verification_sources.items())),
         "by_modality": _distribution_report(modality, target_total, strategy["target_distribution"]["modality"]),
         "by_grade": _distribution_report(grade, target_total, strategy["target_distribution"]["grade"]),
         "by_response_quality": _distribution_report(quality, target_total, strategy["target_distribution"]["response_quality"]),
@@ -406,7 +424,7 @@ def export_sft_curated(root: Path, *, split: str) -> tuple[Path, int]:
         metadata = record.get("metadata", {})
         if metadata.get("split") != split:
             continue
-        if metadata.get("status") != "teacher_verified" or metadata.get("pii_reviewed") is not True:
+        if metadata.get("status") not in VERIFIED_STATUSES or metadata.get("pii_reviewed") is not True:
             continue
 
         task_payload = {key: value for key, value in record["task"].items() if key != "task_id"}
@@ -418,7 +436,7 @@ def export_sft_curated(root: Path, *, split: str) -> tuple[Path, int]:
                 {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False, separators=(",", ":"))},
                 {"role": "assistant", "content": json.dumps(record["gold_evaluation"], ensure_ascii=False, separators=(",", ":"))},
             ],
-            "metadata": {"modality": record["modality"], "grade": record["grade"], "schema_version": record["schema_version"], "rubric_id": record["rubric"]["rubric_id"], "task_id": record["task"].get("task_id"), "response_quality": metadata.get("response_quality"), "hard_case_types": metadata.get("hard_case_types", []), "adversarial": metadata.get("adversarial", False)},
+            "metadata": {"modality": record["modality"], "grade": record["grade"], "schema_version": record["schema_version"], "rubric_id": record["rubric"]["rubric_id"], "task_id": record["task"].get("task_id"), "response_quality": metadata.get("response_quality"), "hard_case_types": metadata.get("hard_case_types", []), "adversarial": metadata.get("adversarial", False), "verification_source": metadata.get("verification_source")},
         })
 
     output = root / "exports" / "sft" / f"{split}.jsonl"
