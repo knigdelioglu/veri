@@ -37,7 +37,7 @@ canonical record
     ↓
 quality + production gate
     ↓
-group-aware split
+exact-task-aware group split
     ↓
 curated SFT / benchmark
 ```
@@ -176,15 +176,16 @@ veri next-batch --phase pilot --count 100
 
 Teacher-verified kayıtları varsayılan `80/10/10` train/validation/test oranıyla ayırır. Satır bazlı rastgele split yapmaz.
 
-Aşağıdaki alanlardan herhangi birini paylaşan kayıtlar aynı bağlı grupta tutulur:
+Aşağıdaki alanlardan **herhangi birini** paylaşan kayıtlar aynı bağlı bileşende tutulur:
 
 ```text
-subject_group_id
+task_id
+OR subject_group_id
 OR exam_family
 OR question_family
 ```
 
-Benchmark aileleri eğitim split'leriyle çakışamaz.
+Böylece birebir aynı soru, yakın soru varyantı, aynı sınav formu veya aynı anonim öğrenci bağlantısı train/test arasında bölünemez. Benchmark da aynı dört anahtarla eğitim split'lerinden izole edilir.
 
 ### `veri export-sft`
 
