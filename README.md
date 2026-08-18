@@ -1,28 +1,26 @@
 # veri — Türk Dili ve Edebiyatı Rubrik Notlandırma Veri Seti
 
-Bu depo, **yerel bir dil modelini (Local LLM) Türk Dili ve Edebiyatı derslerinde rubriğe dayalı notlandırma yapacak şekilde eğitmek ve değerlendirmek** için veri üretme, temizleme, öğretmen tarafından doğrulama, kalite kontrolü ve eğitim formatlarına dönüştürme amacıyla kurulmuştur.
+Bu depo, **yerel bir dil modelini (Local LLM) Türk Dili ve Edebiyatı derslerinde rubriğe dayalı notlandırma yapacak şekilde eğitmek ve değerlendirmek** için veri üretme, öğretmen tarafından doğrulama, kalite kontrolü, kota yönetimi ve eğitim formatlarına dönüştürme amacıyla kurulmuştur.
 
-Hedef model; bir sınav sorusunu/görevini, ilgili rubriği ve öğrencinin cevabını birlikte okuyarak:
+Hedef model; soru/görev + rubrik + öğrenci cevabını birlikte okuyarak:
 
 - ölçüt bazında puan,
 - toplam puan,
 - öğrenci cevabına dayalı kısa kanıt,
 - rubriğe bağlı kısa gerekçe,
-- gerekirse `needs_review`
+- gerektiğinde güvenilir `needs_review`
 
 üretmelidir.
 
 Desteklenen sınav türleri:
 
-- **Yazılı sınav** — öğrencinin yazılı cevabı üzerinden rubrik değerlendirmesi.
-- **Konuşma sınavı** — doğrulanmış transkript ve gerekli olduğunda öğretmen gözlemleri üzerinden değerlendirme.
-- **Dinleme sınavı** — dinleme görevine verilen öğrenci cevabının rubriğe göre değerlendirilmesi.
+- **Yazılı sınav** (`written`)
+- **Konuşma sınavı** (`speaking`)
+- **Dinleme sınavı** (`listening`)
 
-> Bu depo öncelikle **rubrik tabanlı değerlendirme modelini** eğitir. OCR ve konuşmadan metne (ASR/STT) sistemlerinin kendi hatalarını öğretmek ana hedef değildir. Eğitimde mümkün olduğunca öğretmen tarafından düzeltilmiş öğrenci metni/transkripti canonical cevap olarak kullanılmalıdır.
+> Bu depo rubrik tabanlı değerlendirme modelini eğitir. OCR veya STT sisteminin kendi hatalarını öğretmek ana hedef değildir. Canonical öğrenci metni/transkripti mümkün olduğunca öğretmen tarafından doğrulanmış olmalıdır.
 
-## Temel tasarım ilkesi
-
-Canonical veri hiçbir eğitim framework'üne bağlı değildir.
+## Ana tasarım
 
 ```text
 soru / görev
@@ -31,18 +29,64 @@ rubrik
     +
 öğrenci cevabı
     +
-öğretmenin doğruladığı değerlendirme
+öğretmen gold değerlendirmesi
+    +
+üretim profili / review metadata
     ↓
 canonical record
     ↓
-quality gate
+quality + production gate
     ↓
 group-aware split
     ↓
-SFT / preference / benchmark export
+curated SFT / benchmark
 ```
 
-`dataset/records/` altındaki kayıtlar veri setinin **tek gerçek kaynağıdır (single source of truth)**. `exports/` altındaki JSONL dosyaları yeniden üretilebilir türevlerdir.
+`dataset/records/` veri setinin **single source of truth** alanıdır. `exports/` yeniden üretilebilir türevleri içerir.
+
+## V1 veri üretim hedefi
+
+V1 için hedef **6.000 teacher-verified canonical örnek**tir. Veri tek seferde üretilmez:
+
+```text
+500    → pilot fine-tune + error mining
+1.500  → ikinci fine-tune + error mining
+3.000  → üçüncü fine-tune + error mining
+6.000  → V1
+```
+
+Modalite hedefi:
+
+| Tür | Pay |
+|---|---:|
+| Yazılı | %50 |
+| Konuşma | %25 |
+| Dinleme | %25 |
+
+Cevap profili hedefi:
+
+| Profil | Pay |
+|---|---:|
+| Tam/tama yakın doğru | %20 |
+| Yüksek kısmi doğru | %20 |
+| Orta kısmi doğru | %20 |
+| Düşük kısmi doğru | %15 |
+| Yanlış | %10 |
+| Boş/ilgisiz | %5 |
+| Borderline | %10 |
+
+Buna ek olarak:
+
+- **%15–20 hard case**,
+- **%3–5 adversarial**,
+- **%8–12 teacher-verified gold `needs_review`**,
+- teacher-verified verinin en az **%20'sinde çift insan değerlendirmesi**
+
+hedeflenir.
+
+Ayrıntılar: [`docs/DATA_PRODUCTION_STRATEGY.md`](docs/DATA_PRODUCTION_STRATEGY.md).
+
+Makine tarafından okunan hedefler: [`config/data-production.v1.json`](config/data-production.v1.json).
 
 ## Hızlı başlangıç
 
@@ -54,67 +98,85 @@ source .venv/bin/activate
 python -m pip install -e .
 ```
 
-Ardından:
+Pilot üretime başlarken:
 
 ```bash
+veri quota --phase pilot
+veri next-batch --phase pilot --count 100
 veri new
 veri check
 veri split
 veri check
 veri export-sft
-veri stats
 ```
 
-Araçların ayrıntılı kullanımı için [`docs/DATASET_FACTORY.md`](docs/DATASET_FACTORY.md).
+## Dataset Factory komutları
 
-## Dataset Factory
+### `veri new`
 
-Repo içinde `veri` adlı küçük bir CLI bulunur.
+Yeni draft canonical kayıt oluşturur. Soru/cevap/rubriğe ek olarak:
 
-### Yeni canonical kayıt
+- exact `task_id`,
+- `exam_family`,
+- `question_family`,
+- anonim `subject_group_id`,
+- `response_quality`,
+- `hard_case_types`,
+- `adversarial`
 
-```bash
-veri new
-```
+bilgilerini de toplar.
 
-Etkileşimli sihirbaz soru/görev, cevap, rubrik ölçütleri, puan çıpaları ve kanıt kaynaklarını sorar. Oluşturulan kayıt doğrudan eğitime girmez; başlangıçta:
+Yeni kayıt doğrudan eğitime girmez:
 
 ```text
 status = draft
 pii_reviewed = false
 needs_review = true
+review_count = 0
+adjudicated = false
 ```
 
-olur.
+### `veri check`
 
-### Kalite kapısı
+Tek kalite kapısıdır:
+
+```text
+JSON Schema + semantic invariants
+             +
+production profile policy
+             +
+split leakage
+```
+
+`teacher_verified` kayıtta üretim metadata'sı ve insan review politikası da kontrol edilir.
+
+### `veri quota`
+
+Mevcut veri setini üretim hedefleriyle karşılaştırır:
 
 ```bash
-veri check
+veri quota --phase pilot
+veri quota --phase v1
+veri quota --phase v1 --json
 ```
 
-Şunları kontrol eder:
+Modalite, sınıf, cevap profili, hard-case/adversarial/needs-review oranları, review kotası, exact soru kapsaması, question-family kapsaması ve rubrik çeşitliliğini raporlar.
 
-- JSON Schema,
-- dosya adı ↔ kayıt ID'si,
-- modality ↔ klasör,
-- rubrik ölçütleri ↔ gold sonuç ölçütleri,
-- ölçüt puan sınırları,
-- rubrik/toplam maksimum puan tutarlılığı,
-- ölçüt puanları toplamı ↔ `total_score`,
-- `teacher_verified` ↔ `pii_reviewed`,
-- `needs_review` açıklaması,
-- temel PII işaretleri,
-- metin dışı konuşma ölçütlerinde gözlem eksikliği,
-- train/validation/test/benchmark leakage.
+### `veri next-batch`
 
-### Grup-bilinçli split
+Sonraki üretim paketini veri açığına göre yönlendirir:
 
 ```bash
-veri split
+veri next-batch --phase pilot --count 100
 ```
 
-Varsayılan oranlar `80/10/10`'dur. Split satır bazlı yapılmaz. Aşağıdaki alanlardan **herhangi birini** paylaşan kayıtlar bağlı grup kabul edilerek aynı split içinde tutulur:
+Örneğin yazılı veya orta-kısmi cevaplar geride kaldıysa sonraki pakette onların kotasını yükseltir.
+
+### `veri split`
+
+Teacher-verified kayıtları varsayılan `80/10/10` train/validation/test oranıyla ayırır. Satır bazlı rastgele split yapmaz.
+
+Aşağıdaki alanlardan herhangi birini paylaşan kayıtlar aynı bağlı grupta tutulur:
 
 ```text
 subject_group_id
@@ -122,15 +184,11 @@ OR exam_family
 OR question_family
 ```
 
-Mevcut split ataması korunur. Benchmark ile aile çakışması varsa komut yazma yapmadan durur.
+Benchmark aileleri eğitim split'leriyle çakışamaz.
 
-### SFT exportu
+### `veri export-sft`
 
-```bash
-veri export-sft
-```
-
-Üretilen dosyalar:
+Curated Chat/messages JSONL üretir:
 
 ```text
 exports/sft/train.jsonl
@@ -138,36 +196,84 @@ exports/sft/validation.jsonl
 exports/sft/test.jsonl
 ```
 
-SFT girdisine yalnız `task`, `rubric` ve `student_response`; hedefe yalnız `gold_evaluation` konur. Öğrenci/grup metadata'sı modele verilmez. `needs_review=true` kayıtları SFT hedefinden çıkarılır.
+Model promptuna yalnız değerlendirme için gereken içerik gider:
 
-## Modelin öğrenmesi gereken çıktı
+```text
+task (task_id hariç)
+rubric
+student_response
+```
 
-Her değerlendirmede mümkün olduğunca şu yapı korunur:
+Üretim etiketleri ve öğrenci/grup metadata'sı modele verilmez.
 
-1. Her rubrik ölçütü için puan.
-2. Ölçüte ilişkin öğrenci cevabından kısa kanıt veya yapılandırılmış gözlem.
-3. Ölçüte ilişkin kısa, öğretmen diliyle gerekçe.
-4. Toplam puan ve mümkün olan maksimum puan.
-5. Puanlama güvenilir değilse `needs_review: true`.
+## `needs_review` için kritik ayrım
 
-Uzun serbest biçimli düşünce zinciri veri setine eklenmez. Bunun yerine yalnızca puanı açıklayan **kısa ve denetlenebilir değerlendirme gerekçesi** tutulur.
+İki durum birbirine karıştırılmaz.
+
+**Çözülmemiş annotation:**
+
+```text
+draft / annotated / quarantined
+```
+
+→ SFT exportuna girmez.
+
+**Gold escalation davranışı:**
+
+```text
+status = teacher_verified
+needs_review = true
+review_count >= 2
+```
+
+→ gerçekten modelin “insan incelemesine gönder” demesi doğru olduğundan curated SFT exportuna girer.
+
+Bu sayede model yalnız not vermeyi değil, kanıt yetersiz olduğunda **aşırı özgüven göstermemeyi** de öğrenir.
+
+## Aynı sorudan kaç cevap?
+
+- exact `task.task_id`: **8–20 cevap**,
+- `question_family`: **20–40 cevap**,
+- V1: yaklaşık **300 question family**.
+
+Amaç binlerce örneği birkaç soruya yığmak değil, farklı soru/rubrik karar yüzeylerine yaymaktır.
+
+## Hard-case örnekleri
+
+Desteklenen etiketlerden bazıları:
+
+- `short_correct`
+- `long_irrelevant`
+- `keyword_decoy`
+- `paraphrase_equivalent`
+- `contradictory_answer`
+- `prompt_injection`
+- `ocr_ambiguity`
+- `stt_ambiguity`
+- `missing_evidence`
+- `rubric_ambiguity`
+
+Bunlar modelin yalnız anahtar kelime veya cevap uzunluğuna göre puan vermesini engellemek için deliberate olarak üretilir.
 
 ## Dizin yapısı
 
 ```text
 .
 ├── README.md
-├── .gitignore
 ├── pyproject.toml
+├── config/
+│   └── data-production.v1.json
 ├── dataset_factory/
 │   ├── __init__.py
 │   ├── cli.py
-│   └── core.py
+│   ├── core.py
+│   └── production.py
 ├── docs/
 │   ├── DATA_CONTRACT.md
 │   ├── ANNOTATION_GUIDE.md
 │   ├── DATA_QUALITY.md
-│   └── DATASET_FACTORY.md
+│   ├── DATASET_FACTORY.md
+│   └── DATA_PRODUCTION_STRATEGY.md
 ├── schemas/
 │   ├── canonical-record.schema.json
 │   └── rubric.schema.json
@@ -177,193 +283,63 @@ Uzun serbest biçimli düşünce zinciri veri setine eklenmez. Bunun yerine yaln
 │   │   ├── speaking/
 │   │   └── listening/
 │   ├── splits/
-│   │   ├── train/
-│   │   ├── validation/
-│   │   └── test/
 │   ├── preferences/
 │   └── benchmarks/
 ├── examples/
-│   ├── written.example.json
-│   ├── speaking.example.json
-│   └── listening.example.json
 ├── exports/
-│   ├── sft/
-│   └── preference/
 └── tests/
-    └── test_factory.py
 ```
 
-### `dataset/records/`
-
-Öğretmen tarafından hazırlanıp doğrulanacak canonical JSON kayıtları burada tutulur. Modaliteler birbirinden ayrıdır ancak **aynı veri sözleşmesini** kullanır.
-
-### `dataset/splits/`
-
-Train/validation/test manifestleri burada tutulur. Aynı öğrenci grubuna, sınav ailesine veya soru ailesine bağlı kayıtların split'ler arasında sızması engellenir.
-
-### `dataset/preferences/`
-
-İleride preference optimization / DPO benzeri yöntemler için kullanılabilecek `chosen/rejected` çiftleri burada tutulur. `chosen` mutlaka öğretmen onaylı olmalıdır.
-
-### `dataset/benchmarks/`
-
-Eğitim sırasında görülmemesi gereken sabit değerlendirme örnekleri. Benchmark ailesi eğitim split'leriyle çakışmamalıdır.
-
-### `exports/`
-
-Canonical kayıtlardan eğitim kütüphanesine uygun olarak üretilen JSONL vb. dosyalar. Bunlar veri setinin ana kaynağı değildir ve Git tarafından varsayılan olarak izlenmez.
-
-## Canonical kayıt özeti
-
-Her örnek en az şu yapıyı taşır:
+## Canonical metadata özeti
 
 ```json
 {
-  "id": "tde12-written-000001",
-  "schema_version": "1.0",
-  "modality": "written",
-  "language": "tr",
-  "grade": 12,
   "task": {
+    "task_id": "tde11-poetry-main-idea-q01",
     "prompt": "...",
     "context": null,
-    "max_score": 20
-  },
-  "rubric": {
-    "rubric_id": "...",
-    "version": "1.0",
-    "criteria": []
-  },
-  "student_response": {
-    "text": "...",
-    "source": "teacher_corrected",
-    "observations": []
-  },
-  "gold_evaluation": {
-    "criterion_results": [],
-    "total_score": 0,
-    "max_score": 20,
-    "needs_review": false,
-    "review_reason": null,
-    "overall_feedback": "..."
+    "max_score": 10
   },
   "metadata": {
     "status": "teacher_verified",
     "split": null,
-    "created_at": "YYYY-MM-DD",
-    "tags": [],
     "pii_reviewed": true,
-    "subject_group_id": null,
-    "exam_family": null,
-    "question_family": null,
+    "subject_group_id": "anon-group-...",
+    "exam_family": "exam-family-...",
+    "question_family": "main-idea-poetry",
+    "response_quality": "mid_partial",
+    "hard_case_types": ["paraphrase_equivalent"],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false,
     "provenance": "real_anonymized"
   }
 }
 ```
 
-Ayrıntılı alan kuralları için [`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md) ve JSON Schema dosyalarına bakın.
-
-## Önerilen veri üretim akışı
-
-```text
-1. Sınav sorusunu/görevini ekle
-2. Rubriği yapılandırılmış ölçütlere dönüştür
-3. Öğrenci cevabını anonimleştir
-4. OCR/STT varsa metni öğretmen tarafından düzelt
-5. Öğretmen ölçüt bazında gold puanlama yapar
-6. İkinci kontrol / kalite kontrolü yapılır
-7. Kayıt teacher_verified durumuna alınır
-8. veri check
-9. veri split
-10. veri check
-11. veri export-sft
-```
-
-## Veri kalitesi kuralları
-
-- **Gold etiket öğretmen değerlendirmesidir.** Model tarafından üretilen ilk puan doğrudan gold veri olamaz.
-- Yalnızca toplam not değil, **ölçüt bazlı puanlar** saklanır.
-- Puan gerekçesi rubriğe ve öğrenci cevabındaki gözlenebilir kanıta dayanır.
-- Belirsiz veya rubriğin kapsamadığı durumda zorla puan üretmek yerine `needs_review` kullanılır.
-- OCR/STT hatası ile öğrencinin gerçek hatası birbirine karıştırılmaz.
-- Aynı öğrencinin, sınav ailesinin veya yakın soru varyantlarının split sızıntısı oluşturması engellenir.
-- Benchmark kayıtları eğitim export'larına dahil edilmez.
-- Şema değişikliklerinde `schema_version` artırılır; eski kayıtların anlamı sessizce değiştirilmez.
+Tam sözleşme: [`docs/DATA_CONTRACT.md`](docs/DATA_CONTRACT.md).
 
 ## Konuşma sınavlarında kanıt kuralı
 
-Transkript yalnızca **ne söylendiğini** temsil eder. Şunlar yalnız transkriptten puanlanmamalıdır:
+Transkript yalnız **ne söylendiğini** temsil eder. Telaffuz, vurgu-tonlama, gerçek akıcılık/duraksama, ses kullanımı veya beden dili yalnız transkriptten puanlanmaz. Bu ölçütler varsa uygun `evidence_sources` ve öğretmen observation bilgisi gerekir.
 
-- telaffuz,
-- vurgu ve tonlama,
-- gerçek zamanlı akıcılık/duraksama,
-- ses kullanımı,
-- beden dili.
+## Gizlilik
 
-Bu ölçütler kullanılacaksa rubrikte uygun `evidence_sources` belirtilmeli ve `student_response.observations` içinde öğretmen tarafından doğrulanmış yapılandırılmış gözlem bulunmalıdır.
+Canonical kayıtlara öğrenci adı/soyadı, okul numarası, T.C. kimlik numarası, telefon/e-posta, açık okul/şube bilgisi veya kişiyi yeniden tanımlamayı kolaylaştıracak metadata konmaz.
 
-## Gizlilik ve öğrenci verisi
+Ham ses, PDF, fotoğraf ve taranmış kâğıtlar varsayılan olarak Git'e alınmaz.
 
-Canonical kayıtlara şunları koymayın:
+## Başarı ölçütü
 
-- öğrenci adı/soyadı,
-- okul numarası,
-- T.C. kimlik numarası,
-- telefon/e-posta,
-- açık okul/sınıf/şube kimliği,
-- öğrenciyi doğrudan veya dolaylı biçimde tanımlayabilecek serbest metadata.
+Başarı yalnız toplam puan eşleşmesi değildir. Benchmarklarda mümkün olduğunca:
 
-Her öğrenci/oturum gerekiyorsa geri döndürülemeyen anonim bir grup kimliği ile temsil edilmelidir. Gerçek ses, taranmış kâğıt, PDF, fotoğraf ve benzeri ham materyaller varsayılan olarak Git'e alınmaz.
+- criterion agreement,
+- toplam/ölçüt puan sapması,
+- borderline karar performansı,
+- `needs_review` precision/recall,
+- hard-case ve adversarial alt-küme performansı,
+- insan ↔ insan ve model ↔ insan uyumu
 
-## Eğitim split'i konusunda önemli kural
+izlenmelidir.
 
-Rastgele satır bazlı split yeterli değildir. Aynı öğrencinin, aynı sınav formunun veya aynı sorunun yakın varyantlarının train ile test arasında sızması model performansını yapay olarak yükseltir.
-
-Dataset Factory bu nedenle ortak:
-
-```text
-subject_group_id
-exam_family
-question_family
-```
-
-değerlerinden herhangi biri üzerinden birbirine bağlanan kayıtları aynı split'te tutar.
-
-## Kayıt adlandırma
-
-Önerilen ID:
-
-```text
-<tde><sinif>-<modality>-<6 haneli sıra>
-```
-
-Örnekler:
-
-```text
-tde09-written-000001
-tde11-speaking-000042
-tde12-listening-000107
-```
-
-Dosya adı kayıt ID'si ile aynı olmalıdır:
-
-```text
-dataset/records/written/tde12-written-000001.json
-```
-
-## Veri setinin başarı ölçütü
-
-Başarı yalnızca modelin öğretmenle aynı toplam notu vermesi değildir. İyi bir model:
-
-- rubriğin hangi ölçütünü neden uyguladığını doğru belirlemeli,
-- kısmi puanı tutarlı kullanmalı,
-- öğrenci cevabında olmayan bilgiyi varmış gibi değerlendirmemeli,
-- rubriğe ek ölçüt uydurmamalı,
-- farklı anlatım biçimlerini aynı anlamı taşıdıklarında kabul edebilmeli,
-- belirsiz örneklerde aşırı özgüvenli davranmamalıdır.
-
-Benchmarklarda toplam puan hatasına ek olarak **criterion agreement**, **puan sapması**, **review recall** ve mümkünse öğretmenler arası uyumla karşılaştırma izlenmelidir.
-
----
-
-Bu depo veri setini, veri sözleşmesini ve veri üretim/kalite araçlarını tutar. Model mimarisi, quantization yöntemi veya belirli fine-tuning framework'ü canonical veri şemasının parçası değildir.
+Bu depo veri setini, üretim stratejisini ve kalite araçlarını tutar. Model mimarisi, quantization yöntemi veya belirli fine-tuning framework'ü canonical veri sözleşmesinin parçası değildir.
