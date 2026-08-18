@@ -1,0 +1,208 @@
+{
+  "id": "tde10-written-000130",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "pilot-w5-g10-written-b",
+    "prompt": "Parçada karakterin karar değiştirmesine yol açan temel etkeni ve bunun sonucunu açıklayınız.",
+    "context": "Mert başta yarışmaya katılmak istemiyordu. Arkadaşının önceki yıl tek başına hazırlanıp zorlandığını dinleyince birlikte çalışmayı önerdi. İki hafta sonra başvuru formunu ikisi birlikte doldurdu.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w5-g10-causality-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Temel sonuç",
+        "description": "Olaylar arasındaki temel neden-sonuç ilişkisini doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Sonuç yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Neden-sonuç bağını uygun gerekçeyle açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Metinsel kanıt",
+        "description": "Sonucu destekleyen uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Bir sınırlı/uygun kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Arkadaşının geçen yıl tek başına hazırlanırken zorlandığını duyunca Mert birlikte çalışmayı öneriyor.",
+    "source": "raw_ocr",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "ocr",
+        "span": "zorlandığını",
+        "candidates": [
+          "zorlandığını",
+          "zorlanmadığını"
+        ],
+        "note": "Negasyon temel nedensel etkeni değiştiriyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 2.0,
+        "evidence": [
+          "Arkadaşının geçen yıl tek başına hazırlanırken zorlandığını duyunca Mert birlikte çalışmayı öneriyor."
+        ],
+        "justification": "Temel sonuç için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "Arkadaşının geçen yıl tek başına hazırlanırken zorlandığını duyunca Mert birlikte çalışmayı öneriyor."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Arkadaşının geçen yıl tek başına hazırlanırken zorlandığını duyunca Mert birlikte çalışmayı öneriyor."
+        ],
+        "justification": "Metinsel kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Bir sınırlı/uygun kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Arkadaşının geçen yıl tek başına hazırlanırken zorlandığını duyunca Mert birlikte çalışmayı öneriyor."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "Negasyon, Mert'in karar değişikliğini tetikleyen deneyimin niteliğini tersine çeviriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "causality",
+      "ocr",
+      "pilot",
+      "pilot-wave-5",
+      "quota-closure",
+      "synthetic",
+      "wave-5",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w5-g10-written-quota-closure-a",
+    "question_family": "pilot-w5-g10-written-causality",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "borderline",
+    "hard_case_types": [
+      "ocr_ambiguity",
+      "missing_evidence"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

@@ -1,0 +1,187 @@
+{
+  "id": "tde11-speaking-000124",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "pilot-w5-g11-speaking-b",
+    "prompt": "'Bir roman kahramanını yalnız yaptığı seçimlere göre değerlendirmek yeterlidir.' görüşünü tartışınız; en az bir karşı görüş kullanınız.",
+    "context": null,
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w5-g11-source-argument-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Temel görüş",
+        "description": "Konuşmacı temel görüşünü açık ve tutarlı biçimde ortaya koyar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Görüş yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Görüşünü uygun gerekçe ve örneklerle destekler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "counterargument",
+        "name": "Karşı görüş",
+        "description": "Karşı görüşü doğru temsil eder ve kendi görüşüyle ilişkilendirir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Karşı görüş yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Karşı görüş sınırlı ele alınmış."
+          },
+          {
+            "score": 2,
+            "description": "Karşı görüş doğru ve anlamlı biçimde yanıtlanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Düşünce örgüsü",
+        "description": "Konuşma metni anlaşılır bir sıraya sahiptir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Düşünce sırası ciddi biçimde bozuk."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Romanlarda karakterler ve olaylar bulunur.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Temel görüş için yanıt 0 puan düzeyindeki çıpayla uyumludur: Görüş yok veya yanlış."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Gerekçelendirme için yanıt 0 puan düzeyindeki çıpayla uyumludur: Gerekçe yok veya yanlış."
+      },
+      {
+        "criterion_id": "counterargument",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Karşı görüş için yanıt 0 puan düzeyindeki çıpayla uyumludur: Karşı görüş yok veya yanlış."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Düşünce örgüsü için yanıt 0 puan düzeyindeki çıpayla uyumludur: Düşünce sırası ciddi biçimde bozuk."
+      }
+    ],
+    "total_score": 0.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini karşılamıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "argument",
+      "pilot",
+      "pilot-wave-5",
+      "quota-closure",
+      "speaking",
+      "stt",
+      "synthetic",
+      "transcript-only",
+      "wave-5"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w5-g11-speaking-quota-closure",
+    "question_family": "pilot-w5-g11-speaking-source-argument",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "blank_irrelevant",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
