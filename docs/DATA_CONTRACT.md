@@ -16,7 +16,7 @@ Bir kayıt **tek bir öğrencinin tek bir exact soru/görev için rubrikle değe
 4. `gold_evaluation`: öğretmen tarafından doğrulanmış hedef değerlendirme,
 5. `metadata`: leakage, veri üretimi ve kalite kontrol metadata'sı.
 
-## 3. Kimlik ve temel alanlar
+## 3. Temel alanlar
 
 ### `id`
 
@@ -50,7 +50,12 @@ Canonical sözleşme sürümü. İlk sürüm `1.0`'dır.
 
 Birebir aynı soru/görevin veri seti içindeki kararlı kimliğidir. Aynı soruya verilen farklı öğrenci cevapları aynı `task_id` değerini kullanır.
 
-`task_id` veri kürasyonu içindir; modele verilen SFT promptuna dahil edilmez.
+`task_id` iki amaçla kullanılır:
+
+1. exact soru başına veri kotasını ölçmek,
+2. birebir aynı sorunun farklı splitlere sızmasını engellemek.
+
+`task_id` veri kürasyonu içindir ve modelin SFT promptuna verilmez.
 
 ### `prompt`
 
@@ -58,7 +63,7 @@ Birebir aynı soru/görevin veri seti içindeki kararlı kimliğidir. Aynı soru
 
 ### `context`
 
-Değerlendirme için gerekli ek metin/veridir. Örneğin şiir parçası veya dinleme sorusunun doğru değerlendirilebilmesi için gerekli kaynak bağlamı. Gerekmiyorsa `null` olabilir.
+Değerlendirme için gerekli ek metin/veridir. Gerekmiyorsa `null` olabilir.
 
 ### `max_score`
 
@@ -85,7 +90,7 @@ Desteklenen kanıt kaynakları:
 - `audio_delivery`
 - `teacher_observation`
 
-Bir model, mevcut girdide bulunmayan kanıtı varmış gibi kullanmamalıdır.
+Bir model mevcut girdide bulunmayan kanıtı varmış gibi kullanmamalıdır.
 
 Konuşma sınavında transkript yalnız **ne söylendiğini** temsil eder. Telaffuz, vurgu-tonlama ve gerçek zamanlı akıcılık gibi özellikler yalnız uygun ses/gözlem kanıtı varsa puanlanır.
 
@@ -106,7 +111,7 @@ OCR/STT'nin eklediği hata düzeltilir; öğrencinin kendi dil/anlatım hatası 
 
 ### `observations`
 
-Transkriptten/metinden güvenilir biçimde çıkarılamayan fakat rubrik için gerekli öğretmen gözlemleridir.
+Metinden güvenilir biçimde çıkarılamayan fakat rubrik için gerekli öğretmen gözlemleridir.
 
 ```json
 {
@@ -139,26 +144,30 @@ Ayrıca:
 
 bulunur.
 
-`justification`, uzun düşünce zinciri değildir. Yalnız puanın denetlenebilmesini sağlayan kısa gerekçedir.
+`justification` uzun düşünce zinciri değildir; yalnız puanın dışarıdan denetlenebilmesini sağlayan kısa gerekçedir.
 
 ### `needs_review` semantiği
 
-`needs_review=true` her zaman “kayıt bitmemiş” demek değildir.
-
-İki ayrı lifecycle durumu vardır:
+`needs_review=true` her zaman “annotation tamamlanmadı” anlamına gelmez.
 
 **Çözülmemiş annotation:** gold karar güvenilir değilse kayıt `draft`, `annotated` veya `quarantined` kalır ve export edilmez.
 
-**Gold escalation:** doğru model davranışı insan incelemesine yönlendirmekse kayıt `teacher_verified + needs_review=true` olabilir. Bu tür kayıtlar en az iki bağımsız inceleme görür ve curated SFT exportuna girer.
+**Gold escalation:** doğru model davranışı insan incelemesine yönlendirmekse kayıt `teacher_verified + needs_review=true` olabilir. Bu örnek en az iki bağımsız insan incelemesi görür ve curated SFT exportuna dahil edilir.
 
-## 8. `metadata.status`
+## 8. Lifecycle metadata
 
-- `draft`: kayıt tamamlanmamış,
-- `annotated`: ilk değerlendirme yapılmış fakat final kalite kapısından geçmemiş,
-- `teacher_verified`: canonical gold karar eğitim/evaluation için onaylı,
+### `status`
+
+- `draft`: tamamlanmamış,
+- `annotated`: ilk değerlendirmesi yapılmış fakat final kalite kapısından geçmemiş,
+- `teacher_verified`: canonical gold karar onaylı,
 - `quarantined`: şüpheli veya kullanıma uygun olmayan kayıt.
 
-## 9. Split ve leakage alanları
+### `pii_reviewed`
+
+Kişisel veri kontrolünün tamamlandığını belirtir. `teacher_verified` kayıt `pii_reviewed=true` olmalıdır.
+
+## 9. Split ve leakage anahtarları
 
 ### `split`
 
@@ -168,21 +177,32 @@ bulunur.
 - `benchmark`
 - `null`
 
+### `task.task_id`
+
+Birebir aynı soru/görev. Exact soru farklı splitlere ayrılamaz.
+
 ### `subject_group_id`
 
 Öğrenciyi tanımlamayan rastgele/grup kimliği. Gerçek okul numarası veya kolay geri çözülebilir öğrenci kimliği kullanılmaz.
 
 ### `exam_family`
 
-Aynı sınav/form ailesini gruplar.
+Aynı sınav/form ailesi.
 
 ### `question_family`
 
-Birebir aynı olmayan ancak aynı veya çok yakın beceriyi/soru yapısını temsil eden varyantları gruplar.
+Birebir aynı olmayan ancak aynı veya çok yakın beceriyi/soru yapısını temsil eden varyant ailesi.
 
-### `task.task_id`
+Curated splitter bu dört anahtar üzerinde bağlı bileşen kurar:
 
-Birebir aynı soruyu ayırt eder. `task_id`, cevap sayısı kotası için kullanılır; split leakage kuralında esas geniş aile koruması `question_family`, `exam_family` ve `subject_group_id` üzerinden yapılır.
+```text
+task_id
+OR subject_group_id
+OR exam_family
+OR question_family
+```
+
+Bu nedenle bir bağlantı zinciriyle birbirine bağlı kayıtların tamamı aynı splitte kalır. Aynı dört anahtar benchmark izolasyonunda ve leakage kontrolünde de kullanılır.
 
 ## 10. Veri üretim metadata'sı
 
@@ -202,7 +222,7 @@ Bu alanlar **model girdisi değildir**; veri setinin dengesi ve doğrulanabilirl
 
 ### `hard_case_types`
 
-Bir örneğin deliberate hard case olup olmadığını ve hangi karar sınırını sınadığını belirtir. Birden çok değer taşıyabilir.
+Örneğin hangi deliberate karar sınırını sınadığını belirtir. Birden çok değer taşıyabilir.
 
 ### `adversarial`
 
@@ -226,13 +246,13 @@ Bağımsız değerlendirmeler arasında anlamlı uyuşmazlık oluşmuş ve nihai
 - `synthetic`
 - `real_anonymized`
 
-Sentetik örnekler gerçek öğrenci verisi gibi etiketlenmemelidir. Model tarafından üretilen örnek, öğretmen doğrulaması olmadan gold kabul edilmez.
+Sentetik örnek gerçek öğrenci verisi gibi etiketlenmemelidir. Model tarafından üretilen örnek, öğretmen doğrulaması olmadan gold kabul edilmez.
 
 ## 12. Gizlilik
 
-`pii_reviewed=true` olmadan kayıt teacher-verified export sürecine girmemelidir.
-
 Canonical veri öğrenci adı, okul numarası, T.C. kimlik numarası, telefon/e-posta, açık okul/şube bilgisi veya kişiyi yeniden tanımlamayı kolaylaştıracak serbest metadata içermemelidir.
+
+Ham ses, PDF, fotoğraf ve taranmış materyaller varsayılan olarak Git'e alınmaz.
 
 ## 13. Canonical ve türetilmiş veri
 
@@ -244,9 +264,9 @@ dataset/records/<modality>/<id>.json
 
 Canonical kayıt tek gerçek kaynaktır. `exports/` altındaki SFT/preference dosyaları yeniden üretilebilir türevlerdir.
 
-## 14. SFT girdisi
+## 14. Curated SFT girdisi
 
-Curated SFT exportunda modele:
+Modele:
 
 ```text
 task (task_id hariç)
@@ -271,4 +291,4 @@ Assistant hedefi yalnız `gold_evaluation` yapısıdır.
 - `adjudicated`,
 - diğer annotation metadata'sı.
 
-Bu ayrım, modelin veri kürasyonu etiketlerinden kestirme öğrenmesini engeller.
+Bu ayrım modelin veri kürasyonu etiketlerinden kestirme öğrenmesini engeller.
