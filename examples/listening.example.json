@@ -5,6 +5,7 @@
   "language": "tr",
   "grade": 10,
   "task": {
+    "task_id": "example-listening-main-reason-q01",
     "prompt": "Dinlediğiniz metinde anlatıcının yolculuğa çıkmasının temel nedenini açıklayınız.",
     "context": "Değerlendirme anahtarına göre anlatıcı, uzun süredir görmediği ailesini ziyaret etmek üzere yolculuğa çıkmaktadır.",
     "max_score": 5
@@ -56,6 +57,11 @@
     "subject_group_id": null,
     "exam_family": "example-listening-01",
     "question_family": "main-reason-comprehension",
-    "provenance": "synthetic"
+    "provenance": "synthetic",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
   }
 }
