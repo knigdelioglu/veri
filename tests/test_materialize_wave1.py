@@ -43,7 +43,9 @@ class Wave1MaterializationTest(unittest.TestCase):
         review_records = [r for r in self.records if r["gold_evaluation"]["needs_review"]]
         self.assertEqual(len(review_records), 1)
         self.assertEqual(review_records[0]["grade"], 11)
-        self.assertIn("STT", review_records[0]["gold_evaluation"]["review_reason"])
+        reason = review_records[0]["gold_evaluation"]["review_reason"]
+        self.assertIn("Transkriptte", reason)
+        self.assertIn("Doğrulanmış ses", reason)
 
     def test_ai_review_metadata_overrides_are_applied(self):
         records_by_text = {record["student_response"]["text"]: record for record in self.records}
