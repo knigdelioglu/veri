@@ -1,0 +1,57 @@
+{
+  "schema_version": "candidate-family-1.0",
+  "batch_id": "pilot-wave-2-partial-boundaries",
+  "status": "generated_pending_ai_review",
+  "created_at": "2026-08-18",
+  "provenance": "synthetic",
+  "question_family": "pilot-w2-g12-listening-speaker-purpose",
+  "exam_family": "pilot-w2-g12-listening-partial-boundaries",
+  "grade": 12,
+  "modality": "listening",
+  "tags": ["pilot", "wave-2", "dinleme", "konusmaci-amaci", "cikarim"],
+  "rubric": {
+    "rubric_id": "pilot-w2-g12-listening-purpose-r1",
+    "version": "1.0",
+    "criteria": [
+      {"criterion_id":"purpose","name":"Konuşmacının amacını belirleme","description":"Konuşmacının temel iletişim amacını dinleme bağlamıyla uyumlu biçimde belirler.","max_score":4,"scoring_anchors":[{"score":0,"description":"Temel amaç yanlış veya cevap yok."},{"score":2,"description":"Konuşmanın konusunu yakalıyor fakat iletişim amacını eksik/genel belirliyor."},{"score":4,"description":"Temel iletişim amacı açık ve doğru biçimde belirlenmiş."}],"evidence_sources":["response_text","task_context"]},
+      {"criterion_id":"supporting_detail","name":"Destekleyici ayrıntı","description":"Amacı gösteren uygun bir ayrıntıyı konuşmadan seçer.","max_score":3,"scoring_anchors":[{"score":0,"description":"Uygun ayrıntı yok."},{"score":1,"description":"Ayrıntı konuşmada var fakat amaçla ilişkisi zayıf."},{"score":2,"description":"Uygun ayrıntı seçilmiş fakat bağlantı kısmen kurulmuş."},{"score":3,"description":"Amacı doğrudan destekleyen uygun ayrıntı seçilmiş."}],"evidence_sources":["response_text","task_context"]},
+      {"criterion_id":"inference","name":"Amaç-ayrıntı çıkarımı","description":"Seçtiği ayrıntının konuşmacının amacını nasıl gösterdiğini açıklar.","max_score":3,"scoring_anchors":[{"score":0,"description":"Çıkarım yok veya yanlış."},{"score":1,"description":"Genel ve sınırlı çıkarım var."},{"score":2,"description":"Doğru fakat kısmen geliştirilmiş çıkarım var."},{"score":3,"description":"Ayrıntı ile iletişim amacı arasında açık ve doğru çıkarım kurulmuş."}],"evidence_sources":["response_text","task_context"]}
+    ]
+  },
+  "tasks": [
+    {
+      "task_id": "pilot-w2-g12-listening-speaker-purpose-a",
+      "prompt": "Konuşmacının bu duyurudaki temel amacını belirleyiniz. Amacı gösteren bir ayrıntıyı seçerek neden bu sonuca vardığınızı açıklayınız.",
+      "context": "Bir kent müzesinin yöneticisi radyo programında şöyle konuşur: 'Müzemizin gece programında yalnız vitrinlere bakmayacaksınız. Restorasyon atölyesini ilk kez ziyaretçilere açıyoruz; uzmanlarımız bir tablonun yıllar içindeki değişimini uygulamalı olarak gösterecek. Kontenjanımız sınırlı olduğu için çevrim içi kayıt yaptırmanızı özellikle öneriyorum. Bir müzeyi, eserlerin arkasındaki emeği görmeden tanımış sayılmayız.'",
+      "responses": [
+        {"candidate_id":"w2a5-01","response_quality":"full_correct","text":"Konuşmacının temel amacı dinleyicileri gece programına katılmaya ve kayıt yaptırmaya teşvik etmektir. “Kontenjanımız sınırlı olduğu için çevrim içi kayıt yaptırmanızı özellikle öneriyorum” sözü doğrudan çağrı yapıyor; atölyenin ilk kez açılacağını vurgulaması da etkinliği cazip göstermek için kullanılıyor.","scores":[4,3,3],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-02","response_quality":"full_correct","text":"Amaç yalnız program hakkında bilgi vermek değil, insanları müzeye gelmeye ikna etmektir. Sınırlı kontenjan nedeniyle kayıt önerilmesi ve restorasyon atölyesinin ilk kez açıldığının özellikle söylenmesi, dinleyiciyi harekete geçirmek istediğini gösteriyor.","scores":[4,3,3],"observations":[],"hard_case_types":["paraphrase_equivalent"],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-03","response_quality":"high_partial","text":"Konuşmacı insanları gece programına davet ediyor. Kontenjanın sınırlı olduğunu ve kayıt yapılması gerektiğini söylüyor. Restorasyon atölyesi ayrıntısının ikna edici işlevini ayrıntılı açıklamıyorum.","scores":[4,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-04","response_quality":"high_partial","text":"Amaç müze etkinliğine ilgiyi artırmaktır. Atölyenin ilk kez açılacağını söylemesi önemli bir ayrıntı. Bunun dinleyiciyi kayıt olmaya nasıl yönelttiğini kısa geçiyorum.","scores":[4,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-05","response_quality":"mid_partial","text":"Müdür gece programını tanıtmak istiyor. Restorasyon atölyesinden ve uzmanlardan bahsediyor. Dinleyicilerin gelmesini de istediği anlaşılıyor ama asıl amacın tanıtım mı davet mi olduğunu netleştirmiyorum.","scores":[2,3,1],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-06","response_quality":"mid_partial","text":"Müze hakkında bilgi veriyor ve kayıt yaptırmayı öneriyor. “Kontenjan sınırlı” sözü önemli. Bence amaç bilgilendirmek ve biraz da insanları çağırmak.","scores":[2,2,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-07","response_quality":"low_partial","text":"Konuşmacı müzedeki restorasyon atölyesini anlatıyor. Atölye ilk kez açılacakmış.","scores":[2,2,1],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-08","response_quality":"incorrect","text":"Temel amaç bir tablonun nasıl restore edildiğini ayrıntılı olarak öğretmektir. Uzmanlar olduğu için bu bir teknik eğitim dersidir.","scores":[0,1,0],"observations":[],"hard_case_types":["keyword_decoy"],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-09","response_quality":"borderline","text":"Bence temel amaç etkinliğe katılım sağlamak, fakat konuşmanın önemli bir bölümü müzecilik anlayışını da açıklıyor. Kayıt önerisi davet amacını gösteriyor; “emeği görmeden tanımış sayılmayız” sözü ise eğitsel bir amaç da olduğunu düşündürüyor.","scores":[4,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2a5-10","response_quality":"borderline","text":"Konuşmacı hem bilgilendiriyor hem de davet ediyor. Sınırlı kontenjan ve kayıt önerisi yüzünden davet etme daha baskın görünüyor. Atölyenin ilk kez açılmasını da bunun için öne çıkarıyor.","scores":[4,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null}
+      ]
+    },
+    {
+      "task_id": "pilot-w2-g12-listening-speaker-purpose-b",
+      "prompt": "Konuşmacının okuma günlüğü tutmayı anlatırken temel amacını belirleyiniz ve bunu gösteren bir ayrıntıyla açıklayınız.",
+      "context": "Bir podcast konuğu şöyle der: 'Okuma günlüğüne kitabın özetini yazmıyorum; zaten aylar sonra olayların çoğunu unutabilirim. Ben ilk okuduğumda hangi karaktere kızdığımı, hangi cümlenin beni durdurduğunu not ediyorum. Geçen yıl çok sevdiğim bir kahramanı bu yıl bencil bulduğumu fark ettim. Günlük, kitapları hatırlamamdan çok, okurken benim nasıl değiştiğimi görmemi sağlıyor.'",
+      "responses": [
+        {"candidate_id":"w2b5-01","response_quality":"full_correct","text":"Konuşmacının amacı okuma günlüğünün bir özet defteri değil, okurun zaman içindeki değişimini görme aracı olduğunu açıklamaktır. “Geçen yıl çok sevdiğim bir kahramanı bu yıl bencil buldum” örneği, aynı metne bakışının değişmesini fark ettiğini gösteriyor.","scores":[4,3,3],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-02","response_quality":"high_partial","text":"Okuma günlüğünün kişinin düşüncelerindeki değişimi göstermesini anlatıyor. Geçen yıl sevdiği kahramanı bu yıl bencil bulması bunun kanıtı. Neden özet yazmadığını bu amaçla ayrıntılı bağlamıyorum.","scores":[4,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-03","response_quality":"high_partial","text":"Amaç insanlara günlük tutmanın farklı bir yolunu açıklamak. Konuşmacı olayları özetlemek yerine kendisini durduran cümleleri ve karakterlere tepkisini yazdığını söylüyor. Bunun değişimi izlemeyle bağlantısını kısa bırakıyorum.","scores":[4,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-04","response_quality":"mid_partial","text":"Konuşmacı okuma günlüğü tutmanın yararlı olduğunu düşünüyor. Karakterler hakkında ne hissettiğini yazıyor ve sonra düşüncelerinin değiştiğini görüyor. Temel amacı biraz genel ifade ettim.","scores":[2,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-05","response_quality":"mid_partial","text":"Günlüğün kitabı hatırlamak için olmadığını söylüyor. Kitaptaki bazı cümleleri not ediyor. Bence amacı okurken önemli yerleri kaydetmek ama kişinin değişmesi kısmını da söylüyor.","scores":[2,2,1],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-06","response_quality":"low_partial","text":"Okuduğu kitapları unutmamak için günlük tutuyor ama özet yazmıyor. Karakterlere kızdığı yerleri yazıyor.","scores":[2,2,0],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-07","response_quality":"low_partial","text":"Günlük tutmayı seviyor. Bir kahramanı önce sevmiş, sonra bencil bulmuş.","scores":[2,1,1],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-08","response_quality":"incorrect","text":"Konuşmacının amacı bütün kitapların olay örgüsünü eksiksiz hatırlamak için ayrıntılı özet yazmayı öğretmektir.","scores":[0,0,0],"observations":[],"hard_case_types":["contradictory_answer"],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-09","response_quality":"blank_irrelevant","text":"Podcast dinlemek yürürken veya yolculukta güzel olabilir.","scores":[0,0,0],"observations":[],"hard_case_types":["long_irrelevant"],"adversarial":false,"needs_review":false,"review_reason":null},
+        {"candidate_id":"w2b5-10","response_quality":"borderline","text":"Konuşmacı okuma günlüğünü kendi değişimini görmek için kullandığını söylüyor. Önceden sevdiği karakteri sonra bencil bulması bunu gösteriyor. Yine de günlükte önemli cümleleri de tuttuğu için amaç biraz okuma izlerini korumakla da ilgili.","scores":[4,3,2],"observations":[],"hard_case_types":[],"adversarial":false,"needs_review":false,"review_reason":null}
+      ]
+    }
+  ]
+}
