@@ -137,7 +137,7 @@ def _new_wizard(root: Path) -> int:
     record["metadata"].update({"subject_group_id": subject_group_id, "exam_family": exam_family, "question_family": question_family, "response_quality": quality, "hard_case_types": hard_cases, "adversarial": adversarial, "review_count": 0, "adjudicated": False})
     dump_json(path, record)
     print(f"Oluşturuldu: {path.relative_to(root)}")
-    print("Kayıt draft durumunda. Gold puanlama ve anonimlik kontrolünden sonra review_count güncellenmeli; teacher_verified olmadan export edilmez.")
+    print("Kayıt draft durumunda. Gold puanlama ve anonimlik kontrolünden sonra doğrulama statüsüne alınmadan export edilmez.")
     return 0
 
 
@@ -234,7 +234,9 @@ def cmd_quota(args: argparse.Namespace, root: Path) -> int:
         print(json.dumps(report, ensure_ascii=False, indent=2))
         return 0
     print(f"Üretim fazı: {report['phase']}")
-    print(f"Teacher-verified veri: {report['verified_records']} / {report['target_records']} (kalan {report['remaining_to_phase_target']})")
+    print(f"Verified veri: {report['verified_records']} / {report['target_records']} (kalan {report['remaining_to_phase_target']})")
+    if report.get("by_verification_source"):
+        print(f"Doğrulama kaynağı: {report['by_verification_source']}")
     _render_distribution("Modalite", report["by_modality"])
     _render_distribution("Sınıf", report["by_grade"])
     _render_distribution("Cevap profili", report["by_response_quality"])
@@ -248,7 +250,7 @@ def cmd_quota(args: argparse.Namespace, root: Path) -> int:
     print(f"  question family  unique={family['unique']} avg={family['average_answers']:.1f} below_min={family['below_min']} in_range={family['in_range']} above_max={family['above_max']}")
     print(f"  faz hedef family: {report['coverage']['target_question_families']}")
     if report["unclassified_verified_records"]:
-        print(f"\nUYARI: {report['unclassified_verified_records']} teacher_verified kayıt response_quality sınıfı taşımıyor.")
+        print(f"\nUYARI: {report['unclassified_verified_records']} verified kayıt response_quality sınıfı taşımıyor.")
     return 0
 
 
@@ -279,7 +281,7 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("leakage", help="Train/validation/test/benchmark sızıntısını kontrol et.")
     check = sub.add_parser("check", help="Validate + production profile + leakage kontrollerini çalıştır.")
     check.add_argument("--include-examples", action="store_true")
-    split = sub.add_parser("split", help="Teacher-verified kayıtları grup-bilinçli olarak ayır.")
+    split = sub.add_parser("split", help="Verified kayıtları grup-bilinçli olarak ayır.")
     split.add_argument("--train", type=float, default=0.8, help="Train oranı (varsayılan 0.8)")
     split.add_argument("--validation", type=float, default=0.1, help="Validation oranı (varsayılan 0.1)")
     split.add_argument("--seed", default="tde-v1", help="Deterministik split seed'i")
