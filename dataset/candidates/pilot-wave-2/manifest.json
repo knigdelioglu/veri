@@ -1,0 +1,61 @@
+{
+  "schema_version": "candidate-batch-manifest-1.0",
+  "batch_id": "pilot-wave-2-partial-boundaries",
+  "created_at": "2026-08-18",
+  "status": "ai_verified_ready_for_materialization",
+  "candidate_records": 100,
+  "canonical_records": 0,
+  "ai_verified_records_pending_materialization": 100,
+  "teacher_verified_records": 0,
+  "provenance": "synthetic",
+  "focus": "partial-scoring boundaries",
+  "distribution": {
+    "modality": {"written": 60, "speaking": 20, "listening": 20},
+    "grade": {"9": 40, "10": 20, "11": 20, "12": 20},
+    "response_quality": {
+      "full_correct": 19,
+      "high_partial": 20,
+      "mid_partial": 20,
+      "low_partial": 15,
+      "incorrect": 10,
+      "blank_irrelevant": 5,
+      "borderline": 11
+    },
+    "hard_case_records": 20,
+    "adversarial_records": 4,
+    "genuine_needs_review_records": 0,
+    "second_pass_ai_review_records": 25
+  },
+  "cumulative_after_materialization": {
+    "canonical_records": 200,
+    "response_quality": {
+      "full_correct": 40,
+      "high_partial": 40,
+      "mid_partial": 40,
+      "low_partial": 30,
+      "incorrect": 20,
+      "blank_irrelevant": 10,
+      "borderline": 20
+    },
+    "hard_case_records": 35,
+    "adversarial_records": 8,
+    "genuine_needs_review_records": 1
+  },
+  "coverage": {
+    "question_families": 5,
+    "exact_tasks": 10,
+    "answers_per_question_family": 20,
+    "answers_per_exact_task": 10
+  },
+  "families": [
+    {"file":"g09-figurative-function.json","grade":9,"modality":"written","record_id_start":26},
+    {"file":"g09-comparative-interpretation.json","grade":9,"modality":"written","record_id_start":46},
+    {"file":"g10-period-application.json","grade":10,"modality":"written","record_id_start":51},
+    {"file":"g11-speaking-argument.json","grade":11,"modality":"speaking","record_id_start":26},
+    {"file":"g12-listening-speaker-purpose.json","grade":12,"modality":"listening","record_id_start":26}
+  ],
+  "ai_review_overrides": "recalibration/ai-review-overrides.json",
+  "promotion_policy": "source candidate -> Wave 2 AI review override -> ai_verified canonical. Final gold and final metadata follow rubric evidence rather than production quota labels.",
+  "blocking_issue": null,
+  "next_action": "Materialize all 100 Wave 2 candidates, run materializer tests and veri check, then update the pilot quota report."
+}
