@@ -1,0 +1,187 @@
+{
+  "id": "tde11-speaking-000027",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "pilot-w2-g11-speaking-argument-a",
+    "prompt": "Arda'nın yaptığı seçimi 'cesaret' mi yoksa 'düşüncesizlik' mi olarak değerlendirdiğinizi savunun. Görüşünüzü en az iki olay ayrıntısıyla gerekçelendirin.",
+    "context": "Kurgusal öykü 'Kış Geçidi'nde Arda, yoğun kar başlamadan önce dağ köyünden şehre giden son minibüsün iptal edildiğini öğrenir. Köyde ilacı bitmek üzere olan yaşlı komşusu için tek başına yürüyerek sağlık ocağına gitmeye karar verir. Hava raporunda tipi uyarısı vardır. Arda yola çıkmadan rotasını muhtara bildirir, yedek giysi ve fener alır; fakat yolun yarısında tipi şiddetlenince geri dönmek zorunda kalır.",
+    "max_score": 8.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w2-g11-speaking-argument-r1-transcript",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Görüş/tez",
+        "description": "Sorudaki tartışmaya açık bir görüşle doğrudan cevap verir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirgin görüş yok veya görev dışı."
+          },
+          {
+            "score": 1,
+            "description": "Görüş var fakat belirsiz, değişken veya kısmen görevle ilişkili."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve görevle doğrudan ilişkili bir görüş savunuluyor."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Görüşünü olayların anlamını açıklayan tutarlı bir gerekçeyle savunur.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya görüşle çelişiyor."
+          },
+          {
+            "score": 1,
+            "description": "Makul fakat sınırlı/geliştirilmemiş gerekçe var."
+          },
+          {
+            "score": 2,
+            "description": "Görüşle uyumlu ve tutarlı gerekçe geliştirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Metinsel/olaysal kanıt",
+        "description": "Verilen bağlamdan görüşünü destekleyen uygun ayrıntılar kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek güçlü veya sınırlı kanıt kullanılmış."
+          },
+          {
+            "score": 2,
+            "description": "En az iki uygun ayrıntı görüşle ilişkilendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Konuşma düzeni",
+        "description": "Transkriptte görüş, gerekçe ve kanıtlar izlenebilir bir sırayla sunulur.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Düşünce akışı izlenemiyor veya görev dışı."
+          },
+          {
+            "score": 1,
+            "description": "Ana düşünce izleniyor fakat bağlantılar/kapanış sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Görüş, gerekçe ve kanıtlar açık bir düşünce akışı oluşturuyor."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Bence seçim cesur ama ölçülü değildir; yine de temel olarak cesaret ağır basar. Hava uyarısına rağmen ilaca ihtiyaç duyan komşusu için harekete geçmesi risk almasıdır. Öte yandan hazırlık yapması ve hava kötüleşince geri dönmesi, tehlikeyi hiç düşünmeden hareket etmediğini gösterir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 2.0,
+        "evidence": [
+          "Bence seçim cesur ama ölçülü değildir; yine de temel olarak cesaret ağır basar."
+        ],
+        "justification": "Görüş/tez için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve görevle doğrudan ilişkili bir görüş savunuluyor."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "Öte yandan hazırlık yapması ve hava kötüleşince geri dönmesi, tehlikeyi hiç düşünmeden hareket etmediğini gösterir."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Görüşle uyumlu ve tutarlı gerekçe geliştirilmiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "Bence seçim cesur ama ölçülü değildir; yine de temel olarak cesaret ağır basar.",
+          "Hava uyarısına rağmen ilaca ihtiyaç duyan komşusu için harekete geçmesi risk almasıdır."
+        ],
+        "justification": "Metinsel/olaysal kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: En az iki uygun ayrıntı görüşle ilişkilendirilmiş."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 2.0,
+        "evidence": [
+          "Bence seçim cesur ama ölçülü değildir; yine de temel olarak cesaret ağır basar.",
+          "Hava uyarısına rağmen ilaca ihtiyaç duyan komşusu için harekete geçmesi risk almasıdır."
+        ],
+        "justification": "Konuşma düzeni için yanıt 2 puan düzeyindeki çıpayla uyumludur: Görüş, gerekçe ve kanıtlar açık bir düşünce akışı oluşturuyor."
+      }
+    ],
+    "total_score": 8.0,
+    "max_score": 8.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "gorus-savunma",
+      "konusma",
+      "pilot",
+      "pilot-wave-2",
+      "synthetic",
+      "transcript-only",
+      "wave-2"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w2-g11-speaking-partial-boundaries",
+    "question_family": "pilot-w2-g11-speaking-argument",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

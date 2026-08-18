@@ -1,0 +1,220 @@
+{
+  "id": "tde09-written-000050",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "pilot-w2-g09-comparative-interpretation-a",
+    "prompt": "A ve B parçalarında bekleme duygusunun nasıl farklılaştığını karşılaştırınız. Her iki parçadan da kanıt kullanarak açıklayınız.",
+    "context": "A: İstasyondaki bankta üçüncü saati de doldurdum. Her tren sesiyle ayağa kalkıyor, sonra yeniden oturuyordum. B: Kapının önündeki bavulu sabah erkenden hazırladım. Otobüsün gelmesine daha iki saat vardı ama içimde çoktan yola çıkmıştım.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w2-g09-comparative-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comparison_claim",
+        "name": "Karşılaştırma yargısı",
+        "description": "İki parçanın ortak veya farklı yönünü doğru ve açık bir karşılaştırma yargısıyla belirtir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Karşılaştırma yanlış veya yok."
+          },
+          {
+            "score": 1,
+            "description": "Ortak/farklı yön kısmen doğru fakat belirsiz veya tek taraflı."
+          },
+          {
+            "score": 2,
+            "description": "İki parçayı kapsayan doğru ve açık karşılaştırma yargısı var."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence_a",
+        "name": "A parçasından kanıt",
+        "description": "A parçasından karşılaştırmayı destekleyen uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "A parçasından uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kanıt dolaylı veya eksik."
+          },
+          {
+            "score": 2,
+            "description": "A parçasından doğrudan ve uygun kanıt kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence_b",
+        "name": "B parçasından kanıt",
+        "description": "B parçasından karşılaştırmayı destekleyen uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "B parçasından uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kanıt dolaylı veya eksik."
+          },
+          {
+            "score": 2,
+            "description": "B parçasından doğrudan ve uygun kanıt kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "relationship",
+        "name": "İlişkiyi açıklama",
+        "description": "Seçtiği kanıtların karşılaştırma yargısını nasıl oluşturduğunu açıklar.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt-yargı ilişkisi kurulmamış."
+          },
+          {
+            "score": 1,
+            "description": "İlişki kısmen veya genel biçimde açıklanmış."
+          },
+          {
+            "score": 2,
+            "description": "İki metindeki kanıtların karşılaştırma yargısıyla ilişkisi açıkça kurulmuş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "İfade açıklığı",
+        "description": "Karşılaştırmayı anlaşılır ve tutarlı biçimde ifade eder.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade anlaşılmayı ciddi biçimde engelliyor."
+          },
+          {
+            "score": 1,
+            "description": "Yanıt anlaşılır fakat belirgin kopukluk/belirsizlik var."
+          },
+          {
+            "score": 2,
+            "description": "Yanıt açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "A'da beklemek daha kötü, B'de daha güzel bir duygudur. A üç saattir bekliyor. B ise bavulunu erkenden hazırlamış. İki parçadaki ayrıntılar bunu düşündürüyor.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comparison_claim",
+        "score": 2.0,
+        "evidence": [
+          "A'da beklemek daha kötü, B'de daha güzel bir duygudur."
+        ],
+        "justification": "Karşılaştırma yargısı için yanıt 2 puan düzeyindeki çıpayla uyumludur: İki parçayı kapsayan doğru ve açık karşılaştırma yargısı var."
+      },
+      {
+        "criterion_id": "evidence_a",
+        "score": 1.0,
+        "evidence": [
+          "A'da beklemek daha kötü, B'de daha güzel bir duygudur.",
+          "A üç saattir bekliyor."
+        ],
+        "justification": "A parçasından kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Kanıt dolaylı veya eksik."
+      },
+      {
+        "criterion_id": "evidence_b",
+        "score": 1.0,
+        "evidence": [
+          "A'da beklemek daha kötü, B'de daha güzel bir duygudur.",
+          "A üç saattir bekliyor."
+        ],
+        "justification": "B parçasından kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Kanıt dolaylı veya eksik."
+      },
+      {
+        "criterion_id": "relationship",
+        "score": 1.0,
+        "evidence": [
+          "İki parçadaki ayrıntılar bunu düşündürüyor."
+        ],
+        "justification": "İlişkiyi açıklama için yanıt 1 puan düzeyindeki çıpayla uyumludur: İlişki kısmen veya genel biçimde açıklanmış."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "A'da beklemek daha kötü, B'de daha güzel bir duygudur.",
+          "A üç saattir bekliyor."
+        ],
+        "justification": "İfade açıklığı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Yanıt açık ve tutarlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "karsilastirma",
+      "metinsel-kanit",
+      "pilot",
+      "pilot-wave-2",
+      "synthetic",
+      "wave-2",
+      "yorum"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w2-g09-written-partial-boundaries",
+    "question_family": "pilot-w2-g09-comparative-interpretation",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

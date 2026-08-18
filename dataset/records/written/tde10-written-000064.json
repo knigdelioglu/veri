@@ -1,0 +1,163 @@
+{
+  "id": "tde10-written-000064",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "pilot-w2-g10-period-application-b",
+    "prompt": "Ders notundaki özelliklerden yararlanarak roman parçasının Servetifünun roman anlayışıyla uyuşan iki yönünü belirleyiniz ve metne uygulayınız.",
+    "context": "Ders notu: Servetifünun romanında bireysel/psikolojik çatışmalar, ayrıntılı ruh çözümlemeleri, İstanbul'un seçkin çevreleri ve sanatlı-ağır bir anlatım görülebilir. Parça: Nişantaşı'ndaki salonun kristal avizesi sönükleşirken Cemil, davetlilerin kahkahalarını uzaktan işitir gibi oldu. Masanın üzerindeki mektuba dokunmaya cesaret edemiyor; bir cümleyi okumaktan çok, o cümlenin kendi hayatında açacağı boşluğu düşünüyordu. Perdelerin koyu kadifesi, odanın sessizliğini daha da ağırlaştırıyordu.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w2-g10-period-application-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "feature_identification",
+        "name": "Özelliği belirleme",
+        "description": "Verilen ders notundaki dönem/topluluk özelliklerinden parçayla gerçekten ilişkili olanları doğru belirler.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Geçerli özellik belirlenmemiş veya temel sınıflama yanlış."
+          },
+          {
+            "score": 2,
+            "description": "Bir geçerli özellik doğru belirlenmiş ya da iki özellikten biri belirgin biçimde sorunlu."
+          },
+          {
+            "score": 4,
+            "description": "En az iki geçerli özellik doğru biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "name": "Metne uygulama",
+        "description": "Belirlediği özellikleri parçadaki uygun söz, durum veya anlatım tercihiyle eşleştirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Parçadan uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kanıt çok genel veya yalnız bir özellik için sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun kanıtlar var fakat eşleştirme kısmen açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "Özellikler parçadaki doğrudan kanıtlarla doğru biçimde eşleştirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "application_explanation",
+        "name": "Uygulama gerekçesi",
+        "description": "Metinsel kanıtların verilen dönem/topluluk özellikleriyle neden uyuştuğunu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Gerekçe genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Gerekçe doğru fakat kısmen geliştirilmiş."
+          },
+          {
+            "score": 3,
+            "description": "Kanıt-özellik ilişkisi açık ve tutarlı biçimde gerekçelendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Bireysel sorun ve ağır/sanatlı anlatım vardır. Cemil'in mektuba dokunamaması kişisel bir çatışma; koyu kadife perde ve ağırlaşan sessizlik de sanatlı anlatıma örnektir. Psikolojik çözümleme ile bireysel çatışmayı tam ayırmıyorum.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "feature_identification",
+        "score": 4.0,
+        "evidence": [
+          "Bireysel sorun ve ağır"
+        ],
+        "justification": "Özelliği belirleme için yanıt 4 puan düzeyindeki çıpayla uyumludur: En az iki geçerli özellik doğru biçimde belirlenmiş."
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "score": 3.0,
+        "evidence": [
+          "Bireysel sorun ve ağır",
+          "sanatlı anlatım vardır."
+        ],
+        "justification": "Metne uygulama için yanıt 3 puan düzeyindeki çıpayla uyumludur: Özellikler parçadaki doğrudan kanıtlarla doğru biçimde eşleştirilmiş."
+      },
+      {
+        "criterion_id": "application_explanation",
+        "score": 2.0,
+        "evidence": [
+          "Psikolojik çözümleme ile bireysel çatışmayı tam ayırmıyorum."
+        ],
+        "justification": "Uygulama gerekçesi için yanıt 2 puan düzeyindeki çıpayla uyumludur: Gerekçe doğru fakat kısmen geliştirilmiş."
+      }
+    ],
+    "total_score": 9.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "edebi-donem",
+      "kanit",
+      "pilot",
+      "pilot-wave-2",
+      "synthetic",
+      "uygulama",
+      "wave-2"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w2-g10-written-partial-boundaries",
+    "question_family": "pilot-w2-g10-period-application",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "high_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

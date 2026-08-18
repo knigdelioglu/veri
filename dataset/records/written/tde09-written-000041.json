@@ -1,0 +1,191 @@
+{
+  "id": "tde09-written-000041",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "pilot-w2-g09-figurative-function-b",
+    "prompt": "Parçadaki bir anlatım yolunu veya edebî tekniği belirleyiniz. Seçtiğiniz ifadeyi göstererek bu kullanımın şehirdeki sabah telaşını anlatmaya katkısını açıklayınız.",
+    "context": "Yağmur, kentin üstüne ince bir perde çekti. Otobüs durakları sabah telaşını yutuyor; kaldırımlar aceleci adımları birbirine karıştırıyordu.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w2-g09-figurative-function-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "device_identification",
+        "name": "Anlatım yolunu belirleme",
+        "description": "Seçtiği söz veya ifadede kullanılan anlatım yolunu/edebî tekniği metne uygun biçimde belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Teknik yanlış veya cevapla ilgisiz."
+          },
+          {
+            "score": 1,
+            "description": "İfadede özel bir kullanım olduğunu fark ediyor fakat adlandırma/kapsam belirgin biçimde eksik."
+          },
+          {
+            "score": 3,
+            "description": "Geçerli anlatım yolu veya teknik doğru ve açık biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "name": "Metinsel kanıt",
+        "description": "Belirlediği tekniği doğrudan gösteren uygun ifadeyi kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun metinsel kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kanıt kısmi, geniş veya dolaylı."
+          },
+          {
+            "score": 2,
+            "description": "Tekniği doğrudan gösteren uygun ifade seçilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "function",
+        "name": "İşlevi açıklama",
+        "description": "Seçtiği anlatım yolunun parçadaki duygu, anlam veya vurguya katkısını açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İşlev açıklanmamış veya metinle uyuşmuyor."
+          },
+          {
+            "score": 1,
+            "description": "Genel bir etki söylenmiş fakat teknikle bağ zayıf."
+          },
+          {
+            "score": 2,
+            "description": "İşlev doğru fakat sınırlı açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "Teknik ile parçanın anlam/duygu etkisi arasında açık ve doğru ilişki kurulmuş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "İfade açıklığı",
+        "description": "Yanıt anlaşılır ve kendi içinde tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade anlaşılmayı ciddi biçimde engelliyor."
+          },
+          {
+            "score": 1,
+            "description": "Yanıt anlaşılır fakat belirgin kopukluk veya belirsizlik var."
+          },
+          {
+            "score": 2,
+            "description": "Yanıt açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Yağmur perde gibi anlatılmış. “İnce bir perde” sözü kanıttır. Şehrin yağmurlu olduğunu daha güzel anlatıyor.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "device_identification",
+        "score": 1.0,
+        "evidence": [
+          "Yağmur perde gibi anlatılmış."
+        ],
+        "justification": "Anlatım yolunu belirleme için yanıt 1 puan düzeyindeki çıpayla uyumludur: İfadede özel bir kullanım olduğunu fark ediyor fakat adlandırma/kapsam belirgin biçimde eksik."
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "score": 2.0,
+        "evidence": [
+          "Yağmur perde gibi anlatılmış.",
+          "“İnce bir perde” sözü kanıttır."
+        ],
+        "justification": "Metinsel kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Tekniği doğrudan gösteren uygun ifade seçilmiş."
+      },
+      {
+        "criterion_id": "function",
+        "score": 1.0,
+        "evidence": [
+          "Şehrin yağmurlu olduğunu daha güzel anlatıyor."
+        ],
+        "justification": "İşlevi açıklama için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel bir etki söylenmiş fakat teknikle bağ zayıf."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Yağmur perde gibi anlatılmış.",
+          "“İnce bir perde” sözü kanıttır."
+        ],
+        "justification": "İfade açıklığı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Yanıt açık ve tutarlı."
+      }
+    ],
+    "total_score": 6.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "islev",
+      "metinsel-kanit",
+      "pilot",
+      "pilot-wave-2",
+      "soz-sanati",
+      "synthetic",
+      "wave-2"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w2-g09-written-partial-boundaries",
+    "question_family": "pilot-w2-g09-figurative-function",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
