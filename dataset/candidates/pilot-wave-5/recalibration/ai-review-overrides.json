@@ -1,0 +1,28 @@
+{
+  "schema_version":"ai-review-overrides-1.0",
+  "batch_id":"pilot-wave-5-quota-closure",
+  "overrides":[
+    {"candidate_id":"w5a1-10","text_override":"A'da bekleyiş, B'de kalabalıkta görünmezlik var. Kanıt olarak 'kimsenin adını söylemedi' ifadesini kullanıyorum."},
+    {"candidate_id":"w5a2-06","text_override":"Yeni yaprak umut, yağmurda koşmak da mücadele anlamına geliyor."},
+    {"candidate_id":"w5a2-10","text_override":"A'da umut yeni yaprakla, B'de ise çocuğun yağmura rağmen koşmasıyla kuruluyor."},
+    {"candidate_id":"w5b1-06","text_override":"Ece geç kalıyor ve sonra notlarını yeniden düzenliyor. Bunun nedeni otobüsü kaçırması."},
+    {"candidate_id":"w5b1-10","text_override":"Ece otobüsü kaçırdığı için geç kalıyor; sonra arka sıraya geçiyor ve notlarını yeniden düzenliyor."},
+    {"candidate_id":"w5b2-10","text_override":"Arkadaşının geçen yıl tek başına hazırlanırken zorlandığını duyunca Mert birlikte çalışmayı öneriyor."},
+    {"candidate_id":"w5c1-06","text_override":"Yazar kitabın hemen anlaşılmayabileceğini söylüyor. Okunanlar zamanla başka şeylerle birleşiyor."},
+    {"candidate_id":"w5c1-10","needs_review":false,"review_reason":null,"hard_case_types_override":[],"source_override":"manual","input_uncertainties_override":[],"text_override":"Yazar, kitabı hızlı bitirmenin anlamayı garanti etmediğini savunuyor. Bazı cümlelerin zihinde beklemesi ve başka deneyimlerle birleşmesi gerektiğini söylüyor."},
+    {"candidate_id":"w5c2-10","text_override":"Yazar eski yapıların geçmiş yaşam hakkında bilgi verdiğini savunuyor; mahallede yapılan işler buna örnek."}
+  ],
+  "second_pass_ids":[
+    "w5a1-04","w5a1-09","w5a1-10","w5a2-06","w5a2-10","w5b1-06","w5b1-09","w5b1-10","w5b2-04","w5b2-10",
+    "w5c1-06","w5c1-09","w5c1-10","w5c2-04","w5c2-10","w5d1-04","w5d1-06","w5d1-09","w5d1-10","w5d2-04",
+    "w5d2-10","w5e1-04","w5e1-06","w5e1-10","w5e2-04","w5e2-10","w5a2-04","w5b2-08","w5c2-08","w5e2-08"
+  ],
+  "review_summary":{
+    "records_reviewed":30,
+    "score_changes":0,
+    "text_changes":8,
+    "metadata_changes":1,
+    "false_escalations_removed":1,
+    "note":"Rubric-first second pass removed OCR diagnostic prose from written student text and demoted one non-material OCR ambiguity because both readings supported the same grading conclusion."
+  }
+}
