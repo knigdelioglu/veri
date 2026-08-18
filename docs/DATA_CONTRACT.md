@@ -6,15 +6,15 @@ Bu sözleşme, Türk Dili ve Edebiyatı yazılı, konuşma ve dinleme sınavlar�
 
 ## 2. Kayıt birimi
 
-Bir kayıt **tek bir öğrencinin tek bir exact soru/görev için rubrikle değerlendirilmiş cevabını** temsil eder.
+Bir kayıt **tek bir öğrenci/öğrenci-benzeri cevabın tek bir exact soru/görev için rubrikle değerlendirilmiş hâlini** temsil eder.
 
 Çekirdek bileşenler:
 
 1. `task`: soru/görev ve gerekli bağlam,
 2. `rubric`: puanlama ölçütleri,
-3. `student_response`: öğrencinin canonical cevabı,
-4. `gold_evaluation`: öğretmen tarafından doğrulanmış hedef değerlendirme,
-5. `metadata`: leakage, veri üretimi ve kalite kontrol metadata'sı.
+3. `student_response`: canonical cevap,
+4. `gold_evaluation`: doğrulanmış hedef değerlendirme,
+5. `metadata`: verification provenance, leakage, veri üretimi ve kalite kontrol metadata'sı.
 
 ## 3. Temel alanlar
 
@@ -48,7 +48,7 @@ Canonical sözleşme sürümü. İlk sürüm `1.0`'dır.
 
 ### `task_id`
 
-Birebir aynı soru/görevin veri seti içindeki kararlı kimliğidir. Aynı soruya verilen farklı öğrenci cevapları aynı `task_id` değerini kullanır.
+Birebir aynı soru/görevin veri seti içindeki kararlı kimliğidir. Aynı soruya verilen farklı cevaplar aynı `task_id` değerini kullanır.
 
 `task_id` iki amaçla kullanılır:
 
@@ -94,11 +94,13 @@ Bir model mevcut girdide bulunmayan kanıtı varmış gibi kullanmamalıdır.
 
 Konuşma sınavında transkript yalnız **ne söylendiğini** temsil eder. Telaffuz, vurgu-tonlama ve gerçek zamanlı akıcılık gibi özellikler yalnız uygun ses/gözlem kanıtı varsa puanlanır.
 
+**Sentetik speaking kayıtta gerçek audio yoksa audio/delivery criterion'u canonical rubrikten çıkarılır.** Bu kayıtlar transcript-only olarak değerlendirilir; olmayan ses niteliği gold olarak uydurulmaz.
+
 ## 6. `student_response`
 
 ### `text`
 
-Modelin değerlendireceği canonical öğrenci cevabı veya doğrulanmış konuşma transkriptidir.
+Modelin değerlendireceği canonical cevap veya doğrulanmış konuşma transkriptidir.
 
 ### `source`
 
@@ -107,11 +109,11 @@ Modelin değerlendireceği canonical öğrenci cevabı veya doğrulanmış konu�
 - `verified_ocr`
 - `verified_stt`
 
-OCR/STT'nin eklediği hata düzeltilir; öğrencinin kendi dil/anlatım hatası canonical cevapta korunur.
+Sentetik cevap/transkript `manual` kullanılabilir. Gerçek OCR/STT verisinde sistemin eklediği hata düzeltilir; öğrencinin kendi dil/anlatım hatası canonical cevapta korunur.
 
 ### `observations`
 
-Metinden güvenilir biçimde çıkarılamayan fakat rubrik için gerekli öğretmen gözlemleridir.
+Metinden güvenilir biçimde çıkarılamayan fakat rubrik için gerekli gerçek öğretmen gözlemleridir.
 
 ```json
 {
@@ -121,9 +123,11 @@ Metinden güvenilir biçimde çıkarılamayan fakat rubrik için gerekli öğret
 }
 ```
 
+Sentetik olarak uydurulmuş observation canonical gold kanıtı olamaz.
+
 ## 7. `gold_evaluation`
 
-Modelin öğrenmesi hedeflenen öğretmen onaylı değerlendirmedir.
+Modelin öğrenmesi hedeflenen doğrulanmış değerlendirmedir.
 
 Her `criterion_result`:
 
@@ -152,20 +156,31 @@ bulunur.
 
 **Çözülmemiş annotation:** gold karar güvenilir değilse kayıt `draft`, `annotated` veya `quarantined` kalır ve export edilmez.
 
-**Gold escalation:** doğru model davranışı insan incelemesine yönlendirmekse kayıt `teacher_verified + needs_review=true` olabilir. Bu örnek en az iki bağımsız insan incelemesi görür ve curated SFT exportuna dahil edilir.
+**Gold escalation:** doğru model davranışı ek incelemeye yönlendirmekse kayıt verified durumda `needs_review=true` olabilir. Bu örnek en az iki doğrulama geçişi görür ve curated SFT exportuna dahil edilir.
 
-## 8. Lifecycle metadata
+**Borderline tek başına escalation değildir.** Rubrik mevcut bir anchor ile güvenilir puan veriyorsa model puanlamalıdır. `needs_review` yalnız mevcut kanıt güvenilir bir puan üretmeye yetmediğinde kullanılmalıdır.
+
+## 8. Lifecycle ve verification metadata
 
 ### `status`
 
 - `draft`: tamamlanmamış,
 - `annotated`: ilk değerlendirmesi yapılmış fakat final kalite kapısından geçmemiş,
-- `teacher_verified`: canonical gold karar onaylı,
+- `ai_verified`: AI üretim/puanlama süreci kalite geçişlerinden geçmiş,
+- `teacher_verified`: gerçekten insan öğretmen tarafından doğrulanmış,
 - `quarantined`: şüpheli veya kullanıma uygun olmayan kayıt.
+
+### `verification_source`
+
+- `ai`: `status=ai_verified` için zorunlu,
+- `teacher`: `status=teacher_verified` için zorunlu,
+- `null`: henüz verified olmayan kayıtlar için kullanılabilir.
+
+`status` ve `verification_source` birbiriyle uyuşmalıdır. Sentetik AI üretimi `teacher_verified` diye etiketlenmez.
 
 ### `pii_reviewed`
 
-Kişisel veri kontrolünün tamamlandığını belirtir. `teacher_verified` kayıt `pii_reviewed=true` olmalıdır.
+Kişisel veri kontrolünün tamamlandığını belirtir. `ai_verified` ve `teacher_verified` kayıtların ikisi de `pii_reviewed=true` olmalıdır.
 
 ## 9. Split ve leakage anahtarları
 
@@ -183,7 +198,7 @@ Birebir aynı soru/görev. Exact soru farklı splitlere ayrılamaz.
 
 ### `subject_group_id`
 
-Öğrenciyi tanımlamayan rastgele/grup kimliği. Gerçek okul numarası veya kolay geri çözülebilir öğrenci kimliği kullanılmaz.
+Öğrenciyi tanımlamayan rastgele/grup kimliği. Sentetik kayıtta gerçek öğrenci ilişkisi yoksa `null` olabilir.
 
 ### `exam_family`
 
@@ -218,7 +233,7 @@ Bu alanlar **model girdisi değildir**; veri setinin dengesi ve doğrulanabilirl
 - `blank_irrelevant`
 - `borderline`
 
-`teacher_verified` kayıtlar için üretim kalite kapısı bu alanı zorunlu tutar.
+Verified kayıtlar için üretim kalite kapısı bu alanı zorunlu tutar.
 
 ### `hard_case_types`
 
@@ -230,23 +245,33 @@ Bu alanlar **model girdisi değildir**; veri setinin dengesi ve doğrulanabilirl
 
 ### `review_count`
 
-Canonical gold karar üzerinde kaç bağımsız insan değerlendirmesi bulunduğunu belirtir.
+Gold karar üzerinde kaç ayrı doğrulama geçişi bulunduğunu belirtir.
 
-- normal teacher-verified: en az 1,
+- normal verified: en az 1,
 - validation/test/benchmark: en az 2,
 - `borderline`: en az 2,
 - gold `needs_review=true`: en az 2.
 
+`verification_source=ai` olduğunda bu sayı bağımsız insan sayısı anlamına gelmez; deliberate AI review pass sayısıdır. İnsan doğrulaması varsa `verification_source=teacher` ile ayrı provenance tutulur.
+
 ### `adjudicated`
 
-Bağımsız değerlendirmeler arasında anlamlı uyuşmazlık oluşmuş ve nihai gold karar ortak incelemeyle çözülmüşse `true` yapılır. Çift değerlendirme tek başına adjudication değildir.
+Birden fazla bağımsız insan değerlendirmesi arasında anlamlı uyuşmazlık oluşmuş ve nihai gold karar ortak incelemeyle çözülmüşse `true` yapılır. AI-only sentetik üretimde varsayılan `false` kalır.
 
 ## 11. `provenance`
 
 - `synthetic`
 - `real_anonymized`
 
-Sentetik örnek gerçek öğrenci verisi gibi etiketlenmemelidir. Model tarafından üretilen örnek, öğretmen doğrulaması olmadan gold kabul edilmez.
+Sentetik örnek gerçek öğrenci verisi gibi etiketlenmemelidir. Verification kaynağı provenance'dan ayrı tutulur:
+
+```text
+synthetic + ai_verified
+real_anonymized + teacher_verified
+real_anonymized + ai_verified
+```
+
+teknik olarak farklı veri dilimleridir ve benchmark analizinde ayrı izlenebilir.
 
 ## 12. Gizlilik
 
@@ -289,6 +314,7 @@ Assistant hedefi yalnız `gold_evaluation` yapısıdır.
 - `adversarial`,
 - `review_count`,
 - `adjudicated`,
+- `verification_source`,
 - diğer annotation metadata'sı.
 
-Bu ayrım modelin veri kürasyonu etiketlerinden kestirme öğrenmesini engeller.
+`verification_source` SFT satırının dış metadata'sında tutulabilir; model girdisine verilmez. Bu ayrım modelin veri kürasyonu etiketlerinden kestirme öğrenmesini engeller.
