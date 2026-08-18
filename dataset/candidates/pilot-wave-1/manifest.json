@@ -2,29 +2,100 @@
   "schema_version": "candidate-batch-manifest-1.0",
   "batch_id": "pilot-wave-1-calibration",
   "created_at": "2026-08-18",
-  "status": "materialization_in_progress",
+  "status": "materialized_ai_verified",
   "candidate_records": 100,
-  "canonical_records": 25,
-  "ai_verified_records_pending_materialization": 75,
+  "canonical_records": 100,
+  "ai_verified_records_pending_materialization": 0,
   "teacher_verified_records": 0,
   "provenance": "synthetic",
   "distribution": {
-    "modality": {"written": 50, "speaking": 25, "listening": 25},
-    "grade": {"9": 25, "10": 25, "11": 25, "12": 25},
-    "response_quality": {"full_correct": 20, "high_partial": 20, "mid_partial": 20, "low_partial": 15, "incorrect": 10, "blank_irrelevant": 5, "borderline": 10},
+    "modality": {
+      "written": 50,
+      "speaking": 25,
+      "listening": 25
+    },
+    "grade": {
+      "9": 25,
+      "10": 25,
+      "11": 25,
+      "12": 25
+    },
+    "response_quality": {
+      "full_correct": 20,
+      "high_partial": 20,
+      "mid_partial": 20,
+      "low_partial": 15,
+      "incorrect": 10,
+      "blank_irrelevant": 5,
+      "borderline": 10
+    },
     "hard_case_records": 18,
     "adversarial_records": 4,
     "initial_needs_review_candidates": 10,
     "final_genuine_needs_review_candidates": 1
   },
-  "coverage": {"question_families": 4, "exact_tasks": 8, "answers_per_question_family": 25, "answers_per_exact_task": [12, 13]},
-  "files": ["g09-poetry-theme.json", "g10-narrator-viewpoint.json", "g11-speaking-character.json", "g12-listening-inference.json"],
+  "coverage": {
+    "question_families": 4,
+    "exact_tasks": 8,
+    "answers_per_question_family": 25,
+    "answers_per_exact_task": [
+      12,
+      13
+    ]
+  },
+  "files": [
+    "g09-poetry-theme.json",
+    "g10-narrator-viewpoint.json",
+    "g11-speaking-character.json",
+    "g12-listening-inference.json"
+  ],
   "audit_file": "AUDIT.md",
   "ai_review_file": "AI_REVIEW_PHASE_A.md",
   "recalibration_directory": "recalibration/",
-  "recalibration_summary": {"override_records": 62, "text_overrides": 27, "second_pass_high_risk_records": 30, "false_needs_review_labels_corrected": 9, "speaking_transcript_only_records": 25},
+  "recalibration_summary": {
+    "override_records": 62,
+    "text_overrides": 27,
+    "second_pass_high_risk_records": 30,
+    "false_needs_review_labels_corrected": 9,
+    "speaking_transcript_only_records": 25
+  },
   "promotion_policy": "Materialize synthetic records as ai_verified with verification_source=ai. Source, recalibration and second-pass AI overrides are applied in that order. Speaking synthetic records use transcript-only rubrics; nonexistent audio delivery is never fabricated.",
   "blocking_issue": null,
-  "materialized_blocks": ["g09-poetry-theme"],
-  "next_action": "Validate the 25 Grade 9 canonical records, then materialize the next Wave 1 family."
+  "materialized_blocks": [
+    "g09-poetry-theme",
+    "g10-narrator-viewpoint",
+    "g11-speaking-character",
+    "g12-listening-inference"
+  ],
+  "next_action": "Run validate + production + leakage gates, then begin Wave 2.",
+  "ai_verified_records": 100,
+  "final_needs_review_records": 1,
+  "second_pass_ai_review_records": 30,
+  "canonical_materialized_at": "2026-08-18",
+  "canonical_policy": "candidate -> recalibration -> AI review -> ai_verified canonical",
+  "canonical_distribution": {
+    "modality": {
+      "listening": 25,
+      "speaking": 25,
+      "written": 50
+    },
+    "grade": {
+      "10": 25,
+      "11": 25,
+      "12": 25,
+      "9": 25
+    },
+    "response_quality": {
+      "blank_irrelevant": 5,
+      "borderline": 9,
+      "full_correct": 21,
+      "high_partial": 20,
+      "incorrect": 10,
+      "low_partial": 15,
+      "mid_partial": 20
+    },
+    "hard_case_records": 15,
+    "adversarial_records": 4,
+    "needs_review_records": 1
+  }
 }

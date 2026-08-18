@@ -1,1 +1,163 @@
-{"id":"tde09-written-000021","schema_version":"1.0","modality":"written","language":"tr","grade":9,"task":{"task_id":"pilot-w1-g09-poetry-theme-b","prompt":"Bu şiir parçasında baskın duyguyu belirleyiniz. Metinden en az iki ayrıntı kullanarak bu duygunun nasıl oluşturulduğunu açıklayınız.","context":"Yağmur dindi; avluda tek bir sandalye ıslak. / Kapının eşiğinde annemin terlikleri yok. / Bahçedeki erik ağacı yine çiçek açmış; / ben dönüşümü geç kalmış bir mektup gibi taşıyorum.","max_score":10},"rubric":{"rubric_id":"pilot-w1-g09-theme-evidence-r1","version":"1.0","criteria":[{"criterion_id":"dominant_feeling","name":"Baskın duygu/tema","description":"Parçada öne çıkan duyguyu veya temayı metnin bütünüyle uyumlu biçimde belirler.","max_score":4,"scoring_anchors":[{"score":0,"description":"Duygu/tema yanlış veya metinle ilişkisiz."},{"score":2,"description":"Metinle ilişkili fakat baskınlığı tartışmalı ya da eksik adlandırılmış duygu/tema."},{"score":4,"description":"Baskın duygu/tema doğru ve açık biçimde belirlenmiş."}],"evidence_sources":["response_text","task_context"]},{"criterion_id":"textual_evidence","name":"Metinsel kanıt","description":"Yorumunu parçada yer alan uygun söz, imge veya ayrıntılarla destekler.","max_score":3,"scoring_anchors":[{"score":0,"description":"Metinden uygun kanıt yok."},{"score":1,"description":"Tek veya zayıf ilişkili kanıt var."},{"score":2,"description":"Uygun kanıt var fakat kapsam veya seçim sınırlı."},{"score":3,"description":"En az iki uygun ve doğrudan ilişkili kanıt kullanılmış."}],"evidence_sources":["response_text","task_context"]},{"criterion_id":"explanation","name":"Açıklama","description":"Seçtiği kanıtların duygu/temayı nasıl kurduğunu açıklar.","max_score":3,"scoring_anchors":[{"score":0,"description":"Açıklama yok veya ilişki kurulmamış."},{"score":1,"description":"İlişki ima edilmiş fakat çok sınırlı."},{"score":2,"description":"Kanıt ile yorum arasındaki ilişki kısmen açıklanmış."},{"score":3,"description":"Kanıtların yorumu nasıl desteklediği açık ve tutarlı biçimde açıklanmış."}],"evidence_sources":["response_text","task_context"]}]},"student_response":{"text":"Şiirde yalnızlık vardır. Çünkü avluda tek bir sandalye vardır ve ev boştur.","source":"manual","observations":[]},"gold_evaluation":{"criterion_results":[{"criterion_id":"dominant_feeling","score":2,"evidence":["Şiirde yalnızlık vardır."],"justification":"Baskın duygu/tema için yanıt 2 puan düzeyindeki çıpayla uyumludur: Metinle ilişkili fakat baskınlığı tartışmalı ya da eksik adlandırılmış duygu/tema."},{"criterion_id":"textual_evidence","score":1,"evidence":["Şiirde yalnızlık vardır.","Çünkü avluda tek bir sandalye vardır ve ev boştur."],"justification":"Metinsel kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Tek veya zayıf ilişkili kanıt var."},{"criterion_id":"explanation","score":1,"evidence":["Çünkü avluda tek bir sandalye vardır ve ev boştur."],"justification":"Açıklama için yanıt 1 puan düzeyindeki çıpayla uyumludur: İlişki ima edilmiş fakat çok sınırlı."}],"total_score":4,"max_score":10,"needs_review":false,"review_reason":null,"overall_feedback":"Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."},"metadata":{"status":"ai_verified","split":null,"created_at":"2026-08-18","tags":["metinsel-kanit","pilot","pilot-wave-1","siir","synthetic","tema","wave-1"],"pii_reviewed":true,"subject_group_id":null,"exam_family":"pilot-w1-g09-written-calibration","question_family":"pilot-w1-g09-poetry-theme","provenance":"synthetic","verification_source":"ai","response_quality":"low_partial","hard_case_types":[],"adversarial":false,"review_count":1,"adjudicated":false}}
+{
+  "id": "tde09-written-000021",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "pilot-w1-g09-poetry-theme-b",
+    "prompt": "Bu şiir parçasında baskın duyguyu belirleyiniz. Metinden en az iki ayrıntı kullanarak bu duygunun nasıl oluşturulduğunu açıklayınız.",
+    "context": "Yağmur dindi; avluda tek bir sandalye ıslak. / Kapının eşiğinde annemin terlikleri yok. / Bahçedeki erik ağacı yine çiçek açmış; / ben dönüşümü geç kalmış bir mektup gibi taşıyorum.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w1-g09-theme-evidence-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "dominant_feeling",
+        "name": "Baskın duygu/tema",
+        "description": "Parçada öne çıkan duyguyu veya temayı metnin bütünüyle uyumlu biçimde belirler.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Duygu/tema yanlış veya metinle ilişkisiz."
+          },
+          {
+            "score": 2,
+            "description": "Metinle ilişkili fakat baskınlığı tartışmalı ya da eksik adlandırılmış duygu/tema."
+          },
+          {
+            "score": 4,
+            "description": "Baskın duygu/tema doğru ve açık biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "name": "Metinsel kanıt",
+        "description": "Yorumunu parçada yer alan uygun söz, imge veya ayrıntılarla destekler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Metinden uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek veya zayıf ilişkili kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Uygun kanıt var fakat kapsam veya seçim sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "En az iki uygun ve doğrudan ilişkili kanıt kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "explanation",
+        "name": "Açıklama",
+        "description": "Seçtiği kanıtların duygu/temayı nasıl kurduğunu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Açıklama yok veya ilişki kurulmamış."
+          },
+          {
+            "score": 1,
+            "description": "İlişki ima edilmiş fakat çok sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt ile yorum arasındaki ilişki kısmen açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "Kanıtların yorumu nasıl desteklediği açık ve tutarlı biçimde açıklanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Şiirde yalnızlık vardır. Çünkü avluda tek bir sandalye vardır ve ev boştur.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "dominant_feeling",
+        "score": 2.0,
+        "evidence": [
+          "Şiirde yalnızlık vardır."
+        ],
+        "justification": "Baskın duygu/tema için yanıt 2 puan düzeyindeki çıpayla uyumludur: Metinle ilişkili fakat baskınlığı tartışmalı ya da eksik adlandırılmış duygu/tema."
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "score": 1.0,
+        "evidence": [
+          "Şiirde yalnızlık vardır.",
+          "Çünkü avluda tek bir sandalye vardır ve ev boştur."
+        ],
+        "justification": "Metinsel kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Tek veya zayıf ilişkili kanıt var."
+      },
+      {
+        "criterion_id": "explanation",
+        "score": 1.0,
+        "evidence": [
+          "Çünkü avluda tek bir sandalye vardır ve ev boştur."
+        ],
+        "justification": "Açıklama için yanıt 1 puan düzeyindeki çıpayla uyumludur: İlişki ima edilmiş fakat çok sınırlı."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "metinsel-kanit",
+      "pilot",
+      "pilot-wave-1",
+      "siir",
+      "synthetic",
+      "tema",
+      "wave-1"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w1-g09-written-calibration",
+    "question_family": "pilot-w1-g09-poetry-theme",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

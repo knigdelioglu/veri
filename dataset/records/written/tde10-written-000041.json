@@ -1,0 +1,191 @@
+{
+  "id": "tde10-written-000041",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "pilot-w1-g10-viewpoint-b",
+    "prompt": "Bu parçada kullanılan bakış açısını belirleyiniz. Anlatıcının karakterlerden daha fazla veya daha az bilgi vermesinin okur üzerindeki etkisini metinden kanıtla açıklayınız.",
+    "context": "Meral pencerenin önünde beklerken sokağın başında görünen her gölgeyi kardeşine benzetiyordu. Annesi mutfakta sessizce çay koyuyor, Meral'in neden bu kadar tedirgin olduğunu anlamıyordu. Oysa kardeşi çoktan otobüsü kaçırmış ve istasyondaki bankta yeni seferi beklemeye başlamıştı.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w1-g10-viewpoint-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "viewpoint",
+        "name": "Bakış açısını belirleme",
+        "description": "Anlatıcının bakış açısını doğru terim ve anlamla belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Bakış açısı yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Anlatıcı konumu kısmen fark edilmiş fakat terim veya kapsam belirsiz."
+          },
+          {
+            "score": 3,
+            "description": "Bakış açısı doğru ve açık biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Metinden kanıt",
+        "description": "Bakış açısını gösteren uygun bir veya daha fazla metin ayrıntısı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kanıt var fakat sınırlı veya dolaylı."
+          },
+          {
+            "score": 2,
+            "description": "Bakış açısını doğrudan destekleyen uygun kanıt kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "effect",
+        "name": "Okur üzerindeki etki",
+        "description": "Bilgi alanının okurun merak, gerilim veya bilgi üstünlüğü üzerindeki etkisini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Etki açıklanmamış veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Etki genel bir ifadeyle kısmen belirtilmiş."
+          },
+          {
+            "score": 2,
+            "description": "Etki doğru fakat sınırlı açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "Bakış açısı ile okurun bilgi alanı arasındaki etki açık ve doğru açıklanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "İfade açıklığı",
+        "description": "Yanıtı anlaşılır ve tutarlı bir biçimde ifade eder.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade anlaşılmayı ciddi biçimde engelliyor."
+          },
+          {
+            "score": 1,
+            "description": "Yanıt anlaşılır ancak sınırlı kopukluk veya belirsizlik var."
+          },
+          {
+            "score": 2,
+            "description": "Yanıt açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Hâkim bakış açısı vardır. Meral kardeşini beklerken okur kardeşin otobüsü kaçırdığını öğreniyor. Bu yüzden okur karakterden daha fazla bilgi sahibi.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "viewpoint",
+        "score": 3.0,
+        "evidence": [
+          "Hâkim bakış açısı vardır."
+        ],
+        "justification": "Bakış açısını belirleme için yanıt 3 puan düzeyindeki çıpayla uyumludur: Bakış açısı doğru ve açık biçimde belirlenmiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "Hâkim bakış açısı vardır.",
+          "Meral kardeşini beklerken okur kardeşin otobüsü kaçırdığını öğreniyor."
+        ],
+        "justification": "Metinden kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Bakış açısını doğrudan destekleyen uygun kanıt kullanılmış."
+      },
+      {
+        "criterion_id": "effect",
+        "score": 2.0,
+        "evidence": [
+          "Bu yüzden okur karakterden daha fazla bilgi sahibi."
+        ],
+        "justification": "Okur üzerindeki etki için yanıt 2 puan düzeyindeki çıpayla uyumludur: Etki doğru fakat sınırlı açıklanmış."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Hâkim bakış açısı vardır.",
+          "Meral kardeşini beklerken okur kardeşin otobüsü kaçırdığını öğreniyor."
+        ],
+        "justification": "İfade açıklığı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Yanıt açık ve tutarlı."
+      }
+    ],
+    "total_score": 9.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "anlatici",
+      "bakis-acisi",
+      "metinsel-kanit",
+      "pilot",
+      "pilot-wave-1",
+      "synthetic",
+      "wave-1"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w1-g10-written-calibration",
+    "question_family": "pilot-w1-g10-narrator-viewpoint",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "high_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
