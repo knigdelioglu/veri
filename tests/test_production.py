@@ -49,7 +49,7 @@ def strategy() -> dict:
             "preferred_criterion_count_range": [1, 5],
         },
         "review_policy": {
-            "teacher_verified_min_reviews": 1,
+            "verified_min_reviews": 1,
             "evaluation_split_min_reviews": 2,
             "borderline_min_reviews": 2,
             "needs_review_min_reviews": 2,
@@ -57,7 +57,15 @@ def strategy() -> dict:
     }
 
 
-def record(record_id: str, *, split: str | None = "train", quality: str = "mid_partial") -> dict:
+def record(
+    record_id: str,
+    *,
+    split: str | None = "train",
+    quality: str = "mid_partial",
+    status: str = "teacher_verified",
+) -> dict:
+    source = "ai" if status == "ai_verified" else "teacher"
+    provenance = "synthetic" if status == "ai_verified" else "real_anonymized"
     return {
         "id": record_id,
         "schema_version": "1.0",
@@ -104,7 +112,7 @@ def record(record_id: str, *, split: str | None = "train", quality: str = "mid_p
             "overall_feedback": "Kısmi başarı.",
         },
         "metadata": {
-            "status": "teacher_verified",
+            "status": status,
             "split": split,
             "created_at": "2026-08-18",
             "tags": [],
@@ -112,7 +120,8 @@ def record(record_id: str, *, split: str | None = "train", quality: str = "mid_p
             "subject_group_id": f"student-{record_id}",
             "exam_family": "exam-1",
             "question_family": "family-1",
-            "provenance": "real_anonymized",
+            "provenance": provenance,
+            "verification_source": source,
             "response_quality": quality,
             "hard_case_types": [],
             "adversarial": False,
@@ -143,6 +152,20 @@ class ProductionStrategyTest(unittest.TestCase):
         self.write(record("tde11-written-000001"))
         self.assertEqual(production_findings(self.root), [])
 
+    def test_complete_ai_verified_profile_passes(self):
+        self.write(record("tde11-written-000001", status="ai_verified"))
+        self.assertEqual(production_findings(self.root), [])
+        report = production_report(self.root, phase="pilot")
+        self.assertEqual(report["verified_records"], 1)
+        self.assertEqual(report["by_verification_source"], {"ai": 1})
+
+    def test_verification_source_must_match_status(self):
+        payload = record("tde11-written-000001", status="ai_verified")
+        payload["metadata"]["verification_source"] = "teacher"
+        self.write(payload)
+        findings = production_findings(self.root)
+        self.assertTrue(any(item.code == "verification_source_mismatch" for item in findings))
+
     def test_missing_response_quality_blocks_verified_record(self):
         payload = record("tde11-written-000001")
         payload["metadata"].pop("response_quality")
@@ -171,7 +194,7 @@ class ProductionStrategyTest(unittest.TestCase):
         self.assertEqual(sum(plan["response_quality"].values()), 17)
 
     def test_verified_needs_review_is_exported_as_gold_escalation(self):
-        payload = record("tde11-written-000001")
+        payload = record("tde11-written-000001", status="ai_verified")
         payload["gold_evaluation"]["needs_review"] = True
         payload["gold_evaluation"]["review_reason"] = "Rubrik için gerekli kanıt eksik."
         payload["metadata"]["review_count"] = 2
@@ -187,6 +210,7 @@ class ProductionStrategyTest(unittest.TestCase):
         self.assertTrue(assistant["needs_review"])
         self.assertNotIn("task_id", user["task"])
         self.assertEqual(row["metadata"]["task_id"], "task-1")
+        self.assertEqual(row["metadata"]["verification_source"], "ai")
 
     def test_question_coverage_uses_exact_task_and_family(self):
         self.write(record("tde11-written-000001"))
