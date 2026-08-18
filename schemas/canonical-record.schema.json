@@ -77,7 +77,7 @@
       "additionalProperties": false,
       "required": ["status", "split", "created_at", "tags", "pii_reviewed", "subject_group_id", "exam_family", "question_family", "provenance"],
       "properties": {
-        "status": {"enum": ["draft", "annotated", "teacher_verified", "quarantined"]},
+        "status": {"enum": ["draft", "annotated", "ai_verified", "teacher_verified", "quarantined"]},
         "split": {"enum": ["train", "validation", "test", "benchmark", null]},
         "created_at": {"type": "string", "format": "date"},
         "tags": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
@@ -86,6 +86,7 @@
         "exam_family": {"type": ["string", "null"]},
         "question_family": {"type": ["string", "null"]},
         "provenance": {"enum": ["synthetic", "real_anonymized"]},
+        "verification_source": {"enum": ["ai", "teacher", null]},
         "response_quality": {"enum": ["full_correct", "high_partial", "mid_partial", "low_partial", "incorrect", "blank_irrelevant", "borderline", null]},
         "hard_case_types": {
           "type": "array",
