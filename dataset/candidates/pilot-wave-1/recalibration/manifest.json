@@ -1,0 +1,37 @@
+{
+  "schema_version": "candidate-recalibration-manifest-1.0",
+  "batch_id": "pilot-wave-1-calibration",
+  "created_at": "2026-08-18",
+  "status": "ready_for_teacher_review",
+  "candidate_records": 100,
+  "teacher_verified_records": 0,
+  "canonical_records": 0,
+  "recalibration": {
+    "override_records": 62,
+    "text_overrides": 27,
+    "speaking_records_delivery_pending": 25,
+    "gold_needs_review_candidates": 10
+  },
+  "effective_response_quality_distribution": {
+    "full_correct": 20,
+    "high_partial": 20,
+    "mid_partial": 20,
+    "low_partial": 15,
+    "incorrect": 10,
+    "blank_irrelevant": 5,
+    "borderline": 10
+  },
+  "files": [
+    "g09-poetry-theme.json",
+    "g10-narrator-viewpoint.json",
+    "g11-speaking-character.json",
+    "g12-listening-inference.json"
+  ],
+  "policy": {
+    "score_rule": "Rubric anchors determine proposed scores; quota labels never lower or raise gold scores.",
+    "text_rule": "When a target response profile was inconsistent with rubric-correct scoring, the response text was rewritten instead of forcing the score.",
+    "speaking_rule": "Synthetic delivery observations are generation aids only and must not become gold. Real audio or teacher observation is required before delivery scoring.",
+    "human_gate": "This recalibration is AI-generated and is not an independent teacher review. No candidate may enter dataset/records or become teacher_verified until human review."
+  },
+  "next_action": "Teacher reviews effective candidate text plus recalibrated criterion scores. Speaking candidates additionally require real delivery evidence. Approved records can then be materialized into canonical dataset/records with review_count updated appropriately."
+}
