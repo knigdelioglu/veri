@@ -1,0 +1,208 @@
+{
+  "id": "tde09-written-000085",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "pilot-w3-g09-figurative-b",
+    "prompt": "Parçada öne çıkan söz sanatını belirleyiniz ve bu sanatın zaman algısına katkısını açıklayınız.",
+    "context": "Saat, duvarda ağır bir kuş gibi kanat çırpıyordu. / Her vuruşunda oda biraz daha küçülüyor, / kapının ardındaki koridor uzadıkça uzuyor, / beklenen haber bir türlü gelmiyordu.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w3-g09-figurative-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "device",
+        "name": "Söz sanatını belirleme",
+        "description": "Parçada öne çıkan söz sanatını doğru belirler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Söz sanatı yanlış veya ilgisiz."
+          },
+          {
+            "score": 1,
+            "description": "İlgili bir sanatı fark etmiş ancak adlandırma eksik ya da karışık."
+          },
+          {
+            "score": 2,
+            "description": "Söz sanatı doğru ve açık belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "function",
+        "name": "İşlevi açıklama",
+        "description": "Söz sanatının anlam ve duyguya katkısını açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İşlev açıklanmamış veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı bir etki söylenmiş."
+          },
+          {
+            "score": 2,
+            "description": "İşlev doğru fakat kısmen açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "İşlev metnin anlamıyla açık ve tutarlı ilişkilendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Metinsel kanıt",
+        "description": "Yorumunu uygun söz veya dizeyle destekler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kanıt dolaylı veya zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Bir uygun kanıt kullanılmış."
+          },
+          {
+            "score": 3,
+            "description": "İki uygun ve doğrudan kanıt kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "İfade açıklığı",
+        "description": "Yanıt anlaşılır ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade anlamı ciddi biçimde belirsizleştiriyor."
+          },
+          {
+            "score": 1,
+            "description": "Yanıt anlaşılır ancak sınırlı belirsizlik var."
+          },
+          {
+            "score": 2,
+            "description": "Yanıt açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Saatin “ağır bir kuş gibi” oluşu benzetme. Bu söz beklerken zamanın yavaş geçtiğini gösteriyor.",
+    "source": "raw_ocr",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "ocr",
+        "span": "yavaş",
+        "candidates": [
+          "yavaş",
+          "hızlı"
+        ],
+        "note": "İşlev açıklamasındaki karşıt anlamlı sözcük güvenilir okunamıyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "device",
+        "score": 2.0,
+        "evidence": [
+          "Saatin “ağır bir kuş gibi” oluşu benzetme."
+        ],
+        "justification": "Söz sanatını belirleme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Söz sanatı doğru ve açık belirlenmiş."
+      },
+      {
+        "criterion_id": "function",
+        "score": 1.0,
+        "evidence": [
+          "Bu söz beklerken zamanın yavaş geçtiğini gösteriyor."
+        ],
+        "justification": "İşlevi açıklama için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı bir etki söylenmiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "Saatin “ağır bir kuş gibi” oluşu benzetme.",
+          "Bu söz beklerken zamanın yavaş geçtiğini gösteriyor."
+        ],
+        "justification": "Metinsel kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Bir uygun kanıt kullanılmış."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Saatin “ağır bir kuş gibi” oluşu benzetme.",
+          "Bu söz beklerken zamanın yavaş geçtiğini gösteriyor."
+        ],
+        "justification": "İfade açıklığı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Yanıt açık ve tutarlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "OCR alternatifi işlev yorumunu tersine çevirdiği için function puanı özgün cevap doğrulanmadan kesinleştirilemez.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "ocr-ambiguity",
+      "pilot",
+      "pilot-wave-3",
+      "soz-sanati",
+      "synthetic",
+      "wave-3",
+      "yorum"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w3-g09-written-hard-cases",
+    "question_family": "pilot-w3-g09-figurative-ambiguity",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "borderline",
+    "hard_case_types": [
+      "ocr_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
