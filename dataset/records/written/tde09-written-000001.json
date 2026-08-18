@@ -1,1 +1,163 @@
-{"id":"tde09-written-000001","schema_version":"1.0","modality":"written","language":"tr","grade":9,"task":{"task_id":"pilot-w1-g09-poetry-theme-a","prompt":"Bu şiir parçasında öne çıkan duyguyu belirleyiniz. Yorumunuzu en az iki söz/ifadeyle destekleyip bu ifadelerin duyguyu nasıl kurduğunu açıklayınız.","context":"Akşam, boş sokağın taşlarına ağır ağır indi. / Penceremde unutulmuş bir ışık titredi. / Uzak bir tren sesi, çocukluğumdan kalan / adı silinmiş bir yolu yeniden çizdi.","max_score":10},"rubric":{"rubric_id":"pilot-w1-g09-theme-evidence-r1","version":"1.0","criteria":[{"criterion_id":"dominant_feeling","name":"Baskın duygu/tema","description":"Parçada öne çıkan duyguyu veya temayı metnin bütünüyle uyumlu biçimde belirler.","max_score":4,"scoring_anchors":[{"score":0,"description":"Duygu/tema yanlış veya metinle ilişkisiz."},{"score":2,"description":"Metinle ilişkili fakat baskınlığı tartışmalı ya da eksik adlandırılmış duygu/tema."},{"score":4,"description":"Baskın duygu/tema doğru ve açık biçimde belirlenmiş."}],"evidence_sources":["response_text","task_context"]},{"criterion_id":"textual_evidence","name":"Metinsel kanıt","description":"Yorumunu parçada yer alan uygun söz, imge veya ayrıntılarla destekler.","max_score":3,"scoring_anchors":[{"score":0,"description":"Metinden uygun kanıt yok."},{"score":1,"description":"Tek veya zayıf ilişkili kanıt var."},{"score":2,"description":"Uygun kanıt var fakat kapsam veya seçim sınırlı."},{"score":3,"description":"En az iki uygun ve doğrudan ilişkili kanıt kullanılmış."}],"evidence_sources":["response_text","task_context"]},{"criterion_id":"explanation","name":"Açıklama","description":"Seçtiği kanıtların duygu/temayı nasıl kurduğunu açıklar.","max_score":3,"scoring_anchors":[{"score":0,"description":"Açıklama yok veya ilişki kurulmamış."},{"score":1,"description":"İlişki ima edilmiş fakat çok sınırlı."},{"score":2,"description":"Kanıt ile yorum arasındaki ilişki kısmen açıklanmış."},{"score":3,"description":"Kanıtların yorumu nasıl desteklediği açık ve tutarlı biçimde açıklanmış."}],"evidence_sources":["response_text","task_context"]}]},"student_response":{"text":"Şiirde baskın duygu geçmişe özlemdir. “Uzak bir tren sesi” ve “çocukluğumdan kalan bir yolu yeniden çizdi” sözleri, şimdiki andan çocukluğa yönelişi gösterir.","source":"manual","observations":[]},"gold_evaluation":{"criterion_results":[{"criterion_id":"dominant_feeling","score":4,"evidence":["Şiirde baskın duygu geçmişe özlemdir."],"justification":"Baskın duygu/tema için yanıt 4 puan düzeyindeki çıpayla uyumludur: Baskın duygu/tema doğru ve açık biçimde belirlenmiş."},{"criterion_id":"textual_evidence","score":3,"evidence":["Şiirde baskın duygu geçmişe özlemdir.","“Uzak bir tren sesi” ve “çocukluğumdan kalan bir yolu yeniden çizdi” sözleri, şimdiki andan çocukluğa yönelişi gösterir."],"justification":"Metinsel kanıt için yanıt 3 puan düzeyindeki çıpayla uyumludur: En az iki uygun ve doğrudan ilişkili kanıt kullanılmış."},{"criterion_id":"explanation","score":3,"evidence":["“Uzak bir tren sesi” ve “çocukluğumdan kalan bir yolu yeniden çizdi” sözleri, şimdiki andan çocukluğa yönelişi gösterir."],"justification":"Açıklama için yanıt 3 puan düzeyindeki çıpayla uyumludur: Kanıtların yorumu nasıl desteklediği açık ve tutarlı biçimde açıklanmış."}],"total_score":10,"max_score":10,"needs_review":false,"review_reason":null,"overall_feedback":"Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."},"metadata":{"status":"ai_verified","split":null,"created_at":"2026-08-18","tags":["metinsel-kanit","pilot","pilot-wave-1","siir","synthetic","tema","wave-1"],"pii_reviewed":true,"subject_group_id":null,"exam_family":"pilot-w1-g09-written-calibration","question_family":"pilot-w1-g09-poetry-theme","provenance":"synthetic","verification_source":"ai","response_quality":"full_correct","hard_case_types":[],"adversarial":false,"review_count":1,"adjudicated":false}}
+{
+  "id": "tde09-written-000001",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "pilot-w1-g09-poetry-theme-a",
+    "prompt": "Bu şiir parçasında öne çıkan duyguyu belirleyiniz. Yorumunuzu en az iki söz/ifadeyle destekleyip bu ifadelerin duyguyu nasıl kurduğunu açıklayınız.",
+    "context": "Akşam, boş sokağın taşlarına ağır ağır indi. / Penceremde unutulmuş bir ışık titredi. / Uzak bir tren sesi, çocukluğumdan kalan / adı silinmiş bir yolu yeniden çizdi.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w1-g09-theme-evidence-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "dominant_feeling",
+        "name": "Baskın duygu/tema",
+        "description": "Parçada öne çıkan duyguyu veya temayı metnin bütünüyle uyumlu biçimde belirler.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Duygu/tema yanlış veya metinle ilişkisiz."
+          },
+          {
+            "score": 2,
+            "description": "Metinle ilişkili fakat baskınlığı tartışmalı ya da eksik adlandırılmış duygu/tema."
+          },
+          {
+            "score": 4,
+            "description": "Baskın duygu/tema doğru ve açık biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "name": "Metinsel kanıt",
+        "description": "Yorumunu parçada yer alan uygun söz, imge veya ayrıntılarla destekler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Metinden uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek veya zayıf ilişkili kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Uygun kanıt var fakat kapsam veya seçim sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "En az iki uygun ve doğrudan ilişkili kanıt kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "explanation",
+        "name": "Açıklama",
+        "description": "Seçtiği kanıtların duygu/temayı nasıl kurduğunu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Açıklama yok veya ilişki kurulmamış."
+          },
+          {
+            "score": 1,
+            "description": "İlişki ima edilmiş fakat çok sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt ile yorum arasındaki ilişki kısmen açıklanmış."
+          },
+          {
+            "score": 3,
+            "description": "Kanıtların yorumu nasıl desteklediği açık ve tutarlı biçimde açıklanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Şiirde baskın duygu geçmişe özlemdir. “Uzak bir tren sesi” ve “çocukluğumdan kalan bir yolu yeniden çizdi” sözleri, şimdiki andan çocukluğa yönelişi gösterir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "dominant_feeling",
+        "score": 4.0,
+        "evidence": [
+          "Şiirde baskın duygu geçmişe özlemdir."
+        ],
+        "justification": "Baskın duygu/tema için yanıt 4 puan düzeyindeki çıpayla uyumludur: Baskın duygu/tema doğru ve açık biçimde belirlenmiş."
+      },
+      {
+        "criterion_id": "textual_evidence",
+        "score": 3.0,
+        "evidence": [
+          "Şiirde baskın duygu geçmişe özlemdir.",
+          "“Uzak bir tren sesi” ve “çocukluğumdan kalan bir yolu yeniden çizdi” sözleri, şimdiki andan çocukluğa yönelişi gösterir."
+        ],
+        "justification": "Metinsel kanıt için yanıt 3 puan düzeyindeki çıpayla uyumludur: En az iki uygun ve doğrudan ilişkili kanıt kullanılmış."
+      },
+      {
+        "criterion_id": "explanation",
+        "score": 3.0,
+        "evidence": [
+          "“Uzak bir tren sesi” ve “çocukluğumdan kalan bir yolu yeniden çizdi” sözleri, şimdiki andan çocukluğa yönelişi gösterir."
+        ],
+        "justification": "Açıklama için yanıt 3 puan düzeyindeki çıpayla uyumludur: Kanıtların yorumu nasıl desteklediği açık ve tutarlı biçimde açıklanmış."
+      }
+    ],
+    "total_score": 10.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "metinsel-kanit",
+      "pilot",
+      "pilot-wave-1",
+      "siir",
+      "synthetic",
+      "tema",
+      "wave-1"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w1-g09-written-calibration",
+    "question_family": "pilot-w1-g09-poetry-theme",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

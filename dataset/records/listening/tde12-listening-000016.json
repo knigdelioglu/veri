@@ -1,0 +1,123 @@
+{
+  "id": "tde12-listening-000016",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "pilot-w1-g12-listening-inference-b",
+    "prompt": "Şairin gece yazmayı tercih etmesinin temel nedenini ve bu tercihin yalnız sessizlikle ilgili olmadığını gösteren bir ayrıntıyı açıklayınız.",
+    "context": "Bir radyo söyleşisinde genç bir şair, geceleri yazmasının sessizlikten çok başka bir nedeni olduğunu söyler. Gündüzleri telefon, işler ve insanların beklentileri arasında kendi düşüncesinin sesini ayırt edemediğini; gece ise gün içinde aceleyle geçtiği duygulara geri dönebildiğini anlatır. “Gece benim için sessiz bir oda değil, yavaşlama izni.” der.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "pilot-w1-g12-listening-inference-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comprehension",
+        "name": "Temel nedeni anlama",
+        "description": "Konuşmacının temel nedenini veya amacını dinleme bağlamıyla uyumlu biçimde belirler.",
+        "max_score": 6,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel neden yanlış veya cevap yok."
+          },
+          {
+            "score": 3,
+            "description": "Doğru yöne işaret ediyor fakat temel nedeni eksik/örtük veriyor."
+          },
+          {
+            "score": 6,
+            "description": "Temel neden açık ve doğru biçimde belirlenmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "supporting_inference",
+        "name": "Destekleyici ayrıntı ve çıkarım",
+        "description": "Temel nedeni gösteren uygun bir ayrıntıyı seçer ve bunun anlamını açıklar.",
+        "max_score": 4,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun ayrıntı/çıkarım yok."
+          },
+          {
+            "score": 2,
+            "description": "Uygun ayrıntı var fakat anlam bağlantısı sınırlı."
+          },
+          {
+            "score": 4,
+            "description": "Uygun ayrıntı seçilmiş ve temel nedenle açıkça ilişkilendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Şair gece daha rahat düşündüğü için yazıyor. Gündüz iş ve insanların beklentisi var; gece kendi düşüncelerine dönüyor. “Yavaşlama izni” fikrini tam açıklamıyorum.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comprehension",
+        "score": 6.0,
+        "evidence": [
+          "Şair gece daha rahat düşündüğü için yazıyor."
+        ],
+        "justification": "Temel nedeni anlama için yanıt 6 puan düzeyindeki çıpayla uyumludur: Temel neden açık ve doğru biçimde belirlenmiş."
+      },
+      {
+        "criterion_id": "supporting_inference",
+        "score": 2.0,
+        "evidence": [
+          "Şair gece daha rahat düşündüğü için yazıyor.",
+          "Gündüz iş ve insanların beklentisi var; gece kendi düşüncelerine dönüyor."
+        ],
+        "justification": "Destekleyici ayrıntı ve çıkarım için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun ayrıntı var fakat anlam bağlantısı sınırlı."
+      }
+    ],
+    "total_score": 8.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-18",
+    "tags": [
+      "ana-neden",
+      "cikarim",
+      "dinleme",
+      "pilot",
+      "pilot-wave-1",
+      "synthetic",
+      "wave-1"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "pilot-w1-g12-listening-calibration",
+    "question_family": "pilot-w1-g12-listening-inference",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "high_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
