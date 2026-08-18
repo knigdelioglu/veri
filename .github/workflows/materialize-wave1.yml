@@ -6,6 +6,7 @@ on:
     paths:
       - dataset_factory/materialize_wave1.py
       - tests/test_materialize_wave1.py
+      - dataset_factory/materialize_wave1.trigger
       - .github/workflows/materialize-wave1.yml
   pull_request:
     branches: [main]
@@ -14,6 +15,7 @@ on:
       - tests/test_materialize_wave1.py
       - dataset_factory/materialize_wave1.trigger
       - .github/workflows/materialize-wave1.yml
+  workflow_dispatch:
 
 permissions:
   contents: write
