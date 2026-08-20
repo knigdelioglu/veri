@@ -1,0 +1,218 @@
+{
+  "id": "tde11-speaking-000240",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i1-w05-g11-speaking-evidence-b",
+    "prompt": "İki görüşü birlikte değerlendirerek bir edebî yorumu güçlü yapan kanıt türleri konusunda görüşünüzü savununuz.",
+    "context": "Kaynak A: Doğrudan metinsel ayrıntılar yorumun denetlenebilir olmasını sağlar. Kaynak B: Dönemin toplumsal bağlamı, metindeki bazı seçimlerin neden önemli olduğunu gösterebilir.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w05-g11-evidence-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Temel görüş",
+        "description": "Açık ve tutarlı bir görüş ortaya koyar.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Görüş yok veya belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Görüş kısmen açık."
+          },
+          {
+            "score": 2,
+            "description": "Görüş açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "source_a",
+        "name": "Kaynak A kullanımı",
+        "description": "Kaynak A'daki bilgiyi görüşüyle doğru ilişkilendirir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kaynak A yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Kaynak A sınırlı kullanılmış."
+          },
+          {
+            "score": 2,
+            "description": "Kaynak A doğru ve işlevsel kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "source_b",
+        "name": "Kaynak B kullanımı",
+        "description": "Kaynak B'deki bilgiyi görüşüyle doğru ilişkilendirir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kaynak B yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Kaynak B sınırlı kullanılmış."
+          },
+          {
+            "score": 2,
+            "description": "Kaynak B doğru ve işlevsel kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "counterargument",
+        "name": "Karşı görüş",
+        "description": "Alternatif görüşü adil biçimde temsil eder ve yanıtlar.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Karşı görüş yok."
+          },
+          {
+            "score": 1,
+            "description": "Karşı görüş var fakat yanıt sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Karşı görüş doğru temsil edilmiş ve yanıtlanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Düşünce örgüsü",
+        "description": "Konuşma metni açık bir sırayla ilerler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Örgü ciddi biçimde bozuk."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak izlenebilir."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Metinden kanıt göstermek daha önemlidir; bağlam da yardımcı olabilir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 2.0,
+        "evidence": [
+          "Metinden kanıt göstermek daha önemlidir; bağlam da yardımcı olabilir."
+        ],
+        "justification": "Temel görüş için yanıt 2 puan düzeyindeki çıpayla uyumludur: Görüş açık ve tutarlı."
+      },
+      {
+        "criterion_id": "source_a",
+        "score": 1.0,
+        "evidence": [
+          "Metinden kanıt göstermek daha önemlidir; bağlam da yardımcı olabilir."
+        ],
+        "justification": "Kaynak A kullanımı için yanıt 1 puan düzeyindeki çıpayla uyumludur: Kaynak A sınırlı kullanılmış."
+      },
+      {
+        "criterion_id": "source_b",
+        "score": 1.0,
+        "evidence": [
+          "Metinden kanıt göstermek daha önemlidir; bağlam da yardımcı olabilir."
+        ],
+        "justification": "Kaynak B kullanımı için yanıt 1 puan düzeyindeki çıpayla uyumludur: Kaynak B sınırlı kullanılmış."
+      },
+      {
+        "criterion_id": "counterargument",
+        "score": 1.0,
+        "evidence": [
+          "Metinden kanıt göstermek daha önemlidir; bağlam da yardımcı olabilir."
+        ],
+        "justification": "Karşı görüş için yanıt 1 puan düzeyindeki çıpayla uyumludur: Karşı görüş var fakat yanıt sınırlı."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 1.0,
+        "evidence": [
+          "Metinden kanıt göstermek daha önemlidir; bağlam da yardımcı olabilir."
+        ],
+        "justification": "Düşünce örgüsü için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak izlenebilir."
+      }
+    ],
+    "total_score": 6.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "argument",
+      "evidence",
+      "iteration-1",
+      "iteration-1-wave-05",
+      "speaking",
+      "synthetic",
+      "transcript-only",
+      "wave-05"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w05-g11-speaking-argument",
+    "question_family": "i1-w05-g11-speaking-evidence-hierarchy",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

@@ -1,0 +1,185 @@
+{
+  "id": "tde09-written-000234",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "i1-w05-g09-written-setting-a",
+    "prompt": "Parçada mekânın karakterin duygusunu nasıl güçlendirdiğini açıklayınız ve metinden kanıt gösteriniz.",
+    "context": "Sokağın iki yanındaki kepenkler çoktan kapanmıştı. Yağmur oluklardan taşarak kaldırıma vuruyor, tek açık dükkânın beyaz ışığı karşı duvarda titriyordu. Arda, elindeki anahtarı çevirip çevirmemekte kararsız kaldı.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w05-g09-setting-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Mekânın duygu, çatışma veya anlam üzerindeki temel işlevini doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Mekân ayrıntıları ile karakter ya da olay arasındaki ilişkiyi açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metinden uygun ve doğrudan kanıt kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı fakat ilişkili kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Parçada sokak, dükkân ve anahtar vardır.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Yorum için yanıt 0 puan düzeyindeki çıpayla uyumludur: Temel yorum yok veya yanlış."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Gerekçelendirme için yanıt 0 puan düzeyindeki çıpayla uyumludur: Gerekçe yok veya yanlış."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Kanıt için yanıt 0 puan düzeyindeki çıpayla uyumludur: Uygun kanıt yok."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Açıklık için yanıt 0 puan düzeyindeki çıpayla uyumludur: İfade ciddi biçimde belirsiz."
+      }
+    ],
+    "total_score": 0.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini karşılamıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "function",
+      "iteration-1",
+      "iteration-1-wave-05",
+      "setting",
+      "synthetic",
+      "wave-05",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w05-g09-written-close-reading",
+    "question_family": "i1-w05-g09-written-setting-function",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "blank_irrelevant",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
