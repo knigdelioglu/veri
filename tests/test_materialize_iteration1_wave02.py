@@ -12,6 +12,9 @@ class Iteration1Wave02MaterializationTest(unittest.TestCase):
     def setUpClass(cls):
         cls.root = Path(__file__).resolve().parents[1]
         cls.records = build_batch_records(cls.root, batch="iteration-1-wave-02")
+        cls.by_task_candidate = {}
+        for record in cls.records:
+            cls.by_task_candidate[(record["task"]["task_id"], record["student_response"]["text"])] = record
 
     def test_builds_100_unique_records(self):
         self.assertEqual(len(self.records), 100)
@@ -20,7 +23,7 @@ class Iteration1Wave02MaterializationTest(unittest.TestCase):
     def test_distribution(self):
         self.assertEqual(Counter(r["modality"] for r in self.records), Counter({"written":40,"speaking":20,"listening":40}))
         self.assertEqual(Counter(r["grade"] for r in self.records), Counter({9:20,10:20,11:20,12:40}))
-        self.assertEqual(Counter(r["metadata"]["response_quality"] for r in self.records), Counter({"full_correct":20,"high_partial":20,"mid_partial":20,"low_partial":15,"incorrect":10,"blank_irrelevant":5,"borderline":10}))
+        self.assertEqual(Counter(r["metadata"]["response_quality"] for r in self.records), Counter({"high_partial":23,"full_correct":20,"mid_partial":17,"low_partial":13,"incorrect":12,"borderline":10,"blank_irrelevant":5}))
 
     def test_special_case_counts(self):
         self.assertEqual(sum(bool(r["metadata"]["hard_case_types"]) for r in self.records), 18)
@@ -40,6 +43,26 @@ class Iteration1Wave02MaterializationTest(unittest.TestCase):
             self.assertIn(record["student_response"]["source"], {"raw_ocr","raw_stt"})
             self.assertTrue(record["student_response"].get("input_uncertainties"))
             self.assertGreaterEqual(record["metadata"]["review_count"],2)
+
+    def test_rewritten_quality_compensation_is_evidence_backed(self):
+        expected = {
+            "Başta neşeli ve hareketli bir ton var, sonda yalnızlık ağır basıyor. İnsan seslerinin kesilmesi ve salonun boşalması bu dönüşümü gösteriyor.": ("high_partial", [3,2,2,1]),
+            "Karakter yardım geldiği için memnun görünse de 'nihayet' ve 'bu kez' sözleri kırgınlık taşıyor. Teşekkürün altında gecikmiş desteğe yönelik sitem var.": ("high_partial", [3,2,2,1]),
+            "Tek bir yorum doğru olmalıdır; rubrik varsa bütün öğrenciler aynı sonucu söylemelidir. Kaynakların ne dediği önemli değildir.": ("incorrect", [1,0,0,1,0]),
+            "Konuşmacı iddiayı reddetmiyor; 'olabilir ama' diyerek koşullu kabul ediyor. Tek örneği yetersiz bulduğu için daha fazla veri istiyor.": ("high_partial", [3,2,2,1]),
+            "İki konuşmacı tamamen aynı yöntemi savunuyor; aralarında hiçbir görüş farkı yok.": ("incorrect", [0,1,0,1]),
+        }
+        found=0
+        for record in self.records:
+            text=record["student_response"]["text"]
+            if text not in expected:
+                continue
+            found += 1
+            quality, scores = expected[text]
+            self.assertEqual(record["metadata"]["response_quality"], quality)
+            self.assertEqual([x["score"] for x in record["gold_evaluation"]["criterion_results"]], scores)
+            self.assertGreaterEqual(record["metadata"]["review_count"], 2)
+        self.assertEqual(found, 5)
 
     def test_diagnostic_prose_not_in_student_text(self):
         forbidden=("OCR'da","STT'de","transkriptte","el yazısında","ses kaydında","olarak okun")
