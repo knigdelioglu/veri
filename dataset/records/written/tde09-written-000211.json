@@ -1,0 +1,208 @@
+{
+  "id": "tde09-written-000211",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "i1-w04-g09-written-imagery-a",
+    "prompt": "Parçadaki duyusal ayrıntıların atmosferi nasıl kurduğunu açıklayınız ve metinden kanıt gösteriniz.",
+    "context": "Pencerenin camında ince bir buğu vardı. Sokak lambasının sarı ışığı buğunun içinde dağılıyor, odadaki eşyaların kenarları silikleşiyordu. Dışarıdan yalnızca uzakta geçen bir trenin sesi geliyordu.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w04-g09-imagery-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "İmge veya duyusal ayrıntının metindeki temel işlevini doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "İmge ile atmosfer ya da duygu arasındaki ilişkiyi açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metinden uygun bir ayrıntıyı kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı fakat ilişkili kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Mekân biraz belirsiz ve yalnız görünüyor. Eşyaların kenarlarının silikleşmesi buna yardım ediyor.",
+    "source": "raw_ocr",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "ocr",
+        "span": "silikleşiyordu",
+        "candidates": [
+          "silikleşiyordu",
+          "belirginleşiyordu"
+        ],
+        "note": "Fiilin karşıt okunması öğrencinin temel atmosfer gerekçesini değiştiriyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 2.0,
+        "evidence": [
+          "Mekân biraz belirsiz ve yalnız görünüyor."
+        ],
+        "justification": "Yorum için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "Eşyaların kenarlarının silikleşmesi buna yardım ediyor."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Mekân biraz belirsiz ve yalnız görünüyor.",
+          "Eşyaların kenarlarının silikleşmesi buna yardım ediyor."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı fakat ilişkili kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Mekân biraz belirsiz ve yalnız görünüyor.",
+          "Eşyaların kenarlarının silikleşmesi buna yardım ediyor."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 6.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "OCR'daki 'silikleşiyordu/belirginleşiyordu' ayrımı atmosferin belirsizlik yönünü tersine çeviriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "atmosphere",
+      "imagery",
+      "iteration-1",
+      "iteration-1-wave-04",
+      "synthetic",
+      "wave-04",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w04-g09-written-close-reading",
+    "question_family": "i1-w04-g09-written-imagery-atmosphere",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [
+      "ocr_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
