@@ -1,0 +1,193 @@
+{
+  "id": "tde12-listening-000192",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i1-w03-g12-listening-concession-a",
+    "prompt": "Konuşmacının öneriye yaklaşımını ve koyduğu koşulu açıklayınız.",
+    "context": "Konuşmacı: 'Programı uzatmak yararlı olabilir; öğrenciler daha çok uygulama yapar. Yine de ek süreyi yalnız tekrar için kullanacaksak buna değmez.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w03-g12-concession-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "stance",
+        "name": "Temel tutum",
+        "description": "Konuşmacının temel tutumunu doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Tutum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "qualification",
+        "name": "Sınırlandırma",
+        "description": "Kabul, çekince veya koşulu doğru açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Sınırlandırma yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Duyulan içerikten uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı fakat ilgili kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Biraz destekliyor ama bir şartı var.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "stance",
+        "score": 1.0,
+        "evidence": [
+          "Biraz destekliyor ama bir şartı var."
+        ],
+        "justification": "Temel tutum için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı ve kısmen doğru."
+      },
+      {
+        "criterion_id": "qualification",
+        "score": 1.0,
+        "evidence": [
+          "Biraz destekliyor ama bir şartı var."
+        ],
+        "justification": "Sınırlandırma için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Biraz destekliyor ama bir şartı var."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı fakat ilgili kanıt."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Biraz destekliyor ama bir şartı var."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "concession",
+      "iteration-1",
+      "iteration-1-wave-03",
+      "listening",
+      "qualified-stance",
+      "synthetic",
+      "wave-03"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w03-g12-listening-stance",
+    "question_family": "i1-w03-g12-listening-concession",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

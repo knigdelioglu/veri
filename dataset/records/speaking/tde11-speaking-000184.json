@@ -1,0 +1,207 @@
+{
+  "id": "tde11-speaking-000184",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i1-w03-g11-speaking-counter-b",
+    "prompt": "'Edebî yorumlarda yazarın niyeti belirleyici olmalıdır.' görüşünü karşı örnekle tartışınız.",
+    "context": null,
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w03-g11-counterexample-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Temel görüş",
+        "description": "Açık ve tutarlı bir görüş ortaya koyar.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Görüş yok veya belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Görüş kısmen açık."
+          },
+          {
+            "score": 2,
+            "description": "Görüş açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Görüşünü nedenlerle açıklar.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı gerekçe."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve yeterli gerekçe."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "counterexample",
+        "name": "Karşı örnek",
+        "description": "Görüşünü sınayan uygun bir karşı örnek kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Karşı örnek yok veya ilgisiz."
+          },
+          {
+            "score": 1,
+            "description": "Kısmen uygun."
+          },
+          {
+            "score": 2,
+            "description": "Uygun ve işlevsel."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "qualification",
+        "name": "Sınırlandırma",
+        "description": "Görüşünün hangi koşullarda geçerli olduğunu belirtir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Sınırlandırma yok."
+          },
+          {
+            "score": 1,
+            "description": "Kısmi sınırlandırma."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve uygun sınırlandırma."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Düşünce örgüsü",
+        "description": "Konuşma metni açık bir sırayla ilerler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Örgü ciddi biçimde bozuk."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak izlenebilir."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Yazarlar eser yazar, okurlar da okur.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Temel görüş için yanıt 0 puan düzeyindeki çıpayla uyumludur: Görüş yok veya belirsiz."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Gerekçelendirme için yanıt 0 puan düzeyindeki çıpayla uyumludur: Gerekçe yok."
+      },
+      {
+        "criterion_id": "counterexample",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Karşı örnek için yanıt 0 puan düzeyindeki çıpayla uyumludur: Karşı örnek yok veya ilgisiz."
+      },
+      {
+        "criterion_id": "qualification",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Sınırlandırma için yanıt 0 puan düzeyindeki çıpayla uyumludur: Sınırlandırma yok."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Düşünce örgüsü için yanıt 0 puan düzeyindeki çıpayla uyumludur: Örgü ciddi biçimde bozuk."
+      }
+    ],
+    "total_score": 0.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini karşılamıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "counterexample",
+      "iteration-1",
+      "iteration-1-wave-03",
+      "speaking",
+      "synthetic",
+      "transcript-only",
+      "wave-03"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w03-g11-speaking-argument",
+    "question_family": "i1-w03-g11-speaking-counterexample",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "blank_irrelevant",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
