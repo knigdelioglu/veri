@@ -164,7 +164,7 @@
   },
   "metadata": {
     "status": "ai_verified",
-    "split": null,
+    "split": "validation",
     "created_at": "2026-08-18",
     "tags": [
       "evidence",

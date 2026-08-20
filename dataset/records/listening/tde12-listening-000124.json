@@ -159,7 +159,7 @@
   },
   "metadata": {
     "status": "ai_verified",
-    "split": null,
+    "split": "test",
     "created_at": "2026-08-18",
     "tags": [
       "listening",
