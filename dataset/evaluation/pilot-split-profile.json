@@ -1,0 +1,112 @@
+{
+  "schema_version": "1.0",
+  "seed": "tde-pilot-v1",
+  "total": 500,
+  "splits": {
+    "train": {
+      "records": 350,
+      "modality": {
+        "listening": 80,
+        "speaking": 85,
+        "written": 185
+      },
+      "grade": {
+        "10": 125,
+        "11": 85,
+        "12": 80,
+        "9": 60
+      },
+      "response_quality": {
+        "blank_irrelevant": 17,
+        "borderline": 36,
+        "full_correct": 70,
+        "high_partial": 70,
+        "incorrect": 34,
+        "low_partial": 53,
+        "mid_partial": 70
+      },
+      "needs_review": 36,
+      "hard_case": 66,
+      "adversarial": 14,
+      "dual_review": 107,
+      "question_families": [
+        "pilot-w1-g10-narrator-viewpoint",
+        "pilot-w1-g11-speaking-character",
+        "pilot-w2-g10-period-application",
+        "pilot-w2-g12-listening-speaker-purpose",
+        "pilot-w3-g09-figurative-ambiguity",
+        "pilot-w3-g10-irony-context-gap",
+        "pilot-w3-g11-speaking-counterargument-stt",
+        "pilot-w3-g12-listening-attitude-negation",
+        "pilot-w4-g09-written-ocr-evidence",
+        "pilot-w4-g10-written-attribution",
+        "pilot-w4-g11-speaking-interpretation",
+        "pilot-w4-g11-speaking-thesis",
+        "pilot-w4-g12-listening-attitude",
+        "pilot-w5-g09-written-synthesis",
+        "pilot-w5-g10-written-causality",
+        "pilot-w5-g10-written-paraphrase",
+        "pilot-w5-g12-listening-speaker-attribution"
+      ]
+    },
+    "validation": {
+      "records": 65,
+      "modality": {
+        "listening": 45,
+        "speaking": 20
+      },
+      "grade": {
+        "11": 20,
+        "12": 45
+      },
+      "response_quality": {
+        "blank_irrelevant": 4,
+        "borderline": 6,
+        "full_correct": 13,
+        "high_partial": 13,
+        "incorrect": 7,
+        "low_partial": 9,
+        "mid_partial": 13
+      },
+      "needs_review": 2,
+      "hard_case": 9,
+      "adversarial": 2,
+      "dual_review": 16,
+      "question_families": [
+        "pilot-w1-g12-listening-inference",
+        "pilot-w2-g11-speaking-argument",
+        "pilot-w3-g12-listening-speaker-relations"
+      ]
+    },
+    "test": {
+      "records": 85,
+      "modality": {
+        "speaking": 20,
+        "written": 65
+      },
+      "grade": {
+        "11": 20,
+        "9": 65
+      },
+      "response_quality": {
+        "blank_irrelevant": 4,
+        "borderline": 8,
+        "full_correct": 17,
+        "high_partial": 17,
+        "incorrect": 9,
+        "low_partial": 13,
+        "mid_partial": 17
+      },
+      "needs_review": 2,
+      "hard_case": 16,
+      "adversarial": 4,
+      "dual_review": 22,
+      "question_families": [
+        "pilot-w1-g09-poetry-theme",
+        "pilot-w2-g09-comparative-interpretation",
+        "pilot-w2-g09-figurative-function",
+        "pilot-w5-g11-speaking-source-argument"
+      ]
+    }
+  }
+}
