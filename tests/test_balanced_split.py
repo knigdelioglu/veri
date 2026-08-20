@@ -54,6 +54,10 @@ class BalancedSplitTest(unittest.TestCase):
             path = self.root / "dataset" / "records" / modality / f"{rid}.json"
             path.write_text(json.dumps(record, ensure_ascii=False), encoding="utf-8")
 
+    def _all_record_paths(self):
+        for modality in ("written", "speaking", "listening"):
+            yield from (self.root / "dataset" / "records" / modality).glob("*.json")
+
     def test_balanced_split_is_deterministic_group_safe_and_near_target(self):
         modalities = ["written", "speaking", "listening"]
         grades = [9, 10, 11, 12]
@@ -67,7 +71,6 @@ class BalancedSplitTest(unittest.TestCase):
         first = assign_balanced_splits(self.root, seed="balanced-test", rebalance=True)
         self.assertEqual(check_leakage_curated(self.root), [])
         self.assertEqual(sum(map(len, first.values())), 120)
-        # Component size is 10, so each requested target should be reachable within one component.
         self.assertLessEqual(abs(len(first["train"]) - 96), 10)
         self.assertLessEqual(abs(len(first["validation"]) - 12), 10)
         self.assertLessEqual(abs(len(first["test"]) - 12), 10)
@@ -81,6 +84,34 @@ class BalancedSplitTest(unittest.TestCase):
 
         second = assign_balanced_splits(self.root, seed="balanced-test", rebalance=True)
         self.assertEqual(first, second)
+
+    def test_existing_split_is_locked_without_rebalance_even_when_quality_changes(self):
+        modalities = ["written", "speaking", "listening"]
+        grades = [9, 10, 11, 12]
+        for family_index in range(12):
+            self._write_family(
+                family_index,
+                modality=modalities[family_index % len(modalities)],
+                grade=grades[family_index % len(grades)],
+            )
+
+        frozen = assign_balanced_splits(self.root, seed="freeze-test", rebalance=True)
+        split_by_id = {rid: split for split, ids in frozen.items() for rid in ids}
+
+        # Deliberately distort the quality distribution after freezing. A non-rebalance call
+        # must preserve component membership rather than optimizing against the new labels.
+        for path in self._all_record_paths():
+            record = json.loads(path.read_text(encoding="utf-8"))
+            split = record["metadata"]["split"]
+            record["metadata"]["response_quality"] = "full_correct" if split == "train" else "incorrect"
+            path.write_text(json.dumps(record, ensure_ascii=False), encoding="utf-8")
+
+        preserved = assign_balanced_splits(self.root, seed="freeze-test", rebalance=False)
+        self.assertEqual(frozen, preserved)
+        for split, ids in preserved.items():
+            for rid in ids:
+                self.assertEqual(split_by_id[rid], split)
+        self.assertEqual(check_leakage_curated(self.root), [])
 
 
 if __name__ == "__main__":
