@@ -128,27 +128,27 @@
     "criterion_results": [
       {
         "criterion_id": "claim",
-        "score": 2.0,
+        "score": 3.0,
         "evidence": [
           "Bence uyarlama serbest olabilir ama ana fikir korunmalıdır."
         ],
-        "justification": "Temel görüş için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+        "justification": "Temel görüş için ikinci AI değerlendirmesi 3/3 puan verdi. Rubrik çıpası: Doğru, açık ve tam."
       },
       {
         "criterion_id": "reasoning",
-        "score": 2.0,
-        "evidence": [
-          "Bence uyarlama serbest olabilir ama ana fikir korunmalıdır."
-        ],
-        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
-      },
-      {
-        "criterion_id": "counterargument",
         "score": 1.0,
         "evidence": [
           "Bence uyarlama serbest olabilir ama ana fikir korunmalıdır."
         ],
-        "justification": "Karşı görüş için yanıt 1 puan düzeyindeki çıpayla uyumludur: Bir sınırlı/uygun kanıt var."
+        "justification": "Gerekçelendirme için ikinci AI değerlendirmesi 1/3 puan verdi. Rubrik çıpası: Genel ve sınırlı."
+      },
+      {
+        "criterion_id": "counterargument",
+        "score": 0.0,
+        "evidence": [
+          "Bence uyarlama serbest olabilir ama ana fikir korunmalıdır."
+        ],
+        "justification": "Karşı görüş için ikinci AI değerlendirmesi 0/2 puan verdi. Rubrik çıpası: Uygun kanıt yok."
       },
       {
         "criterion_id": "organization",
@@ -156,14 +156,14 @@
         "evidence": [
           "Bence uyarlama serbest olabilir ama ana fikir korunmalıdır."
         ],
-        "justification": "Düşünce örgüsü için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+        "justification": "Düşünce örgüsü için ikinci AI değerlendirmesi 1/2 puan verdi. Rubrik çıpası: Genel olarak anlaşılır."
       }
     ],
-    "total_score": 6.0,
+    "total_score": 5.0,
     "max_score": 10.0,
     "needs_review": false,
     "review_reason": null,
-    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+    "overall_feedback": "Yanıt göreve kısmen yanıt veriyor; gerekçelendirme ve eksik ölçütler geliştirilmelidir."
   },
   "metadata": {
     "status": "ai_verified",
@@ -188,7 +188,7 @@
     "response_quality": "mid_partial",
     "hard_case_types": [],
     "adversarial": false,
-    "review_count": 1,
+    "review_count": 2,
     "adjudicated": false
   }
 }

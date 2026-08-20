@@ -136,11 +136,11 @@
     "criterion_results": [
       {
         "criterion_id": "claim",
-        "score": 2.0,
+        "score": 3.0,
         "evidence": [
           "Yalnız seçimlere bakmanın yeterli olmadığını savunuyorum."
         ],
-        "justification": "Temel görüş için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+        "justification": "Temel görüş için ikinci AI değerlendirmesi 3/3 puan verdi. Rubrik çıpası: Doğru, açık ve tam."
       },
       {
         "criterion_id": "reasoning",
@@ -148,7 +148,7 @@
         "evidence": [
           "Koşullar ve niyet de önemlidir; ancak karşı görüşe verdiğim cümle eksik kalmış."
         ],
-        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+        "justification": "Gerekçelendirme için ikinci AI değerlendirmesi 2/3 puan verdi. Rubrik çıpası: Uygun fakat geliştirilmemiş."
       },
       {
         "criterion_id": "counterargument",
@@ -156,16 +156,16 @@
         "evidence": [
           "Yalnız seçimlere bakmanın yeterli olmadığını savunuyorum."
         ],
-        "justification": "Karşı görüş için yanıt 1 puan düzeyindeki çıpayla uyumludur: Karşı görüş sınırlı ele alınmış."
+        "justification": "Karşı görüş için ikinci AI değerlendirmesi 1/2 puan verdi. Rubrik çıpası: Karşı görüş sınırlı ele alınmış."
       },
       {
         "criterion_id": "organization",
-        "score": 2.0,
+        "score": 1.0,
         "evidence": [
           "Yalnız seçimlere bakmanın yeterli olmadığını savunuyorum.",
           "Koşullar ve niyet de önemlidir; ancak karşı görüşe verdiğim cümle eksik kalmış."
         ],
-        "justification": "Düşünce örgüsü için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+        "justification": "Düşünce örgüsü için ikinci AI değerlendirmesi 1/2 puan verdi. Rubrik çıpası: Genel olarak anlaşılır."
       }
     ],
     "total_score": 7.0,

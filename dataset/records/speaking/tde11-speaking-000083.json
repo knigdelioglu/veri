@@ -139,11 +139,11 @@
     "criterion_results": [
       {
         "criterion_id": "claim",
-        "score": 1.0,
+        "score": 3.0,
         "evidence": [
           "Uyarlama değişebilir ama ana çatışmayı korumalı."
         ],
-        "justification": "Temel görüş için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı ve kısmen doğru."
+        "justification": "Temel görüş için ikinci AI değerlendirmesi 3/3 puan verdi. Rubrik çıpası: Doğru, açık ve tam."
       },
       {
         "criterion_id": "reasoning",
@@ -151,15 +151,15 @@
         "evidence": [
           "Uyarlama değişebilir ama ana çatışmayı korumalı."
         ],
-        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı."
+        "justification": "Gerekçelendirme için ikinci AI değerlendirmesi 1/3 puan verdi. Rubrik çıpası: Genel ve sınırlı."
       },
       {
         "criterion_id": "counterargument",
-        "score": 1.0,
+        "score": 0.0,
         "evidence": [
           "Uyarlama değişebilir ama ana çatışmayı korumalı."
         ],
-        "justification": "Karşı görüş için yanıt 1 puan düzeyindeki çıpayla uyumludur: Bir sınırlı/uygun kanıt var."
+        "justification": "Karşı görüş için ikinci AI değerlendirmesi 0/2 puan verdi. Rubrik çıpası: Uygun kanıt yok."
       },
       {
         "criterion_id": "organization",
@@ -167,10 +167,10 @@
         "evidence": [
           "Uyarlama değişebilir ama ana çatışmayı korumalı."
         ],
-        "justification": "Düşünce örgüsü için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+        "justification": "Düşünce örgüsü için ikinci AI değerlendirmesi 1/2 puan verdi. Rubrik çıpası: Genel olarak anlaşılır."
       }
     ],
-    "total_score": 4.0,
+    "total_score": 5.0,
     "max_score": 10.0,
     "needs_review": true,
     "review_reason": "STT'deki negasyon uyarlama ölçütünü tersine çeviriyor; ses olmadan claim/reasoning puanı kesinleştirilemez.",

@@ -132,7 +132,7 @@
         "evidence": [
           "Uyarlama bazı şeyleri değiştirebilir ama temel çatışmayı korumalıdır."
         ],
-        "justification": "Temel görüş için yanıt 3 puan düzeyindeki çıpayla uyumludur: Doğru, açık ve tam."
+        "justification": "Temel görüş için ikinci AI değerlendirmesi 3/3 puan verdi. Rubrik çıpası: Doğru, açık ve tam."
       },
       {
         "criterion_id": "reasoning",
@@ -140,31 +140,31 @@
         "evidence": [
           "Karşı görüş olarak sadakatin önemli olduğunu kabul ediyorum."
         ],
-        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+        "justification": "Gerekçelendirme için ikinci AI değerlendirmesi 2/3 puan verdi. Rubrik çıpası: Uygun fakat geliştirilmemiş."
       },
       {
         "criterion_id": "counterargument",
-        "score": 2.0,
+        "score": 1.0,
         "evidence": [
           "Uyarlama bazı şeyleri değiştirebilir ama temel çatışmayı korumalıdır."
         ],
-        "justification": "Karşı görüş için yanıt 2 puan düzeyindeki çıpayla uyumludur: Kanıt doğrudan ve yeterli."
+        "justification": "Karşı görüş için ikinci AI değerlendirmesi 1/2 puan verdi. Rubrik çıpası: Bir sınırlı/uygun kanıt var."
       },
       {
         "criterion_id": "organization",
-        "score": 1.0,
+        "score": 2.0,
         "evidence": [
           "Uyarlama bazı şeyleri değiştirebilir ama temel çatışmayı korumalıdır.",
           "Film ile roman aynı araçları kullanmaz."
         ],
-        "justification": "Düşünce örgüsü için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+        "justification": "Düşünce örgüsü için ikinci AI değerlendirmesi 2/2 puan verdi. Rubrik çıpası: Açık ve tutarlı."
       }
     ],
     "total_score": 8.0,
     "max_score": 10.0,
     "needs_review": false,
     "review_reason": null,
-    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+    "overall_feedback": "Yanıtın ana yönü güçlü; bazı ölçütlerde sınırlı eksikler bulunuyor."
   },
   "metadata": {
     "status": "ai_verified",
@@ -189,7 +189,7 @@
     "response_quality": "high_partial",
     "hard_case_types": [],
     "adversarial": false,
-    "review_count": 1,
+    "review_count": 2,
     "adjudicated": false
   }
 }

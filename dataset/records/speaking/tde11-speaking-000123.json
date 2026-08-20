@@ -128,23 +128,23 @@
     "criterion_results": [
       {
         "criterion_id": "claim",
-        "score": 0.0,
+        "score": 3.0,
         "evidence": [],
-        "justification": "Temel görüş için yanıt 0 puan düzeyindeki çıpayla uyumludur: Görüş yok veya yanlış."
+        "justification": "Temel görüş için ikinci AI değerlendirmesi 3/3 puan verdi. Rubrik çıpası: Doğru, açık ve tam."
       },
       {
         "criterion_id": "reasoning",
-        "score": 1.0,
+        "score": 0.0,
         "evidence": [
           "Karakter sadece yaptığı seçimdir; nedenleri ve şartları hiçbir zaman önemli değildir."
         ],
-        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı."
+        "justification": "Gerekçelendirme için ikinci AI değerlendirmesi 0/3 puan verdi. Rubrik çıpası: Gerekçe yok veya yanlış."
       },
       {
         "criterion_id": "counterargument",
         "score": 0.0,
         "evidence": [],
-        "justification": "Karşı görüş için yanıt 0 puan düzeyindeki çıpayla uyumludur: Karşı görüş yok veya yanlış."
+        "justification": "Karşı görüş için ikinci AI değerlendirmesi 0/2 puan verdi. Rubrik çıpası: Karşı görüş yok veya yanlış."
       },
       {
         "criterion_id": "organization",
@@ -152,14 +152,14 @@
         "evidence": [
           "Karakter sadece yaptığı seçimdir; nedenleri ve şartları hiçbir zaman önemli değildir."
         ],
-        "justification": "Düşünce örgüsü için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+        "justification": "Düşünce örgüsü için ikinci AI değerlendirmesi 1/2 puan verdi. Rubrik çıpası: Genel olarak anlaşılır."
       }
     ],
-    "total_score": 2.0,
+    "total_score": 4.0,
     "max_score": 10.0,
     "needs_review": false,
     "review_reason": null,
-    "overall_feedback": "Yanıtta sınırlı doğru unsurlar var; rubriğin temel beklentileri büyük ölçüde karşılanmıyor."
+    "overall_feedback": "Yanıt göreve kısmen yanıt veriyor; gerekçelendirme ve eksik ölçütler geliştirilmelidir."
   },
   "metadata": {
     "status": "ai_verified",
@@ -182,10 +182,10 @@
     "question_family": "pilot-w5-g11-speaking-source-argument",
     "provenance": "synthetic",
     "verification_source": "ai",
-    "response_quality": "incorrect",
+    "response_quality": "low_partial",
     "hard_case_types": [],
     "adversarial": false,
-    "review_count": 1,
+    "review_count": 2,
     "adjudicated": false
   }
 }
