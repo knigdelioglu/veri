@@ -1,0 +1,196 @@
+{
+  "id": "tde09-written-000151",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "i1-g09-written-sequence-a",
+    "prompt": "Parçada olay sırasını açıklayınız ve karakterin mektubu neden sakladığına ilişkin savunulabilir bir gerekçe veriniz.",
+    "context": "Elif mektubu sabah yazdı. Öğleye doğru postaneye gitmek için evden çıktı; kapıda yıllardır görmediği teyzesini görünce durdu. Akşam olduğunda mektubu çekmecesine geri koydu.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-g09-sequence-motive-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "sequence",
+        "name": "Olay sırası",
+        "description": "Olaylar arasındaki zaman/sıra ilişkisini doğru kurar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Olay sırası yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı veya karışık sıra."
+          },
+          {
+            "score": 2,
+            "description": "Ana sıra doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Olay sırası açık ve doğru."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "motive",
+        "name": "Karakter gerekçesi",
+        "description": "Karakter davranışının olası gerekçesini metinle uyumlu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yanlış/metin dışı."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı gerekçe."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik gerekçe."
+          },
+          {
+            "score": 3,
+            "description": "Metinle uyumlu ve iyi gerekçelendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Sıra veya gerekçeyi metinsel ayrıntıyla destekler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve çelişkisizdir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi belirsizlik/çelişki."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Mektubu yazdıktan sonra dışarı çıkıyor, akşam çekmeceye koyuyor. Teyzesinden dolayı vazgeçmiş olabilir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "sequence",
+        "score": 2.0,
+        "evidence": [
+          "Mektubu yazdıktan sonra dışarı çıkıyor, akşam çekmeceye koyuyor."
+        ],
+        "justification": "Olay sırası için yanıt 2 puan düzeyindeki çıpayla uyumludur: Ana sıra doğru fakat eksik."
+      },
+      {
+        "criterion_id": "motive",
+        "score": 2.0,
+        "evidence": [
+          "Mektubu yazdıktan sonra dışarı çıkıyor, akşam çekmeceye koyuyor."
+        ],
+        "justification": "Karakter gerekçesi için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat eksik gerekçe."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Mektubu yazdıktan sonra dışarı çıkıyor, akşam çekmeceye koyuyor.",
+          "Teyzesinden dolayı vazgeçmiş olabilir."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı kanıt."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Mektubu yazdıktan sonra dışarı çıkıyor, akşam çekmeceye koyuyor.",
+          "Teyzesinden dolayı vazgeçmiş olabilir."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 6.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "iteration-1",
+      "iteration-1-wave-01",
+      "motive",
+      "narrative",
+      "sequence",
+      "synthetic",
+      "wave-01",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-g09-written-close-reading-b",
+    "question_family": "i1-g09-written-sequence-motive",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

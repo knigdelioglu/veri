@@ -1,38 +1,108 @@
 {
-  "schema_version":"candidate-batch-manifest-1.0",
-  "batch_id":"iteration-1-wave-01",
-  "created_at":"2026-08-20",
-  "status":"generated_pending_ai_review",
-  "candidate_records":100,
-  "canonical_records":0,
-  "ai_verified_records_pending_materialization":100,
-  "teacher_verified_records":0,
-  "provenance":"synthetic",
-  "focus":"Iteration 1 expansion: new close-reading, comparative, speaking interpretation and qualified-listening decision surfaces",
-  "distribution":{
-    "modality":{"written":60,"speaking":20,"listening":20},
-    "grade":{"9":40,"10":20,"11":20,"12":20},
-    "response_quality":{"full_correct":20,"high_partial":20,"mid_partial":20,"low_partial":15,"incorrect":10,"blank_irrelevant":5,"borderline":10},
-    "hard_case_records":18,
-    "adversarial_records":4,
-    "genuine_needs_review_records":8,
-    "second_pass_ai_review_records":25
+  "schema_version": "candidate-batch-manifest-1.0",
+  "batch_id": "iteration-1-wave-01",
+  "created_at": "2026-08-20",
+  "status": "materialized_ai_verified",
+  "candidate_records": 100,
+  "canonical_records": 100,
+  "ai_verified_records_pending_materialization": 0,
+  "teacher_verified_records": 0,
+  "provenance": "synthetic",
+  "focus": "Iteration 1 expansion: new close-reading, comparative, speaking interpretation and qualified-listening decision surfaces",
+  "distribution": {
+    "modality": {
+      "written": 60,
+      "speaking": 20,
+      "listening": 20
+    },
+    "grade": {
+      "9": 40,
+      "10": 20,
+      "11": 20,
+      "12": 20
+    },
+    "response_quality": {
+      "full_correct": 20,
+      "high_partial": 20,
+      "mid_partial": 20,
+      "low_partial": 15,
+      "incorrect": 10,
+      "blank_irrelevant": 5,
+      "borderline": 10
+    },
+    "hard_case_records": 18,
+    "adversarial_records": 4,
+    "genuine_needs_review_records": 8,
+    "second_pass_ai_review_records": 25
   },
-  "coverage":{
-    "question_families":5,
-    "exact_tasks":10,
-    "answers_per_question_family":20,
-    "answers_per_exact_task":10
+  "coverage": {
+    "question_families": 5,
+    "exact_tasks": 10,
+    "answers_per_question_family": 20,
+    "answers_per_exact_task": 10
   },
-  "families":[
-    {"file":"g09-written-image-inference.json","grade":9,"modality":"written","record_id_start":126},
-    {"file":"g09-written-sequence-motive.json","grade":9,"modality":"written","record_id_start":146},
-    {"file":"g10-written-comparative-effect.json","grade":10,"modality":"written","record_id_start":151},
-    {"file":"g11-speaking-interpretive-defense.json","grade":11,"modality":"speaking","record_id_start":126},
-    {"file":"g12-listening-qualified-stance.json","grade":12,"modality":"listening","record_id_start":126}
+  "families": [
+    {
+      "file": "g09-written-image-inference.json",
+      "grade": 9,
+      "modality": "written",
+      "record_id_start": 126
+    },
+    {
+      "file": "g09-written-sequence-motive.json",
+      "grade": 9,
+      "modality": "written",
+      "record_id_start": 146
+    },
+    {
+      "file": "g10-written-comparative-effect.json",
+      "grade": 10,
+      "modality": "written",
+      "record_id_start": 151
+    },
+    {
+      "file": "g11-speaking-interpretive-defense.json",
+      "grade": 11,
+      "modality": "speaking",
+      "record_id_start": 126
+    },
+    {
+      "file": "g12-listening-qualified-stance.json",
+      "grade": 12,
+      "modality": "listening",
+      "record_id_start": 126
+    }
   ],
-  "ai_review_overrides":"recalibration/ai-review-overrides.json",
-  "promotion_policy":"candidate -> rubric-first independent AI pass -> input-uncertainty separation -> ai_verified canonical",
-  "blocking_issue":null,
-  "next_action":"Run batch regressions, materialize 100 records, validate 600 canonical records, leakage and Iteration 1 quota."
+  "ai_review_overrides": "recalibration/ai-review-overrides.json",
+  "promotion_policy": "candidate -> rubric-first independent AI pass -> input-uncertainty separation -> ai_verified canonical",
+  "blocking_issue": null,
+  "next_action": "Run veri check and cumulative pilot quota review before producing the next wave.",
+  "ai_verified_records": 100,
+  "canonical_materialized_at": "2026-08-18",
+  "canonical_distribution": {
+    "modality": {
+      "listening": 20,
+      "speaking": 20,
+      "written": 60
+    },
+    "grade": {
+      "10": 20,
+      "11": 20,
+      "12": 20,
+      "9": 40
+    },
+    "response_quality": {
+      "blank_irrelevant": 5,
+      "borderline": 10,
+      "full_correct": 20,
+      "high_partial": 20,
+      "incorrect": 10,
+      "low_partial": 15,
+      "mid_partial": 20
+    },
+    "hard_case_records": 18,
+    "adversarial_records": 4,
+    "needs_review_records": 8,
+    "second_pass_ai_review_records": 25
+  }
 }

@@ -1,0 +1,196 @@
+{
+  "id": "tde10-written-000151",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "i1-g10-written-compare-a",
+    "prompt": "A ve B parçalarının zaman duygusunu nasıl farklı kurduğunu karşılaştırınız; her iki parçadan birer ayrıntı kullanınız.",
+    "context": "A: 'Saat, odanın içinde ağır bir taş gibi ilerledi; her vuruş akşamı biraz daha yaklaştırdı.' B: 'Dakikalar pencerenin önünden koşarak geçti; güneş bir anda karşı çatıya sıçradı.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-g10-comparative-effect-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "comparison",
+        "name": "Karşılaştırma",
+        "description": "İki metin arasındaki temel benzerlik/farkı doğru kurar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Karşılaştırma yanlış veya yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek yönlü/sınırlı karşılaştırma."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik karşılaştırma."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve dengeli karşılaştırma."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "effect",
+        "name": "Biçim ve etki",
+        "description": "Seçilen dil/biçim özelliğinin duygu veya anlam üzerindeki etkisini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Etki açıklanmamış/yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Biçim-anlam ilişkisi açık ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Her iki metinden uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek metinden veya sınırlı kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Her iki metinden doğrudan kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık, düzenli ve çelişkisizdir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi belirsizlik/çelişki."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "A parçasında zaman yavaş ve ağır hissediliyor; saatin 'ağır bir taş gibi' ilerlemesi bekleyişi uzatıyor. B'de ise dakikaların 'koşarak' geçmesi zamanın hızlandığını hissettiriyor. İki parça aynı kavramı karşıt hareket imgeleriyle kuruyor.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "comparison",
+        "score": 3.0,
+        "evidence": [
+          "A parçasında zaman yavaş ve ağır hissediliyor; saatin 'ağır bir taş gibi' ilerlemesi bekleyişi uzatıyor."
+        ],
+        "justification": "Karşılaştırma için yanıt 3 puan düzeyindeki çıpayla uyumludur: Açık ve dengeli karşılaştırma."
+      },
+      {
+        "criterion_id": "effect",
+        "score": 3.0,
+        "evidence": [
+          "İki parça aynı kavramı karşıt hareket imgeleriyle kuruyor."
+        ],
+        "justification": "Biçim ve etki için yanıt 3 puan düzeyindeki çıpayla uyumludur: Biçim-anlam ilişkisi açık ve yeterli."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "A parçasında zaman yavaş ve ağır hissediliyor; saatin 'ağır bir taş gibi' ilerlemesi bekleyişi uzatıyor.",
+          "B'de ise dakikaların 'koşarak' geçmesi zamanın hızlandığını hissettiriyor."
+        ],
+        "justification": "Kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Her iki metinden doğrudan kanıt."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "A parçasında zaman yavaş ve ağır hissediliyor; saatin 'ağır bir taş gibi' ilerlemesi bekleyişi uzatıyor.",
+          "B'de ise dakikaların 'koşarak' geçmesi zamanın hızlandığını hissettiriyor."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 10.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "comparison",
+      "form-function",
+      "iteration-1",
+      "iteration-1-wave-01",
+      "synthetic",
+      "tone",
+      "wave-01",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-g10-written-comparison-a",
+    "question_family": "i1-g10-written-comparative-effect",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
