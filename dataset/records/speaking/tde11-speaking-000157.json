@@ -1,0 +1,218 @@
+{
+  "id": "tde11-speaking-000157",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i1-w02-g11-speaking-source-b",
+    "prompt": "İki görüşü birlikte değerlendirerek edebî yorumlarda ortak ölçüt ile yorum çeşitliliği arasındaki ilişkiyi tartışınız.",
+    "context": "Kaynak A: Ortak değerlendirme ölçütleri tutarlılığı artırır. Kaynak B: Farklı okur deneyimleri aynı metinde savunulabilir farklı anlamlar üretebilir.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w02-g11-source-synthesis-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Temel görüş",
+        "description": "Açık ve tutarlı bir görüş ortaya koyar.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Görüş yok veya belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Görüş kısmen açık."
+          },
+          {
+            "score": 2,
+            "description": "Görüş açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "source_a",
+        "name": "Kaynak A kullanımı",
+        "description": "Kaynak A'daki bilgiyi görüşüyle doğru ilişkilendirir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kaynak A yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Kaynak A sınırlı kullanılmış."
+          },
+          {
+            "score": 2,
+            "description": "Kaynak A doğru ve işlevsel kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "source_b",
+        "name": "Kaynak B kullanımı",
+        "description": "Kaynak B'deki bilgiyi görüşüyle doğru ilişkilendirir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kaynak B yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Kaynak B sınırlı kullanılmış."
+          },
+          {
+            "score": 2,
+            "description": "Kaynak B doğru ve işlevsel kullanılmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "counterargument",
+        "name": "Karşı görüş",
+        "description": "Alternatif görüşü adil biçimde temsil eder ve yanıtlar.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Karşı görüş yok."
+          },
+          {
+            "score": 1,
+            "description": "Karşı görüş var fakat yanıt sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Karşı görüş doğru temsil edilmiş ve yanıtlanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Düşünce örgüsü",
+        "description": "Konuşma metni açık bir sırayla ilerler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Örgü ciddi biçimde bozuk."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak izlenebilir."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Bence rubrik ortak olmalı fakat yorum tek olmak zorunda değil. A değerlendirme tutarlılığını, B yorum çeşitliliğini savunuyor. Bu iki amaç birlikte korunabilir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 2.0,
+        "evidence": [
+          "Bence rubrik ortak olmalı fakat yorum tek olmak zorunda değil."
+        ],
+        "justification": "Temel görüş için yanıt 2 puan düzeyindeki çıpayla uyumludur: Görüş açık ve tutarlı."
+      },
+      {
+        "criterion_id": "source_a",
+        "score": 2.0,
+        "evidence": [
+          "Bence rubrik ortak olmalı fakat yorum tek olmak zorunda değil."
+        ],
+        "justification": "Kaynak A kullanımı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Kaynak A doğru ve işlevsel kullanılmış."
+      },
+      {
+        "criterion_id": "source_b",
+        "score": 2.0,
+        "evidence": [
+          "Bence rubrik ortak olmalı fakat yorum tek olmak zorunda değil."
+        ],
+        "justification": "Kaynak B kullanımı için yanıt 2 puan düzeyindeki çıpayla uyumludur: Kaynak B doğru ve işlevsel kullanılmış."
+      },
+      {
+        "criterion_id": "counterargument",
+        "score": 2.0,
+        "evidence": [
+          "Bence rubrik ortak olmalı fakat yorum tek olmak zorunda değil."
+        ],
+        "justification": "Karşı görüş için yanıt 2 puan düzeyindeki çıpayla uyumludur: Karşı görüş doğru temsil edilmiş ve yanıtlanmış."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 2.0,
+        "evidence": [
+          "Bence rubrik ortak olmalı fakat yorum tek olmak zorunda değil.",
+          "A değerlendirme tutarlılığını, B yorum çeşitliliğini savunuyor."
+        ],
+        "justification": "Düşünce örgüsü için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 10.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini tam olarak karşılıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "iteration-1",
+      "iteration-1-wave-02",
+      "source-synthesis",
+      "speaking",
+      "synthetic",
+      "transcript-only",
+      "wave-02"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w02-g11-speaking-synthesis",
+    "question_family": "i1-w02-g11-speaking-source-synthesis",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "full_correct",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
