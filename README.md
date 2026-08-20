@@ -59,9 +59,11 @@ canonical record
     ↓
 quality + production gate
     ↓
-exact-task-aware group split
+balanced exact-task-aware group split
     ↓
 curated SFT / benchmark
+    ↓
+frozen validation/test + model-agnostic evaluation
 ```
 
 `dataset/records/` veri setinin **single source of truth** alanıdır. `exports/` yeniden üretilebilir türevleri içerir.
@@ -112,6 +114,8 @@ Ayrıntılar: [`docs/DATA_PRODUCTION_STRATEGY.md`](docs/DATA_PRODUCTION_STRATEGY
 
 Makine tarafından okunan hedefler: [`config/data-production.v1.json`](config/data-production.v1.json).
 
+500 kayıtlık frozen pilotun fine-tune ve evaluation sözleşmesi: [`docs/PILOT_FINE_TUNE_PROTOCOL.md`](docs/PILOT_FINE_TUNE_PROTOCOL.md).
+
 ## Hızlı başlangıç
 
 Python 3.11+:
@@ -122,16 +126,17 @@ source .venv/bin/activate
 python -m pip install -e .
 ```
 
-Pilot üretimde:
+Pilot üretim/evaluation akışında:
 
 ```bash
 veri quota --phase pilot
 veri next-batch --phase pilot --count 100
 veri new
 veri check
-veri split
+veri split --seed tde-pilot-v1
 veri check
-veri export-sft
+veri export-sft --split all
+veri evaluate predictions-validation.jsonl --split validation --output reports/validation.json
 ```
 
 ## Dataset Factory komutları
@@ -198,7 +203,7 @@ veri next-batch --phase pilot --count 100
 
 ### `veri split`
 
-Verified kayıtları varsayılan `80/10/10` train/validation/test oranıyla ayırır. Satır bazlı rastgele split yapmaz.
+Verified kayıtları **dengeli ve grup-bilinçli** biçimde train/validation/test'e ayırır. Satır bazlı rastgele split yapmaz.
 
 Aşağıdaki alanlardan **herhangi birini** paylaşan kayıtlar aynı bağlı bileşende tutulur:
 
@@ -210,6 +215,18 @@ OR question_family
 ```
 
 Böylece birebir aynı soru, yakın soru varyantı, aynı sınav formu veya aynı anonim öğrenci bağlantısı train/test arasında bölünemez. Benchmark da aynı dört anahtarla eğitim split'lerinden izole edilir.
+
+Splitter yalnız toplam oranı değil; modalite, sınıf ve cevap-profili temsilini de dengeler. Daha önce split atanmış bağlı bileşenler varsayılan olarak **frozen** kabul edilir. Bu nedenle yeni veri eklendiğinde mevcut pilot validation/test aileleri kendiliğinden başka split'e taşınmaz.
+
+Tüm mevcut splitleri bilinçli olarak yeniden optimize etmek gerekirse açıkça:
+
+```bash
+veri split --seed yeni-deney --rebalance
+```
+
+kullanılır. `--rebalance` mevcut test setini de değiştirebileceği için frozen evaluation üzerinde rutin komut değildir.
+
+500 kayıtlık pilotta family granülaritesi nedeniyle frozen dağılım 380/60/60'tır; validation ve test ayrı ayrı 20 written + 20 speaking + 20 listening içerir.
 
 ### `veri export-sft`
 
@@ -230,6 +247,50 @@ student_response
 ```
 
 Üretim etiketleri ve öğrenci/grup metadata'sı modele verilmez. Export metadata'sında `verification_source` korunur; böylece AI-verified ve ilerideki human-verified veri analizde ayrılabilir.
+
+JSONL exportlar yeniden üretilebilir olduğu için Git'e alınmaz. CI aynı dosyaları üretip pilot için `pilot-sft-v1` workflow artifact'i olarak yayınlar.
+
+### `veri evaluate`
+
+Bir modelin tahmin JSONL'sini frozen canonical split ile karşılaştırır:
+
+```bash
+veri evaluate predictions-validation.jsonl \
+  --split validation \
+  --output reports/validation.json
+```
+
+Minimal prediction satırı:
+
+```json
+{
+  "id": "tde11-speaking-000123",
+  "criterion_scores": {
+    "claim": 3,
+    "reasoning": 0,
+    "counterargument": 0,
+    "organization": 1
+  },
+  "needs_review": false
+}
+```
+
+Evaluator varsayılan olarak strict'tir: splitteki her kayıt için tam bir prediction ister; duplicate, eksik veya split-dışı ID'yi reddeder. Rubrik criterion ID'leri eksiksiz/fazlasız olmalı ve puanlar criterion aralığında kalmalıdır.
+
+Raporlanan ana metrikler:
+
+- criterion exact agreement,
+- criterion ±1 agreement,
+- criterion MAE,
+- toplam puan exact/MAE,
+- normalize toplam MAE,
+- `needs_review` precision/recall/F1,
+- modality/grade/response-quality/question-family kırılımları,
+- hard-case, adversarial ve hard-case-type slice'ları.
+
+Gold `needs_review=true` örneklerde criterion puanları provisional olduğu için bu kayıtlar score-MAE/agreement hesabına girmez; buna karşılık `needs_review` precision/recall hesabına girer.
+
+Prediction sözleşmesi: [`schemas/prediction-record.schema.json`](schemas/prediction-record.schema.json).
 
 ## `needs_review` için kritik ayrım
 
@@ -288,8 +349,10 @@ Bunlar modelin yalnız anahtar kelime veya cevap uzunluğuna göre puan vermesin
 │   └── data-production.v1.json
 ├── dataset_factory/
 │   ├── __init__.py
+│   ├── balanced_split.py
 │   ├── cli.py
 │   ├── core.py
+│   ├── evaluate_predictions.py
 │   └── production.py
 ├── docs/
 │   ├── DATA_CONTRACT.md
@@ -297,12 +360,15 @@ Bunlar modelin yalnız anahtar kelime veya cevap uzunluğuna göre puan vermesin
 │   ├── DATA_QUALITY.md
 │   ├── DATASET_FACTORY.md
 │   ├── DATA_PRODUCTION_STRATEGY.md
-│   └── PILOT_500_PRODUCTION_PLAN.md
+│   ├── PILOT_500_PRODUCTION_PLAN.md
+│   └── PILOT_FINE_TUNE_PROTOCOL.md
 ├── schemas/
 │   ├── canonical-record.schema.json
+│   ├── prediction-record.schema.json
 │   └── rubric.schema.json
 ├── dataset/
 │   ├── candidates/
+│   ├── evaluation/
 │   ├── records/
 │   │   ├── written/
 │   │   ├── speaking/
@@ -362,7 +428,7 @@ Ham ses, PDF, fotoğraf ve taranmış kâğıtlar varsayılan olarak Git'e alın
 
 ## Başarı ölçütü
 
-Başarı yalnız toplam puan eşleşmesi değildir. Benchmarklarda mümkün olduğunca:
+Başarı yalnız toplam puan eşleşmesi değildir. Frozen validation/test üzerinde mümkün olduğunca:
 
 - criterion agreement,
 - toplam/ölçüt puan sapması,
@@ -373,4 +439,6 @@ Başarı yalnız toplam puan eşleşmesi değildir. Benchmarklarda mümkün oldu
 
 izlenmelidir.
 
-Bu depo veri setini, üretim stratejisini ve kalite araçlarını tutar. Model mimarisi, quantization yöntemi veya belirli fine-tuning framework'ü canonical veri sözleşmesinin parçası değildir.
+İlk pilotta test seti model/prompt/checkpoint seçimi için kullanılmaz. Önce train üzerinde fine-tune edilir, validation ile tek konfigürasyon seçilir, test yalnız final değerlendirmede açılır. Ayrıntılı deney sözleşmesi [`docs/PILOT_FINE_TUNE_PROTOCOL.md`](docs/PILOT_FINE_TUNE_PROTOCOL.md) dosyasındadır.
+
+Bu depo veri setini, üretim stratejisini ve kalite/evaluation araçlarını tutar. Model mimarisi, quantization yöntemi veya belirli fine-tuning framework'ü canonical veri sözleşmesinin parçası değildir.
