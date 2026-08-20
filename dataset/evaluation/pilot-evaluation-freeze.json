@@ -126,6 +126,8 @@
     "validation": 60,
     "test": 60
   },
+  "sft_exports_versioned_in_git": false,
+  "sft_artifact_name": "pilot-sft-v1",
   "evaluation_review": {
     "review_id": "pilot-eval-ai-pass-2",
     "validation_dual_reviewed": 60,
@@ -135,6 +137,7 @@
   "notes": [
     "Effective split is 76/12/12 because 20-25-record connected question-family components are never split across train/validation/test.",
     "Evaluation prioritizes modality representation: validation and test each contain 20 written, 20 speaking, and 20 listening records.",
-    "Five response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints."
+    "Five response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints.",
+    "Generated JSONL exports are intentionally ignored by Git; CI regenerates and uploads them as the pilot-sft-v1 workflow artifact."
   ]
 }
