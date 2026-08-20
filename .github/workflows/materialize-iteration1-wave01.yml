@@ -1,0 +1,86 @@
+name: Materialize Iteration 1 Wave 01
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - config/data-production.v1.json
+      - docs/ITERATION_1_1500_PRODUCTION_PLAN.md
+      - dataset_factory/materialize_pilot_batch.py
+      - dataset/candidates/iteration-1-wave-01/**
+      - tests/test_materialize_pilot_batch.py
+      - tests/test_materialize_pilot_wave5.py
+      - tests/test_materialize_iteration1_wave01.py
+      - dataset_factory/iteration1_wave01.trigger
+      - .github/workflows/materialize-iteration1-wave01.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Test production invariants
+        run: python -m unittest discover -s tests -p 'test_production.py'
+      - name: Regression test generic batch materializer
+        run: python -m unittest discover -s tests -p 'test_materialize_pilot_batch.py'
+      - name: Regression test latest pilot wave
+        run: python -m unittest discover -s tests -p 'test_materialize_pilot_wave5.py'
+      - name: Test Iteration 1 Wave 01
+        run: python -m unittest discover -s tests -p 'test_materialize_iteration1_wave01.py'
+      - name: Materialize Iteration 1 Wave 01
+        run: python -m dataset_factory.materialize_pilot_batch --root . --batch iteration-1-wave-01 --overwrite
+      - name: Validate 600 canonical records
+        run: veri check
+      - name: Check leakage
+        run: veri leakage
+      - name: Assert Iteration 1 quota state
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from dataset_factory.production import production_report
+          r=production_report(Path('.'), phase='iteration_1')
+          assert r['verified_records'] == 600, r['verified_records']
+          assert r['target_records'] == 1500
+          assert r['remaining_to_phase_target'] == 900
+          assert r['coverage']['question_families']['unique'] == 29, r['coverage']['question_families']
+          assert r['coverage']['target_question_families'] == 72
+          assert r['by_modality']['written']['actual'] == 310
+          assert r['by_modality']['speaking']['actual'] == 145
+          assert r['by_modality']['listening']['actual'] == 145
+          assert r['by_grade']['9']['actual'] == 165
+          assert all(r['by_grade'][g]['actual'] == 145 for g in ('10','11','12'))
+          assert r['target_ranges']['needs_review']['actual'] == 48
+          assert r['target_ranges']['hard_case']['actual'] == 109
+          assert r['target_ranges']['adversarial']['actual'] == 24
+          print('Iteration 1 Wave 01 quota PASS')
+          PY
+      - name: Print Iteration 1 quota
+        run: veri quota --phase iteration_1 --json
+      - name: Commit canonical Iteration 1 Wave 01
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dataset/records dataset/candidates/iteration-1-wave-01/manifest.json
+          if git diff --cached --quiet; then
+            echo "No Iteration 1 Wave 01 materialization changes to commit."
+            exit 0
+          fi
+          git commit -m "Materialize Iteration 1 Wave 01 AI-verified records"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git push origin HEAD:${{ github.head_ref }}
+          else
+            git push
+          fi
