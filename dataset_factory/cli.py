@@ -5,6 +5,7 @@ import json
 import sys
 from pathlib import Path
 
+from .balanced_split import assign_balanced_splits
 from .core import (
     SUPPORTED_MODALITIES,
     create_draft_record,
@@ -14,10 +15,10 @@ from .core import (
     repo_root,
     validate_dataset,
 )
+from .evaluate_predictions import evaluate_predictions
 from .production import (
     HARD_CASE_TYPES,
     QUALITY_LEVELS,
-    assign_splits_curated,
     check_leakage_curated,
     export_sft_curated,
     next_batch_plan,
@@ -186,7 +187,13 @@ def cmd_split(args: argparse.Namespace, root: Path) -> int:
         _print_findings(errors)
         print("Split iptal edildi: önce üretim profili hatalarını düzeltin.", file=sys.stderr)
         return 1
-    assignments = assign_splits_curated(root, train_ratio=args.train, validation_ratio=args.validation, seed=args.seed)
+    assignments = assign_balanced_splits(
+        root,
+        train_ratio=args.train,
+        validation_ratio=args.validation,
+        seed=args.seed,
+        rebalance=args.rebalance,
+    )
     for split, ids in assignments.items():
         print(f"{split:10} {len(ids):5} kayıt")
     findings = check_leakage_curated(root)
@@ -214,6 +221,18 @@ def cmd_export_sft(args: argparse.Namespace, root: Path) -> int:
     for split in targets:
         output, count = export_sft_curated(root, split=split)
         print(f"{split:10} {count:5} örnek -> {output.relative_to(root)}")
+    return 0
+
+
+def cmd_evaluate(args: argparse.Namespace, root: Path) -> int:
+    predictions = args.predictions if args.predictions.is_absolute() else Path.cwd() / args.predictions
+    report = evaluate_predictions(root, predictions, split=args.split, strict=not args.allow_partial)
+    rendered = json.dumps(report, ensure_ascii=False, indent=2)
+    if args.output:
+        output = args.output if args.output.is_absolute() else Path.cwd() / args.output
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(rendered + "\n", encoding="utf-8")
+    print(rendered)
     return 0
 
 
@@ -281,12 +300,18 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("leakage", help="Train/validation/test/benchmark sızıntısını kontrol et.")
     check = sub.add_parser("check", help="Validate + production profile + leakage kontrollerini çalıştır.")
     check.add_argument("--include-examples", action="store_true")
-    split = sub.add_parser("split", help="Verified kayıtları grup-bilinçli olarak ayır.")
+    split = sub.add_parser("split", help="Verified kayıtları dengeli ve grup-bilinçli olarak ayır.")
     split.add_argument("--train", type=float, default=0.8, help="Train oranı (varsayılan 0.8)")
     split.add_argument("--validation", type=float, default=0.1, help="Validation oranı (varsayılan 0.1)")
     split.add_argument("--seed", default="tde-v1", help="Deterministik split seed'i")
+    split.add_argument("--rebalance", action="store_true", help="Mevcut frozen splitleri de yeniden optimize et; varsayılan mevcut splitleri kilitler.")
     export = sub.add_parser("export-sft", help="Curated Chat/messages JSONL SFT exportu üret.")
     export.add_argument("--split", choices=["train", "validation", "test", "all"], default="all")
+    evaluate = sub.add_parser("evaluate", help="Model prediction JSONL dosyasını frozen canonical split ile karşılaştır.")
+    evaluate.add_argument("predictions", type=Path, help="id + criterion_scores + needs_review içeren JSONL")
+    evaluate.add_argument("--split", choices=["train", "validation", "test"], default="validation")
+    evaluate.add_argument("--allow-partial", action="store_true", help="Resmî rapor için önerilmez; yalnız sağlanan split ID'lerini değerlendirir.")
+    evaluate.add_argument("--output", type=Path, help="Metrik raporunu JSON dosyasına da yaz.")
     sub.add_parser("stats", help="Temel veri seti sayaçlarını göster.")
     quota = sub.add_parser("quota", help="Veri üretim hedeflerine göre eksikleri raporla.")
     quota.add_argument("--phase", choices=["pilot", "iteration_1", "iteration_2", "v1"], default=None)
@@ -306,7 +331,18 @@ def main(argv: list[str] | None = None) -> int:
     except FileNotFoundError as exc:
         print(f"Hata: {exc}", file=sys.stderr)
         return 2
-    handlers = {"new": lambda args, root: _new_wizard(root), "validate": cmd_validate, "leakage": cmd_leakage, "check": cmd_check, "split": cmd_split, "export-sft": cmd_export_sft, "stats": cmd_stats, "quota": cmd_quota, "next-batch": cmd_next_batch}
+    handlers = {
+        "new": lambda args, root: _new_wizard(root),
+        "validate": cmd_validate,
+        "leakage": cmd_leakage,
+        "check": cmd_check,
+        "split": cmd_split,
+        "export-sft": cmd_export_sft,
+        "evaluate": cmd_evaluate,
+        "stats": cmd_stats,
+        "quota": cmd_quota,
+        "next-batch": cmd_next_batch,
+    }
     try:
         return handlers[args.command](args, root)
     except (ValueError, FileExistsError, OSError) as exc:

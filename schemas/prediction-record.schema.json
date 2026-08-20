@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/veri/prediction-record.schema.json",
+  "title": "Rubric grading prediction record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "criterion_scores", "needs_review"],
+  "properties": {
+    "id": {"type": "string", "minLength": 1},
+    "criterion_scores": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {"type": "number", "minimum": 0}
+    },
+    "needs_review": {"type": "boolean"}
+  }
+}
