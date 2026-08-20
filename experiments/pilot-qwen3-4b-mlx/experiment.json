@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "experiment_id": "pilot-qwen3-4b-mlx-qlora-v1",
+  "status": "ready_to_run",
+  "created_at": "2026-08-20",
+  "dataset": {
+    "freeze": "dataset/evaluation/pilot-evaluation-freeze.json",
+    "train_records": 380,
+    "validation_records": 60,
+    "sealed_test_records": 60,
+    "training_data_dir": "experiments/pilot-qwen3-4b-mlx/data",
+    "test_allowed_during_training": false
+  },
+  "model": {
+    "model_repo": "mlx-community/Qwen3-4B-4bit",
+    "base_model": "Qwen/Qwen3-4B",
+    "framework": "mlx-lm",
+    "framework_version": "0.31.3",
+    "quantization": "4bit",
+    "fine_tune_method": "QLoRA"
+  },
+  "hardware_target": {
+    "platform": "Apple Silicon",
+    "memory_gb": 16,
+    "profile": "memory-conservative"
+  },
+  "training": {
+    "config": "experiments/pilot-qwen3-4b-mlx/lora.yaml",
+    "requirements": "experiments/pilot-qwen3-4b-mlx/requirements-mlx.txt",
+    "mask_prompt": true,
+    "seed": 42,
+    "num_layers": 8,
+    "batch_size": 1,
+    "grad_accumulation_steps": 4,
+    "iters": 160,
+    "learning_rate": 1e-5,
+    "max_seq_length": 2048,
+    "grad_checkpoint": true,
+    "lora_rank": 8,
+    "lora_scale": 20.0
+  },
+  "selection_protocol": {
+    "base_model_validation_first": true,
+    "checkpoint_selection_split": "validation",
+    "test_split_sealed_until_selection_complete": true,
+    "primary_metrics": [
+      "criterion_exact_agreement",
+      "criterion_mae",
+      "total_mae_normalized",
+      "needs_review_f1"
+    ],
+    "required_slices": [
+      "modality",
+      "grade",
+      "response_quality",
+      "hard_case",
+      "adversarial"
+    ]
+  },
+  "comparison_candidates_after_baseline": [
+    {
+      "model": "google/gemma-4-12B-it",
+      "role": "larger-model comparison",
+      "condition": "only after 4B baseline and memory profile are measured"
+    }
+  ]
+}
