@@ -1,0 +1,74 @@
+name: Pilot Evaluation Harness
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - dataset_factory/balanced_split.py
+      - dataset_factory/evaluate_predictions.py
+      - dataset_factory/cli.py
+      - schemas/prediction-record.schema.json
+      - tests/test_balanced_split.py
+      - tests/test_evaluate_predictions.py
+      - docs/PILOT_FINE_TUNE_PROTOCOL.md
+      - pyproject.toml
+      - .github/workflows/pilot-evaluation-harness.yml
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Test balanced frozen split semantics
+        run: python -m unittest discover -s tests -p 'test_balanced_split.py'
+      - name: Test prediction evaluator
+        run: python -m unittest discover -s tests -p 'test_evaluate_predictions.py'
+      - name: Validate frozen canonical dataset
+        run: veri check
+      - name: Verify veri split preserves frozen pilot
+        shell: bash
+        run: |
+          veri split --train 0.8 --validation 0.1 --seed tde-pilot-v1
+          git diff --exit-code -- dataset/records dataset/splits
+      - name: Build oracle validation predictions
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          out=Path('/tmp/oracle-validation.jsonl')
+          rows=[]
+          for modality in ('written','speaking','listening'):
+              for path in sorted((Path('dataset/records')/modality).glob('*.json')):
+                  record=json.loads(path.read_text(encoding='utf-8'))
+                  if record['metadata'].get('split') != 'validation':
+                      continue
+                  rows.append({
+                      'id':record['id'],
+                      'criterion_scores':{item['criterion_id']:item['score'] for item in record['gold_evaluation']['criterion_results']},
+                      'needs_review':record['gold_evaluation']['needs_review'],
+                  })
+          assert len(rows)==60, len(rows)
+          out.write_text('\n'.join(json.dumps(row,ensure_ascii=False) for row in rows)+'\n',encoding='utf-8')
+          PY
+      - name: Evaluate oracle through CLI
+        shell: bash
+        run: |
+          veri evaluate /tmp/oracle-validation.jsonl --split validation --output /tmp/oracle-report.json > /tmp/oracle-stdout.json
+          python - <<'PY'
+          import json
+          report=json.load(open('/tmp/oracle-report.json',encoding='utf-8'))
+          assert report['coverage']['gold_records']==60
+          assert report['coverage']['evaluated_records']==60
+          assert report['overall']['criterion_exact_rate']==1.0
+          assert report['overall']['total_mae']==0.0
+          assert report['overall']['needs_review']['precision']==1.0
+          assert report['overall']['needs_review']['recall']==1.0
+          assert report['overall']['needs_review']['f1']==1.0
+          PY
