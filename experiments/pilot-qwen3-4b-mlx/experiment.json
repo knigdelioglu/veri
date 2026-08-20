@@ -15,6 +15,7 @@
     "model_repo": "mlx-community/Qwen3-4B-4bit",
     "base_model": "Qwen/Qwen3-4B",
     "framework": "mlx-lm",
+    "framework_version": "0.31.3",
     "quantization": "4bit",
     "fine_tune_method": "QLoRA"
   },
@@ -25,6 +26,7 @@
   },
   "training": {
     "config": "experiments/pilot-qwen3-4b-mlx/lora.yaml",
+    "requirements": "experiments/pilot-qwen3-4b-mlx/requirements-mlx.txt",
     "mask_prompt": true,
     "seed": 42,
     "num_layers": 8,
