@@ -39,7 +39,6 @@
     "tde11-speaking-000083": {"scores":{"claim":3,"reasoning":1,"counterargument":0,"organization":1}},
     "tde11-speaking-000084": {"scores":{"claim":0,"reasoning":0,"counterargument":0,"organization":1}},
     "tde11-speaking-000085": {"scores":{"claim":3,"reasoning":1,"counterargument":1,"organization":2}},
-
     "tde11-speaking-000108": {"scores":{"claim":3,"reasoning":2,"counterargument":1,"organization":2}},
     "tde11-speaking-000109": {"scores":{"claim":3,"reasoning":2,"counterargument":0,"organization":1},"response_quality":"mid_partial"},
     "tde11-speaking-000110": {"scores":{"claim":3,"reasoning":2,"counterargument":0,"organization":1}},
@@ -58,7 +57,7 @@
   "review_summary": {
     "records_reviewed": 120,
     "records_with_gold_score_corrections": 29,
-    "response_quality_changes": 4,
+    "response_quality_changes": 5,
     "needs_review_changes": 0,
     "key_finding": "Wave 4/5 argumentative speaking gold labels partly conflated stance direction with claim quality. Wave 2/3 stance-neutral behavior was used as the calibration precedent.",
     "status": "PASS_WITH_CORRECTIONS"
