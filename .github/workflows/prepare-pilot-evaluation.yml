@@ -5,7 +5,9 @@ on:
     branches: [main]
     paths:
       - dataset_factory/evaluation_split.trigger
+      - dataset_factory/balanced_split.py
       - dataset_factory/production.py
+      - tests/test_balanced_split.py
       - tests/test_production.py
       - .github/workflows/prepare-pilot-evaluation.yml
   workflow_dispatch:
@@ -26,10 +28,12 @@ jobs:
           python-version: '3.11'
       - name: Install package
         run: python -m pip install -e .
-      - name: Test production and split invariants
+      - name: Test production invariants
         run: python -m unittest discover -s tests -p 'test_production.py'
-      - name: Assign group-aware pilot split
-        run: veri split --train 0.8 --validation 0.1 --seed tde-pilot-v1
+      - name: Test balanced splitter
+        run: python -m unittest discover -s tests -p 'test_balanced_split.py'
+      - name: Assign balanced group-aware pilot split
+        run: python -m dataset_factory.balanced_split --root . --train 0.8 --validation 0.1 --seed tde-pilot-v1 --rebalance
       - name: Check leakage
         run: veri leakage
       - name: Write split profile and evaluation review targets
@@ -38,7 +42,7 @@ jobs:
           mkdir -p dataset/evaluation
           python - <<'PY'
           import json
-          from collections import Counter, defaultdict
+          from collections import Counter
           from pathlib import Path
 
           root=Path('.')
@@ -47,7 +51,7 @@ jobs:
               for path in sorted((root/'dataset'/'records'/modality).glob('*.json')):
                   records.append(json.loads(path.read_text(encoding='utf-8')))
 
-          profile={'schema_version':'1.0','seed':'tde-pilot-v1','total':len(records),'splits':{}}
+          profile={'schema_version':'1.0','seed':'tde-pilot-v1','algorithm':'balanced-connected-components-v1','total':len(records),'splits':{}}
           review_targets=[]
           for split in ('train','validation','test'):
               rows=[r for r in records if r['metadata'].get('split')==split]
@@ -92,7 +96,7 @@ jobs:
             echo "No split changes to commit."
             exit 0
           fi
-          git commit -m "Prepare pilot evaluation split preview"
+          git commit -m "Prepare balanced pilot evaluation split preview"
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             git push origin HEAD:${{ github.head_ref }}
           else
