@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "1.1",
   "default_phase": "v1",
   "phases": {
     "pilot": {"target_records": 500},
@@ -40,10 +40,11 @@
     "answers_per_question_family": [20, 40],
     "target_question_families_by_phase": {
       "pilot": 24,
-      "iteration_1": 75,
-      "iteration_2": 150,
-      "v1": 300
-    }
+      "iteration_1": 72,
+      "iteration_2": 144,
+      "v1": 292
+    },
+    "family_target_note": "Staged targets respect the 20-answer minimum per family while preserving exact modality and grade quotas at each growth increment."
   },
   "rubric_diversity": {
     "min_distinct_criterion_counts": 4,
