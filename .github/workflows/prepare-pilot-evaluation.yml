@@ -49,6 +49,12 @@ jobs:
         run: veri leakage
       - name: Export curated SFT splits
         run: veri export-sft --split all
+      - name: Upload reproducible SFT artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilot-sft-v1
+          path: exports/sft/*.jsonl
+          if-no-files-found: error
       - name: Freeze evaluation profile
         shell: bash
         run: |
@@ -102,6 +108,8 @@ jobs:
               export_counts[split]=count
           assert export_counts == {'train':380,'validation':60,'test':60}
           profile['sft_exports']=export_counts
+          profile['sft_exports_versioned_in_git']=False
+          profile['sft_artifact_name']='pilot-sft-v1'
           profile['evaluation_review']={
               'review_id':'pilot-eval-ai-pass-2',
               'validation_dual_reviewed':60,
@@ -111,7 +119,8 @@ jobs:
           profile['notes']=[
               'Effective split is 76/12/12 because 20-25-record connected question-family components are never split across train/validation/test.',
               'Evaluation prioritizes modality representation: validation and test each contain 20 written, 20 speaking, and 20 listening records.',
-              'Five response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints.'
+              'Five response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints.',
+              'Generated JSONL exports are intentionally ignored by Git; CI regenerates and uploads them as the pilot-sft-v1 workflow artifact.'
           ]
           out=root/'dataset'/'evaluation'/'pilot-evaluation-freeze.json'
           out.write_text(json.dumps(profile,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
@@ -122,12 +131,12 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add dataset/records dataset/splits dataset/evaluation exports/sft
+          git add dataset/records dataset/splits dataset/evaluation
           if git diff --cached --quiet; then
             echo "No evaluation changes to commit."
             exit 0
           fi
-          git commit -m "Freeze reviewed pilot evaluation split and SFT exports"
+          git commit -m "Freeze reviewed pilot evaluation split"
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             git push origin HEAD:${{ github.head_ref }}
           else
