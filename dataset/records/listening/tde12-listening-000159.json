@@ -1,0 +1,193 @@
+{
+  "id": "tde12-listening-000159",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i1-w02-g12-listening-certainty-b",
+    "prompt": "Konuşmacının iddiaya yaklaşımını kabul, ret veya koşullu kabul açısından açıklayınız.",
+    "context": "Konuşmacı: 'Bu açıklama olabilir ama tek örnekle karar veremeyiz. Aynı sonucu başka metinlerde de görürsek daha güçlü konuşabiliriz.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w02-g12-certainty-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Metindeki temel değişim veya ilişkiyi doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Temel yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Yorumunu metnin işleyişiyle ilişkilendirerek açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metinden uygun ve doğrudan kanıt kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı fakat ilişkili kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Kesin ret yok; daha fazla veri gerektiğini söylüyor.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 3.0,
+        "evidence": [
+          "Kesin ret yok; daha fazla veri gerektiğini söylüyor."
+        ],
+        "justification": "Yorum için yanıt 3 puan düzeyindeki çıpayla uyumludur: Doğru, açık ve tam."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "Kesin ret yok; daha fazla veri gerektiğini söylüyor."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "Kesin ret yok; daha fazla veri gerektiğini söylüyor."
+        ],
+        "justification": "Kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Kanıt doğrudan ve yeterli."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Kesin ret yok; daha fazla veri gerektiğini söylüyor."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 8.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "certainty",
+      "epistemic-stance",
+      "iteration-1",
+      "iteration-1-wave-02",
+      "listening",
+      "synthetic",
+      "wave-02"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w02-g12-listening-stance",
+    "question_family": "i1-w02-g12-listening-certainty",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "high_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
