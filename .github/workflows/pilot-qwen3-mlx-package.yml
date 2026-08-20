@@ -1,0 +1,84 @@
+name: Pilot Qwen3 MLX Package
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - dataset_factory/prepare_mlx_pilot.py
+      - dataset_factory/mlx_predict.py
+      - experiments/pilot-qwen3-4b-mlx/**
+      - tests/test_mlx_pilot.py
+      - .github/workflows/pilot-qwen3-mlx-package.yml
+  workflow_dispatch:
+
+jobs:
+  validate-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dataset factory
+        run: python -m pip install -e .
+      - name: Install YAML parser for config validation
+        run: python -m pip install pyyaml
+      - name: Unit test MLX prediction adapter
+        run: python -m unittest tests.test_mlx_pilot
+      - name: Validate frozen canonical dataset
+        run: veri check
+      - name: Prepare sealed MLX train-valid package
+        run: python -m dataset_factory.prepare_mlx_pilot --output /tmp/pilot-mlx-data
+      - name: Verify package counts and sealed test
+        shell: bash
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('/tmp/pilot-mlx-data')
+          manifest=json.loads((root/'manifest.json').read_text(encoding='utf-8'))
+          assert manifest['train_records'] == 380
+          assert manifest['validation_records'] == 60
+          assert manifest['sealed_test_records'] == 60
+          assert manifest['test_materialized_here'] is False
+          assert not (root/'test.jsonl').exists()
+          for name, expected in [('train.jsonl',380),('valid.jsonl',60)]:
+              lines=[x for x in (root/name).read_text(encoding='utf-8').splitlines() if x.strip()]
+              assert len(lines) == expected, (name, len(lines))
+              for raw in lines:
+                  row=json.loads(raw)
+                  assert set(row) == {'messages'}
+                  assert row['messages'][-1]['role'] == 'assistant'
+          print('MLX package PASS')
+          PY
+      - name: Validate baseline training config
+        run: |
+          python - <<'PY'
+          import json, yaml
+          from pathlib import Path
+          config=yaml.safe_load(Path('experiments/pilot-qwen3-4b-mlx/lora.yaml').read_text(encoding='utf-8'))
+          experiment=json.loads(Path('experiments/pilot-qwen3-4b-mlx/experiment.json').read_text(encoding='utf-8'))
+          assert config['model'] == 'mlx-community/Qwen3-4B-4bit'
+          assert config['data'] == 'experiments/pilot-qwen3-4b-mlx/data'
+          assert config['batch_size'] == 1
+          assert config['grad_accumulation_steps'] == 4
+          assert config['test'] is False
+          assert config['num_layers'] == 8
+          assert config['lora_parameters']['rank'] == 8
+          assert experiment['dataset']['test_allowed_during_training'] is False
+          assert experiment['training']['mask_prompt'] is True
+          print('QLoRA config PASS')
+          PY
+      - name: Verify sealed-test CLI guard
+        shell: bash
+        run: |
+          set +e
+          python -m dataset_factory.mlx_predict --split test --limit 1 --output /tmp/should-not-exist.jsonl 2>/tmp/sealed.err
+          code=$?
+          set -e
+          test "$code" -ne 0
+          grep -q -- '--unlock-test' /tmp/sealed.err
+          test ! -e /tmp/should-not-exist.jsonl
+          echo 'sealed test guard PASS'
+      - name: Compile pilot modules
+        run: python -m compileall -q dataset_factory/prepare_mlx_pilot.py dataset_factory/mlx_predict.py
