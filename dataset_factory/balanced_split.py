@@ -85,8 +85,9 @@ def _cost(states: dict[str, dict], targets: dict[str, dict], global_stats: dict)
             cost += 0.5 * _norm_sq(state[field], target[field], 1.0)
 
         # Evaluation splits should not collapse onto a single modality/grade when component
-        # granularity permits broader coverage. This is a soft penalty; grouping invariants win.
-        if split in {"validation", "test"} and state["records"]:
+        # granularity permits broader coverage. Apply this to empty splits too; otherwise
+        # leaving an evaluation split empty gets an artificial cost advantage.
+        if split in {"validation", "test"}:
             missing_modalities = sum(state["modality"][key] == 0 for key in global_stats["modality"])
             missing_grades = sum(state["grade"][key] == 0 for key in global_stats["grade"])
             cost += 0.8 * missing_modalities + 0.3 * missing_grades
