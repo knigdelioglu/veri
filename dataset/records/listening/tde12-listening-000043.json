@@ -130,7 +130,7 @@
   },
   "metadata": {
     "status": "ai_verified",
-    "split": null,
+    "split": "validation",
     "created_at": "2026-08-18",
     "tags": [
       "cikarim",
@@ -152,7 +152,7 @@
       "contradictory_answer"
     ],
     "adversarial": false,
-    "review_count": 1,
+    "review_count": 2,
     "adjudicated": false
   }
 }

@@ -1,0 +1,143 @@
+{
+  "schema_version": "1.0",
+  "status": "frozen",
+  "frozen_at": "2026-08-20",
+  "seed": "tde-pilot-v1",
+  "algorithm": "balanced-connected-components-v1",
+  "requested_ratio": {
+    "train": 0.8,
+    "validation": 0.1,
+    "test": 0.1
+  },
+  "total": 500,
+  "splits": {
+    "train": {
+      "records": 380,
+      "modality": {
+        "listening": 85,
+        "speaking": 85,
+        "written": 210
+      },
+      "grade": {
+        "10": 105,
+        "11": 85,
+        "12": 85,
+        "9": 105
+      },
+      "response_quality": {
+        "blank_irrelevant": 19,
+        "borderline": 37,
+        "full_correct": 77,
+        "high_partial": 76,
+        "incorrect": 38,
+        "low_partial": 57,
+        "mid_partial": 76
+      },
+      "needs_review": 30,
+      "hard_case": 70,
+      "adversarial": 16,
+      "dual_review": 111,
+      "question_families": [
+        "pilot-w1-g09-poetry-theme",
+        "pilot-w1-g10-narrator-viewpoint",
+        "pilot-w1-g11-speaking-character",
+        "pilot-w1-g12-listening-inference",
+        "pilot-w2-g09-comparative-interpretation",
+        "pilot-w2-g09-figurative-function",
+        "pilot-w2-g11-speaking-argument",
+        "pilot-w3-g09-figurative-ambiguity",
+        "pilot-w3-g10-irony-context-gap",
+        "pilot-w3-g11-speaking-counterargument-stt",
+        "pilot-w3-g12-listening-attitude-negation",
+        "pilot-w3-g12-listening-speaker-relations",
+        "pilot-w4-g10-written-attribution",
+        "pilot-w4-g11-speaking-interpretation",
+        "pilot-w4-g12-listening-attitude",
+        "pilot-w5-g09-written-synthesis",
+        "pilot-w5-g10-written-causality",
+        "pilot-w5-g10-written-paraphrase"
+      ]
+    },
+    "validation": {
+      "records": 60,
+      "modality": {
+        "listening": 20,
+        "speaking": 20,
+        "written": 20
+      },
+      "grade": {
+        "11": 20,
+        "12": 20,
+        "9": 20
+      },
+      "response_quality": {
+        "blank_irrelevant": 3,
+        "borderline": 7,
+        "full_correct": 11,
+        "high_partial": 10,
+        "incorrect": 5,
+        "low_partial": 10,
+        "mid_partial": 14
+      },
+      "needs_review": 5,
+      "hard_case": 11,
+      "adversarial": 2,
+      "dual_review": 60,
+      "question_families": [
+        "pilot-w2-g12-listening-speaker-purpose",
+        "pilot-w4-g09-written-ocr-evidence",
+        "pilot-w5-g11-speaking-source-argument"
+      ]
+    },
+    "test": {
+      "records": 60,
+      "modality": {
+        "listening": 20,
+        "speaking": 20,
+        "written": 20
+      },
+      "grade": {
+        "10": 20,
+        "11": 20,
+        "12": 20
+      },
+      "response_quality": {
+        "blank_irrelevant": 3,
+        "borderline": 6,
+        "full_correct": 12,
+        "high_partial": 11,
+        "incorrect": 5,
+        "low_partial": 10,
+        "mid_partial": 13
+      },
+      "needs_review": 5,
+      "hard_case": 10,
+      "adversarial": 2,
+      "dual_review": 60,
+      "question_families": [
+        "pilot-w2-g10-period-application",
+        "pilot-w4-g11-speaking-thesis",
+        "pilot-w5-g12-listening-speaker-attribution"
+      ]
+    }
+  },
+  "sft_exports": {
+    "train": 380,
+    "validation": 60,
+    "test": 60
+  },
+  "sft_exports_versioned_in_git": false,
+  "sft_artifact_name": "pilot-sft-v1",
+  "evaluation_review": {
+    "review_id": "pilot-eval-ai-pass-2",
+    "validation_dual_reviewed": 60,
+    "test_dual_reviewed": 60,
+    "status": "PASS_WITH_CORRECTIONS"
+  },
+  "notes": [
+    "Effective split is 76/12/12 because 20-25-record connected question-family components are never split across train/validation/test.",
+    "Evaluation prioritizes modality representation: validation and test each contain 20 written, 20 speaking, and 20 listening records.",
+    "Five response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints.",
+    "Generated JSONL exports are intentionally ignored by Git; CI regenerates and uploads them as the pilot-sft-v1 workflow artifact."
+  ]
+}

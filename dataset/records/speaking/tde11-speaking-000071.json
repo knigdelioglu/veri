@@ -139,27 +139,27 @@
     "criterion_results": [
       {
         "criterion_id": "claim",
-        "score": 2.0,
+        "score": 3.0,
         "evidence": [
           "Yalnız dönem ölçüt olmamalı."
         ],
-        "justification": "Temel görüş için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+        "justification": "Temel görüş için ikinci AI değerlendirmesi 3/3 puan verdi. Rubrik çıpası: Doğru, açık ve tam."
       },
       {
         "criterion_id": "reasoning",
-        "score": 2.0,
+        "score": 1.0,
         "evidence": [
           "Dil ve kurgu da önemlidir."
         ],
-        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+        "justification": "Gerekçelendirme için ikinci AI değerlendirmesi 1/3 puan verdi. Rubrik çıpası: Genel ve sınırlı."
       },
       {
         "criterion_id": "counterargument",
-        "score": 1.0,
+        "score": 0.0,
         "evidence": [
           "Yalnız dönem ölçüt olmamalı."
         ],
-        "justification": "Karşı görüş için yanıt 1 puan düzeyindeki çıpayla uyumludur: Bir sınırlı/uygun kanıt var."
+        "justification": "Karşı görüş için ikinci AI değerlendirmesi 0/2 puan verdi. Rubrik çıpası: Uygun kanıt yok."
       },
       {
         "criterion_id": "organization",
@@ -168,10 +168,10 @@
           "Yalnız dönem ölçüt olmamalı.",
           "Dil ve kurgu da önemlidir."
         ],
-        "justification": "Düşünce örgüsü için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+        "justification": "Düşünce örgüsü için ikinci AI değerlendirmesi 1/2 puan verdi. Rubrik çıpası: Genel olarak anlaşılır."
       }
     ],
-    "total_score": 6.0,
+    "total_score": 5.0,
     "max_score": 10.0,
     "needs_review": true,
     "review_reason": "STT negasyonu temel görüşü tersine çevirebilir; ses doğrulanmadan claim puanı kesinleştirilemez.",
@@ -179,7 +179,7 @@
   },
   "metadata": {
     "status": "ai_verified",
-    "split": null,
+    "split": "test",
     "created_at": "2026-08-18",
     "tags": [
       "argument",

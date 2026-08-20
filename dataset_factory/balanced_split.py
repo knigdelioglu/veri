@@ -2,8 +2,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
-import json
-from collections import Counter, defaultdict
+from collections import Counter
 from pathlib import Path
 
 from .core import dump_json, load_records, repo_root
@@ -45,10 +44,6 @@ def _blank_stats() -> dict:
         "hard_case": 0,
         "adversarial": 0,
     }
-
-
-def _global_stats(records: list[dict]) -> dict:
-    return _component_stats(records)
 
 
 def _targets(global_stats: dict, ratios: dict[str, float]) -> dict[str, dict]:
@@ -138,11 +133,12 @@ def assign_balanced_splits(
         "validation": validation_ratio,
         "test": 1.0 - train_ratio - validation_ratio,
     }
-    global_stats = _global_stats(records)
+    global_stats = _component_stats(records)
     targets = _targets(global_stats, ratios)
     component_stats = [_component_stats(c) for c in components]
     assignment: list[str | None] = [None] * len(components)
     states = {split: _blank_stats() for split in SUPPORTED_SPLITS}
+    locked_indices: set[int] = set()
 
     if not rebalance:
         for idx, component in enumerate(components):
@@ -157,6 +153,7 @@ def assign_balanced_splits(
             if existing:
                 split = next(iter(existing))
                 assignment[idx] = split
+                locked_indices.add(idx)
                 _add_stats(states[split], component_stats[idx])
 
     order = sorted(
@@ -178,7 +175,8 @@ def assign_balanced_splits(
         assignment[idx] = split
         _add_stats(states[split], component_stats[idx])
 
-    # Deterministic local improvement: single-component moves, then pair swaps.
+    # Deterministic local improvement is allowed only for components assigned in this call.
+    # Existing split metadata is a freeze boundary when rebalance=False.
     improved = True
     while improved:
         improved = False
@@ -186,6 +184,8 @@ def assign_balanced_splits(
         best_move = None
         for idx, source in enumerate(assignment):
             assert source is not None
+            if idx in locked_indices:
+                continue
             for dest in SUPPORTED_SPLITS:
                 if dest == source:
                     continue
@@ -208,7 +208,11 @@ def assign_balanced_splits(
         baseline = _cost(states, targets, global_stats)
         best_swap = None
         for left in range(len(components)):
+            if left in locked_indices:
+                continue
             for right in range(left + 1, len(components)):
+                if right in locked_indices:
+                    continue
                 a, b = assignment[left], assignment[right]
                 assert a is not None and b is not None
                 if a == b:

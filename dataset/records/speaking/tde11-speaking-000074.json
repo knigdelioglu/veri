@@ -159,7 +159,7 @@
   },
   "metadata": {
     "status": "ai_verified",
-    "split": null,
+    "split": "test",
     "created_at": "2026-08-18",
     "tags": [
       "argument",
@@ -180,7 +180,7 @@
     "response_quality": "blank_irrelevant",
     "hard_case_types": [],
     "adversarial": false,
-    "review_count": 1,
+    "review_count": 2,
     "adjudicated": false
   }
 }

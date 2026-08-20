@@ -6,8 +6,11 @@ on:
     paths:
       - dataset_factory/evaluation_split.trigger
       - dataset_factory/balanced_split.py
+      - dataset_factory/apply_evaluation_review.py
       - dataset_factory/production.py
+      - dataset/evaluation/pilot-evaluation-review.json
       - tests/test_balanced_split.py
+      - tests/test_apply_evaluation_review.py
       - tests/test_production.py
       - .github/workflows/prepare-pilot-evaluation.yml
   workflow_dispatch:
@@ -32,14 +35,29 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_production.py'
       - name: Test balanced splitter
         run: python -m unittest discover -s tests -p 'test_balanced_split.py'
-      - name: Assign balanced group-aware pilot split
-        run: python -m dataset_factory.balanced_split --root . --train 0.8 --validation 0.1 --seed tde-pilot-v1 --rebalance
-      - name: Check leakage
+      - name: Test evaluation review applier
+        run: python -m unittest discover -s tests -p 'test_apply_evaluation_review.py'
+      - name: Preserve frozen group-aware split
+        run: python -m dataset_factory.balanced_split --root . --train 0.8 --validation 0.1 --seed tde-pilot-v1
+      - name: Check pre-review leakage
         run: veri leakage
-      - name: Write split profile and evaluation review targets
+      - name: Apply independent evaluation AI review
+        run: python -m dataset_factory.apply_evaluation_review --root . --review dataset/evaluation/pilot-evaluation-review.json
+      - name: Validate reviewed canonical dataset
+        run: veri check
+      - name: Check post-review leakage
+        run: veri leakage
+      - name: Export curated SFT splits
+        run: veri export-sft --split all
+      - name: Upload reproducible SFT artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pilot-sft-v1
+          path: exports/sft/*.jsonl
+          if-no-files-found: error
+      - name: Freeze evaluation profile
         shell: bash
         run: |
-          mkdir -p dataset/evaluation
           python - <<'PY'
           import json
           from collections import Counter
@@ -51,8 +69,16 @@ jobs:
               for path in sorted((root/'dataset'/'records'/modality).glob('*.json')):
                   records.append(json.loads(path.read_text(encoding='utf-8')))
 
-          profile={'schema_version':'1.0','seed':'tde-pilot-v1','algorithm':'balanced-connected-components-v1','total':len(records),'splits':{}}
-          review_targets=[]
+          profile={
+              'schema_version':'1.0',
+              'status':'frozen',
+              'frozen_at':'2026-08-20',
+              'seed':'tde-pilot-v1',
+              'algorithm':'balanced-connected-components-v1',
+              'requested_ratio':{'train':0.8,'validation':0.1,'test':0.1},
+              'total':len(records),
+              'splits':{},
+          }
           for split in ('train','validation','test'):
               rows=[r for r in records if r['metadata'].get('split')==split]
               profile['splits'][split]={
@@ -66,37 +92,51 @@ jobs:
                   'dual_review':sum(int(r['metadata']['review_count'])>=2 for r in rows),
                   'question_families':sorted(set(r['metadata']['question_family'] for r in rows)),
               }
-              if split in {'validation','test'}:
-                  for r in rows:
-                      if int(r['metadata']['review_count']) < 2:
-                          review_targets.append({
-                              'id':r['id'],
-                              'split':split,
-                              'modality':r['modality'],
-                              'grade':r['grade'],
-                              'task_id':r['task']['task_id'],
-                              'question_family':r['metadata']['question_family'],
-                              'response_quality':r['metadata']['response_quality'],
-                              'needs_review':r['gold_evaluation']['needs_review'],
-                              'review_count':r['metadata']['review_count'],
-                          })
 
-          (root/'dataset'/'evaluation'/'pilot-split-profile.json').write_text(json.dumps(profile,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-          (root/'dataset'/'evaluation'/'pilot-review-targets.json').write_text(json.dumps({'schema_version':'1.0','records':review_targets,'count':len(review_targets)},ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          assert profile['total'] == 500
+          assert {s:profile['splits'][s]['records'] for s in ('train','validation','test')} == {'train':380,'validation':60,'test':60}
+          for split in ('validation','test'):
+              p=profile['splits'][split]
+              assert p['modality'] == {'listening':20,'speaking':20,'written':20}
+              assert p['dual_review'] == p['records'] == 60
+          assert set(profile['splits']['validation']['grade']) | set(profile['splits']['test']['grade']) == {'9','10','11','12'}
+
+          export_counts={}
+          for split in ('train','validation','test'):
+              path=root/'exports'/'sft'/f'{split}.jsonl'
+              count=sum(1 for line in path.read_text(encoding='utf-8').splitlines() if line.strip())
+              export_counts[split]=count
+          assert export_counts == {'train':380,'validation':60,'test':60}
+          profile['sft_exports']=export_counts
+          profile['sft_exports_versioned_in_git']=False
+          profile['sft_artifact_name']='pilot-sft-v1'
+          profile['evaluation_review']={
+              'review_id':'pilot-eval-ai-pass-2',
+              'validation_dual_reviewed':60,
+              'test_dual_reviewed':60,
+              'status':'PASS_WITH_CORRECTIONS',
+          }
+          profile['notes']=[
+              'Effective split is 76/12/12 because 20-25-record connected question-family components are never split across train/validation/test.',
+              'Evaluation prioritizes modality representation: validation and test each contain 20 written, 20 speaking, and 20 listening records.',
+              'Five response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints.',
+              'Generated JSONL exports are intentionally ignored by Git; CI regenerates and uploads them as the pilot-sft-v1 workflow artifact.'
+          ]
+          out=root/'dataset'/'evaluation'/'pilot-evaluation-freeze.json'
+          out.write_text(json.dumps(profile,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
           print(json.dumps(profile,ensure_ascii=False,indent=2))
-          print(f'Evaluation records needing second AI review: {len(review_targets)}')
           PY
-      - name: Commit preview split
+      - name: Commit reviewed frozen evaluation set
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add dataset/records dataset/splits dataset/evaluation
           if git diff --cached --quiet; then
-            echo "No split changes to commit."
+            echo "No evaluation changes to commit."
             exit 0
           fi
-          git commit -m "Prepare balanced pilot evaluation split preview"
+          git commit -m "Freeze reviewed pilot evaluation split"
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             git push origin HEAD:${{ github.head_ref }}
           else
