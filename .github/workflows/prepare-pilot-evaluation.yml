@@ -111,7 +111,7 @@ jobs:
           profile['notes']=[
               'Effective split is 76/12/12 because 20-25-record connected question-family components are never split across train/validation/test.',
               'Evaluation prioritizes modality representation: validation and test each contain 20 written, 20 speaking, and 20 listening records.',
-              'Four response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints.'
+              'Five response_quality labels changed during stance-neutrality recalibration; quota targets remain monitoring targets, not gold-label constraints.'
           ]
           out=root/'dataset'/'evaluation'/'pilot-evaluation-freeze.json'
           out.write_text(json.dumps(profile,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
