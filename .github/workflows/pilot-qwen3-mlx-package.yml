@@ -6,8 +6,10 @@ on:
     paths:
       - dataset_factory/prepare_mlx_pilot.py
       - dataset_factory/mlx_predict.py
+      - dataset_factory/pilot_mlx_runner.py
       - experiments/pilot-qwen3-4b-mlx/**
       - tests/test_mlx_pilot.py
+      - tests/test_pilot_mlx_runner.py
       - .github/workflows/pilot-qwen3-mlx-package.yml
   workflow_dispatch:
 
@@ -23,8 +25,8 @@ jobs:
         run: python -m pip install -e .
       - name: Install YAML parser for config validation
         run: python -m pip install pyyaml
-      - name: Unit test MLX prediction adapter
-        run: python -m unittest tests.test_mlx_pilot
+      - name: Unit test MLX prediction and experiment lock
+        run: python -m unittest tests.test_mlx_pilot tests.test_pilot_mlx_runner
       - name: Validate frozen canonical dataset
         run: veri check
       - name: Prepare sealed MLX train-valid package
@@ -58,6 +60,7 @@ jobs:
           from pathlib import Path
           config=yaml.safe_load(Path('experiments/pilot-qwen3-4b-mlx/lora.yaml').read_text(encoding='utf-8'))
           experiment=json.loads(Path('experiments/pilot-qwen3-4b-mlx/experiment.json').read_text(encoding='utf-8'))
+          requirements=Path('experiments/pilot-qwen3-4b-mlx/requirements-mlx.txt').read_text(encoding='utf-8').strip()
           assert config['model'] == 'mlx-community/Qwen3-4B-4bit'
           assert config['data'] == 'experiments/pilot-qwen3-4b-mlx/data'
           assert config['batch_size'] == 1
@@ -67,6 +70,8 @@ jobs:
           assert config['lora_parameters']['rank'] == 8
           assert experiment['dataset']['test_allowed_during_training'] is False
           assert experiment['training']['mask_prompt'] is True
+          assert experiment['model']['framework_version'] == '0.31.3'
+          assert requirements == 'mlx-lm[train]==0.31.3'
           print('QLoRA config PASS')
           PY
       - name: Verify sealed-test CLI guard
@@ -81,4 +86,4 @@ jobs:
           test ! -e /tmp/should-not-exist.jsonl
           echo 'sealed test guard PASS'
       - name: Compile pilot modules
-        run: python -m compileall -q dataset_factory/prepare_mlx_pilot.py dataset_factory/mlx_predict.py
+        run: python -m compileall -q dataset_factory/prepare_mlx_pilot.py dataset_factory/mlx_predict.py dataset_factory/pilot_mlx_runner.py
