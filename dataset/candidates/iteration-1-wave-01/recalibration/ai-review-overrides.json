@@ -1,0 +1,24 @@
+{
+  "schema_version":"ai-review-overrides-1.0",
+  "batch_id":"iteration-1-wave-01",
+  "overrides":[
+    {"candidate_id":"i1a1-10","hard_case_types_override":[]},
+    {"candidate_id":"i1b1-05","hard_case_types_override":[]},
+    {"candidate_id":"i1c1-05","hard_case_types_override":[]}
+  ],
+  "second_pass_ids":[
+    "i1a1-10","i1a2-05","i1a2-08","i1a2-09","i1a2-10",
+    "i1b1-05","i1b1-10","i1b2-05","i1b2-07","i1b2-09","i1b2-10",
+    "i1c1-05","i1c1-10","i1c2-05","i1c2-07","i1c2-09","i1c2-10",
+    "i1d1-10","i1d2-05","i1d2-09","i1d2-10",
+    "i1e1-10","i1e2-05","i1e2-10",
+    "i1a1-08"
+  ],
+  "review_summary":{
+    "records_reviewed":25,
+    "score_changes":0,
+    "text_changes":0,
+    "metadata_changes":3,
+    "note":"Rubric-first second pass confirmed scores and genuine escalation boundaries. All borderline and needs_review records received the required second pass. Three nonessential hard-case labels were removed; no gold score was adjusted for quota reasons."
+  }
+}

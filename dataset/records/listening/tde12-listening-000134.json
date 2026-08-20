@@ -1,0 +1,186 @@
+{
+  "id": "tde12-listening-000134",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i1-g12-listening-stance-a",
+    "prompt": "Konuşmacının dijital arşivlere karşı tutumunu ve bu tutumu nasıl sınırladığını açıklayınız.",
+    "context": "Konuşmacı, dijital arşivlerin araştırmacıya büyük hız kazandırdığını söyler. Ardından, 'Hız bizi kaynakların bağlamını unutmaya itmemeli; ekrandaki görüntü, eserin fiziksel özelliklerini bütünüyle göstermez.' diye ekler.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-g12-qualified-stance-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "stance",
+        "name": "Konuşmacı tutumu",
+        "description": "Konuşmacının temel tutumunu doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Tutum yanlış/yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı veya kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "qualification",
+        "name": "Sınırlama/denge",
+        "description": "Konuşmacının görüşünü nasıl sınırladığını veya dengelediğini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Sınırlama fark edilmemiş/yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Dengeleyici unsur açık ve doğru açıklanmış."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Dinleme kanıtı",
+        "description": "Duyulan içerikten uygun ayrıntı kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi belirsizlik/çelişki."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Arşivlerde eski belgeler bulunur.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "stance",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Konuşmacı tutumu için yanıt 0 puan düzeyindeki çıpayla uyumludur: Tutum yanlış/yok."
+      },
+      {
+        "criterion_id": "qualification",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Sınırlama/denge için yanıt 0 puan düzeyindeki çıpayla uyumludur: Sınırlama fark edilmemiş/yanlış."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Dinleme kanıtı için yanıt 0 puan düzeyindeki çıpayla uyumludur: Kanıt yok."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Açıklık için yanıt 0 puan düzeyindeki çıpayla uyumludur: Ciddi belirsizlik/çelişki."
+      }
+    ],
+    "total_score": 0.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini karşılamıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "inference",
+      "iteration-1",
+      "iteration-1-wave-01",
+      "listening",
+      "qualification",
+      "stance",
+      "synthetic",
+      "wave-01"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-g12-listening-stance-a",
+    "question_family": "i1-g12-listening-qualified-stance",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "blank_irrelevant",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

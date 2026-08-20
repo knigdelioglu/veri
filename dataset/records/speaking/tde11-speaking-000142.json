@@ -1,0 +1,194 @@
+{
+  "id": "tde11-speaking-000142",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i1-g11-speaking-defense-b",
+    "prompt": "Karakterin susmasını 'korku' veya 'koruma isteği' açısından yorumlayınız ve karşı olasılığı da kısaca değerlendiriniz.",
+    "context": "Karakter, arkadaşının kendisi hakkında yayılan yanlış bir söylenti yüzünden okuldan ayrılmayı düşündüğünü öğrenir. Gerçeği açıklarsa başka bir arkadaşının özel bir sırrı açığa çıkacaktır. Toplantıda söz alır, bir süre susar ve yalnızca 'Bu hikâyenin tamamını bilmiyoruz' der.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-g11-speaking-defense-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Yorum tezi",
+        "description": "Savunulabilir ve açık bir yorum ortaya koyar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok/uygunsuz."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı veya belirsiz yorum."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik yorum."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve savunulabilir yorum."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Yorumunu neden-sonuç ve karakter ilişkileriyle gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok/yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı gerekçe."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik gerekçe."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı gerekçelendirme."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kaynak kanıtı",
+        "description": "Verilen olay/ayrıntılardan uygun kanıt kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "organization",
+        "name": "Düşünce örgüsü",
+        "description": "Konuşma transkripti açık ve tutarlı ilerler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi belirsizlik/çelişki."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Bir sırrı açıklamamak için susuyor olabilir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 1.0,
+        "evidence": [
+          "Bir sırrı açıklamamak için susuyor olabilir."
+        ],
+        "justification": "Yorum tezi için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı veya belirsiz yorum."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Bir sırrı açıklamamak için susuyor olabilir."
+        ],
+        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı gerekçe."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Bir sırrı açıklamamak için susuyor olabilir."
+        ],
+        "justification": "Kaynak kanıtı için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı kanıt."
+      },
+      {
+        "criterion_id": "organization",
+        "score": 1.0,
+        "evidence": [
+          "Bir sırrı açıklamamak için susuyor olabilir."
+        ],
+        "justification": "Düşünce örgüsü için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "defense",
+      "interpretation",
+      "iteration-1",
+      "iteration-1-wave-01",
+      "speaking",
+      "synthetic",
+      "transcript-only",
+      "wave-01"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-g11-speaking-interpretive-a",
+    "question_family": "i1-g11-speaking-interpretive-defense",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

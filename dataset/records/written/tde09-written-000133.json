@@ -1,0 +1,192 @@
+{
+  "id": "tde09-written-000133",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "i1-g09-written-image-a",
+    "prompt": "Parçadaki 'yarım kalmış gölge' imgesinin anlatıcının duygusuna katkısını açıklayınız ve en az bir ayrıntıyla destekleyiniz.",
+    "context": "Sokağın sonunda evimiz küçüldü. Kapının önünde bıraktığım valiz kadar sessizdim. Akşam, duvara yarım kalmış bir gölge çizdi; dönüp bakmadım.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-g09-image-inference-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Baskın duygu veya anlamı metinle uyumlu biçimde yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yanlış veya metin dışı."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen uygun yorum."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik yorum."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve bütünlüklü yorum."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "function",
+        "name": "İmge işlevi",
+        "description": "İmgenin yoruma nasıl katkı sağladığını açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İşlev açıklanmamış veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı açıklama."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş açıklama."
+          },
+          {
+            "score": 3,
+            "description": "İmge ile yorum arasındaki bağ açık ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Metinsel kanıt",
+        "description": "Yorumunu uygun metinsel ayrıntıyla destekler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Uygun kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Bir sınırlı/uygun kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İfade ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Gölge anlatıcının mutlu olduğunu gösterir çünkü akşam güneşlidir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Yorum için yanıt 0 puan düzeyindeki çıpayla uyumludur: Yorum yanlış veya metin dışı."
+      },
+      {
+        "criterion_id": "function",
+        "score": 1.0,
+        "evidence": [
+          "Gölge anlatıcının mutlu olduğunu gösterir çünkü akşam güneşlidir."
+        ],
+        "justification": "İmge işlevi için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı açıklama."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Metinsel kanıt için yanıt 0 puan düzeyindeki çıpayla uyumludur: Uygun kanıt yok."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Gölge anlatıcının mutlu olduğunu gösterir çünkü akşam güneşlidir."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 2.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtta sınırlı doğru unsurlar var; rubriğin temel beklentileri büyük ölçüde karşılanmıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "close-reading",
+      "image",
+      "inference",
+      "iteration-1",
+      "iteration-1-wave-01",
+      "synthetic",
+      "wave-01",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-g09-written-close-reading-a",
+    "question_family": "i1-g09-written-image-inference",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "incorrect",
+    "hard_case_types": [
+      "keyword_decoy"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

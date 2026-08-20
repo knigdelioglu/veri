@@ -1,0 +1,208 @@
+{
+  "id": "tde09-written-000162",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "i1-g09-written-sequence-b",
+    "prompt": "Parçada neden-sonuç ilişkisini açıklayınız ve karakterin son davranışını gerekçelendiriniz.",
+    "context": "Mert yarışmaya katılmak için haftalarca çalıştı. Son provada arkadaşının sakatlandığını öğrenince ikili gösteriyi tek başına yapabileceğini söyledi. Yarışma sabahı kendi adını listeden sildirdi ve arkadaşının yanında kaldı.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-g09-sequence-motive-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "sequence",
+        "name": "Olay sırası",
+        "description": "Olaylar arasındaki zaman/sıra ilişkisini doğru kurar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Olay sırası yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı veya karışık sıra."
+          },
+          {
+            "score": 2,
+            "description": "Ana sıra doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Olay sırası açık ve doğru."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "motive",
+        "name": "Karakter gerekçesi",
+        "description": "Karakter davranışının olası gerekçesini metinle uyumlu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yanlış/metin dışı."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı gerekçe."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik gerekçe."
+          },
+          {
+            "score": 3,
+            "description": "Metinle uyumlu ve iyi gerekçelendirilmiş."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Sıra veya gerekçeyi metinsel ayrıntıyla destekler.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve çelişkisizdir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi belirsizlik/çelişki."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Mert arkadaşına yardım etmek için yarışmadan vazgeçiyor.",
+    "source": "raw_ocr",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "ocr",
+        "span": "yardım etmek",
+        "candidates": [
+          "yardım etmek",
+          "yardım etmemek"
+        ],
+        "note": "Negasyon gerekçeyi tersine çeviriyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "sequence",
+        "score": 1.0,
+        "evidence": [
+          "Mert arkadaşına yardım etmek için yarışmadan vazgeçiyor."
+        ],
+        "justification": "Olay sırası için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı veya karışık sıra."
+      },
+      {
+        "criterion_id": "motive",
+        "score": 1.0,
+        "evidence": [
+          "Mert arkadaşına yardım etmek için yarışmadan vazgeçiyor."
+        ],
+        "justification": "Karakter gerekçesi için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı gerekçe."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Mert arkadaşına yardım etmek için yarışmadan vazgeçiyor."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı kanıt."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Mert arkadaşına yardım etmek için yarışmadan vazgeçiyor."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "OCR'daki 'yardım etmek/yardım etmemek' ayrımı karakter gerekçesini doğrudan değiştiriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-20",
+    "tags": [
+      "iteration-1",
+      "iteration-1-wave-01",
+      "motive",
+      "narrative",
+      "sequence",
+      "synthetic",
+      "wave-01",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-g09-written-close-reading-b",
+    "question_family": "i1-g09-written-sequence-motive",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [
+      "ocr_ambiguity",
+      "missing_evidence"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
