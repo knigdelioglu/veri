@@ -1,0 +1,195 @@
+{
+  "id": "tde11-speaking-000392",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i2-w01-g11-analogy-b",
+    "prompt": "Bu analojinin hangi noktada zayıfladığını ve tezin yine de savunulup savunulamayacağını açıklayınız.",
+    "context": "Tez: 'Şiirde biçim anlamın parçasıdır.' Analoji: 'Bir melodiyi yalnız nota adlarıyla anlatmak, melodiyi dinlemekle aynı değildir.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i2-w01-g11-analogy-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "İddia",
+        "description": "Analojinin tezi destekleyip desteklemediğine ilişkin açık bir yargı kurar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok/yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve isabetli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Benzerlik ile farklılıkların argüman gücüne etkisini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok."
+          },
+          {
+            "score": 1,
+            "description": "Zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Kısmen yeterli."
+          },
+          {
+            "score": 3,
+            "description": "Tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Verilen örneğin özelliklerini doğru kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "qualification",
+        "name": "Sınırlama",
+        "description": "Analojinin geçerli olmadığı sınırı belirtir.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Sınırlama yok."
+          },
+          {
+            "score": 1,
+            "description": "Kısmi."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve uygun."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Şiir ve müzik sanat olduğu için analoji doğrudur.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 1.0,
+        "evidence": [
+          "Şiir ve müzik sanat olduğu için analoji doğrudur."
+        ],
+        "justification": "İddia için yanıt 1 puan düzeyindeki çıpayla uyumludur: Belirsiz."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Şiir ve müzik sanat olduğu için analoji doğrudur."
+        ],
+        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Zayıf."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Şiir ve müzik sanat olduğu için analoji doğrudur."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      },
+      {
+        "criterion_id": "qualification",
+        "score": 1.0,
+        "evidence": [
+          "Şiir ve müzik sanat olduğu için analoji doğrudur."
+        ],
+        "justification": "Sınırlama için yanıt 1 puan düzeyindeki çıpayla uyumludur: Kısmi."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "analogy",
+      "argumentation",
+      "iteration-2",
+      "iteration-2-wave-01",
+      "speaking",
+      "synthetic",
+      "transcript-only",
+      "wave-01"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i2-w01-g11-speaking-argument-evaluation",
+    "question_family": "i2-w01-g11-speaking-analogy-validity",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
