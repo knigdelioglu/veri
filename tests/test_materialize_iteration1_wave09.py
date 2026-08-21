@@ -18,7 +18,7 @@ class Iteration1Wave09MaterializationTest(unittest.TestCase):
         self.assertEqual(len({r["id"] for r in self.records}), 100)
 
     def test_distribution(self):
-        self.assertEqual(Counter(r["modality"] for r in self.records), Counter({"written":50,"speaking":30,"listening":20}))
+        self.assertEqual(Counter(r["modality"] for r in self.records), Counter({"written":50,"speaking":25,"listening":25}))
         self.assertEqual(Counter(r["grade"] for r in self.records), Counter({9:25,10:25,11:25,12:25}))
         self.assertEqual(Counter(r["metadata"]["response_quality"] for r in self.records), Counter({"full_correct":20,"high_partial":20,"mid_partial":20,"low_partial":15,"incorrect":10,"blank_irrelevant":5,"borderline":10}))
 
@@ -51,7 +51,7 @@ class Iteration1Wave09MaterializationTest(unittest.TestCase):
 
     def test_speaking_is_transcript_only(self):
         speaking=[r for r in self.records if r["modality"] == "speaking"]
-        self.assertEqual(len(speaking),30)
+        self.assertEqual(len(speaking),25)
         for record in speaking:
             self.assertEqual(record["student_response"]["observations"],[])
             for criterion in record["rubric"]["criteria"]:
