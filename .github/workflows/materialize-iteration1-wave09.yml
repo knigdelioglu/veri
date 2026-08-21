@@ -76,8 +76,8 @@ jobs:
           assert r['coverage']['question_families']['unique'] == 68, r['coverage']['question_families']
           assert r['coverage']['target_question_families'] == 72
           assert r['by_modality']['written']['actual'] == 700
-          assert r['by_modality']['speaking']['actual'] == 355
-          assert r['by_modality']['listening']['actual'] == 345
+          assert r['by_modality']['speaking']['actual'] == 350
+          assert r['by_modality']['listening']['actual'] == 350
           for grade in ('9','10','11','12'):
               assert r['by_grade'][grade]['actual'] == 350, (grade,r['by_grade'][grade])
           expected={'full_correct':280,'high_partial':280,'mid_partial':280,'low_partial':210,'incorrect':140,'blank_irrelevant':70,'borderline':140}
