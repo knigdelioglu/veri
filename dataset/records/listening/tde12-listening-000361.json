@@ -1,0 +1,206 @@
+{
+  "id": "tde12-listening-000361",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i2-w01-g12-irony-a",
+    "prompt": "Konuşmacının 'harika' sözcüğünü gerçek övgü olarak mı yoksa ironik olarak mı kullandığını açıklayınız.",
+    "context": "A: Sunum dosyası yine açılmadı. B: Harika, tam da beş dakika sonra başlayacaktık. Şimdi bütün bağlantıları yeniden kurmamız gerekecek.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i2-w01-g12-irony-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Tutum yorumu",
+        "description": "Konuşmacının literal söz ile gerçek tutumu arasındaki farkı doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yanlış/yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Pragmatik gerekçe",
+        "description": "İroniyi bağlam, karşıtlık veya devam cümlesiyle gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok."
+          },
+          {
+            "score": 1,
+            "description": "Zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Kısmen yeterli."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Dinleme kanıtı",
+        "description": "Duyulan ifadeleri doğru kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "B'nin gerçek tutumu olumsuz görünüyor; 'harika' ironik olabilir.",
+    "source": "raw_stt",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "stt",
+        "span": "gerekecek",
+        "candidates": [
+          "gerekecek",
+          "gerekmeyecek"
+        ],
+        "note": "Devam cümlesinin olumsuzluğu ironiyi doğrulayan temel kanıttır."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 2.0,
+        "evidence": [
+          "B'nin gerçek tutumu olumsuz görünüyor; 'harika' ironik olabilir."
+        ],
+        "justification": "Tutum yorumu için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru fakat eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "B'nin gerçek tutumu olumsuz görünüyor; 'harika' ironik olabilir."
+        ],
+        "justification": "Pragmatik gerekçe için yanıt 2 puan düzeyindeki çıpayla uyumludur: Kısmen yeterli."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "B'nin gerçek tutumu olumsuz görünüyor; 'harika' ironik olabilir."
+        ],
+        "justification": "Dinleme kanıtı için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "B'nin gerçek tutumu olumsuz görünüyor; 'harika' ironik olabilir."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Anlaşılır."
+      }
+    ],
+    "total_score": 6.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "STT'de 'gerekecek/gerekmeyecek' ayrımı konuşmacının durumu sorun olarak görüp görmediğini maddi biçimde değiştiriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "irony",
+      "iteration-2",
+      "iteration-2-wave-01",
+      "listening",
+      "stance",
+      "synthetic",
+      "wave-01"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i2-w01-g12-listening-pragmatic-stance",
+    "question_family": "i2-w01-g12-listening-ironic-stance",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [
+      "stt_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

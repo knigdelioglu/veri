@@ -1,0 +1,193 @@
+{
+  "id": "tde10-written-000387",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "i2-w01-g10-temporal-a",
+    "prompt": "Parçadaki işaretin önsezi işlevi taşıyıp taşımadığını açıklayınız.",
+    "context": "Yolculuğa çıkmadan önce Derya, bavulun fermuarında ince bir çatlak gördü ama önemsemedi. İki saat sonra istasyonda bavul açıldı ve belgeleri yere saçıldı.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i2-w01-g10-temporal-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Sınıflandırma",
+        "description": "İpucunun ileriye dönük önsezi mi geriye dönük açıklama mı olduğunu doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yanlış/yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Zamansal gerekçe",
+        "description": "İpucunun hangi olayla ve hangi zaman yönünde ilişki kurduğunu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok."
+          },
+          {
+            "score": 1,
+            "description": "Zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Metin kanıtı",
+        "description": "İlgili ifade ve olayları kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Fermuarda bir sorun vardır ve sonra bavul açılır.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 1.0,
+        "evidence": [
+          "Fermuarda bir sorun vardır ve sonra bavul açılır."
+        ],
+        "justification": "Sınıflandırma için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Fermuarda bir sorun vardır ve sonra bavul açılır."
+        ],
+        "justification": "Zamansal gerekçe için yanıt 1 puan düzeyindeki çıpayla uyumludur: Zayıf."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Fermuarda bir sorun vardır ve sonra bavul açılır."
+        ],
+        "justification": "Metin kanıtı için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Fermuarda bir sorun vardır ve sonra bavul açılır."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Anlaşılır."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "foreshadowing",
+      "iteration-2",
+      "iteration-2-wave-01",
+      "retrospective-clue",
+      "synthetic",
+      "wave-01",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i2-w01-g10-written-time-structure",
+    "question_family": "i2-w01-g10-written-temporal-clue",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

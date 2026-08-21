@@ -1,0 +1,189 @@
+{
+  "id": "tde12-listening-000374",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i2-w01-g12-irony-b",
+    "prompt": "Konuşmacının literal cümlesi ile gerçek değerlendirmesi arasındaki farkı açıklayınız.",
+    "context": "A: Toplantı iki saat sürdü ama hiçbir karar alınmadı. B: Ne kadar verimli bir sabah olmuş. Öğleden sonra aynı konuları yeniden konuşacağız demek ki.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i2-w01-g12-irony-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Tutum yorumu",
+        "description": "Konuşmacının literal söz ile gerçek tutumu arasındaki farkı doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yanlış/yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Pragmatik gerekçe",
+        "description": "İroniyi bağlam, karşıtlık veya devam cümlesiyle gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok."
+          },
+          {
+            "score": 1,
+            "description": "Zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Kısmen yeterli."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Dinleme kanıtı",
+        "description": "Duyulan ifadeleri doğru kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Konuşmacı toplantıyı kesinlikle başarılı bulmuştur; tekrar konuşmak verimliliği kanıtlar.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Tutum yorumu için yanıt 0 puan düzeyindeki çıpayla uyumludur: Yanlış/yok."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Konuşmacı toplantıyı kesinlikle başarılı bulmuştur; tekrar konuşmak verimliliği kanıtlar."
+        ],
+        "justification": "Pragmatik gerekçe için yanıt 1 puan düzeyindeki çıpayla uyumludur: Zayıf."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Dinleme kanıtı için yanıt 0 puan düzeyindeki çıpayla uyumludur: Kanıt yok."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Konuşmacı toplantıyı kesinlikle başarılı bulmuştur; tekrar konuşmak verimliliği kanıtlar."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Anlaşılır."
+      }
+    ],
+    "total_score": 2.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtta sınırlı doğru unsurlar var; rubriğin temel beklentileri büyük ölçüde karşılanmıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "irony",
+      "iteration-2",
+      "iteration-2-wave-01",
+      "listening",
+      "stance",
+      "synthetic",
+      "wave-01"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i2-w01-g12-listening-pragmatic-stance",
+    "question_family": "i2-w01-g12-listening-ironic-stance",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "incorrect",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
