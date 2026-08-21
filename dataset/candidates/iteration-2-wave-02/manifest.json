@@ -1,0 +1,33 @@
+{
+  "schema_version": "candidate-batch-manifest-1.0",
+  "batch_id": "iteration-2-wave-02",
+  "created_at": "2026-08-21",
+  "status": "generated_pending_ai_review",
+  "candidate_records": 100,
+  "canonical_records": 0,
+  "ai_verified_records_pending_materialization": 100,
+  "teacher_verified_records": 0,
+  "provenance": "synthetic",
+  "focus": "Iteration 2 expansion: reader-character information asymmetry, parallel scene reversal, listening source attribution, causal claim evaluation, and quoted-view endorsement",
+  "distribution": {
+    "modality": {"written": 40, "speaking": 20, "listening": 40},
+    "grade": {"9": 20, "10": 40, "11": 20, "12": 20},
+    "response_quality": {"full_correct": 20, "high_partial": 20, "mid_partial": 20, "low_partial": 15, "incorrect": 10, "blank_irrelevant": 5, "borderline": 10},
+    "hard_case_records": 18,
+    "adversarial_records": 4,
+    "genuine_needs_review_records": 8,
+    "second_pass_ai_review_records": 25
+  },
+  "coverage": {"question_families": 5, "exact_tasks": 10, "answers_per_question_family": 20, "answers_per_exact_task": 10},
+  "families": [
+    {"file": "g09-written-information-asymmetry.json", "grade": 9, "modality": "written", "record_id_start": 416},
+    {"file": "g10-written-parallel-reversal.json", "grade": 10, "modality": "written", "record_id_start": 401},
+    {"file": "g10-listening-source-attribution.json", "grade": 10, "modality": "listening", "record_id_start": 21},
+    {"file": "g11-speaking-causal-claim.json", "grade": 11, "modality": "speaking", "record_id_start": 396},
+    {"file": "g12-listening-quoted-endorsement.json", "grade": 12, "modality": "listening", "record_id_start": 376}
+  ],
+  "ai_review_overrides": "recalibration/ai-review-overrides.json",
+  "promotion_policy": "candidate -> rubric-first independent AI pass -> input-uncertainty separation -> ai_verified canonical",
+  "blocking_issue": null,
+  "next_action": "Materialize after Wave 02 regression, leakage and cumulative quota gates pass."
+}
