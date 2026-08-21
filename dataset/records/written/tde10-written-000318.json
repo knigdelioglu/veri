@@ -1,0 +1,191 @@
+{
+  "id": "tde10-written-000318",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "i1-w08-g10-written-gap-a",
+    "prompt": "Anlatıcının mektubun içeriğini vermemesinin okurun çıkarımına etkisini açıklayınız.",
+    "context": "Meral mektubu iki kez okudu; anlatıcı mektupta ne yazdığını söylemez. O gece Meral valizini hazırlayıp sabaha alarm kurar.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w08-g10-gap-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Anlatıda saklanan bilginin işlevini doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Bilgi eksikliği ile okur çıkarımı/gerilim arasındaki ilişkiyi açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metindeki sıralama ve davranış ayrıntılarını kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok veya uygun değil."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok veya uygun değil."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Mektupta kesin olarak işten çıkarıldığı yazmaktadır; valiz bunun kanıtıdır.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Yorum için yanıt 0 puan düzeyindeki çıpayla uyumludur: Yorum yok veya yanlış."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Mektupta kesin olarak işten çıkarıldığı yazmaktadır; valiz bunun kanıtıdır."
+        ],
+        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı ve kısmen doğru."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Kanıt için yanıt 0 puan düzeyindeki çıpayla uyumludur: Yok veya uygun değil."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Mektupta kesin olarak işten çıkarıldığı yazmaktadır; valiz bunun kanıtıdır."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      }
+    ],
+    "total_score": 2.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtta sınırlı doğru unsurlar var; rubriğin temel beklentileri büyük ölçüde karşılanmıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "inference",
+      "information-gap",
+      "iteration-1",
+      "iteration-1-wave-08",
+      "synthetic",
+      "wave-08",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w08-g10-written-narrative-analysis",
+    "question_family": "i1-w08-g10-written-information-gap",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "incorrect",
+    "hard_case_types": [
+      "mixed_criterion_performance"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

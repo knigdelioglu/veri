@@ -1,0 +1,193 @@
+{
+  "id": "tde12-listening-000292",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i1-w08-g12-listening-intent-a",
+    "prompt": "B'nin doğrudan söylemediği konuşma niyetini açıklayınız.",
+    "context": "A: 'Bu raporu bugün bitirebilir miyiz?' B: 'Dosyaların yarısı hâlâ gelmedi.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w08-g12-intent-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Konuşmacının dolaylı niyetini doğru çıkarır.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Sözün literal içeriği ile konuşma işlevi arasındaki ilişkiyi açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Transkriptteki bağlamsal ipuçlarını kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok veya uygun değil."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok veya uygun değil."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Dosyaların yarısı gelmemiştir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 1.0,
+        "evidence": [
+          "Dosyaların yarısı gelmemiştir."
+        ],
+        "justification": "Yorum için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı ve kısmen doğru."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Dosyaların yarısı gelmemiştir."
+        ],
+        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı ve kısmen doğru."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Dosyaların yarısı gelmemiştir."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Dosyaların yarısı gelmemiştir."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt kısmi başarı gösteriyor; kanıt, açıklama veya gerekçelendirmede belirgin eksikler var."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "implicature",
+      "iteration-1",
+      "iteration-1-wave-08",
+      "listening",
+      "speaker-intent",
+      "synthetic",
+      "wave-08"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w08-g12-listening-pragmatics",
+    "question_family": "i1-w08-g12-listening-implicature-intent",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
