@@ -1,0 +1,208 @@
+{
+  "id": "tde10-written-000355",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "i1-w09-g10-written-distance-b",
+    "prompt": "Anlatıcı ile karakter arasındaki mesafenin değiştiği noktayı ve bu değişimin işlevini açıklayınız.",
+    "context": "Selin toplantı boyunca not aldı. Müdür yeni planı anlatırken başını salladı. Ne kolay söylüyordu bunları; sanki o koridorlarda her gün kendisi koşuyordu. Selin kalemini bıraktı.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w09-g10-distance-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Anlatıcının karakter düşüncesine yaklaşma biçimini doğru yorumlar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Anlatıcı sesi ile karakter bakışı arasındaki mesafenin okur etkisini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metindeki anlatım ayrıntılarını uygun kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Selin'in iç eleştirisi anlatıcı mesafesini azaltıyor; fakat OCR'da 'kolay/zor' okunması değerlendirmesinin yönünü değiştirirse işlev de farklılaşır.",
+    "source": "raw_ocr",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "ocr",
+        "span": "kolay",
+        "candidates": [
+          "kolay",
+          "zor"
+        ],
+        "note": "Değerlendirme yönü anlatıcı-karakter mesafesi yorumunu etkiliyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 2.0,
+        "evidence": [
+          "Selin'in iç eleştirisi anlatıcı mesafesini azaltıyor; fakat OCR'da 'kolay"
+        ],
+        "justification": "Yorum için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "zor' okunması değerlendirmesinin yönünü değiştirirse işlev de farklılaşır."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Selin'in iç eleştirisi anlatıcı mesafesini azaltıyor; fakat OCR'da 'kolay",
+          "zor' okunması değerlendirmesinin yönünü değiştirirse işlev de farklılaşır."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Selin'in iç eleştirisi anlatıcı mesafesini azaltıyor; fakat OCR'da 'kolay",
+          "zor' okunması değerlendirmesinin yönünü değiştirirse işlev de farklılaşır."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "OCR'daki 'kolay/zor' ayrımı Selin'in müdüre yönelik değerlendirmesinin yönünü değiştiriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "free-indirect",
+      "iteration-1",
+      "iteration-1-wave-09",
+      "narrator-distance",
+      "synthetic",
+      "wave-09",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w09-g10-written-narrative-voice",
+    "question_family": "i1-w09-g10-written-narrator-distance",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "borderline",
+    "hard_case_types": [
+      "ocr_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
