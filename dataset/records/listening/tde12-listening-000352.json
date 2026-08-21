@@ -1,0 +1,206 @@
+{
+  "id": "tde12-listening-000352",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i1-w10-g12-listening-attribution-b",
+    "prompt": "Eleştirmenin gerçek görüşü ile sunucunun ona atfettiği genelleme arasındaki farkı açıklayınız.",
+    "context": "Sunucu: 'Siz romanın gereksiz uzun olduğunu söylediniz.' Eleştirmen: 'Hayır; bazı bölümlerin uzadığını söyledim, bütün romanın gereksiz uzun olduğunu değil.' Sunucu: 'Haklısınız, o genelleme bana ait.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w10-g12-attribution-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Metindeki temel anlam veya anlatım işlevini doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Yorumunu metindeki ilişkilerle tutarlı biçimde gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metindeki uygun ayrıntıları kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Romanın bazı bölümleri uzundur.",
+    "source": "raw_stt",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "stt",
+        "span": "bazı bölümlerin",
+        "candidates": [
+          "bazı bölümlerin",
+          "bütün bölümlerin"
+        ],
+        "note": "Kapsam sözcüğü eleştirmenin görüşünün genellenip genellenmediğini maddi biçimde değiştiriyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 1.0,
+        "evidence": [
+          "Romanın bazı bölümleri uzundur."
+        ],
+        "justification": "Yorum için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı ve kısmen doğru."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Romanın bazı bölümleri uzundur."
+        ],
+        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Romanın bazı bölümleri uzundur."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Romanın bazı bölümleri uzundur."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "STT'deki 'bazı/bütün' ayrımı eleştirmenin iddiasının kapsamını ve atıf değerlendirmesini değiştiriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "claim-attribution",
+      "iteration-1",
+      "iteration-1-wave-10",
+      "listening",
+      "scope-correction",
+      "synthetic",
+      "wave-10"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w10-g12-listening-multispeaker-attribution",
+    "question_family": "i1-w10-g12-listening-claim-attribution",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [
+      "stt_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

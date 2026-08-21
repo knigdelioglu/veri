@@ -1,0 +1,206 @@
+{
+  "id": "tde11-speaking-000372",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i1-w10-g11-speaking-hypothesis-b",
+    "prompt": "Karakterin durmuş saati sürekli kurmasını açıklayan iki yorumu karşılaştırın; seçtiğiniz yorumu destekleyen kanıtı ve onu zayıflatabilecek karşı kanıtı söyleyin.",
+    "context": "Kardeşi evden ayrıldıktan sonra karakter, çalışmadığını bildiği eski saati her akşam aynı saatte kurar. İki yorum vardır: kaybı inkâr etme ya da kontrol duygusunu koruyan bir rutin sürdürme.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w10-g11-hypothesis-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Metindeki temel anlam veya anlatım işlevini doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Yorumunu metindeki ilişkilerle tutarlı biçimde gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metindeki uygun ayrıntıları kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Saati kurduğu için kardeşini özlüyor olabilir.",
+    "source": "raw_stt",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "stt",
+        "span": "özlüyor olabilir",
+        "candidates": [
+          "özlüyor olabilir",
+          "bekliyor olabilir"
+        ],
+        "note": "İki fiil, yorumun yas mı literal dönüş beklentisi mi olduğuna ilişkin puanı etkiliyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 1.0,
+        "evidence": [
+          "Saati kurduğu için kardeşini özlüyor olabilir."
+        ],
+        "justification": "Yorum için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı ve kısmen doğru."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 1.0,
+        "evidence": [
+          "Saati kurduğu için kardeşini özlüyor olabilir."
+        ],
+        "justification": "Gerekçelendirme için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel ve sınırlı."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Saati kurduğu için kardeşini özlüyor olabilir."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Saati kurduğu için kardeşini özlüyor olabilir."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 4.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "STT'deki 'özlüyor/bekliyor' ayrımı öğrencinin hangi yorumu savunduğunu ve karşı kanıt değerlendirmesini değiştiriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "counterevidence",
+      "hypothesis-ranking",
+      "iteration-1",
+      "iteration-1-wave-10",
+      "speaking",
+      "synthetic",
+      "wave-10"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w10-g11-speaking-interpretive-comparison",
+    "question_family": "i1-w10-g11-speaking-hypothesis-ranking",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "low_partial",
+    "hard_case_types": [
+      "stt_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
