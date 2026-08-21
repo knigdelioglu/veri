@@ -1,0 +1,195 @@
+{
+  "id": "tde10-written-000273",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 10,
+  "task": {
+    "task_id": "i1-w06-g10-written-cohesion-a",
+    "prompt": "İki cümle arasındaki ilişkiyi ve 'oysa' bağlacının işlevini açıklayınız.",
+    "context": "Anlatıcı, kasabanın yıllardır hiç değişmediğini söylüyor. Oysa hemen ardından eski sinemanın yıkıldığını, meydanın genişlediğini ve insanların akşamları artık başka yerde toplandığını anlatıyor.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w06-g10-cohesion-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "relation",
+        "name": "Anlam İlişkisi",
+        "description": "Cümleler arasındaki anlam ilişkisini doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "İlişki yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Bağlaç ve içerik üzerinden ilişkinin nasıl kurulduğunu açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "İlişkiyi gösteren sözcük veya düşünceyi kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kısmi kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "'Oysa' karşıtlık kurar. İlk cümlede değişmedi denirken sonraki cümlede değişiklikler sayıldığı için bu bağlaç kullanılmıştır.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "relation",
+        "score": 3.0,
+        "evidence": [
+          "'Oysa' karşıtlık kurar."
+        ],
+        "justification": "Anlam İlişkisi için yanıt 3 puan düzeyindeki çıpayla uyumludur: Doğru ve tam."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "İlk cümlede değişmedi denirken sonraki cümlede değişiklikler sayıldığı için bu bağlaç kullanılmıştır."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat eksik."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "'Oysa' karşıtlık kurar.",
+          "İlk cümlede değişmedi denirken sonraki cümlede değişiklikler sayıldığı için bu bağlaç kullanılmıştır."
+        ],
+        "justification": "Kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğrudan kanıt."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "'Oysa' karşıtlık kurar.",
+          "İlk cümlede değişmedi denirken sonraki cümlede değişiklikler sayıldığı için bu bağlaç kullanılmıştır."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 9.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "cohesion",
+      "iteration-1",
+      "iteration-1-wave-06",
+      "relation",
+      "synthetic",
+      "wave-06",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w06-g10-written-text-structure",
+    "question_family": "i1-w06-g10-written-cohesion-relation",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "high_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

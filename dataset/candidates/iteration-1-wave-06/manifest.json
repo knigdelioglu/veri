@@ -2,17 +2,34 @@
   "schema_version": "candidate-batch-manifest-1.0",
   "batch_id": "iteration-1-wave-06",
   "created_at": "2026-08-21",
-  "status": "ai_verified_pending_materialization",
+  "status": "materialized_ai_verified",
   "candidate_records": 100,
-  "canonical_records": 0,
-  "ai_verified_records_pending_materialization": 100,
+  "canonical_records": 100,
+  "ai_verified_records_pending_materialization": 0,
   "teacher_verified_records": 0,
   "provenance": "synthetic",
   "focus": "Iteration 1 expansion: symbolic transformation, cohesion relations, certainty revision, counterclaim weighing and multi-step listening inference",
   "distribution": {
-    "modality": {"written": 40, "speaking": 20, "listening": 40},
-    "grade": {"9": 20, "10": 40, "11": 20, "12": 20},
-    "response_quality": {"full_correct": 20, "high_partial": 20, "mid_partial": 20, "low_partial": 15, "incorrect": 10, "blank_irrelevant": 5, "borderline": 10},
+    "modality": {
+      "written": 40,
+      "speaking": 20,
+      "listening": 40
+    },
+    "grade": {
+      "9": 20,
+      "10": 40,
+      "11": 20,
+      "12": 20
+    },
+    "response_quality": {
+      "full_correct": 20,
+      "high_partial": 20,
+      "mid_partial": 20,
+      "low_partial": 15,
+      "incorrect": 10,
+      "blank_irrelevant": 5,
+      "borderline": 10
+    },
     "hard_case_records": 18,
     "adversarial_records": 4,
     "genuine_needs_review_records": 8,
@@ -25,14 +42,67 @@
     "answers_per_exact_task": 10
   },
   "families": [
-    {"file": "g09-written-symbol-transformation.json", "grade": 9, "modality": "written", "record_id_start": 266},
-    {"file": "g10-written-cohesion-relation.json", "grade": 10, "modality": "written", "record_id_start": 271},
-    {"file": "g10-listening-certainty-revision.json", "grade": 10, "modality": "listening", "record_id_start": 1},
-    {"file": "g11-speaking-counterclaim-weighing.json", "grade": 11, "modality": "speaking", "record_id_start": 246},
-    {"file": "g12-listening-multistep-inference.json", "grade": 12, "modality": "listening", "record_id_start": 246}
+    {
+      "file": "g09-written-symbol-transformation.json",
+      "grade": 9,
+      "modality": "written",
+      "record_id_start": 266
+    },
+    {
+      "file": "g10-written-cohesion-relation.json",
+      "grade": 10,
+      "modality": "written",
+      "record_id_start": 271
+    },
+    {
+      "file": "g10-listening-certainty-revision.json",
+      "grade": 10,
+      "modality": "listening",
+      "record_id_start": 1
+    },
+    {
+      "file": "g11-speaking-counterclaim-weighing.json",
+      "grade": 11,
+      "modality": "speaking",
+      "record_id_start": 246
+    },
+    {
+      "file": "g12-listening-multistep-inference.json",
+      "grade": 12,
+      "modality": "listening",
+      "record_id_start": 246
+    }
   ],
   "ai_review_overrides": "recalibration/ai-review-overrides.json",
   "promotion_policy": "candidate -> rubric-first independent AI pass -> input-uncertainty separation -> ai_verified canonical",
   "blocking_issue": null,
-  "next_action": "Run batch regression, materialize 100 canonical records, then validate the 1100-record cumulative state."
+  "next_action": "Run veri check and cumulative pilot quota review before producing the next wave.",
+  "ai_verified_records": 100,
+  "canonical_materialized_at": "2026-08-18",
+  "canonical_distribution": {
+    "modality": {
+      "listening": 40,
+      "speaking": 20,
+      "written": 40
+    },
+    "grade": {
+      "10": 40,
+      "11": 20,
+      "12": 20,
+      "9": 20
+    },
+    "response_quality": {
+      "blank_irrelevant": 5,
+      "borderline": 10,
+      "full_correct": 20,
+      "high_partial": 20,
+      "incorrect": 10,
+      "low_partial": 15,
+      "mid_partial": 20
+    },
+    "hard_case_records": 18,
+    "adversarial_records": 4,
+    "needs_review_records": 8,
+    "second_pass_ai_review_records": 25
+  }
 }

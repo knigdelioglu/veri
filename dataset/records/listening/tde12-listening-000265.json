@@ -1,0 +1,208 @@
+{
+  "id": "tde12-listening-000265",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i1-w06-g12-listening-multistep-b",
+    "prompt": "Konuşmacının son kararının hangi iki bilgiye dayandığını ve bu bilgilerin birlikte nasıl bir sonuç doğurduğunu açıklayınız.",
+    "context": "Konuşmacı: 'İlk taslakta şiiri yalnızlık şiiri diye okumuştum. Sonra tekrar eden kalabalık görüntülerini ve son dizedeki 'eve dönmek istemiyorum' sözünü birlikte düşününce asıl gerilimin yalnız kalmak değil, ait hissedememek olduğunu fark ettim.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w06-g12-listening-multistep-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "inference",
+        "name": "Çıkarım",
+        "description": "Birden fazla ipucunu birleştirerek temel çıkarımı doğru kurar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Çıkarım yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "İpuçlarının çıkarımı nasıl desteklediğini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "En az iki ilişkili ayrıntıyı kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Tek veya zayıf kanıt."
+          },
+          {
+            "score": 2,
+            "description": "İki ilişkili kanıt yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Kalabalık ve son dize birlikte aidiyetsizliği düşündürüyor. Ancak kayıtta 'eve dönmek istemiyorum/eve dönmek istiyorum' ayrımı varsa ikinci kanıtın yönü değişir.",
+    "source": "raw_stt",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "stt",
+        "span": "eve dönmek istemiyorum",
+        "candidates": [
+          "eve dönmek istemiyorum",
+          "eve dönmek istiyorum"
+        ],
+        "note": "Negasyon çok adımlı çıkarımın temel dayanaklarından birini tersine çeviriyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "inference",
+        "score": 2.0,
+        "evidence": [
+          "eve dönmek istiyorum' ayrımı varsa ikinci kanıtın yönü değişir."
+        ],
+        "justification": "Çıkarım için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "eve dönmek istiyorum' ayrımı varsa ikinci kanıtın yönü değişir."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat eksik."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Kalabalık ve son dize birlikte aidiyetsizliği düşündürüyor.",
+          "Ancak kayıtta 'eve dönmek istemiyorum"
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Tek veya zayıf kanıt."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Kalabalık ve son dize birlikte aidiyetsizliği düşündürüyor.",
+          "Ancak kayıtta 'eve dönmek istemiyorum"
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "STT'de negasyonun kaybolması aidiyet çıkarımındaki ikinci temel kanıtın yönünü değiştiriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "iteration-1",
+      "iteration-1-wave-06",
+      "listening",
+      "multistep-inference",
+      "speaker-relation",
+      "synthetic",
+      "wave-06"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w06-g12-listening-inference",
+    "question_family": "i1-w06-g12-listening-multistep-inference",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "borderline",
+    "hard_case_types": [
+      "stt_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
