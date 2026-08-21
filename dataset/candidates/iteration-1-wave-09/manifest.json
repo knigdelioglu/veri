@@ -10,7 +10,7 @@
   "provenance": "synthetic",
   "focus": "Iteration 1 expansion: narrative ordering and suspense, narrator-character distance, source relevance in argumentation, and listening presupposition repair",
   "distribution": {
-    "modality": {"written": 50, "speaking": 30, "listening": 20},
+    "modality": {"written": 50, "speaking": 25, "listening": 25},
     "grade": {"9": 25, "10": 25, "11": 25, "12": 25},
     "response_quality": {
       "full_correct": 20,
