@@ -1,0 +1,101 @@
+name: Materialize Iteration 1 Wave 06
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - dataset_factory/materialize_pilot_batch.py
+      - dataset/candidates/iteration-1-wave-06/**
+      - tests/test_materialize_pilot_batch.py
+      - tests/test_materialize_iteration1_wave01.py
+      - tests/test_materialize_iteration1_wave02.py
+      - tests/test_materialize_iteration1_wave03.py
+      - tests/test_materialize_iteration1_wave04.py
+      - tests/test_materialize_iteration1_wave05.py
+      - tests/test_materialize_iteration1_wave06.py
+      - dataset_factory/iteration1_wave06.trigger
+      - .github/workflows/materialize-iteration1-wave06.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.head_ref || github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install package
+        run: python -m pip install -e .
+      - name: Test production invariants
+        run: python -m unittest discover -s tests -p 'test_production.py'
+      - name: Regression test generic batch materializer
+        run: python -m unittest discover -s tests -p 'test_materialize_pilot_batch.py'
+      - name: Regression test Iteration 1 Wave 01
+        run: python -m unittest discover -s tests -p 'test_materialize_iteration1_wave01.py'
+      - name: Regression test Iteration 1 Wave 02
+        run: python -m unittest discover -s tests -p 'test_materialize_iteration1_wave02.py'
+      - name: Regression test Iteration 1 Wave 03
+        run: python -m unittest discover -s tests -p 'test_materialize_iteration1_wave03.py'
+      - name: Regression test Iteration 1 Wave 04
+        run: python -m unittest discover -s tests -p 'test_materialize_iteration1_wave04.py'
+      - name: Regression test Iteration 1 Wave 05
+        run: python -m unittest discover -s tests -p 'test_materialize_iteration1_wave05.py'
+      - name: Test Iteration 1 Wave 06
+        run: python -m unittest discover -s tests -p 'test_materialize_iteration1_wave06.py'
+      - name: Materialize Iteration 1 Wave 06
+        run: python -m dataset_factory.materialize_pilot_batch --root . --batch iteration-1-wave-06 --overwrite
+      - name: Validate 1100 canonical records
+        run: veri check
+      - name: Check leakage
+        run: veri leakage
+      - name: Assert Iteration 1 Wave 06 cumulative state
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from dataset_factory.production import production_report
+          r=production_report(Path('.'), phase='iteration_1')
+          assert r['verified_records'] == 1100, r['verified_records']
+          assert r['target_records'] == 1500
+          assert r['remaining_to_phase_target'] == 400
+          assert r['coverage']['question_families']['unique'] == 54, r['coverage']['question_families']
+          assert r['coverage']['target_question_families'] == 72
+          assert r['by_modality']['written']['actual'] == 550
+          assert r['by_modality']['speaking']['actual'] == 265
+          assert r['by_modality']['listening']['actual'] == 285
+          assert r['by_grade']['9']['actual'] == 285
+          assert r['by_grade']['10']['actual'] == 285
+          assert r['by_grade']['11']['actual'] == 265
+          assert r['by_grade']['12']['actual'] == 265
+          expected={'full_correct':220,'high_partial':220,'mid_partial':220,'low_partial':165,'incorrect':110,'blank_irrelevant':55,'borderline':110}
+          for key,value in expected.items():
+              assert r['by_response_quality'][key]['actual'] == value, (key,r['by_response_quality'][key])
+          assert r['target_ranges']['needs_review']['actual'] == 88
+          assert r['target_ranges']['hard_case']['actual'] == 199
+          assert r['target_ranges']['adversarial']['actual'] == 44
+          print('Iteration 1 Wave 06 cumulative quota PASS')
+          PY
+      - name: Print Iteration 1 quota
+        run: veri quota --phase iteration_1 --json
+      - name: Commit canonical Iteration 1 Wave 06
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add dataset/records dataset/candidates/iteration-1-wave-06/manifest.json
+          if git diff --cached --quiet; then
+            echo "No Iteration 1 Wave 06 materialization changes to commit."
+            exit 0
+          fi
+          git commit -m "Materialize Iteration 1 Wave 06 AI-verified records"
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git push origin HEAD:${{ github.head_ref }}
+          else
+            git push
+          fi

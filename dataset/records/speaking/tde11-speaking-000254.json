@@ -1,0 +1,188 @@
+{
+  "id": "tde11-speaking-000254",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i1-w06-g11-speaking-counterclaim-a",
+    "prompt": "'Bir eseri anlamada yazarın niyeti belirleyicidir.' görüşünü tartışınız; karşı görüşü de değerlendiriniz.",
+    "context": "Tartışmada kullanılabilecek iki bilgi: Yazar mektupları niyet hakkında ipucu verebilir; aynı metin farklı dönemlerde farklı ama metinle temellendirilebilir yorumlara da açıktır.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w06-g11-speaking-counterclaim-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "claim",
+        "name": "Tez",
+        "description": "Savunduğu görüşü açık ve tutarlı biçimde ortaya koyar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Tez yok veya tutarsız."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Açık fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      },
+      {
+        "criterion_id": "weighing",
+        "name": "Karşı Savı Tartma",
+        "description": "Karşı görüşü yalnız anmakla kalmayıp kendi savıyla karşılaştırır.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Karşı sav yok."
+          },
+          {
+            "score": 1,
+            "description": "Yalnız anılıyor."
+          },
+          {
+            "score": 2,
+            "description": "Kısmen tartılıyor."
+          },
+          {
+            "score": 3,
+            "description": "Açıkça karşılaştırılıp tartılıyor."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Metinden veya verilen bilgiden uygun kanıt kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Kısmi."
+          },
+          {
+            "score": 2,
+            "description": "Doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Konuşma dökümü açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Yazar ne demişse metnin tek anlamı odur; başka yorumların metinle ilişkisi olsa bile hiçbir değeri yoktur.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "claim",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Tez için yanıt 0 puan düzeyindeki çıpayla uyumludur: Tez yok veya tutarsız."
+      },
+      {
+        "criterion_id": "weighing",
+        "score": 1.0,
+        "evidence": [
+          "Yazar ne demişse metnin tek anlamı odur; başka yorumların metinle ilişkisi olsa bile hiçbir değeri yoktur."
+        ],
+        "justification": "Karşı Savı Tartma için yanıt 1 puan düzeyindeki çıpayla uyumludur: Yalnız anılıyor."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Kanıt için yanıt 0 puan düzeyindeki çıpayla uyumludur: Kanıt yok."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Yazar ne demişse metnin tek anlamı odur; başka yorumların metinle ilişkisi olsa bile hiçbir değeri yoktur."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Anlaşılır."
+      }
+    ],
+    "total_score": 2.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtta sınırlı doğru unsurlar var; rubriğin temel beklentileri büyük ölçüde karşılanmıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "counterclaim",
+      "evidence",
+      "iteration-1",
+      "iteration-1-wave-06",
+      "speaking",
+      "synthetic",
+      "wave-06"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w06-g11-speaking-argument",
+    "question_family": "i1-w06-g11-speaking-counterclaim-weighing",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "incorrect",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
