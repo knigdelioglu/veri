@@ -1,0 +1,193 @@
+{
+  "id": "tde12-listening-000329",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i1-w09-g12-listening-presupposition-b",
+    "prompt": "Konuşmadaki ilk çıkarımın hangi ön kabule dayandığını ve sonraki cümlenin bu ön kabulü nasıl sınırladığını açıklayınız.",
+    "context": "A: 'Demek sunumun başarısız olduğunu sen de kabul ediyorsun.' B: 'Hayır, yalnız giriş bölümünün hedefe ulaşmadığını söyledim; sunumun tamamı için aynı şeyi söylemedim.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i1-w09-g12-presupposition-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Konuşmadaki örtük varsayımı ve sonradan yapılan düzeltmeyi doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yorum yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı ve kısmen doğru."
+          },
+          {
+            "score": 2,
+            "description": "Doğru ancak eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru, açık ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "İlk ifade ile düzeltme arasındaki anlam ilişkisini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Gerekçe yok veya yanlış."
+          },
+          {
+            "score": 1,
+            "description": "Genel ve sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat geliştirilmemiş."
+          },
+          {
+            "score": 3,
+            "description": "Açık, tutarlı ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Transkriptten uygun ifadeleri kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt var."
+          },
+          {
+            "score": 2,
+            "description": "Kanıt doğrudan ve yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Ciddi biçimde belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "B kapsamı giriş bölümüyle sınırlıyor; ama 'hedefe ulaşmadığını' ifadesinin başarısızlıkla tamamen eşdeğer sayılıp sayılamayacağı ayrıca tartışılabilir.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 2.0,
+        "evidence": [
+          "B kapsamı giriş bölümüyle sınırlıyor; ama 'hedefe ulaşmadığını' ifadesinin başarısızlıkla tamamen eşdeğer sayılıp sayılamayacağı ayrıca tartışılabilir."
+        ],
+        "justification": "Yorum için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru ancak eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "B kapsamı giriş bölümüyle sınırlıyor; ama 'hedefe ulaşmadığını' ifadesinin başarısızlıkla tamamen eşdeğer sayılıp sayılamayacağı ayrıca tartışılabilir."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat geliştirilmemiş."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "B kapsamı giriş bölümüyle sınırlıyor; ama 'hedefe ulaşmadığını' ifadesinin başarısızlıkla tamamen eşdeğer sayılıp sayılamayacağı ayrıca tartışılabilir."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı kanıt var."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "B kapsamı giriş bölümüyle sınırlıyor; ama 'hedefe ulaşmadığını' ifadesinin başarısızlıkla tamamen eşdeğer sayılıp sayılamayacağı ayrıca tartışılabilir."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık ve tutarlı."
+      }
+    ],
+    "total_score": 7.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-21",
+    "tags": [
+      "iteration-1",
+      "iteration-1-wave-09",
+      "listening",
+      "presupposition",
+      "repair",
+      "synthetic",
+      "wave-09"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i1-w09-g12-listening-pragmatics",
+    "question_family": "i1-w09-g12-listening-presupposition-repair",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "borderline",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}
