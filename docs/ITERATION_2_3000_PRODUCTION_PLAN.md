@@ -17,12 +17,21 @@ Iteration 2 adds 1500 records in 15 waves of 100 records.
 
 The new 1500 records must contribute exactly **750 written / 375 speaking / 375 listening**.
 
-- I2-01 … I2-06: `60 written / 20 speaking / 20 listening`.
-- I2-07 … I2-09: `40 written / 40 speaking / 20 listening`.
-- I2-10 … I2-12: `40 written / 20 speaking / 40 listening`.
-- I2-13 … I2-15: `50 written / 25 speaking / 25 listening`.
+The first four waves were materialized as follows:
 
-This produces exactly `750/375/375` new records and a final cumulative `1500/750/750` distribution at 3000 records.
+- I2-01: `60 written / 20 speaking / 20 listening`
+- I2-02: `40 written / 20 speaking / 40 listening`
+- I2-03: `40 written / 40 speaking / 20 listening`
+- I2-04: `60 written / 20 speaking / 20 listening`
+
+After I2-04 the cumulative dataset is exactly back at the target 2:1:1 modality ratio: `950 written / 475 speaking / 475 listening` at 1900 records. To preserve exact closure at 3000, the remaining schedule is rebalanced as follows:
+
+- I2-05 … I2-08: `60 written / 20 speaking / 20 listening`
+- I2-09 … I2-10: `40 written / 40 speaking / 20 listening`
+- I2-11 … I2-12: `40 written / 20 speaking / 40 listening`
+- I2-13 … I2-15: `50 written / 25 speaking / 25 listening`
+
+Across I2-01 … I2-12 this yields exactly `600/300/300` new records; the final three waves add `150/75/75`. Iteration 2 therefore still closes exactly at **750/375/375 new records** and **1500/750/750 cumulative records**.
 
 ## Grade schedule
 
@@ -55,7 +64,7 @@ Per 100-record wave, a practical center target is:
 - genuine needs_review: 8
 - second-pass AI review: 25
 
-All borderline and needs_review records receive at least two review passes. `needs_review=true` is reserved for source/evidence uncertainty that can materially alter the score or interpretation. OCR/STT uncertainty remains separate from student answer text.
+All borderline and needs_review records receive at least two review passes. `needs_review=true` is reserved for source/evidence uncertainty that can materially alter the score or interpretation. OCR/STT uncertainty remains separate from student answer text and, from I2-04 onward, the recorded uncertainty span must be grounded directly in the student response text.
 
 ## Invariants
 
@@ -68,9 +77,17 @@ All borderline and needs_review records receive at least two review passes. `nee
 - Canonical record files remain source of truth.
 - Every wave must pass production regressions, materialization, `veri check`, leakage, cumulative assertions, quota, idempotency, and a final clean CI run before merge.
 
-## I2-01 target
+## Current checkpoint after I2-04
+
+- 1900/3000 canonical records
+- 92/144 question families
+- modality: `950 written / 475 speaking / 475 listening`
+- grades: `475` each
+- remaining: 1100 records / 52 families
+
+## I2-05 target
 
 - +100 records / +5 families / +10 exact tasks
 - 60 written / 20 speaking / 20 listening
 - grade 9: 40; grades 10/11/12: 20 each
-- cumulative after merge: **1600/3000 records, 77/144 families, 154 exact tasks**
+- cumulative after merge: **2000/3000 records, 97/144 families, 194 exact tasks**
