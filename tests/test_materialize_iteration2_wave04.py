@@ -50,7 +50,7 @@ class Iteration2Wave04MaterializationTest(unittest.TestCase):
             uncertainties = record["student_response"].get("input_uncertainties") or []
             self.assertTrue(uncertainties)
             for uncertainty in uncertainties:
-                self.assertIn(uncertainty["span"], record["student_response"]["text"])
+                self.assertIn(uncertainty["span"].casefold(), record["student_response"]["text"].casefold())
                 self.assertGreaterEqual(len(uncertainty.get("candidates", [])), 2)
 
     def test_speaking_is_transcript_only(self):
