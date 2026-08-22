@@ -1,0 +1,185 @@
+{
+  "id": "tde09-written-000484",
+  "schema_version": "1.0",
+  "modality": "written",
+  "language": "tr",
+  "grade": 9,
+  "task": {
+    "task_id": "i2-w06-g09-metaphor-a",
+    "prompt": "Altı çizili mecazın bu sahnedeki işlevini ve hangi ölçüde genellenebileceğini açıklayınız.",
+    "context": "Karakter, kardeşiyle konuşmaya çalışırken ‘Aramızda görünmez bir duvar yükseldi.’ der; birkaç cümle sonra konuşmayı yeniden dener.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i2-w06-g09-metaphor-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Mecazın bağlamsal işlevini ve kapsamını doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yanlış ya da yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Yerel mecaz işlevi ile bütün-metne genelleme arasındaki farkı gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok."
+          },
+          {
+            "score": 1,
+            "description": "Zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "İlgili sözcük/ifade ve bağlam ayrıntılarını kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı kanıt."
+          },
+          {
+            "score": 2,
+            "description": "Yeterli kanıt."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Duvarlar tuğladan yapılır.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Yorum için yanıt 0 puan düzeyindeki çıpayla uyumludur: Yanlış ya da yok."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Gerekçelendirme için yanıt 0 puan düzeyindeki çıpayla uyumludur: Yok."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Kanıt için yanıt 0 puan düzeyindeki çıpayla uyumludur: Kanıt yok."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 0.0,
+        "evidence": [],
+        "justification": "Açıklık için yanıt 0 puan düzeyindeki çıpayla uyumludur: Belirsiz."
+      }
+    ],
+    "total_score": 0.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıt rubriğin temel beklentilerini karşılamıyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-22",
+    "tags": [
+      "iteration-2",
+      "iteration-2-wave-06",
+      "metaphor",
+      "scope",
+      "synthetic",
+      "wave-06",
+      "written"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i2-w06-g09-written-local-metaphor",
+    "question_family": "i2-w06-g09-written-metaphor-scope",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "blank_irrelevant",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}
