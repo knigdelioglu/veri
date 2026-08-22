@@ -94,4 +94,4 @@ All borderline and needs_review records receive at least two review passes. `nee
 - grade 10: 40; grades 9/11/12: 20 each
 - cumulative after merge: **2100/3000 records, 102/144 families, 204 exact tasks**
 - cumulative modality: `1070 written / 515 speaking / 515 listening`
-- cumulative grades: **535 each**
+- cumulative grades: `g9=535 / g10=535 / g11=515 / g12=515`
