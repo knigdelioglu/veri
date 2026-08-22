@@ -100,8 +100,10 @@ jobs:
           assert r['by_modality']['written']['actual'] == 1070
           assert r['by_modality']['speaking']['actual'] == 515
           assert r['by_modality']['listening']['actual'] == 515
-          for grade in ('9','10','11','12'):
-              assert r['by_grade'][grade]['actual'] == 535, (grade, r['by_grade'][grade])
+          assert r['by_grade']['9']['actual'] == 535
+          assert r['by_grade']['10']['actual'] == 535
+          assert r['by_grade']['11']['actual'] == 515
+          assert r['by_grade']['12']['actual'] == 515
           expected = {
               'full_correct': 420, 'high_partial': 420, 'mid_partial': 420,
               'low_partial': 315, 'incorrect': 210, 'blank_irrelevant': 105, 'borderline': 210,
