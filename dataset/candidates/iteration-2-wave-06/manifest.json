@@ -1,0 +1,33 @@
+{
+  "schema_version": "candidate-batch-manifest-1.0",
+  "batch_id": "iteration-2-wave-06",
+  "created_at": "2026-08-22",
+  "status": "generated_pending_ai_review",
+  "candidate_records": 100,
+  "canonical_records": 0,
+  "ai_verified_records_pending_materialization": 100,
+  "teacher_verified_records": 0,
+  "provenance": "synthetic",
+  "focus": "Iteration 2 expansion: metaphor scope, rhetorical-question function, alternative-explanation ranking, necessary/sufficient condition boundaries, and listening condition-exception tracking",
+  "distribution": {
+    "modality": {"written": 60, "speaking": 20, "listening": 20},
+    "grade": {"9": 20, "10": 40, "11": 20, "12": 20},
+    "response_quality": {"full_correct": 20, "high_partial": 20, "mid_partial": 20, "low_partial": 15, "incorrect": 10, "blank_irrelevant": 5, "borderline": 10},
+    "hard_case_records": 18,
+    "adversarial_records": 4,
+    "genuine_needs_review_records": 8,
+    "second_pass_ai_review_records": 25
+  },
+  "coverage": {"question_families": 5, "exact_tasks": 10, "answers_per_question_family": 20, "answers_per_exact_task": 10},
+  "families": [
+    {"file": "g09-written-metaphor-scope.json", "grade": 9, "modality": "written", "record_id_start": 476},
+    {"file": "g10-written-rhetorical-question-function.json", "grade": 10, "modality": "written", "record_id_start": 481},
+    {"file": "g10-speaking-alternative-explanation-ranking.json", "grade": 10, "modality": "speaking", "record_id_start": 1},
+    {"file": "g11-written-necessary-sufficient-condition.json", "grade": 11, "modality": "written", "record_id_start": 41},
+    {"file": "g12-listening-condition-exception.json", "grade": 12, "modality": "listening", "record_id_start": 456}
+  ],
+  "ai_review_overrides": "recalibration/ai-review-overrides.json",
+  "promotion_policy": "candidate -> rubric-first independent AI pass -> grounded input-uncertainty separation -> ai_verified canonical",
+  "blocking_issue": null,
+  "next_action": "Run Wave 06 regression, veri check, leakage and cumulative quota gates before promotion."
+}
