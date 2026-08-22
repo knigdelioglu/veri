@@ -1,0 +1,193 @@
+{
+  "id": "tde11-speaking-000419",
+  "schema_version": "1.0",
+  "modality": "speaking",
+  "language": "tr",
+  "grade": 11,
+  "task": {
+    "task_id": "i2-w03-g11-counterfactual-a",
+    "prompt": "'Kapı motifi karakterin kaçış isteğini gösterir' yorumunu, son kapı sahnesi metinden çıkarılsaydı yeniden değerlendiriniz.",
+    "context": "Metinde karakter üç kez kapıya yönelir. İlkinde geri döner, ikincisinde anahtarı elinde tutar, son sahnede kapıyı açıp dışarı çıkar.",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i2-w03-g11-counterfactual-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Bir yorumu karşı-olgusal değişiklik altında tutarlı biçimde yeniden değerlendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yanlış ya da yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Bir ayrıntının çıkarılması/değiştirilmesinin yorumun kanıt gücünü neden etkilediğini açıklar.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok."
+          },
+          {
+            "score": 1,
+            "description": "Zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Yorumun dayandığı özgül ayrıntıları uygun kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Sözlü yanıtın transkripti açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Kaçış yorumu devam eder ama daha az güçlü olur; son sahne en açık kanıttır.",
+    "source": "manual",
+    "observations": []
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 3.0,
+        "evidence": [
+          "Kaçış yorumu devam eder ama daha az güçlü olur; son sahne en açık kanıttır."
+        ],
+        "justification": "Yorum için yanıt 3 puan düzeyindeki çıpayla uyumludur: Doğru ve tam."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "Kaçış yorumu devam eder ama daha az güçlü olur; son sahne en açık kanıttır."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat sınırlı."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 2.0,
+        "evidence": [
+          "Kaçış yorumu devam eder ama daha az güçlü olur; son sahne en açık kanıttır."
+        ],
+        "justification": "Kanıt için yanıt 2 puan düzeyindeki çıpayla uyumludur: Yeterli."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 2.0,
+        "evidence": [
+          "Kaçış yorumu devam eder ama daha az güçlü olur; son sahne en açık kanıttır."
+        ],
+        "justification": "Açıklık için yanıt 2 puan düzeyindeki çıpayla uyumludur: Açık."
+      }
+    ],
+    "total_score": 9.0,
+    "max_score": 10.0,
+    "needs_review": false,
+    "review_reason": null,
+    "overall_feedback": "Yanıtın ana yönü doğru; bazı ölçütlerde sınırlı eksikler bulunuyor."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-22",
+    "tags": [
+      "counterfactual",
+      "interpretation-test",
+      "iteration-2",
+      "iteration-2-wave-03",
+      "speaking",
+      "synthetic",
+      "wave-03"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i2-w03-g11-speaking-interpretation-stress-test",
+    "question_family": "i2-w03-g11-speaking-counterfactual-test",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "high_partial",
+    "hard_case_types": [],
+    "adversarial": false,
+    "review_count": 1,
+    "adjudicated": false
+  }
+}

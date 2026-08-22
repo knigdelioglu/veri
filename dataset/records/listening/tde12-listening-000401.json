@@ -1,0 +1,206 @@
+{
+  "id": "tde12-listening-000401",
+  "schema_version": "1.0",
+  "modality": "listening",
+  "language": "tr",
+  "grade": 12,
+  "task": {
+    "task_id": "i2-w03-g12-negation-a",
+    "prompt": "Konuşmacının hangi önerilere karşı çıktığını olumsuzluğun kapsamına dikkat ederek açıklayınız.",
+    "context": "A: 'Üç önerinin hepsine karşı değilim. İlk ikisi uygulanabilir; yalnız üçüncünün bütçesi gerçekçi görünmüyor.'",
+    "max_score": 10.0
+  },
+  "rubric": {
+    "rubric_id": "i2-w03-g12-negation-r1",
+    "version": "1.0",
+    "criteria": [
+      {
+        "criterion_id": "interpretation",
+        "name": "Yorum",
+        "description": "Olumsuzluğun hangi önerme veya öğe üzerinde kapsam kurduğunu doğru belirler.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yanlış ya da yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Doğru fakat eksik."
+          },
+          {
+            "score": 3,
+            "description": "Doğru ve tam."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "reasoning",
+        "name": "Gerekçelendirme",
+        "description": "Söylem bağlaçları ve karşıtlık üzerinden tutumun sınırını gerekçelendirir.",
+        "max_score": 3,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Yok."
+          },
+          {
+            "score": 1,
+            "description": "Zayıf."
+          },
+          {
+            "score": 2,
+            "description": "Uygun fakat sınırlı."
+          },
+          {
+            "score": 3,
+            "description": "Açık ve tutarlı."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "evidence",
+        "name": "Kanıt",
+        "description": "Dinleme transkriptindeki ilgili ifadeleri uygun kanıt olarak kullanır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Kanıt yok."
+          },
+          {
+            "score": 1,
+            "description": "Sınırlı."
+          },
+          {
+            "score": 2,
+            "description": "Yeterli."
+          }
+        ],
+        "evidence_sources": [
+          "response_text",
+          "task_context"
+        ]
+      },
+      {
+        "criterion_id": "clarity",
+        "name": "Açıklık",
+        "description": "Yanıt açık ve tutarlıdır.",
+        "max_score": 2,
+        "scoring_anchors": [
+          {
+            "score": 0,
+            "description": "Belirsiz."
+          },
+          {
+            "score": 1,
+            "description": "Genel olarak anlaşılır."
+          },
+          {
+            "score": 2,
+            "description": "Açık."
+          }
+        ],
+        "evidence_sources": [
+          "response_text"
+        ]
+      }
+    ]
+  },
+  "student_response": {
+    "text": "Konuşmacı hepsine karşı olmadığını ve yalnız üçüncü önerinin sorunlu olduğunu söylüyor.",
+    "source": "raw_stt",
+    "observations": [],
+    "input_uncertainties": [
+      {
+        "type": "stt",
+        "span": "hepsine karşı değilim",
+        "candidates": [
+          "hepsine karşı değilim",
+          "hepsine karşıyım"
+        ],
+        "note": "Negasyonun varlığı tutum yönünü ve puanı maddi biçimde değiştiriyor."
+      }
+    ]
+  },
+  "gold_evaluation": {
+    "criterion_results": [
+      {
+        "criterion_id": "interpretation",
+        "score": 2.0,
+        "evidence": [
+          "Konuşmacı hepsine karşı olmadığını ve yalnız üçüncü önerinin sorunlu olduğunu söylüyor."
+        ],
+        "justification": "Yorum için yanıt 2 puan düzeyindeki çıpayla uyumludur: Doğru fakat eksik."
+      },
+      {
+        "criterion_id": "reasoning",
+        "score": 2.0,
+        "evidence": [
+          "Konuşmacı hepsine karşı olmadığını ve yalnız üçüncü önerinin sorunlu olduğunu söylüyor."
+        ],
+        "justification": "Gerekçelendirme için yanıt 2 puan düzeyindeki çıpayla uyumludur: Uygun fakat sınırlı."
+      },
+      {
+        "criterion_id": "evidence",
+        "score": 1.0,
+        "evidence": [
+          "Konuşmacı hepsine karşı olmadığını ve yalnız üçüncü önerinin sorunlu olduğunu söylüyor."
+        ],
+        "justification": "Kanıt için yanıt 1 puan düzeyindeki çıpayla uyumludur: Sınırlı."
+      },
+      {
+        "criterion_id": "clarity",
+        "score": 1.0,
+        "evidence": [
+          "Konuşmacı hepsine karşı olmadığını ve yalnız üçüncü önerinin sorunlu olduğunu söylüyor."
+        ],
+        "justification": "Açıklık için yanıt 1 puan düzeyindeki çıpayla uyumludur: Genel olarak anlaşılır."
+      }
+    ],
+    "total_score": 6.0,
+    "max_score": 10.0,
+    "needs_review": true,
+    "review_reason": "STT'de 'hepsine karşı değilim/hepsine karşıyım' ayrımı konuşmacının toplam tutumunu tersine çeviriyor.",
+    "overall_feedback": "Mevcut girdi güvenilir bir final puanı için yeterli değildir; kaynak belirsizliği doğrulanmalıdır."
+  },
+  "metadata": {
+    "status": "ai_verified",
+    "split": null,
+    "created_at": "2026-08-22",
+    "tags": [
+      "iteration-2",
+      "iteration-2-wave-03",
+      "listening",
+      "negation-scope",
+      "stance",
+      "synthetic",
+      "wave-03"
+    ],
+    "pii_reviewed": true,
+    "subject_group_id": null,
+    "exam_family": "i2-w03-g12-listening-stance-scope",
+    "question_family": "i2-w03-g12-listening-negation-scope",
+    "provenance": "synthetic",
+    "verification_source": "ai",
+    "response_quality": "mid_partial",
+    "hard_case_types": [
+      "stt_ambiguity"
+    ],
+    "adversarial": false,
+    "review_count": 2,
+    "adjudicated": false
+  }
+}

@@ -2,16 +2,25 @@
   "schema_version": "candidate-batch-manifest-1.0",
   "batch_id": "iteration-2-wave-03",
   "created_at": "2026-08-22",
-  "status": "generated_pending_ai_review",
+  "status": "materialized_ai_verified",
   "candidate_records": 100,
-  "canonical_records": 0,
-  "ai_verified_records_pending_materialization": 100,
+  "canonical_records": 100,
+  "ai_verified_records_pending_materialization": 0,
   "teacher_verified_records": 0,
   "provenance": "synthetic",
   "focus": "Iteration 2 expansion: observation-inference separation, motif function transformation, register/power shift, counterfactual interpretation testing, and listening negation scope",
   "distribution": {
-    "modality": {"written": 40, "speaking": 40, "listening": 20},
-    "grade": {"9": 20, "10": 20, "11": 40, "12": 20},
+    "modality": {
+      "written": 40,
+      "speaking": 40,
+      "listening": 20
+    },
+    "grade": {
+      "9": 20,
+      "10": 20,
+      "11": 40,
+      "12": 20
+    },
     "response_quality": {
       "full_correct": 20,
       "high_partial": 20,
@@ -33,14 +42,67 @@
     "answers_per_exact_task": 10
   },
   "families": [
-    {"file": "g09-speaking-observation-inference.json", "grade": 9, "modality": "speaking", "record_id_start": 1},
-    {"file": "g10-written-motif-transformation.json", "grade": 10, "modality": "written", "record_id_start": 421},
-    {"file": "g11-written-register-power-shift.json", "grade": 11, "modality": "written", "record_id_start": 1},
-    {"file": "g11-speaking-counterfactual-test.json", "grade": 11, "modality": "speaking", "record_id_start": 416},
-    {"file": "g12-listening-negation-scope.json", "grade": 12, "modality": "listening", "record_id_start": 396}
+    {
+      "file": "g09-speaking-observation-inference.json",
+      "grade": 9,
+      "modality": "speaking",
+      "record_id_start": 1
+    },
+    {
+      "file": "g10-written-motif-transformation.json",
+      "grade": 10,
+      "modality": "written",
+      "record_id_start": 421
+    },
+    {
+      "file": "g11-written-register-power-shift.json",
+      "grade": 11,
+      "modality": "written",
+      "record_id_start": 1
+    },
+    {
+      "file": "g11-speaking-counterfactual-test.json",
+      "grade": 11,
+      "modality": "speaking",
+      "record_id_start": 416
+    },
+    {
+      "file": "g12-listening-negation-scope.json",
+      "grade": 12,
+      "modality": "listening",
+      "record_id_start": 396
+    }
   ],
   "ai_review_overrides": "recalibration/ai-review-overrides.json",
   "promotion_policy": "candidate -> rubric-first independent AI pass -> input-uncertainty separation -> ai_verified canonical",
   "blocking_issue": null,
-  "next_action": "Materialize only after Wave 03 regression, 1800-record veri check, leakage and cumulative Iteration 2 quota gates pass."
+  "next_action": "Run veri check and cumulative pilot quota review before producing the next wave.",
+  "ai_verified_records": 100,
+  "canonical_materialized_at": "2026-08-18",
+  "canonical_distribution": {
+    "modality": {
+      "listening": 20,
+      "speaking": 40,
+      "written": 40
+    },
+    "grade": {
+      "10": 20,
+      "11": 40,
+      "12": 20,
+      "9": 20
+    },
+    "response_quality": {
+      "blank_irrelevant": 5,
+      "borderline": 10,
+      "full_correct": 20,
+      "high_partial": 20,
+      "incorrect": 10,
+      "low_partial": 15,
+      "mid_partial": 20
+    },
+    "hard_case_records": 18,
+    "adversarial_records": 4,
+    "needs_review_records": 8,
+    "second_pass_ai_review_records": 25
+  }
 }
