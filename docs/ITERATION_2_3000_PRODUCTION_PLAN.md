@@ -17,21 +17,22 @@ Iteration 2 adds 1500 records in 15 waves of 100 records.
 
 The new 1500 records must contribute exactly **750 written / 375 speaking / 375 listening**.
 
-The first four waves were materialized as follows:
+Materialized first-wave schedule:
 
 - I2-01: `60 written / 20 speaking / 20 listening`
 - I2-02: `40 written / 20 speaking / 40 listening`
 - I2-03: `40 written / 40 speaking / 20 listening`
 - I2-04: `60 written / 20 speaking / 20 listening`
+- I2-05: `60 written / 20 speaking / 20 listening`
 
-After I2-04 the cumulative dataset is exactly back at the target 2:1:1 modality ratio: `950 written / 475 speaking / 475 listening` at 1900 records. To preserve exact closure at 3000, the remaining schedule is rebalanced as follows:
+After I2-05 the canonical state is `1010 written / 495 speaking / 495 listening` at 2000 records. Exact 3000-record closure remains:
 
-- I2-05 … I2-08: `60 written / 20 speaking / 20 listening`
+- I2-06 … I2-08: `60 written / 20 speaking / 20 listening`
 - I2-09 … I2-10: `40 written / 40 speaking / 20 listening`
 - I2-11 … I2-12: `40 written / 20 speaking / 40 listening`
 - I2-13 … I2-15: `50 written / 25 speaking / 25 listening`
 
-Across I2-01 … I2-12 this yields exactly `600/300/300` new records; the final three waves add `150/75/75`. Iteration 2 therefore still closes exactly at **750/375/375 new records** and **1500/750/750 cumulative records**.
+Across I2-01 … I2-12 this yields exactly `600/300/300` Iteration-2 records; the final three waves add `150/75/75`. Iteration 2 therefore closes exactly at **750/375/375 new records** and **1500/750/750 cumulative records**.
 
 ## Grade schedule
 
@@ -77,17 +78,20 @@ All borderline and needs_review records receive at least two review passes. `nee
 - Canonical record files remain source of truth.
 - Every wave must pass production regressions, materialization, `veri check`, leakage, cumulative assertions, quota, idempotency, and a final clean CI run before merge.
 
-## Current checkpoint after I2-04
+## Current checkpoint after I2-05
 
-- 1900/3000 canonical records
-- 92/144 question families
-- modality: `950 written / 475 speaking / 475 listening`
-- grades: `475` each
-- remaining: 1100 records / 52 families
+- **2000/3000** canonical records
+- **97/144** question families
+- **194** exact tasks
+- modality: `1010 written / 495 speaking / 495 listening`
+- grades: `g9=515 / g10=495 / g11=495 / g12=495`
+- remaining: **1000 records / 47 families**
 
-## I2-05 target
+## I2-06 target
 
 - +100 records / +5 families / +10 exact tasks
-- 60 written / 20 speaking / 20 listening
-- grade 9: 40; grades 10/11/12: 20 each
-- cumulative after merge: **2000/3000 records, 97/144 families, 194 exact tasks**
+- `60 written / 20 speaking / 20 listening`
+- grade 10: 40; grades 9/11/12: 20 each
+- cumulative after merge: **2100/3000 records, 102/144 families, 204 exact tasks**
+- cumulative modality: `1070 written / 515 speaking / 515 listening`
+- cumulative grades: **535 each**
